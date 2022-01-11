@@ -1,0 +1,10 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Me\Include\Ppi\"
+	RefName = "DenvertonPkg.Me.Include.Ppi"
+[files]
+"HeciPpi.h"
+"MeUma.h"	
+"PlatformMeHookPpi.h"	
+<endComponent>

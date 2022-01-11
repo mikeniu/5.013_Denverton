@@ -1,0 +1,9 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "AmiChipsetPkg\Include\Library\"
+	RefName = "AmiChipsetPkg.Library"
+[files]
+"AmiChipsetRuntimeServiceLib.h"	
+"AmiChipsetIoLib.h"	
+<endComponent>

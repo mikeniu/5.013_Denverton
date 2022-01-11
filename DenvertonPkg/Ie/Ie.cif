@@ -1,0 +1,13 @@
+<component>
+	name = "Ie"
+	category = MODULEPART
+	LocalRoot = "DenvertonPkg\Ie\"
+	RefName = "DenvertonPkg.Ie"
+[files]
+"IePkg.dec"	
+"Ie.sdl"	
+[parts]
+"DenvertonPkg.Ie.Heci"
+"DenvertonPkg.Ie.Include"
+"DenvertonPkg.Ie.IePolicyInclude"
+<endComponent>

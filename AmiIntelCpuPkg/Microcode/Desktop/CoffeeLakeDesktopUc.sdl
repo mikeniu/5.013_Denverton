@@ -1,0 +1,54 @@
+TOKEN
+    Name  = "DESKTOP_906EX"
+    Value = "0"
+    Help  = "Intel(R) CoffeeLake"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "DESKTOP_M22906EA"
+    Value  = "1"
+    Help  = "Intel(R) Coffee Lake-S U-0 Stepping, 0:Disable \ 1:With Cannon Lake PCH \ 2:With Kaby Lake PCH"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "DESKTOP_M22906EA"
+    Value  = "2"
+    Help  = "Intel(R) Coffee Lake-S U-0 Stepping, 0:Disable \ 1:With Cannon Lake PCH \ 2:With Kaby Lake PCH"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "0"
+End
+
+TOKEN
+    Name  = "DESKTOP_M02906EB"
+    Value  = "2"
+    Help  = "Intel(R) Coffee Lake-S B-0 Stepping, 0:Disable \ 2:With Kaby Lake PCH"
+    TokenType = Boolean
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22906EA_00000074.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Coffee Lake-S U-0 Stepping with Cannon Lake PCH"
+    Token = "DESKTOP_M22906EA" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22906EA_0000007C.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Coffee Lake-S U-0 Stepping with Kaby Lake PCH"
+    Token = "DESKTOP_M22906EA" "=" "2"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M02906EB_0000007C.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Coffee Lake-S B-0 Stepping with Kaby Lake PCH"
+    Token = "DESKTOP_M02906EB" "=" "2"
+    InvokeOrder = AfterParent
+End

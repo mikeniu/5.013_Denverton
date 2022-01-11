@@ -1,0 +1,44 @@
+TOKEN
+	Name  = "Library_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "AdrCfgLib"
+	File  = "AdrCfgLib\AdrCfgLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "C2fAhciLib"
+	File  = "C2fAhciLib\C2fAhciLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "GpioCtrlrLib"
+	File  = "GpioCtrlrLib\GpioCtrlrLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "AdrCfgLib"
+	Instance  = "HarrisonvillePkg.AdrCfgLib"
+End
+
+LibraryMapping
+	Class  = "C2fAhciLib"
+	Instance  = "HarrisonvillePkg.C2fAhciLib"
+End
+
+LibraryMapping
+	Class  = "GpioCtrlrLib"
+	Instance  = "HarrisonvillePkg.GpioCtrlrLib"
+End
+

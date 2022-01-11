@@ -1,0 +1,17 @@
+TOKEN
+	Name  = "CpuMpDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling CpuMpDxe support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "CpuMpDxe"
+	File  = "CpuMpDxe.inf"
+	Package  = "HarrisonvillePkg"
+	Arch  = "IA32 X64"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "CpuMpDxe_SUPPORT" "=" "1"
+End
+

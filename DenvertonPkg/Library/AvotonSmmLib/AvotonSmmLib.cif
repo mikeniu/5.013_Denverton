@@ -1,0 +1,11 @@
+<component>
+	name = "AvotonSmmLib"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Library\AvotonSmmLib\"
+	RefName = "DenvertonPkg.AvotonSmmLib"
+[INF]
+"AvotonSmmLib.inf"
+[files]
+"CommonHeader.h"	
+"AvotonSmmLib.sdl"	
+<endComponent>

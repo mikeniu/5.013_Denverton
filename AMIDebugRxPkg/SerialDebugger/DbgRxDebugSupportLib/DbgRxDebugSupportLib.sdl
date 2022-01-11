@@ -1,0 +1,45 @@
+PATH
+	Name  = "COMDbgRxDebugSupportLib_DIR"
+	Path  = "AMIDebugRxPkg\SerialDebugger\DbgRxDebugSupportLib"
+End
+
+INFComponent
+	Name  = "CommonDebugSupportLib"
+	File  = "CommonDebugSupportLib.inf"
+	Package  = "SerialDebugger"
+	Arch  = "common"
+	Path  = "COMDbgRxDebugSupportLib_DIR"
+End
+
+INFComponent
+	Name  = "DbgRxDebugSupportLib"
+	File  = "DbgRxDebugSupportLib.inf"
+	Package  = "SerialDebugger"
+	Arch  = "common"
+	Path  = "COMDbgRxDebugSupportLib_DIR"
+End
+
+LibraryMapping
+	Class  = "CommonDebugSupportLib"
+	Instance  = "SerialDebugger.CommonDebugSupportLib"
+End
+
+LibraryMapping
+	Class  = "DbgRxDebugSupportLib"
+	Instance  = "SerialDebugger.DbgRxDebugSupportLib"
+End
+
+INFComponent
+	Name  = "DbgRxEndOfPeiLib"
+	File  = "DbgRxEndOfPeiLib.inf"
+	Package  = "SerialDebugger"
+	Arch  = "common"
+	Path  = "COMDbgRxDebugSupportLib_DIR"
+	Token = "DBG_ENDOFPEI_CALLBACK_SUPPORT" "=" "0"
+End
+
+LibraryMapping
+	Class  = "DbgRxEndOfPeiLib"
+	Instance  = "SerialDebugger.DbgRxEndOfPeiLib"
+	Token = "DBG_ENDOFPEI_CALLBACK_SUPPORT" "=" "0"
+End

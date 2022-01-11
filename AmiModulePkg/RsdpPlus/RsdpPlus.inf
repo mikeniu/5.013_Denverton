@@ -1,0 +1,31 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = RsdpPlus
+  FILE_GUID                      = 8F3F1DE2-2FE4-4d5c-A8EC-49E8CCA17EBC
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = ManageShadowRamEntryPoint
+
+[Sources]
+  ManageShadowRam.c
+  RsdpPlusCsmOn.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+  
+[LibraryClasses]
+  AmiDxeLib
+  AmiCspLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+
+[Protocols]
+  gEfiLegacyBiosProtocolGuid
+  
+#[Guids]
+[Depex]
+  TRUE

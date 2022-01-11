@@ -1,0 +1,15 @@
+<component>
+	name = "FIT : LT-SX"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Fit\"
+	RefName = "HarrisonvillePkg.IntelLtsxFit"
+[INF]
+"IntelLtsxFit.inf"
+"FitHook\FitHook.inf"
+[files]
+"IntelLtsxFit.sdl"	
+"FitUtility.exe"	
+"IntelLtsxFit.dec"	
+"IntelLtsxFit.mak"
+"Fittable_Statement.txt"
+<endComponent>

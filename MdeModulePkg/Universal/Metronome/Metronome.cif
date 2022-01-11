@@ -1,0 +1,10 @@
+<component>
+	name = "MdeModulePkg.Metronome"
+	category = eModule
+	LocalRoot = "MdeModulePkg\Universal\Metronome\"
+	RefName = "MdeModulePkg.Metronome"
+[files]
+"Metronome.sdl"	
+[INF]
+"Metronome.inf"
+<endComponent>

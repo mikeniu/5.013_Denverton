@@ -1,0 +1,14 @@
+<component>
+	name = "PlatformStage2Pei"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Platform\PlatformStage2Pei\"
+	RefName = "HarrisonvillePkg.Platform.PlatformStage2Pei"
+[INF]
+"PlatformStage2Pei.inf"
+[files]
+"PlatformStage2Pei.sdl"
+"Dimm.c"	
+"PlatformClock.c"	
+"PlatformSaInit.c"	
+"Recovery.c"	
+<endComponent>

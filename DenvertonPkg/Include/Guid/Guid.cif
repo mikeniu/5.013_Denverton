@@ -1,0 +1,9 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Include\Guid\"
+	RefName = "DenvertonPkg.Include.Guid"
+[files]
+"AcpiVariable.h"
+"MemoryConfigData.h"	
+<endComponent>

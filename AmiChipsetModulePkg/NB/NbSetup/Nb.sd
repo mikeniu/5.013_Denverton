@@ -1,0 +1,121 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/** @file Nb.sd
+    This file contains the setup description for NB Template
+
+*/
+
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example: UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+#endif
+
+#ifdef MAIN_FORM_SET
+
+  #ifdef FORM_SET_ITEM
+    // Define controls to be added to the main page of the formset
+
+    SEPARATOR
+    SUBTITLE(STRING_TOKEN(STR_MEMORY))
+
+    text
+      help   = STRING_TOKEN(STR_MEMORY_SIZE_HELP),
+      text   = STRING_TOKEN(STR_MEMORY_SIZE_NAME),
+      text   = STRING_TOKEN(STR_MEMORY_SIZE_VALUE),
+      flags  = 0,
+      key    = 0;
+  #endif
+
+#endif
+
+#ifdef CHIPSET_FORM_SET
+
+  #ifdef FORM_SET_ITEM
+    // Define controls to be added to the main page of the formset
+  #endif
+
+  #ifdef FORM_SET_GOTO
+    // Define goto commands for the forms defined in this file
+    goto NB_FORM_ID, 
+      prompt = STRING_TOKEN(STR_NB_FORM),
+      help = STRING_TOKEN(STR_NB_FORM_HELP);
+  #endif
+
+  #ifdef FORM_SET_FORM
+  // Define forms
+    form formid = AUTO_ID(NB_FORM_ID),
+    title = STRING_TOKEN(STR_NB_FORM);
+
+    SUBTITLE(STRING_TOKEN(STR_MEMORY))
+    SEPARATOR
+
+      text 
+        help   = STRING_TOKEN(STR_MEMORY_SIZE_HELP),
+        text   = STRING_TOKEN(STR_MEMORY_SIZE_NAME),
+        text   = STRING_TOKEN(STR_MEMORY_SIZE_VALUE),
+        flags  = 0,
+        key    = 0;
+
+      SEPARATOR
+      text 
+        help   = STRING_TOKEN(STR_MEMORY_SIZE_SLOT_HELP),
+        text   = STRING_TOKEN(STR_MEMORY_SIZE_SLOT0_NAME),
+        text   = STRING_TOKEN(STR_MEMORY_SIZE_SLOT0_VALUE),
+        flags  = 0,
+        key    = 0;
+
+      text 
+        help   = STRING_TOKEN(STR_MEMORY_SIZE_SLOT_HELP),
+        text   = STRING_TOKEN(STR_MEMORY_SIZE_SLOT1_NAME),
+        text   = STRING_TOKEN(STR_MEMORY_SIZE_SLOT1_VALUE),
+        flags  = 0,
+        key    = 0;
+
+      text 
+        help   = STRING_TOKEN(STR_MEMORY_SIZE_SLOT_HELP),
+        text   = STRING_TOKEN(STR_MEMORY_SIZE_SLOT2_NAME),
+        text   = STRING_TOKEN(STR_MEMORY_SIZE_SLOT2_VALUE),
+        flags  = 0,
+        key    = 0;
+
+      text 
+        help   = STRING_TOKEN(STR_MEMORY_SIZE_SLOT_HELP),
+        text   = STRING_TOKEN(STR_MEMORY_SIZE_SLOT3_NAME),
+        text   = STRING_TOKEN(STR_MEMORY_SIZE_SLOT3_VALUE),
+        flags  = 0,
+        key    = 0;
+
+    endform;
+  #endif
+
+#endif
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

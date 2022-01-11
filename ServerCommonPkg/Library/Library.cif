@@ -1,0 +1,10 @@
+<component>
+	name = "Library"
+	category = MODULEPART
+	LocalRoot = "ServerCommonPkg\Library\"
+	RefName = "ServerCommonPkg.Library"
+[INF]
+"WheaErrorLib\WheaErrorLib.inf"
+[files]
+"Library.sdl"	
+<endComponent>

@@ -1,0 +1,22 @@
+TOKEN
+	Name  = "SmmAccess_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SmmAccess support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "SmmAccessPei"
+	File  = "Pei\SmmAccess.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "SmmAccessDxe"
+	File  = "Dxe\SmmAccess.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+

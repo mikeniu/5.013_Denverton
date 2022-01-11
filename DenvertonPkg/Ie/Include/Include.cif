@@ -1,0 +1,11 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Ie\Include\"
+	RefName = "DenvertonPkg.Ie.Include"
+[files]
+"IeHeciMsgs.h"	
+"IeHeciRegs.h"	
+"Library\IeHeciCoreLib.h"
+"Ppi\IeHeci.h"
+<endComponent>

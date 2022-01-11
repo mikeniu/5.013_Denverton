@@ -1,0 +1,53 @@
+TOKEN
+	Name  = "Heci_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Heci support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "MeUma_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable MeUma support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+    Name  = "HeciInitPei_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling HeciInitPei support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+	Name  = "HeciSmm_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable HeciSmm support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "MeUma"
+	File  = "MeUma\MeUma.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+	Token = "MeUma_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "HeciInitPei"
+    File  = "Pei\HeciInit.inf"
+    Package  = "DenvertonPkg"
+    ModuleTypes  = "PEIM"
+    Token = "HeciInitPei_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "HeciSmm"
+	File  = "Smm\HeciSmm.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "HeciSmm_SUPPORT" "=" "1"
+End
+

@@ -1,0 +1,17 @@
+<component>
+	name = "NonVolatileMem"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Platform\NonVolatileMem\"
+	RefName = "HarrisonvillePkg.Platform.NonVolatileMem"
+[INF]
+"Dxe\CopyToFlashSmi.inf"
+"Dxe\NonVolatileMemDxe.inf"
+"Ppi\NonVolatileMemPolicyInit.inf"
+"Pei\NonVolatileMemPei.inf"
+[files]
+"NonVolatileMem.dec"	
+"NonVolatileMem.sdl"	
+[parts]
+"HarrisonvillePkg.Platform.NonVolatileMem.Include"
+"HarrisonvillePkg.Platform.NonVolatileMem.Library"
+<endComponent>

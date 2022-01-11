@@ -1,0 +1,25 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\Include\Protocol\"
+	RefName = "DenvertonPkg.SouthCluster.Include.Protocol"
+[files]
+"EmmcCardInfoProtocol.h"	
+"PchAcpiSmiDispatch.h"	
+"PchEmmcTuning.h"	
+"PchEspiSmiDispatch.h"	
+"PchGpioUnlockSmiDispatch.h"	
+"PchInfo.h"	
+"PchPcieSmiDispatch.h"	
+"PchReset.h"	
+"PchSmiDispatch.h"	
+"PchSmmIoTrapControl.h"	
+"PchTcoSmiDispatch.h"	
+"SdHostIo.h"	
+"SerialGpio.h"	
+"SmmSmbus.h"	
+"Spi.h"	
+"UsbHcPortPrecondition.h"	
+"Wdt.h"	
+"PchSmmPeriodicTimerControl.h"
+<endComponent>

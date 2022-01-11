@@ -1,0 +1,9 @@
+<component>
+	name = "IndustryStandard"
+	category = ModulePart
+	LocalRoot = "ServerCommonPkg\Include\IndustryStandard\"
+	RefName = "ServerCommonPkg.IndustryStandard"
+[files]
+"WheaAcpi.h"	
+"WheaDefs.h"	
+<endComponent>

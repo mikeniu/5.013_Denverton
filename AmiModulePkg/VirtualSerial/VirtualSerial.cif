@@ -1,0 +1,14 @@
+<component>
+	name = "VirtualSerial"
+	category = eModule
+	LocalRoot = "AmiModulePkg\VirtualSerial\"
+	RefName = "VirtualSerial"
+[INF]
+"VirtualSerial.inf"
+[files]
+"VirtualSerial.sdl"	
+"VirtualSerial.chm"	
+"VirtualSerialComPort1.asl"	
+"VirtualSerialComPort2.asl"	
+"VirtualSerialComPort3.asl"	
+<endComponent>

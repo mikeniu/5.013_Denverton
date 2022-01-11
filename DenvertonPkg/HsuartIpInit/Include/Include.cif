@@ -1,0 +1,11 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\HsuartIpInit\Include\"
+	RefName = "DenvertonPkg.HsuartIpInit.Include"
+[files]
+"HsuartIpPolicy.h"	
+"HsuartIpRegs.h"	
+"PeiHsuartIpInitLib.h"	
+"PeiHsuartIpPolicyLib.h"	
+<endComponent>

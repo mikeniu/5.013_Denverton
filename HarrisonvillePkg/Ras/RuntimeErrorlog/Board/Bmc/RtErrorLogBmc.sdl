@@ -1,0 +1,45 @@
+TOKEN
+	Name  = RuntimeErrorLogBmc_SUPPORT
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+	Help  = "Main switch to enable RuntimeErrorLogBmc support in Project"
+    Token = "IPMI_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name = "LogMeToSel,"
+    Parent = "MemErrorHandlers"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "LogPciErrorToBmc,"
+    Parent = "PciErrorHandlers"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "LogCsiErrorToBmc,"
+    Parent = "CsiErrorHandlers"
+    InvokeOrder = AfterParent
+    Token = "MCA_ERROR_LOGGING" "=" "1"
+End
+
+INFComponent
+    Name  = "RtErrorLogBmcLib"
+    File  = "RtErrorLogBmc.inf"
+    Package  = "HarrisonvillePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+    Class  = "RtErrorLogBmcLib"
+    Instance  = "HarrisonvillePkg.RtErrorLogBmcLib"
+    ModuleTypes  = "DXE_DRIVER DXE_SMM_DRIVER"
+    Arch  = "common"
+End
+
+

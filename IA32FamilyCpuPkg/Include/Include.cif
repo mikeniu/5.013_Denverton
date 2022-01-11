@@ -1,0 +1,14 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "IA32FamilyCpuPkg\Include\"
+	RefName = "IA32FamilyCpuPkg.Include"
+[files]
+"AcpiCpuData.h"	
+"CpuHotPlugData.h"	
+[parts]
+"IA32FamilyCpuPkg.Guid"
+"IA32FamilyCpuPkg.Library"
+"IA32FamilyCpuPkg.Ppi"
+"IA32FamilyCpuPkg.Protocol"
+<endComponent>

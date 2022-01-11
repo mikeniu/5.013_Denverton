@@ -1,0 +1,13 @@
+<component>
+	name = "Whea"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Ras\Whea\"
+	RefName = "HarrisonvillePkg.Ras.Whea"
+[INF]
+"IsPlatformSupportWhea\IsPlatformSupportWhea.inf"
+"WheaPlatformHooksLib\WheaPlatformHooksLib.inf"
+[files]
+"Whea.sdl"	
+[parts]
+"HarrisonvillePkg.WheaErrorInj"
+<endComponent>

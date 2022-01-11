@@ -1,0 +1,23 @@
+<component>
+	name = "PeiPlatformHookLib"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Library\PeiPlatformHookLib\"
+	RefName = "HarrisonvillePkg.PeiPlatformHookLib"
+[INF]
+"PeiPlatformHooklib.inf"
+[files]
+"PeiPlatformHookLib.sdl"	
+"PeiPlatformHooklib.h"	
+"GpioTableAspenCove.h"
+"GpioTableCormorantLake.h"
+"GpioTableHarcuvar.h"
+"GpioTableMinnehaha.h"
+"GpioTableOstrichBay.h"
+"GpioTablePineLake.h"
+"GpioTableCarCreekModule.h"
+"GpioTableBigBugCreek.h"
+"GpioTableCarCreekModule2.h"
+"GpioTableDelphiModule.h"
+"GpioTableNano.h"
+"GpioTableElinks.txt"	
+<endComponent>

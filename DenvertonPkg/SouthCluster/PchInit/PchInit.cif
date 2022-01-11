@@ -1,0 +1,12 @@
+<component>
+	name = "PchInit"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\PchInit\"
+	RefName = "DenvertonPkg.SouthCluster.PchInit"
+[INF]
+"Dxe\PchInitDxe.inf"	
+"Smm\PchInitSmm.inf"	
+[files]
+"PchInit.sdl"	
+"Dxe\PchUsbPrecondition.h"		
+<endComponent>

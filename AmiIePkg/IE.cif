@@ -1,0 +1,9 @@
+<component>
+	name = "IE"
+	category = eModule
+	LocalRoot = "AmiIePkg\"
+	RefName = "IE"
+[parts]
+"AmiIePkg.IeHeci"
+"AmiIePkg.IpmiIe"
+<endComponent>

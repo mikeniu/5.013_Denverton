@@ -1,0 +1,12 @@
+<component>
+	name = "IA32FamilyCpuPkg"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Override\IA32FamilyCpuPkg\"
+	RefName = "HarrisonvillePkg.Override.IA32FamilyCpuPkg"
+[files]
+"IA32FamilyCpuPkg.dec"	
+"IA32FamilyCpuPkg.sdl"	
+[parts]
+"HarrisonvillePkg.Override.IA32FamilyCpuPkg.Include"
+"HarrisonvillePkg.CpuMpDxe"
+<endComponent>

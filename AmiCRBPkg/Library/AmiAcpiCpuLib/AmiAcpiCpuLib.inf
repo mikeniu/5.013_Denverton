@@ -1,0 +1,55 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2012, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file
+#   This driver installs BDS Architectural Protocol
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiAcpiCpuLibOverride
+  FILE_GUID                      = 87e4a8d5-f4ee-4d0c-a4a3-52e901149834
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiAcpiCpuLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  AmiAcpiCpuLibMadt.c
+  AmiAcpiCpuLibMp.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  # Denverton AptioV Override Start - EIP#138757
+  UefiCpuPkg/UefiCpuPkg.dec
+  # Denverton AptioV Override End - EIP#138757
+  
+[LibraryClasses]
+  HobLib
+  DebugLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+# Denverton AptioV Override Start - EIP#138757  
+  LocalApicLib
+  
+ [Protocols]
+   gEfiMpServiceProtocolGuid
+# Denverton AptioV Override End - EIP#138757   
+

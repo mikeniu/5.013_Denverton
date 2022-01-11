@@ -1,0 +1,17 @@
+<component>
+	name = "Me"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Me\"
+	RefName = "DenvertonPkg.Me"
+[files]
+"MePkg.dec"	
+"Me.sdl"
+[parts]
+"DenvertonPkg.Me.Heci"
+"DenvertonPkg.Me.Include"
+"DenvertonPkg.Me.Library"
+"DenvertonPkg.Me.Policy.Include"
+"DenvertonPkg.Me.Sps"
+"DenvertonPkg.Me.PtuLoader"
+"DenvertonPkg.MeFiaMuxLib"
+<endComponent>

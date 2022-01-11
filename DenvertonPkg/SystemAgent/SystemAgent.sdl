@@ -1,0 +1,23 @@
+TOKEN
+	Name  = "SystemAgent_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SystemAgent support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "SaAcpiTables_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SaAcpiTables support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "SaAcpiTables"
+	File  = "AcpiTables\SaAcpiTables.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "SaAcpiTables_SUPPORT" "=" "1"
+End
+

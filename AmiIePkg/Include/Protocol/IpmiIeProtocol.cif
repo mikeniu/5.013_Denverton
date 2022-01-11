@@ -1,0 +1,10 @@
+<component>
+    name = "IpmiIeProtocol"
+    category = ModulePart
+    LocalRoot = "AmiIePkg\Include\Protocol\"
+    RefName = "AmiIePkg.Include.IpmiIeProtocol"
+[files]
+"IpmiIeTransportProtocol.h"
+"IpmiIeSelfTestLogProtocol.h"
+"IeHeciDxe.h"
+<endComponent>

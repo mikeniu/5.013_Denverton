@@ -1,0 +1,12 @@
+<component>
+	name = "MmcMediaDevicePei"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\MmcMediaDevicePei\"
+	RefName = "DenvertonPkg.MmcMediaDevicePei"
+[INF]
+"MmcMediaDevicePei.inf"
+[files]
+"MmcMediaDevicePei.sdl"	
+"SdHostDriver.h"
+"MmioLib.h"	
+<endComponent>

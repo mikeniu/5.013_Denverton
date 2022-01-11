@@ -1,0 +1,12 @@
+<component>
+    name = "IpmiIeInclude"
+    category = ModulePart
+    LocalRoot = "AmiIePkg\Include\Include\"
+    RefName = "AmiIePkg.Include.IpmiIeInclude"
+[files]
+"IpmiIeCommon.h"
+"IpmiIeNetFnAppDefinitions.h"
+"IpmiIeNetFnTransportDefinitions.h"
+"IpmiIeNetFnOtherDefinitions.h"
+"PostCodeCommon.h"
+<endComponent>

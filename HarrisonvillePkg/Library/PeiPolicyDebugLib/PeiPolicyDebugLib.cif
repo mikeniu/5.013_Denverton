@@ -1,0 +1,11 @@
+<component>
+	name = "PeiPolicyDebugLib"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Library\PeiPolicyDebugLib\"
+	RefName = "HarrisonvillePkg.Library.PeiPolicyDebugLib"
+[INF]
+"PeiPolicyDebugLib.inf"
+[files]
+"PeiPolicyDebug.h"	
+"PeiPolicyDebugLib.sdl"	
+<endComponent>

@@ -1,0 +1,15 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\PcieIpInit\Include\"
+	RefName = "DenvertonPkg.PcieIpInit.Include"
+[files]
+"DxePcieIpInitLib.h"
+"PcieIpPlatform.h"
+"PcieIpPlatformLib.h"	
+"PcieIpPolicy.h"	
+"PcieIpRegs.h"	
+"PeiPcieIpInitLib.h"	
+"PeiPcieIpPolicyLib.h"	
+"Ppi\PeiPcieIpPolicyPpi.h"	
+<endComponent>

@@ -1,0 +1,16 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Me\Heci\Library\"
+	RefName = "DenvertonPkg.Me.Heci.Library"
+[INF]
+"HeciCoreLib\HeciCoreLib.inf"
+"HeciMsgDxeLib\HeciMsgDxeLib.inf"
+"HeciMsgPeiLib\HeciMsgPeiLib.inf"
+"MeChipsetLib\MeChipsetLib.inf"
+"MeDummyLib\MeDummyLib.inf"
+[files]
+"Library.sdl"	
+[parts]
+"DenvertonPkg.MeTypeLib"
+<endComponent>

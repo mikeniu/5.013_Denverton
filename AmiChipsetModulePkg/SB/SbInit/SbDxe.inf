@@ -1,0 +1,63 @@
+
+
+#
+# This file contains code for South Bridge initialization in the DXE stage.
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SbDxe
+  FILE_GUID                      = B7D19491-E55A-470d-8508-85A5DFA41974
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SbDxeInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+
+[Sources]  
+  SbDxe.c
+  SbSmm.c
+  SbDxeBoard.c
+
+[Packages]
+  MdePkg/MdePkg.dec   
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiCryptoPkg/AmiCryptoPkg.dec 
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  AmiDxeLib
+  AmiCspLib
+  UefiLib
+  AmiChipsetIoLib
+
+[Guids]
+  gEfiHobListGuid
+  gBdsConnectDriversProtocolGuid
+
+[Protocols]
+  gEfiSmmControl2ProtocolGuid
+  gEfiS3SaveStateProtocolGuid
+  gEfiPciRootBridgeIoProtocolGuid
+  gEfiUsbProtocolGuid
+  gEfiWatchdogTimerArchProtocolGuid
+  gEfiLegacy8259ProtocolGuid
+  gEfiCpuArchProtocolGuid
+  gEfiTimerArchProtocolGuid
+  gEfiPciIoProtocolGuid
+  gAmiSbHddPolicyProtocolGuid
+  gEfiSmmAccess2ProtocolGuid
+
+[Depex]  	
+  gEfiCpuArchProtocolGuid AND
+  gEfiPciRootBridgeIoProtocolGuid AND
+  gEfiSmmAccess2ProtocolGuid AND
+  gEfiS3SaveStateProtocolGuid

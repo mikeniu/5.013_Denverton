@@ -1,0 +1,118 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+TOKEN
+	Name  = "AmiChipsetModulePkg_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmiChipsetModulePkg support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "AmiChipsetModulePkg_DIR"
+End
+
+ # Denverton AptioV override Start - EIP#278393 
+ # To support Performance Measurement on Denverton
+ 
+TOKEN
+ Name  = "PeiTscTimerLib_SUPPORT"
+ Value  = "1"
+ Help  = "Main switch to enable PeiTscTimerLib support in Project"
+ TokenType = Boolean
+ Token = "PERFORMANCE_MEASUREMENTS_SUPPORT" "=" "1"
+End
+
+TOKEN
+ Name  = "DxeTscTimerLib_SUPPORT"
+ Value  = "1"
+ Help  = "Main switch to enable DxeTscTimerLib support in Project"
+ TokenType = Boolean
+ Token = "PERFORMANCE_MEASUREMENTS_SUPPORT" "=" "1"
+End
+
+ # Denverton AptioV override End - EIP#278393
+ 
+PcdMapping
+	Name  = "PcdGpioPortBaseAddress"
+	GuidSpace  = "gAmiChipsetModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	Value  = "$(GPIO_BASE_ADDRESS)"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcdRcrbBaseAddress"
+	GuidSpace  = "gAmiChipsetModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	Value  = "$(SB_RCRB_BASE_ADDRESS)"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+End
+
+ # Denverton AptioV override Start - EIP#278393 
+ # To support Performance Measurement on Denverton
+ 
+INFComponent
+ Name  = "PeiTscTimerLib"
+ File  = "Library/TscTimerLib/PeiTscTimerLib.inf"
+ Package  = "AmiChipsetModulePkg"
+ ModuleTypes  = "PEIM"
+ Token = "PeiTscTimerLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+ Name  = "DxeTscTimerLib"
+ File  = "Library/TscTimerLib/DxeTscTimerLib.inf"
+ Package  = "AmiChipsetModulePkg"
+ ModuleTypes  = "DXE_DRIVER"
+ Token = "DxeTscTimerLib_SUPPORT" "=" "1"
+End
+
+
+LibraryMapping
+ Class  = "TimerLib"
+ Instance  = "AmiChipsetModulePkg.PeiTscTimerLib"
+ ModuleTypes = "PEIM PEI_CORE"
+ Token = "PeiTscTimerLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+ Class  = "TimerLib"
+ Instance  = "AmiChipsetModulePkg.DxeTscTimerLib"
+ ModuleTypes = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER SMM_CORE"
+ Token = "DxeTscTimerLib_SUPPORT" "=" "1"
+End
+
+ # Denverton AptioV override End - EIP#278393
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

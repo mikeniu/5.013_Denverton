@@ -1,0 +1,136 @@
+TOKEN
+	Name  = "Library_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "PlatformCmosLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PlatformCmosLib support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+  Name  = "AcpiTimerLib_SUPPORT"
+  Value  = "1"
+  Help  = "Switch for Enabling AcpiTimerLib support in the project"
+  TokenType = Boolean
+End
+
+TOKEN
+  Name  = "PeiClockGenerator_SUPPORT"
+  Value  = "1"
+  Help  = "Switch for Enabling ClockGenerator support in the project"
+  TokenType = Boolean
+End
+
+TOKEN
+  Name  = "PlatformTimerLib_SUPPORT"
+  Value  = "1"
+  Help  = "Switch for Enabling PlatformTimerLib support in the project"
+  TokenType = Boolean
+End
+
+INFComponent
+  Name  = "AcpiTimerLib"
+  File  = "AcpiTimerLib\AcpiTimerLib.inf"
+  Package  = "HarrisonvillePkg"
+  ModuleTypes  = "BASE"
+  Token = "AcpiTimerLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+  Name  = "PeiClockGeneratorLib"
+  File  = "ClockGenerator\Pei\PeiClockGenerator.inf"
+  Package  = "HarrisonvillePkg"
+  ModuleTypes  = "BASE"
+  Token = "PeiClockGenerator_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "CpuOnlyResetLib"
+	File  = "CpuOnlyResetLib\CpuOnlyResetLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PlatformCmosLib"
+	File  = "PlatformCmosLib\PlatformCmosLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "LIBRARY"
+	Token = "PlatformCmosLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "PlatformHookLib"
+	File  = "PlatformHookLib\PlatformHookLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "BASE"
+	Token = "DEBUG_COM_PORT" "=" "1"	
+End
+
+INFComponent
+  Name  = "PlatformTimerLib"
+  File  = "PlatformTimerLib\PlatformTimerLib.inf"
+  Package  = "HarrisonvillePkg"
+  ModuleTypes  = "BASE"
+  Token = "PlatformTimerLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "SmmCorePlatformHookLibNull"
+	File  = "SmmCorePlatformHookLib\SmmCorePlatformHookLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "SMM_CORE"
+End
+
+LibraryMapping
+  Class  = "TimerLib"
+  Instance  = "HarrisonvillePkg.AcpiTimerLib"
+  Token = "AcpiTimerLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+  Class  = "PeiClockGeneratorLib"
+  Instance  = "HarrisonvillePkg.PeiClockGeneratorLib"
+  Token = "PeiClockGenerator_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CpuOnlyResetLib"
+	Instance  = "HarrisonvillePkg.CpuOnlyResetLib"
+End
+
+LibraryMapping
+  Class  = "MultiPlatformLib"
+  Instance  = "HarrisonvillePkg.MultiPlatformLib"
+  Token = "MultiPlatformLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PlatformCmosLib"
+	Instance  = "HarrisonvillePkg.PlatformCmosLib"
+End
+
+LibraryMapping
+	Class  = "PlatformHookLib"
+	Instance  = "HarrisonvillePkg.PlatformHookLib"
+	Token = "DEBUG_COM_PORT" "=" "1"	
+End
+
+LibraryMapping
+  Class  = "PlatformTimerLib"
+  Instance  = "HarrisonvillePkg.PlatformTimerLib"
+  Token = "PlatformTimerLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "SmmCorePlatformHookLib"
+	Instance  = "HarrisonvillePkg.SmmCorePlatformHookLibNull"
+	ModuleTypes  = "SMM_CORE"
+End
+

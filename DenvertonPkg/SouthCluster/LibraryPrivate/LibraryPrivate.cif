@@ -1,0 +1,19 @@
+<component>
+	name = "LibraryPrivate"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\LibraryPrivate\"
+	RefName = "DenvertonPkg.SouthCluster.LibraryPrivate"
+[INF]
+"PeiPchSmmControlLibNull\PeiPchSmmControlLibNull.inf"
+"PeiDxeSmmGpioPrivateLib\PeiDxeSmmGpioPrivateLib.inf"
+"PeiDxeSmmPchInitCommonLib\PeiDxeSmmPchInitCommonLib.inf"
+"BasePchResetCommonLib\BasePchResetCommonLib.inf"
+"PeiDxeSmmPchSmbusCommonLib\PeiDxeSmmPchSmbusCommonLib.inf"
+"BasePchSpiCommonLib\BasePchSpiCommonLib.inf"
+"PeiDxeSmmPchWdtCommonLib\PeiDxeSmmPchWdtCommonLib.inf"
+[files]
+"LibraryPrivate.sdl"	
+[parts]
+"DenvertonPkg.PeiPchInitLib"
+"DenvertonPkg.PeiPchRcLib"
+<endComponent>

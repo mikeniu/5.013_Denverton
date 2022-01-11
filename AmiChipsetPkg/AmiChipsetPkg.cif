@@ -1,0 +1,13 @@
+<component>
+	name = "AmiChipsetPkg"
+	category = eChipset
+	LocalRoot = "AmiChipsetPkg\"
+	RefName = "AmiChipsetPkg"
+[files]
+"AmiChipsetPkg.sdl"	
+"AmiChipsetPkg.dec"	
+"AmiChipsetPkg.chm"
+[parts]
+"AmiChipsetPkg.Include"
+"AmiChipsetPkg.LibraryInstances"
+<endComponent>

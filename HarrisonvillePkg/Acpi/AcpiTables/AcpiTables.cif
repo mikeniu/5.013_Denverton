@@ -1,0 +1,30 @@
+<component>
+	name = "AcpiTables"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Acpi\AcpiTables\"
+	RefName = "HarrisonvillePkg.AcpiTables"
+[INF]
+"AcpiTables.inf"
+[files]
+"AcpiTables.sdl"	
+"Bdat\Bdat.h"	
+"Dsdt\Emmc.asi"	
+"Dsdt\GlobalNvs.asi"	
+"Dsdt\IchApic.asi"	
+"Dsdt\IpmiOprRegions.asi"	
+"Dsdt\Mother.asi"	
+"Dsdt\osc.asi"	
+"Dsdt\P2SB.asi"	
+"Dsdt\PchNvs.asl"
+"Dsdt\PciCrs.asi"	
+"Dsdt\PciIrq.asi"	
+"Dsdt\PMC.asi"	
+"Dsdt\SIO.asi"	
+"Dsdt\SOL.asi"	
+"Dsdt\SysBus.asi"	
+"Dsdt\Tpm.asi"	
+"Dsdt\Whea.asi"	
+"Dsdt\Xhci.asi"	
+"Dsdt\Npk.asi"
+"Hpet\Hpet.h"	
+<endComponent>

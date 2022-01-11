@@ -1,0 +1,15 @@
+<component>
+	name = "IqatIpInit"
+	category = MODULEPART
+	LocalRoot = "DenvertonPkg\IqatIpInit\"
+	RefName = "DenvertonPkg.IqatIpInit"
+[INF]
+"DxeIqatIpInitLib\DxeIqatIpInitLib.inf"
+"IqatIpPolicyInitLib\IqatIpPolicyInitLib.inf"
+"PeiDxeSmmIqatIpInitLib\PeiDxeSmmIqatIpInitLib.inf"
+"PeiIqatIpInitLib\PeiIqatIpInitLib.inf"
+[files]
+"IqatIpInit.sdl"	
+[parts]
+"DenvertonPkg.IqatIpInit.Include"
+<endComponent>

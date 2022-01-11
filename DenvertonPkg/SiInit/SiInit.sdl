@@ -1,0 +1,23 @@
+TOKEN
+	Name  = "SiInit_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SiInit support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "SiInitDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SiInitDxe support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "SiInitDxe"
+	File  = "Dxe\SiInitDxe.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SiInitDxe_SUPPORT" "=" "1"
+End
+

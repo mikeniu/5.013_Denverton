@@ -1,0 +1,50 @@
+#/*++
+#
+# Copyright (c)  1999 - 2011 Intel Corporation. All rights reserved
+# This software and associated documentation (if any) is furnished
+# under a license and may only be used or copied in accordance
+# with the terms of the license. Except as permitted by such
+# license, no part of this software or documentation may be
+# reproduced, stored in a retrieval system, or transmitted in any
+# form or by any means without the express written consent of
+# Intel Corporation.
+
+#
+#  Module Name:
+#
+#   PpmPolicy.inf
+#
+#  Abstract:
+#
+#    Implement platform power management policy
+#
+#--*/
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PpmPolicy
+  FILE_GUID                      = 2EE72E7C-FB9E-4318-B888-33A315C7A91D
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PpmPolicyEntry
+
+[Sources]
+  PpmPolicy.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec #CpuConfigLib.h
+  HarrisonvillePkg/PlatformPkg.dec
+  DenvertonPkg/SiPkg.dec
+
+[LibraryClasses]
+  DebugLib
+  BaseLib
+  UefiDriverEntryPoint
+
+[Protocols]
+  gEfiMpServiceProtocolGuid
+  gPpmPlatformPolicyProtocolGuid
+
+[Depex]
+  gEfiMpServiceProtocolGuid

@@ -1,0 +1,18 @@
+<component>
+	name = "BaseTraceHubDebugLib"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\Library\BaseTraceHubDebugLib\"
+	RefName = "DenvertonPkg.SouthCluster.Library.BaseTraceHubDebugLib"
+[INF]
+"BaseTraceHubDebugLib.inf"
+[files]
+"BaseTraceHubDebugLib.sdl"	
+"sventx\api.h"	
+"sventx\compiler.h"	
+"sventx\crc32.h"	
+"sventx\devh.h"	
+"sventx\event.h"	
+"sventx\inline.h"	
+"sventx\sventx_platform.h"	
+"sventx\sventx_platform_config.h"	
+<endComponent>

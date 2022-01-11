@@ -1,0 +1,324 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2014, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+TOKEN
+	Name  = "NB_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Template - NorthBridge support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "TSEG_SIZE"
+	Value  = "0x400000"
+	Help  = "Size of SMM TSEG area used (in bytes) \Default size 1MB."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ROOT_BRIDGE_COUNT"
+	Value  = "1"
+	Help  = "Indicates how many root bridges (peer to peer) are in the system."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PCIEX_BASE_ADDRESS"
+	Value  = "0xE0000000"
+	Help  = "Contains the base address programmed for PCI Express. \Set this value to 0 if PCI Express support is not present. \Enables/disables PCI configuration access through memory. \Make sure PCIEX_BASE_ADDRESS is set appropriately. \If PCI is accessed through PCI \config mechanism then the maximum register offset that can be accessed is 256."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEBS"
+	Value  = "$(PCIEX_BASE_ADDRESS)"
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "PCIEX_LENGTH"
+	Value  = "0x10000000"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PCI_REGISTER_MAX"
+	Value  = "4096"
+	Help  = "Contains the maximum value of PCI register that can be accessed. \ Enabled only when PCI config memory access is enabled"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Token = "PCIEX_BASE_ADDRESS" "!=" "0"
+End
+
+TOKEN
+	Name  = "PCI_REGISTER_MAX"
+	Value  = "256"
+	Help  = "Contains the maximum value of PCI register that can be accessed. \ Enabled only when PCI config memory access is disabled"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Token = "PCIEX_BASE_ADDRESS" "=" "0"
+End
+
+TOKEN
+	Name  = "NB_DEBUG_MESSAGE"
+	Value  = "1"
+	Help  = "Enables/disables debug message in NB module"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+	Token = "DEBUG_MODE" "!=" "0"
+End
+
+TOKEN
+	Name  = "NB_TEMPLATE_VER"
+	Value  = "0007"
+	Help  = "North Bridge Template Version Number.\ DO NOT CHANGE THIS VALUE"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "INCLUDE_NB_ASM_FILE_IN_SEC"
+	Value  = "0"
+	Help  = "Includes an ASM file and an eLink in SEC build process for NB code modification:"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "LAPB"
+	Value  = "$(LOCAL_APIC_BASE)"
+	Help  = "Local APIC Base Address"
+	TokenType = Expression
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "CPU_MAX_MEMORY_SIZE"
+	Value  = "0x8000000000" # Denverton Aptiov override - EIP#210294
+	Help  = "Maximum memory size addressable by the CPU"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "MM_LEGACY_RESERVE_MEM"
+	Value  = "0x100000"
+	Help  = "This value will state how much Memory Manager \has to skip from Physical Bottom Of Memory before \start allocating BootServices Memory from the bottom.\The value is platform specific but it is suggested to \skip first 1 M of phisical memory for CSM and legacy BIOS \use.\Also some drivers may expect to find Some memory Below 16 Meg.\"
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "from 1M (0x100000) to 16M(0x1000000 ) or more"
+End
+
+TOKEN
+	Name  = "MEMORY_ARRAY_NUM"
+	Value  = "1"
+	Help  = "No of Memory Array"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIMM_SLOT_NUM"
+	Value  = "4"
+	Help  = "No of DIMM slots"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+# Denverton AptioV override Start - EIP#272510
+TOKEN
+	Name  = "NB_PCI_DEVICES_SSID_TABLE" 
+	Value  = "{NB_BUS_DEV_FUN, 0x19998086}, {-1, -1}"
+	Help  = "List of PCI device's Sub-System ID in the following format:\{Device#1 Bus/Device/Function, Device#1 Sub-ID}, {Device#2 Bus/Device/Function, Device#2 Sub-ID}...\The format of the PCI bus/device/function is followed by EFI_PCI_CONFIGURATION_ADDRESS.\If the value of Sub-ID is -1, that means BIOS will use PCI Vendor-ID and Device-ID instead.\The last structure {-1, -1} is end of the table, don't remove it!"
+	TokenType = Expression
+	TargetH = Yes
+End
+# Denverton AptioV override End - EIP#272510
+
+TOKEN
+	Name  = "=============== SMI Configuration =============="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "NB_SWSMI"
+	Value  = "0xb0"
+	Help  = "Value to write into SMI command register to generate software SMI for NB"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0xB0 - 0xB6"
+End
+
+TOKEN
+	Name  = "NB_SMM_ACCESS2_PROTOCOL_SUPPORT" # Denverton Aptiov override - EIP#210294
+	Value  = "0"
+	Help  = "Enable this token if SmmAccess2 protocol is from north bridge.\ If not disable this and provide SmmAccess2 protocol from other module."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "SMM_SUPPORT" "=" "1"
+End
+
+PATH
+	Name  = "NB_LIBRARY_DIR"
+	Path  = "AmiChipsetModulePkg/Library"
+End
+
+PATH
+	Name  = "NB_INCLUDE_DIR"
+	Path  = "AmiChipsetModulePkg/Include"
+End
+
+PATH
+	Name  = "NB_INIT_DIR"
+	Path  = "AmiChipsetModulePkg/NB/NbInit"
+End
+
+PATH
+	Name  = "NB_LIBRARY_INCLUDE_DIR"
+	Path  = "AmiChipsetModulePkg/Include/Library"
+End
+
+MODULE
+	Help  = "Includes Nb.mak to Project"
+	File  = "Nb.mak"
+End
+
+ELINK
+	Name  = "$(NB_LIBRARY_DIR)/AmiCspLib/NbGeneric.c"
+	Parent  = "AMI_CSP_PEI_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(NB_LIBRARY_DIR)/AmiCspLib/NbGeneric.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress"
+	Parent  = "AMI_CSP_PCD"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name = "NbConfigurationList"
+	InvokeOrder = ReplaceParent
+End
+
+OUTPUTREGISTER
+	Name  = "NbElinkList"
+	Path  = "Build"
+	File  = "NbElinks.h"
+	Template  = "Elink/NbElinks.txt"
+End
+
+INFComponent
+	Name  = "NbPei"
+	File  = "NbPei.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "PEIM"
+	Path  = "NB_INIT_DIR"
+End
+
+INFComponent
+	Name  = "NbDxe"
+	File  = "NbDxe.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Path  = "NB_INIT_DIR"
+End
+
+INFComponent
+	Name  = "NbSmi"
+	File  = "NbSmi.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Path  = "NB_INIT_DIR"
+End
+
+INFComponent
+	Name  = "NbPciDxeInitLib"
+	File  = "NbPciDxeInitLib/NbPciDxeInitLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "NB_LIBRARY_DIR"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiChipsetModulePkg.NbPciDxeInitLib"
+	ModuleTypes  = "DXE_DRIVER"
+	Override  = "AmiModulePkg.PciDxeInit"
+End
+
+PcdMapping
+	Name  = "PcdPciExpressBaseAddress"
+	GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	Value  = "$(PCIEX_BASE_ADDRESS)"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+End
+# Denverton AptioV Override Start - EIP#221424
+PCIDEVICE
+	Title  = "PciRoot"
+	Parent  = "PciHost (Virtual)"
+	Attribute  = "0x7877f"
+	Dev_type  = "RootBridge"
+	Bus  = 00h
+	Dev  = 00h
+	Fun  = 00h
+	BridgeBusNum  = 00h
+	SleepNum  = 01h
+	ASLfile  = "'HarrisonvillePkg\Acpi\AcpiTables\Dsdt\SysBus.asi','HarrisonvillePkg\Acpi\AcpiTables\Dsdt\osc.asi','HarrisonvillePkg\Acpi\AcpiTables\Dsdt\PciCrs.asi','HarrisonvillePkg\Acpi\AcpiTables\Dsdt\IchApic.asi'"
+	ASLdeviceName  = "PCI0"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	FixedBus = Yes
+	PCIExpress = Yes
+	InitRoutine  = "CspNbPciInitPciRoot"
+End
+# Denverton AptioV Override End - EIP#221424
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2014, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

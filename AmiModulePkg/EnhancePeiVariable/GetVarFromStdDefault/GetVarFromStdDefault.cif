@@ -1,0 +1,10 @@
+<component>
+    name = "GetVarFromStdDefault"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\EnhancePeiVariable\GetVarFromStdDefault\"
+    RefName = "GetVarFromStdDefault"
+[files]
+"FvBbStdDefaultsFile.txt"
+"GetVarFromStdDefaultPei.c"
+"GetVarFromStdDefault.h"
+<endComponent>

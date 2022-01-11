@@ -1,0 +1,10 @@
+<component>
+	name = "MdeModulePkg.WatchdogTimer"
+	category = eModule
+	LocalRoot = "MdeModulePkg\Universal\WatchdogTimerDxe\"
+	RefName = "MdeModulePkg.WatchdogTimer"
+[files]
+"WatchdogTimer.sdl"	
+[INF]
+"WatchdogTimer.inf"
+<endComponent>

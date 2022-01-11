@@ -1,0 +1,8 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "AmiChipsetPkg\Include\Guid\"
+	RefName = "AmiChipsetPkg.Guid"
+[files]
+"Rtc.h"	
+<endComponent>

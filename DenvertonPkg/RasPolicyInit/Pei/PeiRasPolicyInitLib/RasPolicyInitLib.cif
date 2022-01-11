@@ -1,0 +1,10 @@
+<component>
+	name = "RasPolicyInitLib"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\RasPolicyInit\Pei\PeiRasPolicyInitLib"
+	RefName = "DenvertonPkg.RasPolicyInit.Pei.PeiRasPolicyInitLib"
+[INF]
+"PeiRasPolicyInitLib.inf"
+[files]
+"RasPolicyInitLib.sdl"	
+<endComponent>

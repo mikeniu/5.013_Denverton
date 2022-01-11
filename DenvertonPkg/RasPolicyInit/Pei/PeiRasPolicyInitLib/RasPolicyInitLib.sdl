@@ -1,0 +1,19 @@
+TOKEN
+	Name  = "RasPolicyInitPei_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SiInit support in Project"
+	TokenType = Boolean
+	Master = Yes	
+End
+
+INFComponent
+	Name  = "PeiRasPolicyInitLib"
+	File  = "PeiRasPolicyInitLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "PeiRasPolicyInitLib"
+	Instance  = "DenvertonPkg.PeiRasPolicyInitLib"
+End

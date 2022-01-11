@@ -1,0 +1,12 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "ServerCommonPkg\Include\Library\"
+	RefName = "ServerCommonPkg.Include.Library"
+[files]
+"PlatformHooksLib.h"	
+"WheaErrorLib.h"	
+"WheaPlatformHooksLib.h"	
+"MmPciBaseLib.h"
+"TraceHubLib.h"
+<endComponent>

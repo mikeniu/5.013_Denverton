@@ -1,0 +1,612 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may
+// be modified by the user, subject to additional terms of the
+// license agreement
+//
+// *++
+//
+// Copyright (c) 1999 - 2016 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+//
+//
+// Module Name:
+//
+//   ProcessorSetup.hfr
+//
+// Abstract:
+//
+//   Processor Setup formset.
+//
+// Revision History:
+//
+// --*/
+
+  form formid = VFR_FORMID_PROCESSOR,
+
+    title         = STRING_TOKEN(STR_PROCESSOR_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_PROCESSOR_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+
+    suppressif TRUE;
+    checkbox varid    = SYSTEM_CONFIGURATION.Access,
+             prompt   = STRING_TOKEN(STR_NULL_STRING),
+             help     = STRING_TOKEN(STR_NULL_STRING),
+             flags    = 0,
+    endcheckbox;
+    endif;
+
+    text
+        help  = STRING_TOKEN(STR_NULL_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_ID_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_ID_VALUE),
+        flags = 0, key = 0;
+
+    text
+        help  = STRING_TOKEN(STR_NULL_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_FREQ_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_FREQ_VALUE),
+        flags = 0, key = 0;
+
+    text
+        help  = STRING_TOKEN(STR_NULL_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_BCLK_FREQ_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_BCLK_FREQ_VALUE),
+        flags = 0, key = 0;
+
+    // Denverton Aptiov override start - EIP#217439
+    // STR_PROCESSOR_MICROCODE_VALUE will be displayed in IntelRc page itself
+    /*
+    text
+        help  = STRING_TOKEN(STR_NULL_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_MICROCODE_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_MICROCODE_VALUE),
+        flags = 0, key = 0;
+    */
+    // Denverton Aptiov override end - EIP#217439
+    text
+        help  = STRING_TOKEN(STR_NULL_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_L1_CACHE_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_L1_CACHE_VALUE),
+        flags = 0, key = 0;
+
+    text
+        help  = STRING_TOKEN(STR_NULL_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_L2_CACHE_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_L2_CACHE_VALUE),
+        flags = 0, key = 0;
+
+    text
+        help  = STRING_TOKEN(STR_NULL_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_VERSION_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_VERSION_VALUE),
+        flags = 0, key = 0;
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+      //
+      // IED support
+      //
+    suppressif TRUE;
+//    suppressif  ideqval SYSTEM_CONFIGURATION.Access == SYSTEM_PASSWORD_USER;
+        oneof varid     = SYSTEM_CONFIGURATION.IedSize,
+            prompt      = STRING_TOKEN(STR_PROCESSOR_IED_PROMPT),
+            help        = STRING_TOKEN(STR_PROCESSOR_IED_HELP),
+            option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+            option text = STRING_TOKEN(STR_4096K),    value = 1,  flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    //
+    // Enable CPU P-States
+    //
+    oneof varid     = SYSTEM_CONFIGURATION.ProcessorEistEnable,
+        prompt      = STRING_TOKEN(STR_PROCESSOR_EIST),
+        help        = STRING_TOKEN(STR_PROCESSOR_EIST_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    //
+    // BIOS Request Frequency
+    //
+    oneof varid     = SYSTEM_CONFIGURATION.BiosRequestFreq,
+        prompt      = STRING_TOKEN(STR_BIOS_REQUEST_FREQ),
+        help        = STRING_TOKEN(STR_BIOS_REQUEST_FREQ_HELP),
+#ifdef CAR_LAKE_SUPPORT
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED; 
+#else
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+#endif //CAR_LAKE_SUPPORT
+    endoneof;
+
+    //
+    // Enable Turbo
+    //
+        grayoutif ideqval SYSTEM_CONFIGURATION.ProcessorEistEnable == 0;
+            oneof varid     = SYSTEM_CONFIGURATION.TurboModeEnable,
+                prompt      = STRING_TOKEN(STR_PROCESSOR_TURBO_MODE),
+                help        = STRING_TOKEN(STR_PROCESSOR_TURBO_MODE_HELP),
+#ifdef CAR_LAKE_SUPPORT
+                option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+                option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED;
+#else              
+                option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+#endif //CAR_LAKE_SUPPORT
+            endoneof;
+        endif;
+
+    oneof varid   = SYSTEM_CONFIGURATION.EnableTm1,
+        prompt      = STRING_TOKEN(STR_TM1_PROMPT),
+        help        = STRING_TOKEN(STR_TM1_PROMPT_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = MANUFACTURING |DEFAULT | RESET_REQUIRED;
+    endoneof;
+
+    grayoutif  ideqval SYSTEM_CONFIGURATION.ProcessorEistEnable == 0 OR ideqval SYSTEM_CONFIGURATION.EnableTm1 == 0;
+        oneof varid   = SYSTEM_CONFIGURATION.Tm2ThrottlingType,
+            prompt      = STRING_TOKEN(STR_TM2_THROTTLE_TYPE_PROMPT),
+            help        = STRING_TOKEN(STR_TM2_THROTTLE_TYPE_PROMPT_HELP),
+            option text = STRING_TOKEN(STR_LFM_THROTTLING), value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_ADAPTIVE_THROTTLING),  value = 1, flags = MANUFACTURING |DEFAULT | RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    //
+    // Enables/Disables Dynamic Self Refresh
+    //
+    oneof varid = SYSTEM_CONFIGURATION.DynamicSelfRefresh,
+      prompt      = STRING_TOKEN(STR_DYNAMIC_SELF_REFRESH_PROMPT),
+      help        = STRING_TOKEN(STR_DYNAMIC_SELF_REFRESH_HELP),
+      option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    //
+    // Sets PMOP Levels
+    //
+    oneof varid = SYSTEM_CONFIGURATION.DynamicPowerModeOpcode,
+      prompt      = STRING_TOKEN(STR_DYNAMIC_POWER_MODE_OPCODE_PROMPT),
+      help        = STRING_TOKEN(STR_DYNAMIC_POWER_MODE_OPCODE_HELP),
+      option text = STRING_TOKEN(STR_SLOW_EXIT_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_FAST_EXIT_STRING), value = 1, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+    endoneof;
+
+    //
+    // Enable CPU C-States
+    //
+    oneof varid     = SYSTEM_CONFIGURATION.ProcessorCcxEnable,
+        prompt      = STRING_TOKEN(STR_PROCESSOR_CCX),
+        help        = STRING_TOKEN(STR_PROCESSOR_CCX_HELP),
+#ifdef CAR_LAKE_SUPPORT
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED;
+#else        
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+#endif // CAR_LAKE_SUPPORT        
+    endoneof;
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.ProcessorCcxEnable == 00;
+      //
+      // If ProcessorCcxEnable == 0, then the following setup options are gray
+      //   PackageCState, MaxCState, ProcessorC1eEnable & MonitorMwaitEnable
+      //
+      // Set Package C-State Limit
+      //
+      oneof varid     = SYSTEM_CONFIGURATION.PackageCState,
+          prompt      = STRING_TOKEN(STR_PACKAGE_CSTATE_REPORT),
+          help        = STRING_TOKEN(STR_PACKAGE_CSTATE_REPORT_HELP),
+          option text = STRING_TOKEN(STR_NOPACKAGE_CSTATE),     value = 0,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_NOS0IX),               value = 1,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_NOLIMIT),              value = 2,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+      endoneof;
+      
+      //
+      // Set Max Core C-State
+      //
+      oneof varid = SYSTEM_CONFIGURATION.MaxCState,
+          prompt  = STRING_TOKEN(STR_MAX_C_STATE),
+          help    = STRING_TOKEN(STR_MAX_C_STATE_HELP),
+          option text = STRING_TOKEN(STR_C1),  value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_C6),  value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+      endoneof;
+      
+      //
+      // Enable CPU C1E
+      //
+      grayoutif  ideqval SYSTEM_CONFIGURATION.ProcessorEistEnable == 0;
+          oneof varid     = SYSTEM_CONFIGURATION.ProcessorC1eEnable,
+              prompt      = STRING_TOKEN(STR_PROCESSOR_C1E),
+              help        = STRING_TOKEN(STR_PROCESSOR_C1E_HELP),
+              option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED;
+              option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          endoneof;
+      endif;
+
+      //
+      // Monitor / Mwait
+      //
+      oneof varid     = SYSTEM_CONFIGURATION.MonitorMwaitEnable,
+          prompt      = STRING_TOKEN(STR_MWAIT),
+          help        = STRING_TOKEN(STR_MWAIT_HELP),
+          option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED  | MANUFACTURING | DEFAULT;
+      endoneof;
+    endif;  // ProcessorCcxEnable == 0
+
+
+    oneof varid = SYSTEM_CONFIGURATION.L1Prefetcher,
+         prompt  = STRING_TOKEN(STR_L1_PREFETCHER),
+         help    = STRING_TOKEN(STR_L1_PREFETCHER_HELP),
+         option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED  | MANUFACTURING | DEFAULT;
+         option text = STRING_TOKEN(STR_DISABLE),   value = 0, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.L2Prefetcher,
+         prompt  = STRING_TOKEN(STR_L2_PREFETCHER),
+         help    = STRING_TOKEN(STR_L2_PREFETCHER_HELP),
+         option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED  | MANUFACTURING | DEFAULT;
+         option text = STRING_TOKEN(STR_DISABLE),   value = 0, flags = RESET_REQUIRED;
+    endoneof;
+
+    //
+    // Enable CPU T-States
+    //
+    oneof varid     = SYSTEM_CONFIGURATION.TStateEnable,
+        prompt      = STRING_TOKEN(STR_ACPI_TSTATES_ENABLE),
+        help        = STRING_TOKEN(STR_ACPI_TSTATES_ENABLE_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.TStateEnable == 0;
+      oneof varid   = SYSTEM_CONFIGURATION.OnDieThermalThrottling,
+        prompt      = STRING_TOKEN(STR_TT_DUTY_CYCLE),
+        help        = STRING_TOKEN(STR_TT_DUTY_CYCLE_HELP),
+        option text = STRING_TOKEN(STR_TT_DUTY_CYCLE_0),  value = 0x00, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_TT_DUTY_CYCLE_1),  value = 0x02, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_TT_DUTY_CYCLE_2),  value = 0x04, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_TT_DUTY_CYCLE_3),  value = 0x06, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_TT_DUTY_CYCLE_4),  value = 0x08, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_TT_DUTY_CYCLE_5),  value = 0x0A, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_TT_DUTY_CYCLE_6),  value = 0x0C, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_TT_DUTY_CYCLE_7),  value = 0x0E, flags = RESET_REQUIRED;
+      endoneof;
+	endif;
+
+    //
+    // Fast String
+    //
+    oneof varid     = SYSTEM_CONFIGURATION.FastStringEnable,
+        prompt      = STRING_TOKEN(STR_FAST_STR),
+        help        = STRING_TOKEN(STR_FAST_STR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED  | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    //
+    // Machine Check
+    //
+    oneof varid     = SYSTEM_CONFIGURATION.MachineCheckEnable,
+        prompt      = STRING_TOKEN(STR_MCH_STR),
+        help        = STRING_TOKEN(STR_MCH_STR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED  | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    //
+    // CPUID Max
+    //
+    oneof varid     = SYSTEM_CONFIGURATION.CpuidMaxValue,
+        prompt      = STRING_TOKEN(STR_LIMIT_CPUID_PROMPT),
+        help        = STRING_TOKEN(STR_LIMIT_CPUID_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    //
+    // Execute Disable
+    //
+    oneof varid     = SYSTEM_CONFIGURATION.ExecuteDisableBit,
+        prompt      = STRING_TOKEN (STR_EXECUTE_DISABLE_BIT_PROMPT),
+        help        = STRING_TOKEN (STR_EXECUTE_DISABLE_BIT_HELP),
+        option text = STRING_TOKEN (STR_DISABLE), value = 0, flags = 0;
+        option text = STRING_TOKEN (STR_ENABLE),  value = 1, flags = MANUFACTURING | DEFAULT;
+    endoneof;
+
+    //
+    // VMX
+    //
+    oneof varid     = SYSTEM_CONFIGURATION.ProcessorVmxEnable,
+        prompt      = STRING_TOKEN(STR_PROCESSOR_VMX),
+        help        = STRING_TOKEN(STR_PROCESSOR_VMX_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    //
+    // BIST
+    //
+    oneof varid     = SYSTEM_CONFIGURATION.ProcessorBistEnable,
+        prompt      = STRING_TOKEN(STR_PROCESSOR_BIST),
+        help        = STRING_TOKEN(STR_PROCESSOR_BIST_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    //
+    // XAPIC support
+    //
+    suppressif ideqval SYSTEM_CONFIGURATION.InterruptRemappingSupport == 0;
+     // Denverton AptioV override Start - EIP#321794 
+     grayoutif TRUE;   
+      oneof varid     = SYSTEM_CONFIGURATION.ProcessorXapic,
+	    prompt      = STRING_TOKEN(STR_PROCESSOR_XAPIC),
+        help        = STRING_TOKEN(STR_PROCESSOR_XAPIC_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+      endoneof;
+     endif;
+     // Denverton AptioV override End - EIP#321794
+    endif;
+    //
+    // AES-NI support
+    //
+    oneof varid     = SYSTEM_CONFIGURATION.AesEnable,
+        prompt      = STRING_TOKEN(STR_PROCESSOR_AES),
+        help        = STRING_TOKEN(STR_PROCESSOR_AES_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    //
+    // MSR 0x606 PKG_POWER_SKU_UNIT
+    //
+    grayoutif TRUE;
+      numeric varid = SYSTEM_CONFIGURATION.PkgPowerSkuUnit,
+          prompt    = STRING_TOKEN(STR_PKG_POWER_SKU_UNIT),
+          help      = STRING_TOKEN(STR_PKG_POWER_SKU_UNIT_HELP),
+          flags     = DISPLAY_UINT_HEX | INTERACTIVE | RESET_REQUIRED,
+          minimum   = 0x0,
+          maximum   = 0xffffffff,
+          step      = 1,
+          default   = 0xffffffff,
+      endnumeric;
+    endif;
+
+    //
+    // LOCK MSR 0x610 PKG_RAPL_LIMIT
+    //
+    oneof varid     = SYSTEM_CONFIGURATION.PkgRaplLimitLock,
+        prompt      = STRING_TOKEN(STR_PKG_RAPL_LIMIT_LOCK),
+        help        = STRING_TOKEN(STR_PKG_RAPL_LIMIT_LOCK_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED;
+//        option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED;
+//        option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    //
+    // MSR 0x610 PKG_RAPL_LIMIT
+    //
+    grayoutif ideqval SYSTEM_CONFIGURATION.PkgRaplLimitLock == 1;
+        numeric varid = SYSTEM_CONFIGURATION.PackageRaplTimeWindow1,
+            prompt    = STRING_TOKEN(STR_PKG_RAPL_TIME_WINDOW1),
+            help      = STRING_TOKEN(STR_PKG_RAPL_TIME_WINDOW1_HELP),
+            flags     = DISPLAY_UINT_DEC | INTERACTIVE | NUMERIC_SIZE_4 | RESET_REQUIRED,
+            minimum   = 0x0,
+            maximum   = 0xFFFFFFFF,
+            step      = 1,
+            default   = 0xFFFFFFFF,
+        endnumeric;
+        
+        numeric varid = SYSTEM_CONFIGURATION.PackageRaplPowerLevel1,
+            prompt    = STRING_TOKEN(STR_PKG_RAPL_POWER_LIMIT1),
+            help      = STRING_TOKEN(STR_PKG_RAPL_POWER_LIMIT1_HELP),
+            flags     = DISPLAY_UINT_DEC | INTERACTIVE | NUMERIC_SIZE_2 | RESET_REQUIRED,
+            minimum   = 0x0,
+            maximum   = 0x7FFF,
+            step      = 1,
+            default   = 0x0,
+        endnumeric;
+        
+        numeric varid = SYSTEM_CONFIGURATION.PackageRaplPowerLevel2,
+            prompt    = STRING_TOKEN(STR_PKG_RAPL_POWER_LIMIT2),
+            help      = STRING_TOKEN(STR_PKG_RAPL_POWER_LIMIT2_HELP),
+            flags     = DISPLAY_UINT_DEC | INTERACTIVE | NUMERIC_SIZE_2 | RESET_REQUIRED,
+            minimum   = 0x0,
+            maximum   = 0x7FFF,
+            step      = 1,
+            default   = 0x0,
+        endnumeric;
+    endif;
+
+    //
+    // Active Cores
+    //    
+    numeric
+      name    = ActiveCores,
+      varid   = SYSTEM_CONFIGURATION.ActiveCoreCount,
+      prompt  = STRING_TOKEN(STR_ACTIVE_CORE_COUNT_PROMPT),
+      help    = STRING_TOKEN(STR_ACTIVE_CORE_COUNT_PROMPT_HELP),
+      flags   = 0 | RESET_REQUIRED | INTERACTIVE,
+      minimum = 0,
+      maximum = 16, // 1 Core to 16 Cores
+      step    = 0,                                    // Stepping of 0 equates to a manual entering of a value, 
+                                                      // otherwise it will auto-increment with a left/right arrow
+      default value = 0,
+    endnumeric;
+
+    //
+    // Crash Dump
+    //    
+    oneof varid     = SYSTEM_CONFIGURATION.EnableDumpCrashLog,
+        prompt      = STRING_TOKEN(STR_CRASH_DUMP_PROMPT),
+        help        = STRING_TOKEN(STR_CRASH_DUMP_PROMPT_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid     = SYSTEM_CONFIGURATION.ProcessorFlexibleRatioOverrideEnable,
+        prompt      = STRING_TOKEN(STR_PROCESSOR_RATIO_OVERRIDE),
+        help        = STRING_TOKEN(STR_PROCESSOR_RATIO_OVERRIDE_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.ProcessorFlexibleRatioOverrideEnable == 0;
+        numeric varid = SYSTEM_CONFIGURATION.ProcessorFlexibleRatio,
+            prompt  = STRING_TOKEN(STR_PROCESSOR_CORE_RATIO),
+            help    = STRING_TOKEN(STR_PROCESSOR_CORE_RATIO_HELP),
+            flags   = 0 | RESET_REQUIRED,
+            minimum = 0, maximum = 100,
+            step    = 1, // Stepping of 0 equates to a manual entering of a value, otherwise
+                         // it will auto-increment with a left/right arrow
+            default = 24,
+        endnumeric;
+    endif;
+    oneof varid     = SYSTEM_CONFIGURATION.RatioLimitsEnable,
+        prompt      = STRING_TOKEN(STR_RATIO_LIMITS_ENABLE),
+        help        = STRING_TOKEN(STR_RATIO_LIMITS_ENABLE_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.RatioLimitsEnable == 0;
+      goto VFR_FORMID_RATIO_LIMITS,
+      prompt  = STRING_TOKEN(STR_RATIO_LIMITS_PROMPT),
+      help    = STRING_TOKEN(STR_RATIO_LIMITS_PROMPT_HELP);
+    endif;    
+	
+	//
+    // Jump to Processor DFX Configuration Form
+    //
+    goto VFR_FORMID_DFX_PROCESSOR, 
+        prompt = STRING_TOKEN(STR_DFX_PROCESSOR_CONFIG_FORM_TITLE),
+        help   = STRING_TOKEN(STR_DFX_PROCESSOR_CONFIG_FORM_HELP);
+  endform;
+  
+  form formid = VFR_FORMID_DFX_PROCESSOR,
+
+    title         = STRING_TOKEN(STR_DFX_PROCESSOR_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_DFX_PROCESSOR_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    //
+    // iTurbo Mode Enable
+    //
+    grayoutif ideqval SYSTEM_CONFIGURATION.ProcessorEistEnable == 0;
+        oneof varid     = SYSTEM_CONFIGURATION.iTurboModeValue,
+            prompt      = STRING_TOKEN(STR_PROCESSOR_I_TURBO_MODE),
+            help        = STRING_TOKEN(STR_PROCESSOR_I_TURBO_MODE_HELP),
+            option text = STRING_TOKEN(STR_PERFORMANCE),           value = 0,  flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_BALANCED_PERFORMANCE),  value = 4,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+            option text = STRING_TOKEN(STR_BALANCED_EFFICIENCY),   value = 8,  flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_ENERGY_EFFICIENT),      value = 12, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+    //
+    // LOCK MSR 0x615 PL3_CONTROL
+    //
+    oneof varid     = SYSTEM_CONFIGURATION.PL3ControlLock,
+        prompt      = STRING_TOKEN(STR_PL3_CONTROL_LOCK),
+        help        = STRING_TOKEN(STR_PL3_CONTROL_LOCK_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED;
+//        option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED;
+//        option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    //
+    // MSR 0x615 PL3_CONTROL
+    //
+    grayoutif ideqval SYSTEM_CONFIGURATION.PL3ControlLock == 1;
+        //
+        // PL3 Time Window
+        //
+        oneof varid = SYSTEM_CONFIGURATION.PL3ControlTimeWindow,
+            prompt    = STRING_TOKEN(STR_PL3_CONTROL_TIME_WINDOW),
+            help      = STRING_TOKEN(STR_PL3_CONTROL_TIME_WINDOW_HELP),
+            option text = STRING_TOKEN(STR_2MS),  value = 1,  flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_4MS),  value = 2,  flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_8MS),  value = 3,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+            option text = STRING_TOKEN(STR_16MS), value = 4,  flags = RESET_REQUIRED;
+        endoneof;
+
+        //
+        // PL3 Enable
+        //
+        oneof varid     = SYSTEM_CONFIGURATION.PL3ControlEnable,
+            prompt      = STRING_TOKEN(STR_PL3_CONTROL_PL3_ENABLE),
+            help        = STRING_TOKEN(STR_PL3_CONTROL_PL3_ENABLE_HELP),
+//            option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+//            option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_DISABLE),  value = 0,  flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_ENABLE),   value = 1,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        endoneof;
+
+        //
+        // PL3 Power Level
+        //
+        numeric varid = SYSTEM_CONFIGURATION.PL3ControlPowerLevel,
+            prompt    = STRING_TOKEN(STR_PL3_CONTROL_POWER_LIMIT),
+            help      = STRING_TOKEN(STR_PL3_CONTROL_POWER_LIMIT_HELP),
+            flags     = DISPLAY_UINT_DEC | INTERACTIVE | NUMERIC_SIZE_2 | RESET_REQUIRED,
+            minimum   = 0x0,
+            maximum   = 0x7FFF,
+            step      = 1,
+            default   = 0x0,
+        endnumeric;
+        
+        //
+        // PL3 Duty Cycle
+        //
+        numeric varid = SYSTEM_CONFIGURATION.PL3ControlDutyCycle,
+            prompt    = STRING_TOKEN(STR_PL3_CONTROL_PL3_DUTY_CYCLE),
+            help      = STRING_TOKEN(STR_PL3_CONTROL_PL3_DUTY_CYCLE_HELP),
+            flags     = 0 | RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,       // 0% .. 100%
+            step      = 0,         // Stepping of 0 equates to a manual entering of a value, 
+                                   // otherwise it will auto-increment with a left/right arrow
+            default   = 25,
+        endnumeric;
+        
+        //
+        // PL3 PMAX Power
+        //        
+        numeric varid = SYSTEM_CONFIGURATION.PL3ControlPmaxPower,
+            prompt    = STRING_TOKEN(STR_PL3_CONTROL_PMAX_POWER),
+            help      = STRING_TOKEN(STR_PL3_CONTROL_PMAX_POWER_HELP),
+            flags     = DISPLAY_UINT_DEC | INTERACTIVE | NUMERIC_SIZE_2 | RESET_REQUIRED,
+            minimum   = 0x0,
+            maximum   = 0x7FFF,
+            step      = 1,
+            default   = 0x0,
+        endnumeric;
+    endif;
+	
+	//
+    // Sets Self Refresh Delay
+    //
+    numeric varid = SYSTEM_CONFIGURATION.SelfRefreshDelay,
+      prompt    = STRING_TOKEN(STR_SELF_REFRESH_DELAY_PROMPT),
+      help      = STRING_TOKEN(STR_SELF_REFRESH_DELAY_HELP),
+      flags     = RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0x514,
+      step      = 1,
+      default   = 0x01e,
+    endnumeric;
+   endform;
+#include "ProcessorLimitsSetup.hfr"

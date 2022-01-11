@@ -1,0 +1,93 @@
+TOKEN
+	Name  = "LibraryPrivate_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling LibraryPrivate support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PeiPchSmmControlLib"
+	File  = "PeiPchSmmControlLibNull\PeiPchSmmControlLibNull.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PeiDxeSmmGpioPrivateLib"
+	File  = "PeiDxeSmmGpioPrivateLib\PeiDxeSmmGpioPrivateLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PeiDxeSmmPchInitCommonLib"
+	File  = "PeiDxeSmmPchInitCommonLib\PeiDxeSmmPchInitCommonLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "BasePchResetCommonLib"
+	File  = "BasePchResetCommonLib\BasePchResetCommonLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PeiDxeSmmPchSmbusCommonLib"
+	File  = "PeiDxeSmmPchSmbusCommonLib\PeiDxeSmmPchSmbusCommonLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "BasePchSpiCommonLib"
+	File  = "BasePchSpiCommonLib\BasePchSpiCommonLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PeiDxeSmmPchWdtCommonLib"
+	File  = "PeiDxeSmmPchWdtCommonLib\PeiDxeSmmPchWdtCommonLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+# Denverton AptioV override End - EIP#226369
+
+
+LibraryMapping
+	Class  = "PchSmmControlLib"
+	Instance  = "DenvertonPkg.PeiPchSmmControlLib"
+End
+
+LibraryMapping
+	Class  = "GpioPrivateLib"
+	Instance  = "DenvertonPkg.PeiDxeSmmGpioPrivateLib"
+End
+
+LibraryMapping
+	Class  = "PchInitCommonLib"
+	Instance  = "DenvertonPkg.PeiDxeSmmPchInitCommonLib"
+End
+
+LibraryMapping
+	Class  = "PchResetCommonLib"
+	Instance  = "DenvertonPkg.BasePchResetCommonLib"
+End
+
+LibraryMapping
+	Class  = "PchSmbusCommonLib"
+	Instance  = "DenvertonPkg.PeiDxeSmmPchSmbusCommonLib"
+End
+
+LibraryMapping
+	Class  = "PchSpiCommonLib"
+	Instance  = "DenvertonPkg.BasePchSpiCommonLib"
+End
+
+LibraryMapping
+	Class  = "PchWdtCommonLib"
+	Instance  = "DenvertonPkg.PeiDxeSmmPchWdtCommonLib"
+End

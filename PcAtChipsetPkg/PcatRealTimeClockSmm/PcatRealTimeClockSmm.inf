@@ -1,0 +1,68 @@
+## @file
+# PcRtc driver to install EFI_REAL_TIME_CLOCK_ARCH_PROTOCOL.
+#
+# This driver provides GetTime, SetTime, GetWakeupTime, SetWakeupTime services to Runtime Service Table.
+# It will install a tagging protocol with gEfiRealTimeClockArchProtocolGuid.
+#
+# Copyright (c) 2006 - 2017, Intel Corporation. All rights reserved.<BR>
+# This program and the accompanying materials
+# are licensed and made available under the terms and conditions of the BSD License
+# which accompanies this distribution.  The full text of the license may be found at
+# http://opensource.org/licenses/bsd-license.php
+#
+# THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+# WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PcRtcSmm
+  FILE_GUID                      = BE2A8686-ED9E-4326-9D08-D104C23B44E2
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = InitializePcRtcSmm
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 EBC
+#
+
+[Sources]
+  PcRtcSmmEntry.c
+  PcRtcSmm.c
+  PcRtcSmm.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  PcAtChipsetPkg/PcAtChipsetPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec #Denverton AptioV override - EIP#263420
+
+[LibraryClasses]
+  UefiRuntimeServicesTableLib
+  SmmServicesTableLib
+  UefiDriverEntryPoint
+  TimerLib
+  IoLib
+  BaseMemoryLib
+  DebugLib
+  BaseLib
+  PcdLib
+  ReportStatusCodeLib
+
+[Guids]
+  SmmRsTableGuid
+
+[Depex]
+  gEfiRealTimeClockArchProtocolGuid AND
+  gEfiSmmVariableProtocolGuid AND
+  SmmRsTableGuid
+  
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdRealTimeClockUpdateTimeout  ## CONSUMES
+  gPcAtChipsetPkgTokenSpaceGuid.PcdMinimalValidYear             ## CONSUMES
+  gPcAtChipsetPkgTokenSpaceGuid.PcdMaximalValidYear             ## CONSUMES
+

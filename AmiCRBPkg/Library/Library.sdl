@@ -1,0 +1,92 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+TOKEN
+    Name  = "Library_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable CRB library code support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+End
+
+INFComponent
+    Name  = "AmiPciAccessCspBaseLibOverride"
+    File  = "AmiPciAccessCspBaseLibOverride\AmiPciAccessCspBaseLibOverride.inf"
+    Package  = "AmiCRBPkg"
+    ModuleTypes  = "BASE"
+End
+
+# Denverton AptioV Override Start - EIP#323097
+INFComponent
+	Name  = "AmiAcpiCpuLibOverride"
+	File  = "AmiAcpiCpuLib/AmiAcpiCpuLib.inf"
+	Package  = "AmiCRBPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "AmiPciExpressGen2LibOverride"
+	File  = "AmiPciExpressGen2Lib/AmiPciExpressGen2Lib.inf"
+	Package  = "AmiCRBPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmiPciExpressGen2LibNullOverride"
+	File  = "AmiPciExpressGen2LibNull/AmiPciExpressGen2LibNull.inf"
+	Package  = "AmiCRBPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "PciAccessCspLib"
+	Instance  = "AmiCRBPkg.AmiPciAccessCspBaseLibOverride"
+	ModuleTypes  = "DXE_DRIVER UEFI_DRIVER DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmiAcpiCpuLib"
+	Instance  = "AmiCRBPkg.AmiAcpiCpuLibOverride"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmiPciExpressGen2Lib"
+	Instance  = "AmiCRBPkg.AmiPciExpressGen2LibOverride"
+	ModuleTypes  = "DXE_DRIVER UEFI_DRIVER"
+	Token = "PCI_EXPRESS_GEN2_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmiPciExpressGen2Lib"
+	Instance  = "AmiCRBPkg.AmiPciExpressGen2LibNullOverride"
+	ModuleTypes  = "DXE_DRIVER UEFI_DRIVER"
+	Token = "PCI_EXPRESS_GEN2_SUPPORT" "=" "0"
+End
+# Denverton AptioV Override End - EIP#323097
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

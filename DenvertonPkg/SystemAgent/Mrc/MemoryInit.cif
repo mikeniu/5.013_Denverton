@@ -1,0 +1,12 @@
+<component>
+	name = "MemoryInit"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SystemAgent\Mrc\"
+	RefName = "DenvertonPkg.SystemAgent.Mrc.MemoryInit"
+[INF]
+"Mmrc\ProjectData\DNV\Pei\MemoryInit.inf"
+[files]
+"Mmrc\ProjectData\DNV\Pei\MemoryInit.sdl"	
+"Mmrc\ProjectData\DNV\Pei\MemoryInit.dec"	
+"Mmrc\ProjectData\DNV\Pei\MemoryInit.h"	
+<endComponent>

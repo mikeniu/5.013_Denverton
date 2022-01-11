@@ -1,0 +1,21 @@
+TOKEN
+	Name  = "PchInit_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PchInit support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PchInitDxe"
+	File  = "Dxe\PchInitDxe.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "PchInitSmm"
+	File  = "Smm\PchInitSmm.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End

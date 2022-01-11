@@ -1,0 +1,18 @@
+<component>
+	name = "PeiPchInitLib"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\LibraryPrivate\PeiPchInitLib\"
+	RefName = "DenvertonPkg.PeiPchInitLib"
+[INF]
+"PeiPchInitLib.inf"
+[files]
+"PeiPchInitLib.sdl"	
+"PchInitPei.h"	
+"PchReset.h"	
+"PchSmbus.h"	
+"PchUsb.h"	
+"Wdt.h"
+"PchHsioLaneLib.h"
+"PchSpi.h"
+"PchStPgMisc.h"
+<endComponent>

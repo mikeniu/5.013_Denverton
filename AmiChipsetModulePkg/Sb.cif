@@ -1,0 +1,17 @@
+<component>
+	name = "Denverton - SouthBridge"
+	category = eChipset
+	LocalRoot = "AmiChipsetModulePkg\"
+	RefName = "AmiChipsetModulePkg.SouthBridge"
+[files]
+"Sb.sdl"	
+"Sb.mak"	
+"Elink\SbElinks.txt"	
+"SB\ReleaseNotes.chm"	
+"ASL\RriorDma.asl"
+[parts]
+"AmiChipsetModulePkg.SbInit"
+"AmiChipsetModulePkg.AcpiModeEnable"
+"AmiChipsetModulePkg.SbLibrary"
+"AmiChipsetModulePkg.SbInclude"
+<endComponent>

@@ -1,0 +1,10 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Me\Library"
+	RefName = "DenvertonPkg.Me.Library"
+[INF]
+"MeLibPei\MeLibPei.inf"
+[files]
+"Library.sdl"	
+<endComponent>

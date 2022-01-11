@@ -1,0 +1,260 @@
+TOKEN
+    Name  = "IntelLtsxFit_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable IntelLtsxFit support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "FIT_MICROCODE_BASE"
+    Value  = "$(FV_BB_BASE)"
+    Help  = "Base address for FV containing CPU microcode."
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "MICROCODE_SPLIT_BB_UPDATE" "=" "1"
+End
+
+TOKEN
+    Name  = "FIT_MICROCODE_BASE"
+    Value  = "$(FV_MAIN_BASE)"
+    Help  = "Base address for FV containing CPU microcode."
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "MICROCODE_SPLIT_BB_UPDATE" "=" "0"
+End
+
+TOKEN
+    Name  = "FIT_MICROCODE_ALIGNMENT"
+    Value  = "16"
+    Help  = "Microcode patch alignment within FV_BB.  THIS SHOULD NOT NEED PORTED."
+    TargetMAK = Yes
+    Token = "MICROCODE_SPLIT_BB_UPDATE" "=" "1"
+End
+
+TOKEN
+    Name  = "FIT_MICROCODE_ALIGNMENT"
+    Value  = "$(MICROCODE_BLOCK_SIZE)"
+    Help  = "Microcode patch alignment within FV_MAIN.  THIS SHOULD NOT NEED PORTED."
+    TargetMAK = Yes
+    Token = "MICROCODE_SPLIT_BB_UPDATE" "=" "0"
+End
+
+TOKEN
+    Name  = "FIT_UTILITY"
+    Value  = "$(IntelLtsxFit_DIR)\FitUtility.exe"
+    Help  = "FIT Utility for LT-SX"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FIT_NUM_MICROCODE_PATCHES"
+    Value  = "20"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FIT_FILE"
+    Value  = "$(OUTPUT_DIRECTORY)\RELEASE_MYTOOLS\X64\HarrisonvillePkg\Fit\IntelLtsxFit\OUTPUT\IntelLtsxFit.com"
+    TokenType = File
+    TargetMAK = Yes
+    TargetFDF = Yes
+    Token = "DEBUG_MODE" "=" "0"    
+End
+
+TOKEN
+    Name  = "FIT_FILE"
+    Value  = "$(OUTPUT_DIRECTORY)\DEBUG_MYTOOLS\X64\HarrisonvillePkg\Fit\IntelLtsxFit\OUTPUT\IntelLtsxFit.com"
+    TokenType = File
+    TargetMAK = Yes
+    TargetFDF = Yes
+    Token = "DEBUG_MODE" "=" "1"    
+End
+
+TOKEN
+    Name  = "FIT_TABLE_SIZE"
+    Value  = "0x1000"
+    Help  = "Size of the FV_FIT area"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+End
+
+TOKEN
+    Name  = "FV_FIT_BASE"
+    Value  = "$(FV_BB_BASE)  - $(FIT_AREA)"
+    Help  = "Offset of FIT Area from the end of the rom image"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "From: 0 To: FLASH_SIZE - FV_BB_SIZE - FV_SINIT_SIZE - FV_BIOSACM_SIZE"
+End
+
+TOKEN
+    Name  = "FIT_AREA"
+    Value  = "$(FIT_TABLE_SIZE)"
+    Help  = "Size of the area of FIT + BIOSACM"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+End
+
+TOKEN
+    Name  = "FV_FIT_LOCATION"
+    Value  = "$(FV_FIT_BASE)"
+    Help  = "Base Address of the FIT"
+    TokenType = Integer
+    TargetH = Yes
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Range  = "From: 4G - FLASH_SIZE To: 4G"
+End
+
+TOKEN
+    Name  = "CHIPSET_VERSION"
+    Value  = "1"
+    Help  = "0 - Debug Chipset SKU, 1 - Production Chipset SKU"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "FIT_HOOK_SUPPORT"
+    Value  = "0"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Help = "Main switch to enable FitHook support in Project"
+End
+
+#FD_AREA
+#    Name  = "FV_FIT"
+#    TYPE  = "RAW"
+#    FD_INFO  = "AMIROM"
+#    Offset  = "$(FLASH_SIZE) - $(FV_BB_SIZE) - $(FIT_AREA)"
+#    Size  = " $(FIT_AREA)"
+#    Layout_Attribute  = "0x100"
+#    Attributes  = "0xffff"
+#End
+
+TOKEN
+	Name  = "FIT_SIGNED_POLICY_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN 
+    Name = "FitTokens"
+    Value = "-Rom=$(BIOS_TAG).ROM -MicrocodeFV=$(FIT_MICROCODE_BASE)"
+    Help = "Support the decimal value"
+    TokenType = Expression
+    TargetMAK = Yes
+End 
+
+
+TOKEN
+    Name  = "LTSX_TXT_CMOS_ADDRESS"
+    Value  = "0x2A"
+    Help  = "CMOS location of TPM enable/disable value."
+    TokenType = Integer
+    TargetH = Yes
+    TargetEQU = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "LTSX_TXT_CMOS_BIT_POSITION"
+    Value  = "5"
+    Help  = "CMOS register TPM enable bit position."
+    TokenType = Integer
+    TargetH = Yes
+    TargetEQU = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "LTSX_CMOS_INDEX_REG_ADDRESS"
+    Value  = "0x70"
+    Help  = "CMOS index register address for LTSX."
+    TokenType = Integer
+    TargetH = Yes
+    TargetEQU = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "LTSX_CMOS_ACCESS_WIDTH"
+    Value  = "1"
+    Help  = "CMOS register access width (in bytes)."
+    TokenType = Integer
+    TargetH = Yes
+    TargetEQU = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "LTSX_CMOS_DATA_REG_ADDRESS"
+    Value  = "0x71"
+    Help  = "CMOS data register address for LTSX."
+    TokenType = Integer
+    TargetH = Yes
+    TargetEQU = Yes
+    TargetMAK = Yes
+End
+
+PATH
+    Name  = "IntelLtsxFit_DIR"
+End
+
+MODULE
+    File  = "IntelLtsxFit.mak"
+End
+
+INFComponent
+    Name  = "IntelLtsxFit"
+    File  = "IntelLtsxFit.inf"
+    Package  = "HarrisonvillePkg"
+    ModuleTypes  = "USER_DEFINED"
+    Skip_Packaging = Yes
+End
+
+ELINK
+    Name   = "AppendFvDataToAFU_UpdateBlockTypeId,"
+    Parent = "SMIFlashEndHandlerList"
+    InvokeOrder = AfterParent
+    Token = "FIT_HOOK_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class = "NULL"
+    Instance = "AmiChipsetModulePkg.FitHook"
+    Override = "AmiModulePkg.SMIFlash"
+    Token = "FIT_HOOK_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name = "FitHook"
+    File = "FitHook\FitHook.inf"
+    Package = "AmiChipsetModulePkg"
+    Token = "FIT_HOOK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "FITtableStatement"
+    FD_AREA  = "FV_BB"
+    FILE_Stmt  = "HarrisonvillePkg\Fit\Fittable_Statement.txt"
+End

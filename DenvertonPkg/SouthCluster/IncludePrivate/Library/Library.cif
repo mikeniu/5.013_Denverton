@@ -1,0 +1,20 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\IncludePrivate\Library\"
+	RefName = "DenvertonPkg.SouthCluster.IncludePrivate.Library"
+[files]
+"PchSpiCommonLib.h"	
+"PchResetCommonLib.h"	
+"PchSmbusCommonLib.h"	
+"GpioPrivateLib.h"
+"PchAlternateAccessModeLib.h"
+"PchHdaLib.h"
+"PchInitCommonLib.h"
+"PchInitLib.h"
+"PchRcLib.h"
+"PchSmmControlLib.h"
+"PchWdtCommonLib.h"
+"PchXhciLib.h"
+"TraceHubPrivateLib.h"
+<endComponent>

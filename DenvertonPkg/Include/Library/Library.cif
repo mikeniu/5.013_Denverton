@@ -1,0 +1,11 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Include\Library\"
+	RefName = "DenvertonPkg.Include.Library"
+[files]
+"ConfigBlockLib.h"	
+"MmPciLib.h"	
+"SiPolicyLib.h"	
+"AslUpdateLib.h"
+<endComponent>

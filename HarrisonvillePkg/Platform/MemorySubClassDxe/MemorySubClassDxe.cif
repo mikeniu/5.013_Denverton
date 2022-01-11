@@ -1,0 +1,11 @@
+<component>
+	name = "MemorySubClassDxe"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Platform\MemorySubClassDxe\"
+	RefName = "HarrisonvillePkg.MemorySubClassDxe"
+[INF]
+"MemorySubClassDxe.inf"
+[files]	
+"MemorySubClass.h"		
+"MemorySubClassDxe.sdl"		
+<endComponent>

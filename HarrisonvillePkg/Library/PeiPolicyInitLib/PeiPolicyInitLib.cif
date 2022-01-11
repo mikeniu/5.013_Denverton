@@ -1,0 +1,15 @@
+<component>
+	name = "PeiPolicyInitLib"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Library\PeiPolicyInitLib\"
+	RefName = "HarrisonvillePkg.PeiPolicyInitLib"
+[INF]
+"PeiPolicyInitLib.inf"
+[files]
+"PeiCpuPolicyInit.c"	
+"PeiCpuPolicyInit.h"	
+"PeiMePolicyInit.c"	
+"PeiMePolicyInit.h"	
+"PeiSiPolicyInit.h"	
+"PeiPolicyInitLib.sdl"	
+<endComponent>

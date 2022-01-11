@@ -1,0 +1,60 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+## @file RTCWakeup.inf
+#  INF file for RTCWakeUp driver. 
+##
+
+[Defines]
+  INF_VERSION                       = 0x00010015
+  VERSION_STRING                    = 1.0
+  BASE_NAME                         = RTCWakeup
+  MODULE_TYPE                       = DXE_SMM_DRIVER
+  FILE_GUID                         = 9BFE0707-8174-4B8A-A5F5-556FB10E8843
+  PI_SPECIFICATION_VERSION          = 0x0001000A
+  ENTRY_POINT                       = InitRTCWakeup
+
+[Sources]
+  RTCWakeup.c
+
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  
+[Packages]
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+  
+[Protocols]
+  gEfiSmmSxDispatch2ProtocolGuid
+  gEfiSmmBase2ProtocolGuid
+  gEfiSmmPowerButtonDispatch2ProtocolGuid
+  
+[Depex]
+  gEfiSmmBase2ProtocolGuid AND 
+  gEfiSmmSxDispatch2ProtocolGuid AND
+  gEfiSmmPowerButtonDispatch2ProtocolGuid
+ 
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

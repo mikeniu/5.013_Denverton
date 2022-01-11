@@ -1,0 +1,83 @@
+## @file
+#  Component information file for the Silicion Init DXE module.
+#
+#@copyright
+#  Copyright (c) 2014 - 2015 Intel Corporation. All rights reserved
+#  This software and associated documentation (if any) is furnished
+#  under a license and may only be used or copied in accordance
+#  with the terms of the license. Except as permitted by the
+#  license, no part of this software or documentation may be
+#  reproduced, stored in a retrieval system, or transmitted in any
+#  form or by any means without the express written consent of
+#  Intel Corporation.
+#  This file contains an 'Intel Peripheral Driver' and is uniquely
+#  identified as "Intel Reference Module" and is licensed for Intel
+#  CPUs and chipsets under the terms of your license agreement with
+#  Intel or your vendor. This file may be modified by the user, subject
+#  to additional terms of the license agreement.
+#
+#@par Specification
+##
+################################################################################
+#
+# Defines Section - statements that will be processed to create a Makefile.
+#
+################################################################################
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SiInitDxe
+  FILE_GUID                      = ACD28235-075B-48b5-98A1-DA04FCAF84F3
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SiInitDxe
+
+################################################################################
+#
+# Sources Section - list of files that are required for the build to succeed.
+#
+################################################################################
+[Sources]
+  SiInitDxe.c
+
+################################################################################
+#
+# Package Dependency Section - list of Package files that are required for
+#                              this module.
+#
+################################################################################
+[Packages]
+  MdePkg/MdePkg.dec
+  DenvertonPkg/SiPkg.dec
+  DenvertonPkg/DnvSiPrivate.dec
+
+################################################################################
+#
+# Library Class Section - list of Library Classes that are required for
+#                         this module.
+#
+################################################################################
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  UefiBootServicesTableLib
+  UefiLib
+  DebugLib
+#  DxeSmbiosMemoryLib
+  IntrinsicLib
+#  DxePcieIpInitLib # Denverton AptioV override
+  DxeIqatIpInitLib
+
+################################################################################
+#
+# Protocol C Name Section - list of Protocol and Protocol Notify C Names
+#                           that this module uses or produces.
+#
+################################################################################
+[Protocols]
+
+[Guids]
+  gEfiEndOfDxeEventGroupGuid     # ALWAYS_CONSUMED
+
+[Depex]
+#  gEfiVariableArchProtocolGuid
+  TRUE

@@ -1,0 +1,15 @@
+<component>
+    name = "EnhancePeiVariable"
+    category = eModule
+    LocalRoot = "AmiModulePkg\EnhancePeiVariable\"
+    RefName = "EnhancePeiVariable"
+[files]
+"EnhancePeiVariable.chm"
+"EnhancePeiVariable.sdl"
+"EnhancePeiVariable.mak"
+"EnhancePeiVariable.c"
+"EnhancePeiVariable.h"
+[parts]
+"CacheVariablePei"
+"GetVarFromStdDefault"
+<endComponent>

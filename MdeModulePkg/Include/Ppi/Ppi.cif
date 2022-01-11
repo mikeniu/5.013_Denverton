@@ -1,0 +1,21 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "MdeModulePkg\Include\Ppi\"
+	RefName = "MdeModulePkg.Ppi"
+[files]
+"AtaController.h"	
+"IpmiPpi.h"	
+"PostBootScriptTable.h"	
+"SdMmcHostController.h"	
+"SecPerformance.h"	
+"SerialPortPei.h"	
+"SmmAccess.h"	
+"SmmCommunication.h"	
+"SmmControl.h"	
+"UfsHostController.h"	
+"Usb2HostController.h"	
+"UsbController.h"	
+"UsbHostController.h"	
+"UsbIo.h"	
+<endComponent>

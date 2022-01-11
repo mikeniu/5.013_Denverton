@@ -1,0 +1,10 @@
+<component>
+	name = "Me Platform"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Me\"
+	RefName = "HarrisonvillePkg.MePlatform"
+[parts]
+"HarrisonvillePkg.Me.Include"
+"HarrisonvillePkg.Me.Library"
+"HarrisonvillePkg.MePlatformPolicy"
+<endComponent>

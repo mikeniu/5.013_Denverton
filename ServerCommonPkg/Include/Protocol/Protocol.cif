@@ -1,0 +1,13 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "ServerCommonPkg\Include\Protocol\"
+	RefName = "ServerCommonPkg.Protocol"
+[files]
+"IsPlatformSupportWhea.h"	
+"WheaBootProtocol.h"	
+"WheaPlatformSupport.h"	
+"WheaSupport.h"	
+"LpcPolicy.h"
+"SmmRtProtocol.h"
+<endComponent>

@@ -1,0 +1,20 @@
+<component>
+	name = "Harrisonville"
+	category = Flavor
+	RefName = "Harrisonville"
+[files]
+"Harrisonville.mak"	
+"Harrisonville.sdl"	
+"Denverton AptioV Release Notes.chm"	
+"AmiNetworkPkg\Library\AmiNetworkPostManagerLib\AmiNetworkPostManagerLib.c"	
+"AmiModulePkg\Recovery\SerialRecovery\SerialRecovery.c"	
+"AmiModulePkg\PCI\PciBus.c"	
+"AmiModulePkg\PCI\PciStaticSetup.sd"	
+"UefiCpuPkg\Library\PlatformSecLibNull\PlatformSecLibNull.inf"	
+"UefiCpuPkg\Library\SmmCpuFeaturesLib\SmmCpuFeaturesLib.inf"	
+"UefiCpuPkg\Library\SmmCpuPlatformHookLibNull\SmmCpuPlatformHookLibNull.inf"	
+"AmiModulePkg\Terminal\SerialIo.c"	
+"AmiModulePkg\Terminal\SerialIo.inf"	
+"AmiModulePkg\Terminal\SerialIo.h"
+"AmiModulePkg\Terminal\Terminal.sdl"	
+<endComponent>

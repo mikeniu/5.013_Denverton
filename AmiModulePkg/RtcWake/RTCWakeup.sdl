@@ -1,0 +1,42 @@
+TOKEN
+    Name  = "RTCWakeup_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable RTCWakeup support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "RTCWAKEUP_POWERBUTTON_SUPPORT"
+    Value  = "1"
+    Help  = "Enable the system wakeup using Rtc Timer when the system goes to S5 state using Power button."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+PATH
+    Name  = "RTC_WAKEUP_DIR"
+End
+
+ELINK
+    Name  = "$(RTC_WAKEUP_DIR)/RTCWakeup.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    Priority  = 50
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(RTC_WAKEUP_DIR)/RTCWakeup.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "RTCWAKEUP"
+    File  = "RTCWakeup.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "RTCWakeup_SUPPORT" "=" "1"
+End
+

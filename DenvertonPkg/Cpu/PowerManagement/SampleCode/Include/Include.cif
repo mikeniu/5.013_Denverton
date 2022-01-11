@@ -1,0 +1,13 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Cpu\PowerManagement\SampleCode\Include\"
+	RefName = "DenvertonPkg.Cpu.PowerManagement.Include"
+[files]
+"acpi3_0.h"	
+"aslupdatelib.h"	
+"IchAccess.h"	
+"IchCommonDefinitions.h"	
+"IchTpt.h"	
+"PciAccess.h"	
+<endComponent>

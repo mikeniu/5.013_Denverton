@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "IntelRC_Setup_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Setup support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "SetupDxe"
+	File  = "SetupDxe.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+

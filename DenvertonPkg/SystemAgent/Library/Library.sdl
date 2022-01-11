@@ -1,0 +1,20 @@
+TOKEN
+	Name  = "SystemAgentLibrary_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PeiSaPolicyLib"
+	File  = "PeiSaPolicyLib\PeiSaPolicyLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "PeiSaPolicyLib"
+	Instance  = "DenvertonPkg.PeiSaPolicyLib"
+End
+

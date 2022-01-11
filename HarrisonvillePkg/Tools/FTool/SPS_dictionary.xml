@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE SvenDictionary SYSTEM "./svendict.dtd">
+<SvenDictionary Name="CSME">
+   <!--
+        INTEL CONFIDENTIAL
+        Copyright 2011-2015 Intel Corporation All Rights Reserved.
+
+        The source code contained or described herein and all documents
+        related to the source code ("Material") are owned by Intel Corporation
+        or its suppliers or licensors. Title to the Material remains with
+        Intel Corporation or its suppliers and licensors. The Material
+        contains trade secrets and proprietary and confidential information of
+        Intel or its suppliers and licensors. The Material is protected by
+        worldwide copyright and trade secret laws and treaty provisions. No
+        part of the Material may be used, copied, reproduced, modified,
+        published, uploaded, posted, transmitted, distributed, or disclosed in
+        any way without Intel's prior express written permission.
+
+        No license under any patent, copyright, trade secret or other
+        intellectual property right is granted to or conferred upon you by
+        disclosure or delivery of the Materials, either expressly, by
+        implication, inducement, estoppel or otherwise. Any license under such
+        intellectual property rights must be express and approved by Intel in
+        writing.
+   -->
+<Guids>
+   <!-- Groups (16, 17, 18) are used by CSE -->
+   <Guid
+     ID =  "{00000000-0010-0000-0000-000000000000}"
+     Mask = "{00000000-ffff-0000-0000-000000000000}"
+   />
+   <Guid
+     ID =  "{00000000-0011-0000-0000-000000000000}"
+     Mask = "{00000000-ffff-0000-0000-000000000000}"
+   />
+   <Guid
+     ID =  "{00000000-0012-0000-0000-000000000000}"
+     Mask = "{00000000-ffff-0000-0000-000000000000}"
+   />
+</Guids>
+
+<WriteEvents>
+    <Route ID="0x00" To="CT_CUSTOM" Format="RAW"/>
+</WriteEvents>
+
+
+<Messages IdSize="64Bit">
+	<Message ID="0x8086000200301592"><![CDATA["Dram Init Done message received."]]></Message>
+	<Message ID="0x808600020064001B"><![CDATA["[IPMI_IPC_CHANNEL] Sending IPC_IPMI_MSG (header) : [0x%02x 0x%02x 0x%02x 0x%02x 0x%02x] PayloadSize = %d"]]></Message>
+	<Message ID="0x808600020064000F"><![CDATA["[IPMI_IPC_CHANNEL] Received IPC_IPMI_MSG (header) : [0x%02x 0x%02x 0x%02x 0x%02x 0x%02x] PayloadSize = %d"]]></Message>
+	<Message ID="0x80860002004100AB"><![CDATA["[MS] Going to CM3-PG."]]></Message>
+	<Message ID="0x80860002004100AA"><![CDATA["[MS] Starting Load Process for CM3"]]></Message>
+	<Message ID="0x808600020064000A"><![CDATA["[IPMI_IPC_CHANNEL] ipc_drv_receive - received byte [%d of %d] = 0x%02x"]]></Message>
+	<Message ID="0x808600020064000B"><![CDATA["[IPMI_IPC_CHANNEL] ipc_drv_send byte [%d of %d] = 0x%02x"]]></Message>
+	<Message ID="0x80860002004100E9"><![CDATA["[MS] Policy Bits = 0x%x"]]></Message>
+	<Message ID="0x8086000200410093"><![CDATA["[MS] Power Source is AC."]]></Message>
+	<Message ID="0x8086000200410094"><![CDATA["[MS] Power Source is DC."]]></Message>
+	<Message ID="0x80860002004100A1"><![CDATA["[MS] Starting Load Process for CM0_NU"]]></Message>
+	<Message ID="0x8086000200410067"><![CDATA["[MS] Cse State: Src CM0 (%d)"]]></Message>
+	<Message ID="0x8086000200410019"><![CDATA["[MS] Next State = CM0_EXIT_COMPLETE. (%d)"]]></Message>
+	<Message ID="0x8086000200410079"><![CDATA["[MS] Boot Type: Unknown (%d)"]]></Message>
+	<Message ID="0x8086000200410080"><![CDATA["[MS] Cause: CSE Power On (%d)"]]></Message>
+	<Message ID="0x808600020041006B"><![CDATA["[MS] Cse State: Src CM3-PG (%d)"]]></Message>
+	<Message ID="0x8086000200410081"><![CDATA["[MS] Cause: Host SX Entry (%d)"]]></Message>
+	<Message ID="0x808600020041007C"><![CDATA["[MS] Cause: CSE Reset (%d)"]]></Message>
+	<Message ID="0x8086000200410014"><![CDATA["[MS] Next State = CMOFF_PD_EXIT. (%d)"]]></Message>
+	<Message ID="0x8086000200410069"><![CDATA["[MS] Cse State: Src CM3 (%d)"]]></Message>
+	<Message ID="0x8086000200410061"><![CDATA["[MS] Host State: Dst S0 (%d)"]]></Message>
+	<Message ID="0x808600020041005D"><![CDATA["[MS] Host State: Src S3 (%d)"]]></Message>
+	<Message ID="0x8086000200410001"><![CDATA["[MS] Current State = CMOFF_PD_ENTRY. (%d)"]]></Message>
+	<Message ID="0x8086000200410004"><![CDATA["[MS] Current State = CM0_EXIT_BEGIN. (%d)"]]></Message>
+	<Message ID="0x808600020041000A"><![CDATA["[MS] Current State = CM0_NU_EXIT_BEGIN. (%d)"]]></Message>
+	<Message ID="0x8086000200410073"><![CDATA["[MS] Cse State: Dst CMOFF-PD (%d)"]]></Message>
+	<Message ID="0x8086000200410010"><![CDATA["[MS] Current State = CM3_PG_ENTRY. (%d)"]]></Message>
+	<Message ID="0x808600020041001F"><![CDATA["[MS] Next State = CM0_NU_EXIT_COMPLETE. (%d)"]]></Message>
+	<Message ID="0x8086000200410089"><![CDATA["[MS] Cause: Unknown (%d)"]]></Message>
+	<Message ID="0x808600020041000E"><![CDATA["[MS] Current State = CM3_EXIT_BEGIN. (%d)"]]></Message>
+	<Message ID="0x8086000200410020"><![CDATA["[MS] Next State = CM3_ENTRY_BEGIN. (%d)"]]></Message>
+	<Message ID="0x8086000200410006"><![CDATA["[MS] Current State = CM0_PG_ENTRY. (%d)"]]></Message>
+	<Message ID="0x808600020041001E"><![CDATA["[MS] Next State = CM0_NU_EXIT_BEGIN. (%d)"]]></Message>
+	<Message ID="0x8086000200410064"><![CDATA["[MS] Host State: Dst S4 (%d)"]]></Message>
+	<Message ID="0x8086000200410078"><![CDATA["[MS] Boot Type: Hap (%d)"]]></Message>
+	<Message ID="0x808600020041005B"><![CDATA["[MS] Host State: Src S0 (%d)"]]></Message>
+	<Message ID="0x808600020041001B"><![CDATA["[MS] Next State = CM0_PG_EXIT. (%d)"]]></Message>
+	<Message ID="0x808600020041006C"><![CDATA["[MS] Cse State: Src CMOFF-PD (%d)"]]></Message>
+	<Message ID="0x8086000200410076"><![CDATA["[MS] Boot Type: Recovery (%d)"]]></Message>
+	<Message ID="0x8086000200410082"><![CDATA["[MS] Cause: Host SX Exit (%d)"]]></Message>
+	<Message ID="0x8086000200410041"><![CDATA["[MS] New Event = UNKNOWN_EVENT. (%d)"]]></Message>
+	<Message ID="0x808600020041007F"><![CDATA["[MS] Cause: CSE Power Off (%d)"]]></Message>
+	<Message ID="0x8086000200410007"><![CDATA["[MS] Current State = CM0_PG_EXIT. (%d)"]]></Message>
+	<Message ID="0x8086000200410009"><![CDATA["[MS] Current State = CM0_NU_ENTRY_COMPLETE. (%d)"]]></Message>
+	<Message ID="0x808600020041000D"><![CDATA["[MS] Current State = CM3_ENTRY_COMPLETE. (%d)"]]></Message>
+	<Message ID="0x8086000200410084"><![CDATA["[MS] Cause: CM3 Policy Change (%d)"]]></Message>
+	<Message ID="0x808600020041005E"><![CDATA["[MS] Host State: Src S4 (%d)"]]></Message>
+	<Message ID="0x8086000200410072"><![CDATA["[MS] Cse State: Dst CM3-PG (%d)"]]></Message>
+	<Message ID="0x8086000200410068"><![CDATA["[MS] Cse State: Src CM0-NU (%d)"]]></Message>
+	<Message ID="0x8086000200410077"><![CDATA["[MS] Boot Type: Temp Disable (%d)"]]></Message>
+	<Message ID="0x8086000200410063"><![CDATA["[MS] Host State: Dst S3 (%d)"]]></Message>
+	<Message ID="0x8086000200410000"><![CDATA["[MS] Current State = CMOFF_PD_EXIT. (%d)"]]></Message>
+	<Message ID="0x808600020041007B"><![CDATA["[MS] Cause: Pseudo Global Reset (%d)"]]></Message>
+	<Message ID="0x8086000200410024"><![CDATA["[MS] Next State = CM3_PG_ENTRY. (%d)"]]></Message>
+	<Message ID="0x808600020041001D"><![CDATA["[MS] Next State = CM0_NU_ENTRY_COMPLETE. (%d)"]]></Message>
+	<Message ID="0x8086000200410085"><![CDATA["[MS] Cause: CM0-PG Entry (%d)"]]></Message>
+	<Message ID="0x8086000200410021"><![CDATA["[MS] Next State = CM3_ENTRY_COMPLETE. (%d)"]]></Message>
+	<Message ID="0x808600020041005F"><![CDATA["[MS] Host State: Src S5 (%d)"]]></Message>
+	<Message ID="0x8086000200410087"><![CDATA["[MS] Cause: CM3-PG Entry (%d)"]]></Message>
+	<Message ID="0x8086000200410008"><![CDATA["[MS] Current State = CM0_NU_ENTRY_BEGIN. (%d)"]]></Message>
+	<Message ID="0x8086000200410005"><![CDATA["[MS] Current State = CM0_EXIT_COMPLETE. (%d)"]]></Message>
+	<Message ID="0x8086000200410003"><![CDATA["[MS] Current State = CM0_ENTRY_COMPLETE. (%d)"]]></Message>
+	<Message ID="0x8086000200410016"><![CDATA["[MS] Next State = CM0_ENTRY_BEGIN. (%d)"]]></Message>
+	<Message ID="0x8086000200410086"><![CDATA["[MS] Cause: CM0-PG Exit (%d)"]]></Message>
+	<Message ID="0x8086000200410070"><![CDATA["[MS] Cse State: Dst CM3 (%d)"]]></Message>
+	<Message ID="0x8086000200410022"><![CDATA["[MS] Next State = CM3_EXIT_BEGIN. (%d)"]]></Message>
+	<Message ID="0x808600020041007D"><![CDATA["[MS] Cause: Host Power Cycle Reset (%d)"]]></Message>
+	<Message ID="0x8086000200410015"><![CDATA["[MS] Next State = CMOFF_PD_ENTRY. (%d)"]]></Message>
+	<Message ID="0x8086000200410088"><![CDATA["[MS] Cause: CM3-PG Exit (%d)"]]></Message>
+	<Message ID="0x808600020041000F"><![CDATA["[MS] Current State = CM3_EXIT_COMPLETE. (%d)"]]></Message>
+	<Message ID="0x808600020041005C"><![CDATA["[MS] Host State: Src S1 (%d)"]]></Message>
+	<Message ID="0x8086000200410002"><![CDATA["[MS] Current State = CM0_ENTRY_BEGIN. (%d)"]]></Message>
+	<Message ID="0x808600020041006A"><![CDATA["[MS] Cse State: Src CM0-PG (%d)"]]></Message>
+	<Message ID="0x8086000200410017"><![CDATA["[MS] Next State = CM0_ENTRY_COMPLETE. (%d)"]]></Message>
+	<Message ID="0x808600020041001C"><![CDATA["[MS] Next State = CM0_NU_ENTRY_BEGIN. (%d)"]]></Message>
+	<Message ID="0x808600020041000C"><![CDATA["[MS] Current State = CM3_ENTRY_BEGIN. (%d)"]]></Message>
+	<Message ID="0x8086000200410062"><![CDATA["[MS] Host State: Dst S1 (%d)"]]></Message>
+	<Message ID="0x8086000200410023"><![CDATA["[MS] Next State = CM3_EXIT_COMPLETE. (%d)"]]></Message>
+	<Message ID="0x808600020041007E"><![CDATA["[MS] Cause: Host Non Power Cycle Reset (%d)"]]></Message>
+	<Message ID="0x8086000200410074"><![CDATA["[MS] Cse State: Dst Unknown (%d)"]]></Message>
+	<Message ID="0x8086000200410018"><![CDATA["[MS] Next State = CM0_EXIT_BEGIN. (%d)"]]></Message>
+	<Message ID="0x808600020041006F"><![CDATA["[MS] Cse State: Dst CM0-NU (%d)"]]></Message>
+	<Message ID="0x8086000200410060"><![CDATA["[MS] Host State: Src Unknown (%d)"]]></Message>
+	<Message ID="0x8086000200410071"><![CDATA["[MS] Cse State: Dst CM0-PG (%d)"]]></Message>
+	<Message ID="0x8086000200410083"><![CDATA["[MS] Cause: Power Source Change (%d)"]]></Message>
+	<Message ID="0x808600020041006D"><![CDATA["[MS] Cse State: Src Unknown (%d)"]]></Message>
+	<Message ID="0x808600020041000B"><![CDATA["[MS] Current State = CM0_NU_EXIT_COMPLETE. (%d)"]]></Message>
+	<Message ID="0x8086000200410075"><![CDATA["[MS] Boot Type: Normal (%d)"]]></Message>
+	<Message ID="0x8086000200410066"><![CDATA["[MS] Host State: Dst Unknown (%d)"]]></Message>
+	<Message ID="0x808600020041008E"><![CDATA["[MS] ***Invalid Cse State: Src %d Dst %d"]]></Message>
+	<Message ID="0x8086000200410065"><![CDATA["[MS] Host State: Dst S5 (%d)"]]></Message>
+	<Message ID="0x808600020041006E"><![CDATA["[MS] Cse State: Dst CM0 (%d)"]]></Message>
+	<Message ID="0x808600020041001A"><![CDATA["[MS] Next State = CM0_PG_ENTRY. (%d)"]]></Message>
+	<Message ID="0x808600020041008D"><![CDATA["[MS] ***Invalid Host State: Src %d Dst %d"]]></Message>
+	<Message ID="0x808600020041007A"><![CDATA["[MS] Cause: Global Reset (%d)"]]></Message>
+	<Message ID="0x80860002004100B5"><![CDATA["[MS] Starting Load Process for CM0."]]></Message>
+	<Message ID="0x80860002004100B9"><![CDATA["[MS] Going to CM0-PG."]]></Message>
+	<Message ID="0x80860002004100C5"><![CDATA["[MS] PG Wake"]]></Message>
+	<Message ID="0x8086000200302417"><![CDATA["[HECI1_HGS_SHDW1] write data = 0x%X, mask data = 0x%X."]]></Message>
+	<Message ID="0x8086000200302416"><![CDATA["[HECI1_CSE_GS5] write data = 0x%X, mask data = 0x%X."]]></Message>
+	<Message ID="0x8086000200302411"><![CDATA["[HECT1_CSE_FS] write data = 0x%X, mask data = 0x%X."]]></Message>
+	<Message ID="0x8086000200302413"><![CDATA["[HECI1_CSE_GS2] write data = 0x%X, mask data = 0x%X."]]></Message>
+	<Message ID="0x8086000200302414"><![CDATA["[HECI1_CSE_GS3] write data = 0x%X, mask data = 0x%X."]]></Message>
+	<Message ID="0x8086000200302415"><![CDATA["[HECI1_CSE_GS4] write data = 0x%X, mask data = 0x%X."]]></Message>
+	<Message ID="0x8086000200302412"><![CDATA["[HECI1_CSE_GS1] write data = 0x%X, mask data = 0x%X."]]></Message>
+	<Message ID="0x8086000200302419"><![CDATA["[HECI1_CUBA] write data = 0x%X, mask data = 0x%X."]]></Message>
+	<Message ID="0x8086000200302418"><![CDATA["[HECI1_HGS_SHDW2] write data = 0x%X, mask data = 0x%X."]]></Message>
+</Messages></SvenDictionary>

@@ -1,0 +1,1194 @@
+#
+# This file contains 'Framework Code' and is licensed as such 
+# under the terms of your license agreement with Intel or your
+# vendor.  This file may not be modified, except as allowed by
+# additional terms of your license agreement.                 
+#
+## @file
+# Platform Package
+#
+# Cross Platform Modules for Tiano
+# Copyright (c) 2012 - 2017, Intel Corporation. All rights reserved.<BR>
+#
+#    This software and associated documentation (if any) is furnished
+#    under a license and may only be used or copied in accordance
+#    with the terms of the license. Except as permitted by such
+#    license, no part of this software or documentation may be
+#    reproduced, stored in a retrieval system, or transmitted in any
+#    form or by any means without the express written consent of
+#    Intel Corporation.
+#
+##
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = HarrisonvillePkg
+  PACKAGE_GUID                   = 2934F99D-9F4D-43b0-962A-96B26FB3C18C
+  PACKAGE_VERSION                = 0.1
+
+[Includes]              
+  Include
+  Include\Library
+  Me\Include
+  ..\Build
+
+[Guids]
+  gPlatformModuleTokenSpaceGuid = { 0xaec0dee0, 0xf04d, 0x425d, { 0x9a, 0xcd, 0xa9, 0x4b, 0x49, 0xc7, 0x51, 0x7a } }
+  gEfiSerialPortTokenSpaceGuid  = { 0xac274b5f, 0x4d79, 0x48d1, { 0x96, 0xdf, 0xfe, 0xe3, 0x54, 0xcf, 0x70, 0x83 }}
+  gPlatformInfoHobGuid          = { 0x9F504A57, 0x06C2, 0x472D, 0x9B, 0x5F, 0xC1, 0xA7, 0x0D, 0xEE, 0x1C, 0x77}
+  gProcessorProducerGuid        = { 0x1bf06aea, 0x5bec, 0x4a8d, { 0x95, 0x76, 0x74, 0x9b, 0x09, 0x56, 0x2d, 0x30 }}
+  gEfiPowerOnHobGuid            = { 0x468a601, 0xc535, 0x46fd, { 0xa9, 0x5d, 0xbb, 0xab, 0x99, 0x1b, 0x17, 0x8c }}
+  gEfiAcpiTableStorageGuid      = { 0x7e374e25, 0x8e01, 0x4fee, { 0x87, 0xf2, 0x39, 0xc, 0x23, 0xc6, 0x6, 0xcd }}
+  gEfiGenericVariableGuid       = { 0x59d1c24f, 0x50f1, 0x401a, { 0xb1, 0x01, 0xf3, 0x3e, 0x0d, 0xae, 0xd4, 0x43 }}
+  gEfiMemorySetupGuid           = { 0x3eeff35f, 0x147c, 0x4cd1, { 0xa2, 0x34, 0x92, 0xa0, 0x69, 0x70, 0x0d, 0xb6 }}
+  gSignalBeforeEnterSetupGuid   = { 0xd9f1669a, 0xf505, 0x48bd, { 0xa8, 0x92, 0x94, 0xb7, 0xca, 0x90, 0x30, 0x31 }}
+## Denverton AptioV Override Start - EIP#217439
+  gSetupVariableGuid = {0xc598db5c, 0x50e7, 0x46f6, { 0xab, 0x16, 0x41, 0x6f, 0x47, 0x23, 0x9c, 0xa9 }} 
+## Denverton AptioV Override End - EIP#217439
+  gPchSetupVariableGuid         =  {0x4570b7f1, 0xade8, 0x4943, {0x8d, 0xc3, 0x40, 0x64, 0x72, 0x84, 0x23, 0x84}} 
+  gEfiSetupVariableDefaultGuid = {0x8d247131, 0x385e, 0x491f, {0xba, 0x68, 0x8d, 0xe9, 0x55, 0x30, 0xb3, 0xa6}}
+  gEfiMfgUUIDHobGuid = { 0x229f268f, 0x23b0, 0x4436, { 0x83, 0xe3, 0x8b, 0x7a, 0xe0, 0x8a, 0x6b, 0xd8 }}
+  gEfiGlobalVariableControlGuid = {0x99a96812, 0x4730, 0x4290, {0x8b, 0xfe, 0x7b, 0x4e, 0x51, 0x4f, 0xf9, 0x3b}}
+  gEfiFlashMapHobGuid = {0xb091e7d2, 0x5a0, 0x4198, {0x94, 0xf0, 0x74, 0xb7, 0xb8, 0xc5, 0x54, 0x59}}
+  gEfiSystemNvDataHobGuid = {0xd6e5092d, 0xc7b2, 0x4872, {0xaf, 0x66, 0xfd, 0xc0, 0xe6, 0xf9, 0x5e, 0x78}}
+  gEfiTcgWakeEventDataHobGuid = {0xBBB810BB, 0x5EF0, 0x4E8F, {0xB2, 0x98, 0xAD, 0x74, 0xAA, 0x50, 0xEF, 0x0A }}
+  gPeiCapsuleOnFatFloppyDiskGuid = {0x2e3d2e75, 0x9b2e, 0x412d, {0xb4, 0xb1, 0x70, 0x41, 0x6b, 0x87, 0x0, 0xff }}
+  gPeiCapsuleOnFatIdeDiskGuid = {0xb38573b6, 0x6200, 0x4ac5, {0xb5, 0x1d, 0x82, 0xe6, 0x59, 0x38, 0xd7, 0x83 }}
+  gPeiCapsuleOnFatUsbDiskGuid = {0x0ffbce19, 0x324c, 0x4690, {0xa0, 0x09, 0x98, 0xc6, 0xae, 0x2e, 0xb1, 0x86 }}
+  gPeiCapsuleOnDataCDGuid = {0x5cac0099, 0x0dc9, 0x48e5, {0x80, 0x68, 0xbb, 0x95, 0xf5, 0x40, 0x0a, 0x9f }}
+  gEfiLegacyBootMarkerGuid       = { 0x72e07da8, 0x63a9, 0x42d4, { 0x83, 0xd5, 0xb, 0xb5, 0x18, 0x38, 0x44, 0x75 } }
+
+  gMainPkgListGuid = { 0x6205c3a4, 0x1149, 0x491a, { 0xa6, 0xd6, 0x1e, 0x72, 0x3b, 0x87, 0x83, 0xb1 } }
+  gAdvancedPkgListGuid = { 0xc09c81cb, 0x31e9, 0x4de6, { 0xa9, 0xf9, 0x17, 0xa1, 0x44, 0x35, 0x42, 0x45 } }
+  gSysInfoPkgListGuid = { 0x477e01ae, 0xad79, 0x4992, { 0xa6, 0x77, 0x68, 0x6c, 0x8c, 0x7, 0x1d, 0xfb } }
+  gTpmPkgListGuid   = { 0x7da45aa9, 0x6dbf, 0x4f1b, { 0xa4, 0x3e, 0x32, 0x87, 0xcb, 0xe5, 0x13, 0x51 } }
+  gSecurityPkgListGuid = { 0x3a885aae, 0x3e30, 0x42b9, { 0xa9, 0x76, 0x2f, 0x1f, 0x13, 0xbd, 0x70, 0x15 } }
+  gChipsetPkgListGuid = { 0x3a885eaa, 0x303e, 0xb942, { 0xa9, 0x76, 0x2f, 0x1f, 0x13, 0xbd, 0x70, 0x15 } }
+  
+  
+  gMiscProducerGuid = { 0x62512c92, 0x63c4, 0x4d80, {0x82, 0xb1, 0xc1, 0xa4, 0xdc, 0x44, 0x80, 0xe5} } 
+  gSmbus2HostController = { 0xfc3dadec, 0x1e3c, 0x49ac, { 0x9c, 0xc8, 0x3c, 0x35, 0x97, 0xa8, 0xc8, 0x5f} } 
+  gEfiMpstNodeDataGuid           = { 0x418bc604, 0xf15e, 0x4843, { 0x85, 0xd0, 0x2d, 0x24, 0x80, 0xb7, 0xe4, 0x88 }}
+  gEfiCpuHtCapableGuid = {0xd1b9c8e, 0xf77b, 0x4632, {0x83, 0x43, 0x91, 0xf4, 0x3d, 0x9a, 0x85, 0x60}}
+  gEfiServerCapsuleGuid = { 0xd400d1e4, 0xa314, 0x442b, { 0x89, 0xed, 0xa9, 0x2e, 0x4c, 0x81, 0x97, 0xcb } }
+
+  ## Include/Guid/AcpiVariable.h
+  gEfiAcpiVariableGuid               = { 0xAF9FFD67, 0xEC10, 0x488A, { 0x9D, 0xFC, 0x6C, 0xBF, 0x5E, 0xE2, 0x2C, 0x2E }}
+  gEfiAcpiS3ContextGuid              = { 0xef98d3a, 0x3e33, 0x497a, { 0xa4, 0x1, 0x77, 0xbe, 0x3e, 0xb7, 0x4f, 0x38 }}
+  
+  ## Include/Guid/AcpiVariable.h
+  gEfiAcpiVariableCompatiblityGuid   = { 0xc020489e, 0x6db2, 0x4ef2, { 0x9a, 0xa5, 0xca, 0x6,  0xfc, 0x11, 0xd3, 0x6a }}
+
+  # Need to refer extern GUID by caller
+  gPchEvaInt15HandlerFileGuid = { 0xA2B05C85, 0x8D5B, 0x4FF3, {0xB7, 0xD1, 0x8F, 0xbE, 0x92, 0xB4, 0xAA, 0x32}}
+  gEfiPlatformCpuInfoGuid         = {    0xbb9c7ab7, 0xb8d9, 0x4bf3, {0x9c, 0x29, 0x9b, 0xf3, 0x41, 0xe2, 0x17, 0xbc}}
+  gPchS3CodeInLockBoxGuid   =  { 0x1f18c5b3, 0x29ed, 0x4d9e, {0xa5, 0x4, 0x6d, 0x97, 0x8e, 0x7e, 0xd5, 0x69}}
+  gPchS3ContextInLockBoxGuid = { 0xe5769ea9, 0xe706, 0x454b, {0x95, 0x7f, 0xaf, 0xc6, 0xdb, 0x4b, 0x8a, 0xd}}
+  gEfiBootStateGuid = { 0x60b5e939, 0xfcf, 0x4227, { 0xba, 0x83, 0x6b, 0xbe, 0xd4, 0x5b, 0xc0, 0xe3 } }
+  gEfiMemorySubClassGuid = { 0x772484B2, 0x7482, 0x4b91, { 0x9F, 0x9A, 0xAD, 0x43, 0xF8, 0x1C, 0x58, 0x81 } }
+  # Xml Cli Module
+  gDramSharedMailBoxGuid  = { 0x9d99a394, 0x1878, 0x4d2c, { 0x98, 0xe9, 0xc1, 0x6b, 0x8e, 0xc4, 0x79, 0x33 }}
+  gBiosKnobsDataBinGuid   = { 0x615E6021, 0x603D, 0x4124, { 0xB7, 0xEA, 0xC4, 0x8A, 0x37, 0x37, 0xBA, 0xCD }}
+  gClientCommonModuleTokenSpaceGuid           = { 0x6239f660, 0x54dc, 0x4cf2, { 0xb2, 0x07, 0x45, 0xdb, 0x9c, 0x4d, 0x22, 0xeb }}
+  #
+  # PCIE
+  #
+  gPcieIpPolicyPpiGuid = { 0xbb159a68, 0x8300, 0x43ef, { 0xa2, 0xa7, 0xf2, 0xad, 0xe6, 0xc9, 0x64, 0xa6 } }
+  gEfiCpuTokenSpaceGuid          = { 0x2ADA836D, 0x0A3D, 0x43D6, { 0xA2, 0x5A, 0x38, 0x45, 0xCA, 0xD2, 0xD4, 0x00 }}
+
+[Ppis]
+  gPeiLegacyRegionPpiGuid   = { 0x1fae70ac, 0x8203, 0x48f0, { 0xb9, 0xef, 0xe8, 0x73, 0xff, 0xec, 0xc1, 0xf2 }}
+  gPeiBaseMemoryTestPpiGuid = { 0xb6ec423c, 0x21d2, 0x490d, { 0x85, 0xc6, 0xdd, 0x58, 0x64, 0xea, 0xa6, 0x74 }}
+  gPeiFlashMapPpiGuid = {0xf34c2fa0, 0xde88, 0x4270, {0x84, 0x14, 0x96, 0x12, 0x22, 0xf4, 0x52, 0x1c}}
+  gPeiPlatformMemoryRangePpiGuid = { 0x30eb2979, 0xb0f7, 0x4d60, {0xb2, 0xdc, 0x1a, 0x2c, 0x96, 0xce, 0xb1, 0xf4 }}
+  gPeiPlatformMemorySizePpiGuid = {0x9a7ef41e, 0xc140, 0x4bd1, {0xb8, 0x84, 0x1e, 0x11, 0x24, 0xb, 0x4c, 0xe6 }}
+  gPeiAtaPolicyPpiGuid = {0x1b8ddea4, 0xdeb2, 0x4152, {0x91, 0xc2, 0xb7, 0x3c, 0xb1, 0x6c, 0xe4, 0x64 }} 
+  gEndOfPeiSignalPpiGuid = { 0x605EA650, 0xC65C, 0x42e1, {0xBA, 0x80, 0x91, 0xA5, 0x2A, 0xB6, 0x18, 0xC6}}
+  gNonVolatileMemPpiGuid = { 0xf8df0b07, 0x5a84, 0x48d1, {0xbe, 0x56, 0xc1, 0xbc, 0x48, 0x89, 0xc6, 0x73 }}
+  gPlxSetupPpiGuid       = { 0x8abd6380, 0xe433, 0x4b5b, {0xb6, 0x0f, 0xcb, 0x20, 0xc8, 0xa2, 0x3f, 0xc6 }}
+
+[Protocols]
+  gEfiPlatformPolicyProtocolGuid = {0x2977064f, 0xab96, 0x4fa9, { 0x85, 0x45, 0xf9, 0xc4, 0x02, 0x51, 0xe0, 0x7f}}
+  gEfiPlatformTypeProtocolGuid  = { 0x171e9398, 0x269c, 0x4081, { 0x90, 0x99, 0x38, 0x44, 0xe2, 0x60, 0x46, 0x6c }}
+  gPchSpiProtocolGuid           = { 0xf8b84ae6, 0x8465, 0x4f95, { 0x9f, 0xb, 0xea, 0xaa, 0x37, 0xc6, 0x15, 0x5a } }
+  gEfiSetupVariableDefaultGuid  = { 0x99a96812, 0x4730, 0x4290, { 0x8b, 0xfe, 0x7b, 0x4e, 0x51, 0x4f, 0xf9, 0x3b }}
+  gEfiGlobalVariableControlGuid = { 0x8d247131, 0x385e, 0x491f, { 0xba, 0x68, 0x8d, 0xe9, 0x55, 0x30, 0xb3, 0xa6 }}
+  gEfiDmaRemapProtocolGuid      = { 0x4e873773, 0x8391, 0x4e47, { 0xb7, 0xf4, 0xca, 0xfb, 0xdc, 0xc4, 0xb2, 0x04 }}
+  gEfiPlatformCpuProtocolGuid   = { 0xbd26cdc9, 0xa092, 0x462a, { 0x87, 0x7a, 0x5a, 0xb6, 0xad, 0xce, 0x48, 0x12 }}
+  gEfiIioUdsProtocolGuid        = { 0xa7ced760, 0xc71c, 0x4e1a, { 0xac, 0xb1, 0x89, 0x60, 0x4d, 0x52, 0x16, 0xcb }}
+  gDxeEnhancedSpeedstepProtocolGuid = { 0xe98021, 0xf4fe, 0x46cc, { 0xab, 0x2d, 0x89, 0x4c, 0x37, 0x3a, 0xfa, 0x1 }}
+  gEfiPciIovPlatformProtocolGuid = { 0xf3a4b484, 0x9b26, 0x4eea, { 0x90, 0xe5, 0xa2, 0x6, 0x54, 0xc, 0xa5, 0x25 }}
+  gEfiWindowsInt10Workaround     = { 0x387f555, 0x20a8, 0x4fc2,  { 0xbb, 0x94, 0xcd, 0x30, 0xda, 0x1b, 0x40, 0x8  }}
+  # RAS
+  gEfiMemRasProtocolGuid         = { 0x6d7e4a32, 0x9a73, 0x46ba, { 0x94, 0xa1, 0x5f, 0x2f, 0x25, 0xef, 0x3e, 0x29 }}
+  gEfiCpuRasProtocolGuid         = { 0xf084ff45, 0xf9fa, 0x4e9e, { 0x8d, 0xff, 0xe2, 0xd7, 0x80, 0xd2, 0x2c, 0xc2 }}
+  gEfiMemoryMapGuid              = { 0xf8870015, 0x6994, 0x4b98, { 0x95, 0xa2, 0xbd, 0x56, 0xda, 0x91, 0xc0, 0x7f }}
+   gEfiSntp4ServiceBindingProtocolGuid = { 0xbf62e0b2, 0x66e9, 0x446b, { 0xa9, 0x76, 0x8f, 0x9e, 0xb6, 0x27, 0x8a, 0xe4 } }
+  gEfiSntp4ProtocolGuid = { 0xd7c442a6, 0xffe3, 0x46e5, { 0xaf, 0x6e, 0xb1, 0x04, 0xee, 0x75, 0xcf, 0xdc } }
+  gXmlCliProtocolGuid            = { 0xe3e49b8d, 0x1987, 0x48d0, { 0x9a, 0x1, 0xed, 0xa1, 0x79, 0xca, 0xb, 0xd6 }}
+  gEfiUsbLegacyStack             = { 0x2ad81e19, 0x2e9b, 0x44aa, { 0xb4, 0xac, 0x9e, 0x21, 0x65, 0x32, 0x2e, 0x1c } }
+  gEfiTrEEPlatformProtocolGuid   = { 0x77ef4b99, 0x1186, 0x48ab, { 0x9d, 0x0b, 0x0b, 0x78, 0x12, 0xe5, 0xe6, 0xab }}
+
+
+[PcdsFixedAtBuild]  
+  gPlatformModuleTokenSpaceGuid.PcdFlashMicrocodeFvBase|0x00000000|UINT32|0x2000007
+  gPlatformModuleTokenSpaceGuid.PcdFlashMicrocodeFvSize|0x00000000|UINT32|0x2000008  
+  
+  #All this PCD's are set in 0 because are being overwrited in FDF file
+  gPlatformModuleTokenSpaceGuid.PcdFlashFvMainOffset|0x00000000|UINT32|0x200000B  
+  gPlatformModuleTokenSpaceGuid.PcdFlashFvOemLogoOffset|0x00000000|UINT32|0x200000C  
+  gPlatformModuleTokenSpaceGuid.PcdFlashFvMrcNormalOffset|0x00000000|UINT32|0x200000D
+  gPlatformModuleTokenSpaceGuid.PcdFlashFvLegacyFreeBase|0x00000000|UINT32|0x20000013
+  gPlatformModuleTokenSpaceGuid.PcdFlashFvLegacyFreeSize|0x00000000|UINT32|0x20000014
+  gPlatformModuleTokenSpaceGuid.PcdFlashFvLegacyBase|0x00000000|UINT32|0x20000015
+  gPlatformModuleTokenSpaceGuid.PcdFlashFvLegacySize|0x00000000|UINT32|0x20000016
+  gPlatformModuleTokenSpaceGuid.PcdFlashAreaBaseAddress|0x00000000|UINT32|0x2000001d
+  gPlatformModuleTokenSpaceGuid.PcdFlashAreaSize|0x00000000|UINT32|0x2000001e
+
+  ## This PCD specifies the size of the physical device containing the BIOS, SMBIOS will use it.
+  gPlatformModuleTokenSpaceGuid.PcdBiosSize|0x00800000|UINT32|0x2000001f
+
+  gEfiSerialPortTokenSpaceGuid.PcdUsbSerialEhciBus|0x00|UINT8|0x00000010
+  gEfiSerialPortTokenSpaceGuid.PcdUsbSerialEhciDev|0x1D|UINT8|0x00000011
+  gEfiSerialPortTokenSpaceGuid.PcdUsbSerialEhciFunc|0x00|UINT8|0x00000012
+
+  gPlatformModuleTokenSpaceGuid.PcdCboDev|0x0C|UINT32|0x3000000A
+  gPlatformModuleTokenSpaceGuid.PcdCboFunc|0x06|UINT8|0x3000000B
+  gPlatformModuleTokenSpaceGuid.PcdRUncoreCrSmram2|0x4C|UINT8|0x3000000C
+
+  gPlatformModuleTokenSpaceGuid.PcdCpuAddressWidthLimit|0x0|UINT8|0x3000000D
+
+  gPlatformModuleTokenSpaceGuid.PcdHpetEnable|TRUE|BOOLEAN|0x3000000E
+
+  gPlatformModuleTokenSpaceGuid.PcdDefaultActiveThermalTripPoint|55|UINT8|0x3000000F
+  gPlatformModuleTokenSpaceGuid.PcdDefaultPassiveThermalTripPoint|95|UINT8|0x3000010
+  gPlatformModuleTokenSpaceGuid.PcdDefaultCriticalThermalTripPoint|100|UINT8|0x3000011
+  gPlatformModuleTokenSpaceGuid.PcdDefaultPassiveTc1Value|1|UINT8|0x3000012
+  gPlatformModuleTokenSpaceGuid.PcdDefaultPassiveTc2Value|5|UINT8|0x3000013
+  gPlatformModuleTokenSpaceGuid.PcdDefaultPassiveTspValue|10|UINT8|0x3000014
+  gPlatformModuleTokenSpaceGuid.PcdDefaultEnableThermalOffset|0x1|UINT8|0x30000015
+  gPlatformModuleTokenSpaceGuid.PcdDefaultEnableDTSCalibration|0x1|UINT8|0x30000016
+
+  ## Specifies maximum number of processors supported by the platform.
+  # @Prompt Maximum number of processors supported by the platform.
+  gEfiCpuTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|64|UINT32|0x30000002
+
+  gEfiCpuTokenSpaceGuid.PcdCpuNumberOfMicrocodePatches|0x0|UINT16|0x600000AA
+  gEfiCpuTokenSpaceGuid.PcdCpuLocalApicBaseAddress|0xfee00000|UINT32|0x600000A1
+  
+  gPlatformModuleTokenSpaceGuid.PcdBootPState|1|UINT8|0x2000001B
+
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicAddress|0xFEE00000|UINT32|0xA000017D    
+  
+  gPlatformModuleTokenSpaceGuid.PcdPeiPchEhciControllerMemoryBaseAddress|0xFD000000|UINT32|0xA000017E
+  gPlatformModuleTokenSpaceGuid.PcdPostCodeBreakCmosIndex|0x48|UINT8|0x10000005
+
+  ## The PCD is used to specify whether or not send HierarchyChangeAuth command for Platform Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2HierarchyChangeAuthPlatform|TRUE|BOOLEAN|0x00010020
+  ## The PCD is used to specify send HierarchyControl command to enable or disable Platform Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2HierarchyControlPlatform|FALSE|BOOLEAN|0x00010024
+  ## The PCD is used to specify send HierarchyControl command to enable or disable Endorsement Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2HierarchyControlEndorsement|TRUE|BOOLEAN|0x00010025
+  ## The PCD is used to specify send HierarchyControl command to enable or disable Storage Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2HierarchyControlOwner|TRUE|BOOLEAN|0x00010026
+  ## The PCD is used to specify if TrEEPlatform module support TXT provision.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2TxtProvisionSupport|FALSE|BOOLEAN|0x00010027
+    
+[PcdsFeatureFlag]
+  ## This PCD specifies whether StatusCode is reported via USB Serial port.
+  gEfiSerialPortTokenSpaceGuid.PcdStatusCodeUseIsaSerial|TRUE|BOOLEAN|0x00000013
+  gEfiSerialPortTokenSpaceGuid.PcdStatusCodeUseUsbSerial|TRUE|BOOLEAN|0x00000020
+  gPlatformModuleTokenSpaceGuid.PcdSupportUnsignedCapsuleImage|TRUE|BOOLEAN|0x00000020
+  gPlatformModuleTokenSpaceGuid.PcdMultipleFlashSupportLibDoSystemInitialization|TRUE|BOOLEAN|0x3000005D
+  gPlatformModuleTokenSpaceGuid.PcdEnableNetworkBoot|FALSE|BOOLEAN|0x2000002A
+
+  ## TODO:Move this to override IA32FamilyCpuPkg.dec
+  gEfiCpuTokenSpaceGuid.PcdCpuTunnelCreekFamilyFlag|TRUE|BOOLEAN|0x200000AE
+
+  gPlatformModuleTokenSpaceGuid.PcdWakeOnRTCS5|FALSE|BOOLEAN|0x30000018
+  gPlatformModuleTokenSpaceGuid.PcdPciBusSerialUseHalfHandshake|FALSE|BOOLEAN|0x30000160
+	
+[PcdsDynamic]
+  gPlatformModuleTokenSpaceGuid.PcdRtcWakeupTimeHour|0|UINT8|0x30000019
+  gPlatformModuleTokenSpaceGuid.PcdRtcWakeupTimeMinute|0|UINT8|0x30000020
+  gPlatformModuleTokenSpaceGuid.PcdRtcWakeupTimeSecond|0|UINT8|0x30000021
+  gPlatformModuleTokenSpaceGuid.PcdDfxAdvDebugJumper|FALSE|BOOLEAN|0x6000001D
+
+  # Defines a flag to Enable/Disable interrupt override setting table0, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table0
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable0Enable|0x01|UINT8|0xA0000100
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable0SourceIrq|0x00|UINT8|0xA0000101
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable0Polarity|0x00|UINT8|0xA0000102
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable0TrigerMode|0x00|UINT8|0xA0000103
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable0GlobalIrq|0x02|UINT32|0xA0000104  
+
+  # Defines a flag to Enable/Disable interrupt override setting table1, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table1
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable1Enable|0x01|UINT8|0xA0000105
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable1SourceIrq|0x09|UINT8|0xA0000106
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable1Polarity|0x01|UINT8|0xA0000107
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable1TrigerMode|0x03|UINT8|0xA0000108
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable1GlobalIrq|0x09|UINT32|0xA0000109   
+
+  # Defines a flag to Enable/Disable interrupt override setting table2, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table2
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable2Enable|0x0|UINT8|0xA000010F
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable2SourceIrq|0x0|UINT8|0xA0000110
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable2Polarity|0x0|UINT8|0xA0000111
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable2TrigerMode|0x0|UINT8|0xA0000112
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable2GlobalIrq|0x0|UINT32|0xA0000113  
+
+  # Defines a flag to Enable/Disable interrupt override setting table3, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table3
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable3Enable|0x0|UINT8|0xA0000114
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable3SourceIrq|0x0|UINT8|0xA0000115
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable3Polarity|0x0|UINT8|0xA0000116
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable3TrigerMode|0x0|UINT8|0xA0000117
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable3GlobalIrq|0x0|UINT32|0xA0000118          
+
+  # Defines a flag to Enable/Disable interrupt override setting table4, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table4
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable4Enable|0x0|UINT8|0xA0000119
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable4SourceIrq|0x0|UINT8|0xA000011A
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable4Polarity|0x0|UINT8|0xA0000120
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable4TrigerMode|0x0|UINT8|0xA0000121
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable4GlobalIrq|0x0|UINT32|0xA0000122  
+
+  # Defines a flag to Enable/Disable interrupt override setting table5, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table5
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable5Enable|0x0|UINT8|0xA0000123
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable5SourceIrq|0x0|UINT8|0xA0000124
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable5Polarity|0x0|UINT8|0xA0000125
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable5TrigerMode|0x0|UINT8|0xA0000126
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable5GlobalIrq|0x0|UINT32|0xA0000127 
+
+  # Defines a flag to Enable/Disable interrupt override setting table6, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table6
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable6Enable|0x0|UINT8|0xA0000128
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable6SourceIrq|0x0|UINT8|0xA0000129
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable6Polarity|0x0|UINT8|0xA000012A
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable6TrigerMode|0x0|UINT8|0xA000012B
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable6GlobalIrq|0x0|UINT32|0xA000012C  
+
+  # Defines a flag to Enable/Disable interrupt override setting table7, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table7
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable7Enable|0x0|UINT8|0xA000012D
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable7SourceIrq|0x0|UINT8|0xA000012E
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable7Polarity|0x0|UINT8|0xA000012F
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable7TrigerMode|0x0|UINT8|0xA0000130
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable7GlobalIrq|0x0|UINT32|0xA0000131          
+
+  # Defines a flag to Enable/Disable interrupt override setting table8, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table8
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable8Enable|0x0|UINT8|0xA0000132
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable8SourceIrq|0x0|UINT8|0xA0000133
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable8Polarity|0x0|UINT8|0xA0000134
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable8TrigerMode|0x0|UINT8|0xA0000135
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable8GlobalIrq|0x0|UINT32|0xA0000136  
+
+  # Defines a flag to Enable/Disable interrupt override setting table9, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table9
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable9Enable|0x0|UINT8|0xA0000137
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable9SourceIrq|0x0|UINT8|0xA0000138
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable9Polarity|0x0|UINT8|0xA0000139
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable9TrigerMode|0x0|UINT8|0xA000013A
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable9GlobalIrq|0x0|UINT32|0xA000013B   
+
+  # Defines a flag to Enable/Disable interrupt override setting table10, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table10
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable10Enable|0x0|UINT8|0xA000013C
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable10SourceIrq|0x0|UINT8|0xA000013D
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable10Polarity|0x0|UINT8|0xA000013E
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable10TrigerMode|0x0|UINT8|0xA000013F
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable10GlobalIrq|0x0|UINT32|0xA0000140  
+
+  # Defines a flag to Enable/Disable interrupt override setting table11, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table11
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable11Enable|0x0|UINT8|0xA0000141
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable11SourceIrq|0x0|UINT8|0xA0000142
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable11Polarity|0x0|UINT8|0xA0000143
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable11TrigerMode|0x0|UINT8|0xA0000144
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable11GlobalIrq|0x0|UINT32|0xA0000145          
+
+  # Defines a flag to Enable/Disable interrupt override setting table12, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table12
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable12Enable|0x0|UINT8|0xA0000146
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable12SourceIrq|0x0|UINT8|0xA0000147
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable12Polarity|0x0|UINT8|0xA0000148
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable12TrigerMode|0x0|UINT8|0xA0000149
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable12GlobalIrq|0x0|UINT32|0xA000014A  
+
+  # Defines a flag to Enable/Disable interrupt override setting table13, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table13
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable13Enable|0x0|UINT8|0xA000014B
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable13SourceIrq|0x0|UINT8|0xA000014C
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable13Polarity|0x0|UINT8|0xA000014D
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable13TrigerMode|0x0|UINT8|0xA000014E
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable13GlobalIrq|0x0|UINT32|0xA000014F 
+
+  # Defines a flag to Enable/Disable interrupt override setting table14, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table14
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable14Enable|0x0|UINT8|0xA0000150
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable14SourceIrq|0x0|UINT8|0xA0000151
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable14Polarity|0x0|UINT8|0xA0000152
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable14TrigerMode|0x0|UINT8|0xA0000153
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable14GlobalIrq|0x0|UINT32|0xA0000154  
+
+  # Defines a flag to Enable/Disable interrupt override setting table15, 
+  # and the source Irq, Polarity, Triger Mode and global Irq of interrupt override setting table15
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable15Enable|0x0|UINT8|0xA0000155
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable15SourceIrq|0x0|UINT8|0xA0000156
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable15Polarity|0x0|UINT8|0xA0000157
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable15TrigerMode|0x0|UINT8|0xA0000158
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable15GlobalIrq|0x0|UINT32|0xA0000159      
+
+  # Defines a punch of Pcds for IO APIC setting: 
+  # IoApicAddress, GlobalInterruptBase, IoApicId, NmiEnable, NmiSource, Polarity and TrigerMode
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingIoApicAddress|0xFEC00000|UINT32|0xA0000170
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingGlobalInterruptBase|0x0|UINT32|0xA0000171
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingIoApicId|0x02|UINT8|0xA0000172
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingNmiEnable|0x0|UINT8|0xA0000173
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingNmiSource|0x0|UINT8|0xA0000174
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingPolarity|0x0|UINT8|0xA0000175
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingTrigerMode|0x0|UINT8|0xA0000176
+
+  # Defines a punch of Pcds for Local APIC setting: 
+  # NmiEnabelApicIdMask, AddressOverrideEnable, Polarity, TrigerMode, LocalApicLint, LocalApicAddress and LocalApicAddressOverride
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicSettingNmiEnabelApicIdMask|0x03|UINT8|0xA0000177
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicSettingAddressOverrideEnable|0x00|UINT8|0xA0000178
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicSettingPolarity|0x01|UINT8|0xA0000179
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicSettingTrigerMode|0x01|UINT8|0xA000017A
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicSettingLocalApicLint|0x01|UINT8|0xA000017B
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicAddressOverride|0x00|UINT64|0xA000017C
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicAddress|0xFEE00000|UINT32|0xA000017D   
+  gPlatformModuleTokenSpaceGuid.PcdPchS3CodeInLockBoxAddress|0|UINT64|0x30000026
+  gPlatformModuleTokenSpaceGuid.PcdPchS3CodeInLockBoxSize|0|UINT64|0x30000027 
+
+  ## The PCD is used to specify whether or not send HierarchyChangeAuth command for Platform Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2HierarchyChangeAuthPlatform|TRUE|BOOLEAN|0x00010020
+
+  ## The PCD is used to specify send HierarchyControl command to enable or disable Platform Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2HierarchyControlPlatform|FALSE|BOOLEAN|0x00010024
+
+  ## The PCD is used to specify send HierarchyControl command to enable or disable Endorsement Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2HierarchyControlEndorsement|TRUE|BOOLEAN|0x00010025
+
+  ## The PCD is used to specify send HierarchyControl command to enable or disable Storage Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2HierarchyControlOwner|TRUE|BOOLEAN|0x00010026
+
+  ## The PCD is used to specify if TrEEPlatform module support TXT provision.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2TxtProvisionSupport|FALSE|BOOLEAN|0x00010027
+
+  ## The PCD is used to specify whether or not send ChangeEPS command to reprovision Endorsement Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2ChangeEps|FALSE|BOOLEAN|0x00010021
+
+  ## The PCD is used to specify whether or not send ChangePPS command to reprovision Platform Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2ChangePps|FALSE|BOOLEAN|0x00010022
+
+  ## The PCD is used to specify whether or not send Clear command to reprovision Storage Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2Clear|FALSE|BOOLEAN|0x00010023
+
+  ## The PCD is used to specify whether or not Tpm command will wait for Response to come back.
+  gClientCommonModuleTokenSpaceGuid.PcdTpmSkipResponseWait|FALSE|BOOLEAN|0x00010028
+  
+  # Defines the number of PCI device information structures
+  # Ihe valid range is between 0 and 50
+
+  gPlatformModuleTokenSpaceGuid.PcdPciDeviceInfoNumber|0x13|UINT8|0xA0000190 
+
+  # Defines the name and the information structure of the PCI device1
+  # typedef struct {
+  #   UINT32    BridgeAddress;  //Location of pci device's bridge. A valid address is in the format of Byte4 Byte3 Byte2 Byte1. 
+  #                             //Byte4:not used, should be 0x00. 
+  #                             //Byte3:bus number. 
+  #                             //Byte2:device number. 
+  #                             //Byte1:function number, if it means any function, its value should be 0xFF. 
+  #                             //If the whole address is invalid, please fill the value as 0xFFFFFFFF.
+  #   UINT32    DeviceAddress;  //Location of pci device. In the same format as above.
+  #   UINT8     INTA[2];   // Interrupt information of interrupt pin INTA. 
+  #                        // 1st member records the 8259 interrupt link, its valid range:1-8.
+  #                        // LINKA - 1
+  #                        // LINKB - 2
+  #                        // LINKC - 3
+  #                        // LINKD - 4
+  #                        // LINKE - 5
+  #                        // LINKF - 6
+  #                        // LINKG - 7
+  #                        // LINKH - 8
+  #                        // If 8259 interrupt link is not valid, please fill the 1st member as 0xFF.
+  #                        // 2nd member records the IO APIC Irq number. Its valid range:16-23.Its value should align with the 
+  #                        // definition of 8259 link.If IO APIC Irq number is not valid, please fill the 2nd member as 0xFF.
+  #   UINT8     INTB[2];   // Interrupt information of interrupt pin INTB.In the same format as above.
+  #   UINT8     INTC[2];   // Interrupt information of interrupt pin INTC.In the same format as above.
+  #   UINT8     INTD[2];   // Interrupt information of interrupt pin INTD.In the same format as above.
+  #   UINT8     GPEPin;    // Gpe pin number that pci device use for wake up
+  #   UINT8     SxNum;     // The lowest system sleeping state that can be entered while still providing wake functionality.
+  # } PCI_DEVICE_INFO;
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice1Name|"Host Bridge"|VOID*|0xA0000191            
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice1Info|{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA0000192
+  # Defines the name and the information structure of the PCI device2
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice2Name|"Integrated Graphics and Video Device"|VOID*|0xA0000193
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice2Info|{0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x01, 0x10, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA0000194
+  # Defines the name and the information structure of the PCI device3
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice3Name|"SDVO Display Unit"|VOID*|0xA0000195
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice3Info|{0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x01, 0x10, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA0000196
+  # Defines the name and the information structure of the PCI device4
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice4Name|"PCI Express Port 0"|VOID*|0xA0000197
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice4Info|{0x00, 0x00, 0x00, 0x00, 0x00, 0x17, 0x00, 0x00, 0x04, 0x13, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x06, 0x03}|VOID*|0xA0000198
+  # Defines the name and the information structure of the PCI device5
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice5Name|"PCI Express Port 1"|VOID*|0xA0000199
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice5Info|{0x00, 0x00, 0x00, 0x00, 0x00, 0x18, 0x00, 0x00, 0x05, 0x14, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x07, 0x03}|VOID*|0xA000019A
+  # Defines the name and the information structure of the PCI device6
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice6Name|"PCI Express Port 2"|VOID*|0xA000019B
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice6Info|{0x00, 0x00, 0x00, 0x00, 0x00, 0x19, 0x00, 0x00, 0x06, 0x15, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x08, 0x03}|VOID*|0xA000019C
+  # Defines the name and the information structure of the PCI device7
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice7Name|"PCI Express Port 3"|VOID*|0xA000019D
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice7Info|{0x00, 0x00, 0x00, 0x00, 0x00, 0x1A, 0x00, 0x00, 0x07, 0x16, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x09, 0x03}|VOID*|0xA000019E
+  # Defines the name and the information structure of the PCI device8
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice8Name|"Intel High Definition Audio Controller"|VOID*|0xA000019F
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice8Info|{0x00, 0x00, 0x00, 0x00, 0x00, 0x1B, 0x00, 0x00, 0x08, 0x17, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x19, 0x03}|VOID*|0xA00001A0
+  # Defines the name and the information structure of the PCI device9
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice9Name|"LPC interface"|VOID*|0xA00001A1
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice9Info|{0x00, 0x00, 0x00, 0x00, 0x00, 0x1F, 0x00, 0x00, 0x01, 0x10, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001A2
+  # Defines the name and the information structure of the PCI device10
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice10Name|"PCI Device"|VOID*|0xA00001A3
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice10Info|{0x00, 0x17, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x10, 0x02, 0x11, 0x03, 0x12, 0x04, 0x13, 0xFF, 0xFF}|VOID*|0xA00001A4
+  # Defines the name and the information structure of the PCI device11
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice11Name|"PCI Device"|VOID*|0xA00001A5
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice11Info|{0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x02, 0x11, 0x03, 0x12, 0x04, 0x13, 0x01, 0x10, 0xFF, 0xFF}|VOID*|0xA00001A6
+  # Defines the name and the information structure of the PCI device12
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice12Name|"PCI Device"|VOID*|0xA00001A7
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice12Info|{0x00, 0x19, 0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x03, 0x12, 0x04, 0x13, 0x01, 0x10, 0x02, 0x11, 0xFF, 0xFF}|VOID*|0xA00001A8
+  # Defines the name and the information structure of the PCI device13
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice13Name|"PCI Device"|VOID*|0xA00001A9
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice13Info|{0x00, 0x1A, 0x00, 0x00, 0x00, 0x00, 0x07, 0x00, 0x04, 0x13, 0x01, 0x10, 0x02, 0x11, 0x03, 0x12, 0xFF, 0xFF}|VOID*|0xA00001AA
+  # Defines the name and the information structure of the PCI device14
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice14Name|"None"|VOID*|0xA00001AB
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice14Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001AC
+  # Defines the name and the information structure of the PCI device15
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice15Name|"None"|VOID*|0xA00001AD
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice15Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001AE
+  # Defines the name and the information structure of the PCI device16
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice16Name|"None"|VOID*|0xA00001AF
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice16Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001B0
+  # Defines the name and the information structure of the PCI device17
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice17Name|"None"|VOID*|0xA00001B1
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice17Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001B2
+  # Defines the name and the information structure of the PCI device18
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice18Name|"None"|VOID*|0xA00001B3
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice18Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001B4
+  # Defines the name and the information structure of the PCI device19
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice19Name|"None"|VOID*|0xA00001B5
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice19Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001B6
+  # Defines the name and the information structure of the PCI device20
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice20Name|"None"|VOID*|0xA00001B7
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice20Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001B8
+  # Defines the name and the information structure of the PCI device21
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice21Name|"None"|VOID*|0xA00001B9
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice21Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001BA
+  # Defines the name and the information structure of the PCI device22
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice22Name|"None"|VOID*|0xA00001BB
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice22Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001BC
+  # Defines the name and the information structure of the PCI device23
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice23Name|"None"|VOID*|0xA00001BD
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice23Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001BE
+  # Defines the name and the information structure of the PCI device24
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice24Name|"None"|VOID*|0xA00001BF
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice24Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001C0
+  # Defines the name and the information structure of the PCI device25
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice25Name|"None"|VOID*|0xA00001C1
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice25Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001C2
+  # Defines the name and the information structure of the PCI device26
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice26Name|"None"|VOID*|0xA00001C3
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice26Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001C4
+  # Defines the name and the information structure of the PCI device27
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice27Name|"None"|VOID*|0xA00001C5
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice27Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001C6
+  # Defines the name and the information structure of the PCI device28
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice28Name|"None"|VOID*|0xA00001C7
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice28Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001C8  
+  # Defines the name and the information structure of the PCI device29
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice29Name|"None"|VOID*|0xA00001C9
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice29Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001CA
+  # Defines the name and the information structure of the PCI device30
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice30Name|"None"|VOID*|0xA00001CB
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice30Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001CC
+  # Defines the name and the information structure of the PCI device31
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice31Name|"None"|VOID*|0xA00001CD
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice31Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001CE
+  # Defines the name and the information structure of the PCI device32
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice32Name|"None"|VOID*|0xA00001CF
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice32Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001D0
+  # Defines the name and the information structure of the PCI device33
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice33Name|"None"|VOID*|0xA00001D1
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice33Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001D2
+  # Defines the name and the information structure of the PCI device34  
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice34Name|"None"|VOID*|0xA00001D3
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice34Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001D4
+  # Defines the name and the information structure of the PCI device35
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice35Name|"None"|VOID*|0xA00001D5
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice35Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001D6
+  # Defines the name and the information structure of the PCI device36
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice36Name|"None"|VOID*|0xA00001D7
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice36Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001D8
+  # Defines the name and the information structure of the PCI device37
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice37Name|"None"|VOID*|0xA00001D9
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice37Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001DA
+  # Defines the name and the information structure of the PCI device38
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice38Name|"None"|VOID*|0xA00001DB
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice38Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001DC
+  # Defines the name and the information structure of the PCI device39
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice39Name|"None"|VOID*|0xA00001DD
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice39Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001DE
+  # Defines the name and the information structure of the PCI device40
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice40Name|"None"|VOID*|0xA00001DF
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice40Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001E0
+  # Defines the name and the information structure of the PCI device41
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice41Name|"None"|VOID*|0xA00001E1
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice41Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001E2
+  # Defines the name and the information structure of the PCI device42
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice42Name|"None"|VOID*|0xA00001E3
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice42Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001E4
+  # Defines the name and the information structure of the PCI device43
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice43Name|"None"|VOID*|0xA00001E5
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice43Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001E6
+  # Defines the name and the information structure of the PCI device44
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice44Name|"None"|VOID*|0xA00001E7
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice44Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001E8
+  # Defines the name and the information structure of the PCI device45
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice45Name|"None"|VOID*|0xA00001E9
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice45Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001EA
+  # Defines the name and the information structure of the PCI device46
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice46Name|"None"|VOID*|0xA00001EB
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice46Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001EC
+  # Defines the name and the information structure of the PCI device47
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice47Name|"None"|VOID*|0xA00001ED
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice47Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001EE
+  # Defines the name and the information structure of the PCI device48
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice48Name|"None"|VOID*|0xA00001EF
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice48Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001F0
+  # Defines the name and the information structure of the PCI device49
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice49Name|"None"|VOID*|0xA00001F1
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice49Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001F2
+  # Defines the name and the information structure of the PCI device50
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice50Name|"None"|VOID*|0xA00001F3
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice50Info|{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}|VOID*|0xA00001F4
+
+
+  #BIOS Information (Type 0), please refer spec SMBIOS 2.4, section 3.3.1 ,for following SMBIOS relates comments.
+
+  # String number of the BIOS Vendors Name
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSBiosVendor|"Intel Corp."|VOID*|0xA0000033 
+  # String number of the BIOS Version
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSBiosVersion|"Tiano-Denverton"|VOID*|0xA0000034
+  # String number of the BIOS Release Data
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSBiosReleaseDate|"04/24/2012"|VOID*|0xA0000035 
+  # Segment location of BIOS starting address. 
+  # Note: The size of the runtime BIOS image can be computed by subtracting the Starting Address Segment from 10000h and multiplying the result by 16.  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSBiosStartAddress|0xE000|UINT16|0xA0000036 
+  #Defines which functions the BIOS supports. PCI, PCMCIA, Flash, etc. See 3.3.1.1.  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSBiosChar|0x03037C099880|UINT64|0xA0000037 
+  #Defines which functions the BIOS supports. etc.See 3.3.1.2.1. 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSBiosCharEx1|0x03|UINT8|0xA0000038 
+  #Defines which functions the BIOS supports. etc.See 3.3.1.2.2. 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSBiosCharEx2|0x03|UINT8|0xA0000039
+
+  # System Information (Type 1), Section 3.3.2
+  # System Manufacturer String
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemManufacturer|"Intel Corp."|VOID*|0xA000003A
+  # System Product String  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemProductName|"Carson Peak"|VOID*|0xA000003B
+  # System Version
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemVersion|"1.0"|VOID*|0xA000003C 
+  # System SerialNumber String
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSerialNumber|"Unknown"|VOID*|0xA000003D 
+  # System UUID 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemUuid|{0x23, 0xef, 0xff, 0x13,0x54, 0x86, 0xda, 0x46, 0xa4, 0x7, 0x39, 0xc9, 0x12, 0x2, 0xd3, 0x56}|VOID*|0xA000003E 
+  # Manufacturer String
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSKUNumber|"System SKUNumber"|VOID*|0xA000003F 
+  # System Family String
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemFamily|"Denverton"|VOID*|0xA0000040 
+
+  # Base Board (or Module) Information (Type 2), Section 3.3.3
+  # Board Manufacturer String
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSBoardManufacturer|"Intel Corp."|VOID*|0xA0000041
+  # Board Product Name| String
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSBoardProductName|"REDFORT"|VOID*|0xA0000042
+  # Board Version String
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSBoardVersion|"FAB-3"|VOID*|0xA0000043
+  # Board Serial Number
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSBoardSerialNumber|"3"|VOID*|0xA0000044
+  # System Enclosure or Chassis(Type 3) Section 3.3.4
+  # Chassis Manufacturer String
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSChassisManufacturer|"Chassis Manufacturer"|VOID*|0xA0000045
+  # ChassisVersion
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSChassisVersion|"Chassis Version"|VOID*|0xA0000046
+  # Chassis SerialNumber String
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSChassisSerialNumber|"Chassis Serial Number"|VOID*|0xA0000047
+  # Chassis Asset Tag
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSChassisAssetTag|"Chassis Asset Tag"|VOID*|0xA0000747
+  # Chassis Type
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSChassisType|0x00000003|UINT8|0xA0000048
+  # Identifies the state of the enclosure when it was last booted. See 3.3.4.2 for definitions.
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSChassisBootupState|0x03|UINT8|0xA0000049
+  # Identifies the state of the enclosures power supply (or supplies) when last booted. See 3.3.4.2 for definitions.
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSChassisPowerSupplyState|0x03|UINT8|0xA000004A
+  # Identifies the enclosures physical security status when last booted. See 3.3.4.3 for definitions.
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSChassisSecurityState|0x01|UINT8|0xA000004B
+  # Contains OEM- or BIOS vendor-specific information.
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSChassisOemDefined|0x0|UINT32|0xA000004C
+  # The height of the enclosure, in 'U's. A U is a standard unit of measure for the height of a rack or rack-mountable component
+  # and is equal to 1.75 inches or 4.445 cm. A value of 00h indicates that the enclosure height is unspecified.
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSChassisHeight|0x0|UINT8|0xA000004D
+  # Identifies the number of power cords associated with the enclosure or chassis. A value of 00h indicates that the number is unspecified.
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSChassisNumberPowerCords|0x0|UINT8|0xA000004E
+  # Identifies the number of Contained Element records that follow, in the range 0 to 255. 
+  # Each Contained Element group comprises m bytes, as specified by the Contained Element Record Length field that follows. 
+  # If no Contained Elements are included, this field is set to 0.
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSChassisElementCount|0x0|UINT8|0xA000004F
+  # Identifies the byte length of each Contained Element record that follow, in the range 0 to 255. 
+  # If no Contained Elements are included, this field is set to 0. For v2.3.2 and later of this specification, 
+  # this field is set to at least 03h when Contained Elements are specified.
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSChassisElementRecordLength|0x0|UINT8|0xA0000050
+  
+  # Defines the number of connectors existent on the board
+  # The valid range is between 0 and 16
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSConnectorNumber|16|UINT8|0xA0000060
+
+  # Defines the designator of port1 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort1InternalConnectorDesignator|"X14 "|VOID*|0xA0000061
+  # Defines the designator of port1 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort1ExternalConnectorDesignator|"Keyboard"|VOID*|0xA0000062
+  # Defines the type of port1 internal connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort1InternalConnectorType|0x0F|UINT8|0xA0000063
+  # Defines the type of port1 external connector
+  # The valid range is between 0 to 0xFF, and 0x0F here means EfiPortConnectorTypePS2
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort1ExternalConnectorType|0x0F|UINT8|0xA0000064
+  # Defines the type of port1
+  # The valid range is between 0 to 0xFF, and 0x0D here means EfiPortTypeKeyboard
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort1Type|0x0D|UINT8|0xA0000065   
+
+  # Defines the designator of port2 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort2InternalConnectorDesignator|"X15 "|VOID*|0xA0000066
+  # Defines the designator of port2 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort2ExternalConnectorDesignator|"Mouse"|VOID*|0xA0000067
+  # Defines the type of port2 internal connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort2InternalConnectorType|0x0F|UINT8|0xA0000068
+  # Defines the type of port2 external connector
+  # The valid range is between 0 to 0xFF, and 0x0F here means EfiPortConnectorTypePS2
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort2ExternalConnectorType|0x0F|UINT8|0xA0000069
+  # Defines the type of port2
+  # The valid range is between 0 to 0xFF, and 0x0E here means EfiPortTypeMouse
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort2Type|0x0E|UINT8|0xA000006A
+
+  # Defines the designator of port3 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort3InternalConnectorDesignator|"X16 "|VOID*|0xA000006B
+  # Defines the designator of port3 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort3ExternalConnectorDesignator|"COM 1"|VOID*|0xA000006C
+  # Defines the type of port3 internal connector
+  # The valid range is between 0 to 0xFF, and 0xFF here means EfiPortConnectorTypeOther
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort3InternalConnectorType|0xFF|UINT8|0xA000006D
+  # Defines the type of port3 external connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort3ExternalConnectorType|0x0|UINT8|0xA000006E
+  # Defines the type of port3
+  # The valid range is between 0 to 0xFF, and 0x09 here means EfiPortTypeSerial16550ACompatible
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort3Type|0x09|UINT8|0xA000006F
+
+  # Defines the designator of port4 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort4InternalConnectorDesignator|"X17 "|VOID*|0xA0000070
+  # Defines the designator of port4 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort4ExternalConnectorDesignator|"COM 2"|VOID*|0xA0000071
+  # Defines the type of port4 internal connector
+  # The valid range is between 0 to 0xFF, and 0xFF here means EfiPortConnectorTypeOther
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort4InternalConnectorType|0xFF|UINT8|0xA0000072
+  # Defines the type of port4 external connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort4ExternalConnectorType|0x0|UINT8|0xA0000073
+  # Defines the type of port4
+  # The valid range is between 0 to 0xFF, and 0x09 here means EfiPortTypeSerial16550ACompatible
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort4Type|0x09|UINT8|0xA0000074  
+
+  # Defines the designator of port5 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort5InternalConnectorDesignator|"X18 "|VOID*|0xA0000075
+  # Defines the designator of port5 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort5ExternalConnectorDesignator|"COM 3"|VOID*|0xA0000076
+  # Defines the type of port5 internal connector
+  # The valid range is between 0 to 0xFF, and 0xFF here means EfiPortConnectorTypeOther
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort5InternalConnectorType|0xFF|UINT8|0xA0000077
+  # Defines the type of port5 external connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort5ExternalConnectorType|0x0|UINT8|0xA0000078
+  # Defines the type of port5
+  # The valid range is between 0 to 0xFF, and 0x09 here means EfiPortTypeSerial16550ACompatible
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort5Type|0x09|UINT8|0xA0000079
+
+  # Defines the designator of port6 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort6InternalConnectorDesignator|"X19 "|VOID*|0xA000007A
+  # Defines the designator of port6 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort6ExternalConnectorDesignator|"COM 4"|VOID*|0xA000007B
+  # Defines the type of port6 internal connector
+  # The valid range is between 0 to 0xFF, and 0xFF here means EfiPortConnectorTypeOther
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort6InternalConnectorType|0xFF|UINT8|0xA000007C
+  # Defines the type of port6 external connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort6ExternalConnectorType|0x0|UINT8|0xA000007D
+  # Defines the type of port6
+  # The valid range is between 0 to 0xFF, and 0x09 here means EfiPortTypeSerial16550ACompatible
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort6Type|0x09|UINT8|0xA000007E
+
+  # Defines the designator of port7 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort7InternalConnectorDesignator|"J4A2"|VOID*|0xA000007F
+  # Defines the designator of port7 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort7ExternalConnectorDesignator|"LPT 1"|VOID*|0xA0000080
+  # Defines the type of port7 internal connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort7InternalConnectorType|0x0|UINT8|0xA0000081
+  # Defines the type of port7 external connector
+  # The valid range is between 0 to 0xFF, and 0x12 here means EfiPortConnectorTypeDB25Male
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort7ExternalConnectorType|0x04|UINT8|0xA0000082
+  # Defines the type of port7
+  # The valid range is between 0 to 0xFF, and 0x10 here means EfiPortTypeEcpEpp
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort7Type|0x05|UINT8|0xA0000083
+
+  # Defines the designator of port8 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort8InternalConnectorDesignator|"X20 "|VOID*|0xA0000084
+  # Defines the designator of port8 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort8ExternalConnectorDesignator|"USB1"|VOID*|0xA0000085
+  # Defines the type of port8 internal connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort8InternalConnectorType|0x0|UINT8|0xA0000086
+  # Defines the type of port8 external connector
+  # The valid range is between 0 to 0xFF, and 0x12 here means EfiPortConnectorTypeUsb
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort8ExternalConnectorType|0x12|UINT8|0xA0000087
+  # Defines the type of port8
+  # The valid range is between 0 to 0xFF, and 0x10 here means EfiPortTypeUsb
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort8Type|0x10|UINT8|0xA0000088
+
+  # Defines the designator of port9 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort9InternalConnectorDesignator|"X21 "|VOID*|0xA0000089
+  # Defines the designator of port9 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort9ExternalConnectorDesignator|"USB2"|VOID*|0xA000008A
+  # Defines the type of port9 internal connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort9InternalConnectorType|0x0|UINT8|0xA000008B
+  # Defines the type of port9 external connector
+  # The valid range is between 0 to 0xFF, and 0x12 here means EfiPortConnectorTypeUsb
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort9ExternalConnectorType|0x12|UINT8|0xA000008C
+  # Defines the type of port9
+  # The valid range is between 0 to 0xFF, and 0x10 here means EfiPortTypeUsb
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort9Type|0x10|UINT8|0xA000008D
+
+  # Defines the designator of port10 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort10InternalConnectorDesignator|"X22 "|VOID*|0xA000008E
+  # Defines the designator of port10 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort10ExternalConnectorDesignator|"USB3"|VOID*|0xA000008F
+  # Defines the type of port10 internal connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort10InternalConnectorType|0x0|UINT8|0xA0000090
+  # Defines the type of port10 external connector
+  # The valid range is between 0 to 0xFF, and 0x12 here means EfiPortConnectorTypeUsb
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort10ExternalConnectorType|0x12|UINT8|0xA0000091
+  # Defines the type of port10
+  # The valid range is between 0 to 0xFF, and 0x10 here means EfiPortTypeUsb
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort10Type|0x10|UINT8|0xA0000092  
+
+  # Defines the designator of port11 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort11InternalConnectorDesignator|"X23 "|VOID*|0xA0000093
+  # Defines the designator of port11 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort11ExternalConnectorDesignator|"USB4"|VOID*|0xA0000094
+  # Defines the type of port11 internal connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort11InternalConnectorType|0x0|UINT8|0xA0000095
+  # Defines the type of port11 external connector
+  # The valid range is between 0 to 0xFF, and 0x12 here means EfiPortConnectorTypeUsb
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort11ExternalConnectorType|0x12|UINT8|0xA0000096
+  # Defines the type of port11
+  # The valid range is between 0 to 0xFF, and 0x10 here means EfiPortTypeUsb
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort11Type|0x10|UINT8|0xA0000097
+
+  # Defines the designator of port12 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort12InternalConnectorDesignator|"X28 "|VOID*|0xA0000098
+  # Defines the designator of port12 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort12ExternalConnectorDesignator|"RJ-45 Type"|VOID*|0xA0000099
+  # Defines the type of port12 internal connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort12InternalConnectorType|0x0|UINT8|0xA000009A
+  # Defines the type of port12 external connector
+  # The valid range is between 0 to 0xFF, and 0x0B here means EfiPortConnectorTypeRJ45
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort12ExternalConnectorType|0x0B|UINT8|0xA000009B
+  # Defines the type of port12
+  # The valid range is between 0 to 0xFF, and 0x1F here means EfiPortTypeNetworkPort
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort12Type|0x1F|UINT8|0xA000009C
+
+  # Defines the designator of port13 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort13InternalConnectorDesignator|"J1G1"|VOID*|0xA000009D
+  # Defines the designator of port13 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort13ExternalConnectorDesignator|"Floppy"|VOID*|0xA000009E
+  # Defines the type of port13 internal connector
+  # The valid range is between 0 to 0xFF, and 0x16 here means EfiPortConnectorTypeOnboardFloppy
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort13InternalConnectorType|0x17|UINT8|0xA000009F
+  # Defines the type of port13 external connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort13ExternalConnectorType|0x0|UINT8|0xA00000A0
+  # Defines the type of port13
+  # The valid range is between 0 to 0xFF, and 0xFF here means EfiPortTypeOther
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort13Type|0xFF|UINT8|0xA00000A1
+
+  # Defines the designator of port14 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort14InternalConnectorDesignator|"J2H2"|VOID*|0xA00000A2
+  # Defines the designator of port14 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort14ExternalConnectorDesignator|"IDE"|VOID*|0xA00000A3
+  # Defines the type of port14 internal connector
+  # The valid range is between 0 to 0xFF, and 0x16 here means EfiPortConnectorTypeOnboardIde
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort14InternalConnectorType|0x16|UINT8|0xA00000A4
+  # Defines the type of port14 external connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort14ExternalConnectorType|0x0|UINT8|0xA00000A5
+  # Defines the type of port14
+  # The valid range is between 0 to 0xFF, and 0xFF here means EfiPortTypeOther
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort14Type|0xFF|UINT8|0xA00000A6
+
+  # Defines the designator of port15 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort15InternalConnectorDesignator|"X29 "|VOID*|0xA00000A7
+  # Defines the designator of port15 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort15ExternalConnectorDesignator|"SATA1"|VOID*|0xA00000A8
+  # Defines the type of port15 internal connector
+  # The valid range is between 0 to 0xFF, and 0x16 here means EfiPortConnectorTypeOnboardIde
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort15InternalConnectorType|0x16|UINT8|0xA00000A9
+  # Defines the type of port15 external connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort15ExternalConnectorType|0x0|UINT8|0xA00000AA
+  # Defines the type of port15
+  # The valid range is between 0 to 0xFF, and 0xFF here means EfiPortTypeOther
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort15Type|0xFF|UINT8|0xA00000AB
+
+  # Defines the designator of port16 internal connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort16InternalConnectorDesignator|"X30 "|VOID*|0xA00000AC
+  # Defines the designator of port16 external connector
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort16ExternalConnectorDesignator|"SATA2"|VOID*|0xA00000AD
+  # Defines the type of port16 internal connector
+  # The valid range is between 0 to 0xFF, and 0x16 here means EfiPortConnectorTypeOnboardIde
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort16InternalConnectorType|0x16|UINT8|0xA00000AE
+  # Defines the type of port16 external connector
+  # The valid range is between 0 to 0xFF, and 0 here means EfiPortConnectorTypeNone
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort16ExternalConnectorType|0x0|UINT8|0xA00000AF
+  # Defines the type of port16
+  # The valid range is between 0 to 0xFF, and 0xFF here means EfiPortTypeOther
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSPort16Type|0xFF|UINT8|0xA00000B0
+
+ 
+  # Defines the number of the slots existent on board
+  # The valid range is between 0 and 14
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlotNumber|5|UINT8|0xA000023F  
+  # Defines the designation of system slot1 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot1Designation|"PCI SLOT1"|VOID*|0xA0000240    
+  # Defines the type of system slot1 
+  # The valid range is between 0x01 to 0xA5, and 0x06 here means EfiSlotTypePci
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot1Type|0x6|UINT8|0xA0000241 
+  # Defines the data bus width of system slot1 
+  # The valid range is between 0x01 to 0x07, and 0x05 here means EfiSlotDataBusWidth32Bit
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot1DataBusWidth|0x5|UINT8|0xA0000242 
+  # Defines the usage of system slot1 
+  # The valid range is between 0x01 to 0x04, and 0x03 here means EfiSlotUsageAvailable    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot1Usage|0x3|UINT8|0xA0000243
+  # Defines the length of system slot1 
+  # The valid range is between 0x01 to 0x04, and 0x04 here means EfiSlotLengthLong  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot1Length|0x4|UINT8|0xA0000244 
+  # Defines the ID of system slot1, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot1Id|0x01|UINT16|0xA0000245
+  # Defines the characteristics of system slot1 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  # typedef struct {
+  #   UINT32  CharacteristicsUnknown  :1;
+  #   UINT32  Provides50Volts         :1;
+  #   UINT32  Provides33Volts         :1;
+  #   UINT32  SharedSlot              :1;
+  #   UINT32  PcCard16Supported       :1;
+  #   UINT32  CardBusSupported        :1;
+  #   UINT32  ZoomVideoSupported      :1;
+  #   UINT32  ModemRingResumeSupported:1;
+  #   UINT32  PmeSignalSupported      :1;
+  #   UINT32  HotPlugDevicesSupported :1;
+  #   UINT32  SmbusSignalSupported    :1;
+  #   UINT32  Reserved                :21;
+  # } EFI_MISC_SLOT_CHARACTERISTICS;
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot1Characteristics|0x504|UINT32|0xA0000246
+
+  # Defines the designation of system slot2 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot2Designation|"PCI-Express 1"|VOID*|0xA0000247
+
+  # Defines the type of system slot2 
+  # The valid range is between 0x01 to 0xA5, and 0x06 here means EfiSlotTypePci
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot2Type|0xA5|UINT8|0xA0000248
+  # Defines the data bus width of system slot2 
+  # The valid range is between 0x01 to 0x07, and 0x05 here means EfiSlotDataBusWidth32Bit
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot2DataBusWidth|0x5|UINT8|0xA0000249
+  # Defines the usage of system slot2 
+  # The valid range is between 0x01 to 0x04, and 0x03 here means EfiSlotUsageAvailable    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot2Usage|0x3|UINT8|0xA000024A 
+  # Defines the length of system slot2 
+  # The valid range is between 0x01 to 0x04, and 0x04 here means EfiSlotLengthLong  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot2Length|0x4|UINT8|0xA000024B
+  # Defines the ID of system slot2, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot2Id|0x02|UINT16|0xA000024C
+  # Defines the characteristics of system slot2 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot2Characteristics|0x504|UINT32|0xA000024D
+
+  # Defines the designation of system slot3 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot3Designation|"PCI-Express 2"|VOID*|0xA000024E
+  # Defines the type of system slot3 
+  # The valid range is between 0x01 to 0xA5, and 0x06 here means EfiSlotTypePci
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot3Type|0xA5|UINT8|0xA000024F 
+  # Defines the data bus width of system slot3 
+  # The valid range is between 0x01 to 0x07, and 0x05 here means EfiSlotDataBusWidth32Bit
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot3DataBusWidth|0x5|UINT8|0xA0000250
+  # Defines the usage of system slot3 
+  # The valid range is between 0x01 to 0x04, and 0x03 here means EfiSlotUsageAvailable    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot3Usage|0x3|UINT8|0xA0000251 
+  # Defines the length of system slot3 
+  # The valid range is between 0x01 to 0x04, and 0x04 here means EfiSlotLengthLong  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot3Length|0x4|UINT8|0xA0000252 
+  # Defines the ID of system slot3, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot3Id|0x03|UINT16|0xA0000253
+  # Defines the characteristics of system slot3 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot3Characteristics|0x504|UINT32|0xA000254
+
+  # Defines the designation of system slot4 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot4Designation|"PCI-Express 3"|VOID*|0xA0000255
+  # Defines the type of system slot4
+  # The valid range is between 0x01 to 0xA5, and 0xA5 here means EfiSlotTypePciExpress
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot4Type|0xA5|UINT8|0xA0000256 
+  # Defines the data bus width of system slot4 
+  # The valid range is between 0x01 to 0x07, and 0x05 here means EfiSlotDataBusWidth32Bit
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot4DataBusWidth|0x5|UINT8|0xA0000257
+  # Defines the usage of system slot4 
+  # The valid range is between 0x01 to 0x04, and 0x03 here means EfiSlotUsageAvailable    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot4Usage|0x3|UINT8|0xA0000258 
+  # Defines the length of system slot4
+  # The valid range is between 0x01 to 0x04, and 0x04 here means EfiSlotLengthLong  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot4Length|0x4|UINT8|0xA0000259 
+  # Defines the ID of system slot4, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot4Id|0x04|UINT16|0xA0000260
+  # Defines the characteristics of system slot4 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot4Characteristics|0x504|UINT32|0xA0000261
+
+  # Defines the designation of system slot5 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot5Designation|"Mini PCI-E"|VOID*|0xA0000262
+  # Defines the type of system slot5 
+  # The valid range is between 0x01 to 0xA5, and 0xA5 here means EfiSlotTypePciExpress
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot5Type|0xA5|UINT8|0xA0000263 
+  # Defines the data bus width of system slot5
+  # The valid range is between 0x01 to 0x07, and 0x05 here means EfiSlotDataBusWidth32Bit
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot5DataBusWidth|0x5|UINT8|0xA0000264
+  # Defines the usage of system slot5 
+  # The valid range is between 0x01 to 0x04, and 0x03 here means EfiSlotUsageAvailable    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot5Usage|0x3|UINT8|0xA0000265 
+  # Defines the length of system slot5 
+  # The valid range is between 0x01 to 0x04, and 0x04 here means EfiSlotLengthLong  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot5Length|0x4|UINT8|0xA0000266 
+  # Defines the ID of system slot5, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot5Id|0x05|UINT16|0xA0000267
+  # Defines the characteristics of system slot5 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot5Characteristics|0x504|UINT32|0xA0000268
+
+  # Defines the designation of system slot6 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot6Designation|"NONE"|VOID*|0xA0000269
+  # Defines the type of system slot6 
+  # The valid range is between 0x01 to 0xA5, and 0x02 here means EfiSlotTypeUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot6Type|0x2|UINT8|0xA000026A
+  # Defines the data bus width of system slot6 
+  # The valid range is between 0x01 to 0x07, and 0x02 here means EfiSlotDataBusWidthUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot6DataBusWidth|0x2|UINT8|0xA000026B 
+  # Defines the usage of system slot6 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotUsageUnknown    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot6Usage|0x2|UINT8|0xA000026C 
+  # Defines the length of system slot6 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotLengthUnknown  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot6Length|0x2|UINT8|0xA000026D 
+  # Defines the ID of system slot6, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot6Id|0x0|UINT16|0xA000026E
+  # Defines the characteristics of system slot6 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot6Characteristics|0x0|UINT32|0xA000026F  
+
+  # Defines the designation of system slot7 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot7Designation|"NONE"|VOID*|0xA0000270
+  # Defines the type of system slot7 
+  # The valid range is between 0x01 to 0xA5, and 0x02 here means EfiSlotTypeUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot7Type|0x2|UINT8|0xA0000271 
+  # Defines the data bus width of system slot7 
+  # The valid range is between 0x01 to 0x07, and 0x02 here means EfiSlotDataBusWidthUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot7DataBusWidth|0x2|UINT8|0xA0000272 
+  # Defines the usage of system slot7 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotUsageUnknown    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot7Usage|0x2|UINT8|0xA0000273 
+  # Defines the length of system slot7 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotLengthUnknown  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot7Length|0x2|UINT8|0xA0000274 
+  # Defines the ID of system slot7, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot7Id|0x0|UINT16|0xA0000275
+  # Defines the characteristics of system slot7 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot7Characteristics|0x0|UINT32|0xA0000276
+
+  # Defines the designation of system slot8 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot8Designation|"NONE"|VOID*|0xA0000277
+  # Defines the type of system slot8 
+  # The valid range is between 0x01 to 0xA5, and 0x02 here means EfiSlotTypeUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot8Type|0x2|UINT8|0xA0000278 
+  # Defines the data bus width of system slot8 
+  # The valid range is between 0x01 to 0x07, and 0x02 here means EfiSlotDataBusWidthUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot8DataBusWidth|0x2|UINT8|0xA0000279 
+  # Defines the usage of system slot8 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotUsageUnknown    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot8Usage|0x2|UINT8|0xA000027A
+  # Defines the length of system slot8 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotLengthUnknown  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot8Length|0x2|UINT8|0xA000027B 
+  # Defines the ID of system slot8, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot8Id|0x0|UINT16|0xA000027C
+  # Defines the characteristics of system slot8 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot8Characteristics|0x0|UINT32|0xA000027D
+
+  # Defines the designation of system slot9 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot9Designation|"NONE"|VOID*|0xA000027E
+  # Defines the type of system slot9 
+  # The valid range is between 0x01 to 0xA5, and 0x02 here means EfiSlotTypeUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot9Type|0x2|UINT8|0xA000027F 
+  # Defines the data bus width of system slot9 
+  # The valid range is between 0x01 to 0x07, and 0x02 here means EfiSlotDataBusWidthUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot9DataBusWidth|0x2|UINT8|0xA0000280 
+  # Defines the usage of system slot9 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotUsageUnknown    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot9Usage|0x2|UINT8|0xA0000281 
+  # Defines the length of system slot9 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotLengthUnknown  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot9Length|0x2|UINT8|0xA0000282
+  # Defines the ID of system slot9, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot9Id|0x0|UINT16|0xA0000283
+  # Defines the characteristics of system slot9 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot9Characteristics|0x0|UINT32|0xA0000284  
+
+  # Defines the designation of system slot10 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot10Designation|"None"|VOID*|0xA0000285
+  # Defines the type of system slot10 
+  # The valid range is between 0x01 to 0xA5, and 0x02 here means EfiSlotTypeUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot10Type|0x2|UINT8|0xA0000286 
+  # Defines the data bus width of system slot10 
+  # The valid range is between 0x01 to 0x07, and 0x02 here means EfiSlotDataBusWidthUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot10DataBusWidth|0x2|UINT8|0xA0000287 
+  # Defines the usage of system slot10 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotUsageUnknown    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot10Usage|0x2|UINT8|0xA0000288 
+  # Defines the length of system slot10 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotLengthUnknown  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot10Length|0x2|UINT8|0xA0000289 
+  # Defines the ID of system slot10, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot10Id|0x0|UINT16|0xA000028A
+  # Defines the characteristics of system slot10 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot10Characteristics|0x0|UINT32|0xA000028B  
+
+  # Defines the designation of system slot11 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot11Designation|"None"|VOID*|0xA000028C
+  # Defines the type of system slot11 
+  # The valid range is between 0x01 to 0xA5, and 0x02 here means EfiSlotTypeUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot11Type|0x2|UINT8|0xA000028D 
+  # Defines the data bus width of system slot11 
+  # The valid range is between 0x01 to 0x07, and 0x02 here means EfiSlotDataBusWidthUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot11DataBusWidth|0x2|UINT8|0xA000028E 
+  # Defines the usage of system slot11 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotUsageUnknown    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot11Usage|0x2|UINT8|0xA000028F 
+  # Defines the length of system slot11 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotLengthUnknown  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot11Length|0x2|UINT8|0xA0000290 
+  # Defines the ID of system slot11, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot11Id|0x0|UINT16|0xA00000EE
+  # Defines the characteristics of system slot11 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot11Characteristics|0x0|UINT32|0xA0000291 
+
+  # Defines the designation of system slot12 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot12Designation|"None"|VOID*|0xA0000292
+  # Defines the type of system slot12 
+  # The valid range is between 0x01 to 0xA5, and 0x02 here means EfiSlotTypeUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot12Type|0x2|UINT8|0xA0000293 
+  # Defines the data bus width of system slot12 
+  # The valid range is between 0x01 to 0x07, and 0x02 here means EfiSlotDataBusWidthUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot12DataBusWidth|0x2|UINT8|0xA0000294 
+  # Defines the usage of system slot12 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotUsageUnknown    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot12Usage|0x2|UINT8|0xA0000295 
+  # Defines the length of system slot12 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotLengthUnknown  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot12Length|0x2|UINT8|0xA0000296 
+  # Defines the ID of system slot12, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot12Id|0x0|UINT16|0xA0000297
+  # Defines the characteristics of system slot12 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot12Characteristics|0x0|UINT32|0xA0000298  
+
+  # Defines the designation of system slot13 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot13Designation|"None"|VOID*|0xA0000299
+  # Defines the type of system slot13 
+  # The valid range is between 0x01 to 0xA5, and 0x02 here means EfiSlotTypeUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot13Type|0x2|UINT8|0xA000029A 
+  # Defines the data bus width of system slot13 
+  # The valid range is between 0x01 to 0x07, and 0x02 here means EfiSlotDataBusWidthUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot13DataBusWidth|0x2|UINT8|0xA000029B 
+  # Defines the usage of system slot13 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotUsageUnknown    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot13Usage|0x2|UINT8|0xA000029C 
+  # Defines the length of system slot13 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotLengthUnknown  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot13Length|0x2|UINT8|0xA000029D 
+  # Defines the ID of system slot13, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot13Id|0x0|UINT16|0xA000029E
+  # Defines the characteristics of system slot13 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot13Characteristics|0x0|UINT32|0xA000029F
+
+  # Defines the designation of system slot14 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot14Designation|"None"|VOID*|0xA00002A0
+  # Defines the type of system slot14 
+  # The valid range is between 0x01 to 0xA5, and 0x02 here means EfiSlotTypeUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot14Type|0x2|UINT8|0xA00002A1 
+  # Defines the data bus width of system slot14 
+  # The valid range is between 0x01 to 0x07, and 0x02 here means EfiSlotDataBusWidthUnknown
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot14DataBusWidth|0x2|UINT8|0xA00002A2 
+  # Defines the usage of system slot14 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotUsageUnknown    
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot14Usage|0x2|UINT8|0xA00002A3 
+  # Defines the length of system slot14 
+  # The valid range is between 0x01 to 0x04, and 0x02 here means EfiSlotLengthUnknown  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot14Length|0x2|UINT8|0xA00002A4 
+  # Defines the ID of system slot14, a number of UINT16  
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot14Id|0x0|UINT16|0xA00002A5
+  # Defines the characteristics of system slot14 , a bit mask of EFI_MISC_SLOT_CHARACTERISTICS 
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSlot14Characteristics|0x0|UINT32|0xA00002A6
+  ## The PCD is used to specify memory size with page number for a pre-allocated ACPI NVS memory to be used
+  #  by PEI in S3 phase. The default size 32K. When changing the value of this PCD, the platform
+  #  developer should make sure the memory size is large enough to meet PEI requiremnt in S3 phase.
+  #gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdS3AcpiReservedMemorySize|0x10000|UINT32|0x30000006   # Denverton AptioV override - EIP#263630
+  ## This PCD specifies whether Serial device use half hand shake.
+  
+[PcdsPatchableInModule, PcdsDynamic, PcdsDynamicEx]
+  ## PCD bit defines as below
+  ## Bits[0:1] 00 DEST_MEM 01 DEST_PTI 11 DEST_EXI
+  ## Bit[7] PCD valid
+  ## Bit[6] TraceHub Enable/Disable
+  ## Bit[5] FW Trace Enable/Disable
+  gPlatformModuleTokenSpaceGuid.PcdTraceHubSetupOption|0xE2|UINT8|0x10000025
+  ## This PCD defines minimum length(in bytes) of the system preboot TCG event log area(LAML).
+  #  For PC Client Implementation spec up to and including 1.2 the minimum log size is 64KB.
+  # @Prompt Minimum length(in bytes) of the system preboot TCG event log area(LAML).
+  gEfiSecurityPkgTokenSpaceGuid.PcdTcgLogAreaMinLen|0x10000|UINT32|0x00010017
+  ## This PCD defines length(in bytes) of the TCG2 Final event log area.
+  # @Prompt Length(in bytes) of the TCG2 Final event log area.
+  gEfiSecurityPkgTokenSpaceGuid.PcdTcg2FinalLogAreaLen|0x8000|UINT32|0x00010018
+  
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2HierarchyChangeAuthPlatform|TRUE|BOOLEAN|0x00010020
+  ## The PCD is used to specify send HierarchyControl command to enable or disable Platform Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2HierarchyControlPlatform|FALSE|BOOLEAN|0x00010024
+  ## The PCD is used to specify send HierarchyControl command to enable or disable Endorsement Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2HierarchyControlEndorsement|TRUE|BOOLEAN|0x00010025
+  ## The PCD is used to specify send HierarchyControl command to enable or disable Storage Hierarchy.
+  gClientCommonModuleTokenSpaceGuid.PcdTpm2HierarchyControlOwner|TRUE|BOOLEAN|0x00010026
+

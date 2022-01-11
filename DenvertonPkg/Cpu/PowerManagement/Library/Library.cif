@@ -1,0 +1,8 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Cpu\PowerManagement\Library\"
+	RefName = "DenvertonPkg.Cpu.PowerManagement.Library"
+[parts]
+"DenvertonPkg.GoldmontLib"
+<endComponent>

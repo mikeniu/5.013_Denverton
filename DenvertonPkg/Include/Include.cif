@@ -1,0 +1,21 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Include\"
+	RefName = "DenvertonPkg.Include"
+[files]
+"ConfigBlock.h"	
+"IntelBWConfig.h"	
+"PcieRegs.h"	
+"RcRev.h"	
+"SimicsDebug.h"	
+"SiPolicyHob.h"	
+"SocRegs.h"	
+"SiPolicyStruct.h"
+"SiVersion.h"
+[parts]
+"DenvertonPkg.Include.Guid"
+"DenvertonPkg.Include.Library"
+"DenvertonPkg.Include.Ppi"
+"DenvertonPkg.Include.Protocol"
+<endComponent>

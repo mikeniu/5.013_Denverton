@@ -1,0 +1,16 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SystemAgent\Include\"
+	RefName = "DenvertonPkg.SystemAgent.Include"
+[files]
+"DmaRemappingTable.h"	
+"SaAccess.h"	
+"SaCommonDefinitions.h"	
+"SaDataHob.h"	
+"SaRegs.h"	
+[parts]
+"DenvertonPkg.SystemAgent.Include.Guid"
+"DenvertonPkg.SystemAgent.Include.Library"
+"DenvertonPkg.SystemAgent.Include.Ppi"
+<endComponent>

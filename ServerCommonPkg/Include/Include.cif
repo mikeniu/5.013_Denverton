@@ -1,0 +1,19 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "ServerCommonPkg\Include\"
+	RefName = "ServerCommonPkg.Include"
+[files]
+"WheaPlatformDefs.h"	
+"CpuDataStruct.h"
+"CommonIncludes.h"
+"CpuRegs.h"
+"FlashMap.h"
+"CpuBaseLib.h"
+[parts]
+"ServerCommonPkg.Guid"
+"ServerCommonPkg.IndustryStandard"
+"ServerCommonPkg.Include.Library"
+"ServerCommonPkg.Protocol"
+<endComponent>
+  

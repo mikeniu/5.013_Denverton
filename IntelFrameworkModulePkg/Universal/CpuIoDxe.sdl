@@ -1,0 +1,26 @@
+TOKEN
+	Name  = "CpuIoDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable IntelFrameworkModulePkg support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+INFComponent
+	Name  = "CpuIoDxe"
+	File  = "CpuIoDxe/CpuIoDxe.inf"
+	Package  = "IntelFrameworkModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "CpuIoDxe_SUPPORT" "=" "1"
+End
+
+# Denverton AptioV Override Start
+FFS_FILE
+	Name  = "CpuIoDxe"
+	FD_AREA  = "FV_MAIN"
+	INFComponent  = "IntelFrameworkModulePkg.CpuIoDxe"
+	Apriori_Index  = "7"
+End
+# Denverton AptioV Override End

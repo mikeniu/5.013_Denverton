@@ -1,0 +1,13 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "IA32FamilyCpuPkg\Include\Library\"
+	RefName = "IA32FamilyCpuPkg.Library"
+[files]
+"CpuConfigLib.h"	
+"CpuOnlyResetLib.h"	
+"PlatformSecLib.h"	
+"SmmCpuPlatformHookLib.h"	
+"SocketLga1156Lib.h"	
+"SocketLga775Lib.h"	
+<endComponent>

@@ -1,0 +1,9 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Cpu\Include\Protocol\"
+	RefName = "DenvertonPkg.Cpu.Include.Protocol"
+[files]
+"PpmPlatformPolicy.h"	
+"PpmProcessorSupport2.h"	
+<endComponent>

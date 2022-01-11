@@ -1,0 +1,21 @@
+TOKEN
+	Name  = "CPUDXE_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Harrisonville CPU DXE support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PlatformCpuPolicy"
+	File  = "Dxe\PlatformCpuPolicyForNativeCpu\PlatformCpuPolicy.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "PpmPolicy"
+	File  = "Dxe\PpmPolicy\PpmPolicy.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End

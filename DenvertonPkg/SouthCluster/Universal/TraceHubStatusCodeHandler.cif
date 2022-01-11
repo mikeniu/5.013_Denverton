@@ -1,0 +1,12 @@
+<component>
+	name = "TraceHubStatusCodeHandler"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\Universal"
+	RefName = "DenvertonPkg.SouthCluster.TraceHubStatusCodeHandler"
+[files]
+"TraceHubStatusCodeHandler.sdl"
+[parts]
+"DenvertonPkg.SouthCluster.TraceHubStatusCodeHandlerPei"
+"DenvertonPkg.SouthCluster.TraceHubStatusCodeHandlerRuntimeDxe"
+"DenvertonPkg.SouthCluster.TraceHubStatusCodeHandlerSmm"
+<endComponent>

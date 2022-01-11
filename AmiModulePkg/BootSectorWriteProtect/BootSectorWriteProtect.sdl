@@ -1,0 +1,57 @@
+TOKEN
+    Name  = "BOOT_SECTOR_WRITE_PROTECT"
+    Value  = "1"
+    Help  = "Enable this token to turn on or off HDD MBR/GPT Write-protect feature."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "GPT_PARTITION_WRITE_PROTECTION"
+    Value  = "1"
+    Help  = "Enable/Disable protection for the the GPT partition "
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+PATH
+    Name  = "BOOT_SECTOR_WRITE_PROTECT_DIR"
+End
+
+ELINK
+    Name  = "$(BOOT_SECTOR_WRITE_PROTECT_DIR)/Csm16/LegacyMbrWriteProtect.csm16"
+    Parent  = "CSM_OEM16_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "MbrWriteProtectModuleStart"
+    Parent  = "CsmOem16Functions"
+    ProcID  = 0Ah
+    SrcFile  = "$(BOOT_SECTOR_WRITE_PROTECT_DIR)/Csm16/LegacyMbrWriteProtect.csm16"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(BOOT_SECTOR_WRITE_PROTECT_DIR)/BootSectorWriteProtect.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    Priority  = 30
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(BOOT_SECTOR_WRITE_PROTECT_DIR)/BootSectorWriteProtect.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "BootSectorWriteProtect"
+    File  = "BootSectorWriteProtect.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "BOOT_SECTOR_WRITE_PROTECT" "=" "1"
+End

@@ -1,0 +1,15 @@
+<component>
+	name = "Heci"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Me\Heci\"
+	RefName = "DenvertonPkg.Me.Heci"
+[INF]
+"MeUma\MeUma.inf"
+"Smm\HeciSmm.inf"
+"Pei\HeciInit.inf"
+[files]
+"Heci.sdl"	
+[parts]
+"DenvertonPkg.Me.Heci.Library"
+"DenvertonPkg.Me.HeciInitDxe"
+<endComponent>

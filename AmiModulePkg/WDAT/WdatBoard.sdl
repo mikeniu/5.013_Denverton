@@ -1,0 +1,51 @@
+TOKEN
+	Name  = "WDAT_BOARD_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable WatchDog Action Table support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "============WDAT Header============"
+	TokenType = Integer
+End	
+
+TOKEN
+	Name  = "PCI_SEG"
+	Value  = "0xFF"
+	Help  = "PCI segment number. For systems that don't support PCI segments, this number must be 0xFF."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PCI_BUS"
+	Value  = "0xFF"
+	Help  = "PCI device number if table describes a PCI device. Must be 0xFF if it is not a PCI device."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PCI_DEV"
+	Value  = "0xFF"
+	Help  = "PCI device number if table describes a PCI device. Must be 0xFF if it is not a PCI device."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PCI_FUN"
+	Value  = "0xFF"
+	Help  = "PCI device number if table describes a PCI device. Must be 0xFF if it is not a PCI device."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "============ACTION TABLE============"
+	TokenType = Integer
+End

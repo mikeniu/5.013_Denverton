@@ -1,0 +1,10 @@
+<component>
+	name = "LegacyInterrupt"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\LegacyInterrupt\"
+	RefName = "DenvertonPkg.SouthCluster.LegacyInterrupt"
+[INF]
+"Dxe\LegacyInterrupt.inf"
+[files]
+"LegacyInterrupt.sdl"	
+<endComponent>

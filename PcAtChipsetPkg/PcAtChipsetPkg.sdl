@@ -1,0 +1,56 @@
+TOKEN
+	Name  = "PcAtChipsetPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PcAtChipsetPkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "Legacy8259_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Legacy8259 support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "PcRtc_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PcRtc support in Project"
+	TokenType = Boolean
+End
+
+# Denverton AptioV Override Start - EIP#322933
+TOKEN
+	Name  = "PcRtcSmm_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PcatRealTimeClockSmm support in Project"
+	TokenType = Boolean
+End
+# Denverton AptioV Override End - EIP#322933
+
+INFComponent
+	Name  = "Legacy8259"
+	File  = "8259InterruptControllerDxe/8259.inf"
+	Package  = "PcAtChipsetPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "Legacy8259_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "PcRtc"
+	File  = "PcatRealTimeClockRuntimeDxe/PcatRealTimeClockRuntimeDxe.inf"
+	Package  = "PcAtChipsetPkg"
+	ModuleTypes  = "DXE_RUNTIME_DRIVER"
+	Token = "PcRtc_SUPPORT" "=" "1"
+End
+
+# Denverton AptioV Override Start - EIP#322933
+INFComponent
+	Name  = "PcRtcSmm"
+	File  = "PcatRealTimeClockSmm/PcatRealTimeClockSmm.inf"
+	Package  = "PcAtChipsetPkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "PcRtcSmm_SUPPORT" "=" "1"
+End
+# Denverton AptioV Override End - EIP#322933 

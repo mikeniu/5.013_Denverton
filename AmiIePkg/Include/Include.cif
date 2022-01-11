@@ -1,0 +1,10 @@
+<component>
+    name = "Include"
+    category = ModulePart
+    LocalRoot = "AmiIePkg\Include\"
+    RefName = "AmiIePkg.Include"
+[parts]
+"AmiIePkg.Include.IpmiIeInclude"
+"AmiIePkg.Include.IpmiIePpi"
+"AmiIePkg.Include.IpmiIeProtocol"
+<endComponent>

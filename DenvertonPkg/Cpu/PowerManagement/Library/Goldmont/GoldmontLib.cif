@@ -1,0 +1,11 @@
+<component>
+	name = "GoldmontLib"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Cpu\PowerManagement\Library\Goldmont\"
+	RefName = "DenvertonPkg.GoldmontLib"
+[INF]
+"GoldmontPpmLib.inf"
+[files]
+"GoldmontPpmDefines.h"	
+"GoldmontLib.sdl"	
+<endComponent>

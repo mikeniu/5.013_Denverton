@@ -1,0 +1,9 @@
+<component>
+	name = "WDAT Board - Skylake"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\WDAT\"
+	RefName = "WDAT_Board"
+[files]
+"WdatBoard.sdl"	
+"WdatBoard.c"	
+<endComponent>

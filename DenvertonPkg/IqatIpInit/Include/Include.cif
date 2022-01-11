@@ -1,0 +1,16 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\IqatIpInit\Include\"
+	RefName = "DenvertonPkg.IqatIpInit.Include"
+[files]
+"DxeIqatIpInitLib.h"	
+"IqatIpInitLib.h"	
+"IqatIpPolicy.h"	
+"IqatIpPolicyHob.h"	
+"IqatIpPolicyLib.h"	
+"IqatIpRegs.h"	
+"PeiIqatIpInitLib.h"	
+"Guid\IqatIpReservedBase.h"
+"Ppi\IqatIpPolicyPpi.h"	
+<endComponent>

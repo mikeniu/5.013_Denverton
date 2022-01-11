@@ -1,0 +1,26 @@
+<component>
+	name = "DenvertonPkg"
+	category = eChipset
+	LocalRoot = "DenvertonPkg\"
+	RefName = "SiDenvertonPkg"
+[files]
+"DenvertonPkg.sdl"	
+"DnvSiPrivate.dec"	
+"SiPkg.dec"	
+[parts]
+"DenvertonPkg.Cpu"
+"DenvertonPkg.Include"
+"DenvertonPkg.Library"
+"DenvertonPkg.Me"
+"DenvertonPkg.SiInit"
+"DenvertonPkg.RasPolicyInit"
+"DenvertonPkg.PcieIpInit"
+"DenvertonPkg.SouthCluster"
+"DenvertonPkg.SystemAgent"
+"DenvertonPkg.HsuartIpInit"
+"DenvertonPkg.Ie"
+"DenvertonPkg.IqatIpInit"
+"DenvertonPkg.IncludePrivate"
+"DenvertonPkg.FiaMuxInit"
+"DenvertonPkg.StPgIpInit"
+<endComponent>

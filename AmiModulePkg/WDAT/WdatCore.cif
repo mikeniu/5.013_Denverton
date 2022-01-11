@@ -1,0 +1,8 @@
+<component>
+	name = "WDAT Core"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\WDAT\"
+	RefName = "WDAT_Core"
+[INF]
+"WdatDxe.inf"
+<endComponent>

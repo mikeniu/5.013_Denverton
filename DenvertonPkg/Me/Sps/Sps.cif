@@ -1,0 +1,14 @@
+<component>
+	name = "Sps"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Me\Sps\"
+	RefName = "DenvertonPkg.Me.Sps"
+[INF]
+"Acpi\SpsAcpiHooks.inf"
+"Acpi\SpsAcpiSsdt.inf"
+[files]
+"Sps.sdl"	
+[parts]
+"DenvertonPkg.Me.SpsDxe"
+"DenvertonPkg.Me.SpsPei"
+<endComponent>

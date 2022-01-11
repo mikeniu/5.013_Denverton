@@ -1,0 +1,14 @@
+<component>
+	name = "PlatformSecLib"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Library\PlatformSecLib\"
+	RefName = "HarrisonvillePkg.PlatformSecLib"
+[INF]
+"PlatformSecLib.inf"
+[files]
+"Ia32\Chipset.inc"	
+"Ia32\Ia32.inc"	
+"Ia32\Platform.inc"	
+"Ia32\SecCore.inc"	
+"PlatformSecLib.sdl"	
+<endComponent>

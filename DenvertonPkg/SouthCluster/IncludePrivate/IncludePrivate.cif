@@ -1,0 +1,15 @@
+<component>
+	name = "IncludePrivate"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\IncludePrivate\"
+	RefName = "DenvertonPkg.SouthCluster.IncludePrivate"
+[files]
+"PchChipsetInfoHob.h"	
+"PchHHsioAx.h"
+"PchHsio.h"
+"PchPolicyHob.h"
+[parts]
+"DenvertonPkg.SouthCluster.IncludePrivate.Library"
+"DenvertonPkg.SouthCluster.IncludePrivate.Ppi"
+"DenvertonPkg.SouthCluster.IncludePrivate.Protocol"
+<endComponent>

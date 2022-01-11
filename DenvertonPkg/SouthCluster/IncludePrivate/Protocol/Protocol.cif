@@ -1,0 +1,11 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\IncludePrivate\Protocol\"
+	RefName = "DenvertonPkg.SouthCluster.IncludePrivate.Protocol"
+[files]
+"PchNvs.h"	
+"PchNvsArea.h"	
+"PchPolicy.h"	
+"PcieIoTrap.h"	
+<endComponent>

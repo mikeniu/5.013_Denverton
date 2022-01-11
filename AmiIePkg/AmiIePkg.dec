@@ -1,0 +1,60 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file AmiIePkg.dec
+#  This is AmiIePkg declaration file
+##
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = AmiIekg
+  PACKAGE_GUID                   = DB167B66-9EBE-4C58-BAFD-637E77A1163B
+  PACKAGE_VERSION                = 0.1
+
+[Includes]
+#
+# Define include file paths
+# 
+  ../
+  ../Build
+  Include
+  Include/Include
+  Include/Ppi
+  Include/Protocol
+
+[Guids]
+  gAmiPostCodeInfoHobGuid = { 0x38234911, 0x4421, 0x46df, { 0xa6, 0x6a, 0x9d, 0xf, 0x4c, 0x6d, 0x64, 0xab } }
+
+[Ppis]
+  gEfiPeiIpmiIeTransportPpiGuid = { 0x2fcca57e, 0xb853, 0x40cf, { 0xb7, 0x84, 0xe, 0xb2, 0x5, 0x84, 0x78, 0x2a } }
+
+[Protocols]
+  gEfiDxeIpmiIeTransportProtocolGuid = { 0xf99ee969, 0xbbab, 0x4220, { 0x88, 0x36, 0xfe, 0xba, 0xaf, 0x65, 0x6d, 0x18 } }
+  gEfiSmmIpmiIeTransportProtocolGuid = { 0xdec789e5, 0xda53, 0x4f75, { 0xa6, 0xb4, 0xf0, 0x7f, 0xc, 0x47, 0xfc, 0x8a } }
+  gDxeIeHeciProtocolGuid             = { 0xace08a6e, 0x7c7b, 0x4afe, { 0xae, 0x9d, 0xbb, 0x1c, 0x1c, 0x7e, 0x5c, 0xf3 }}
+  gSmmIeHeciProtocolGuid             = { 0x4acd0113, 0xf661, 0x4259, { 0xa1, 0x49, 0x84, 0xe7, 0x78, 0x71, 0xa,  0xf2 }}
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+  

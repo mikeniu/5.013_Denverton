@@ -1,0 +1,12 @@
+<component>
+	name = "IpmiIeReportPostCode"
+	category = ModulePart
+	LocalRoot = "AmiIePkg\IpmiIe\IpmiIeReportPostCode\"
+	RefName = "AmiIePkg.IpmiIe.IpmiIeReportPostCode"
+[INF]
+"PeiIpmiIeReportPostCode\PeiIpmiIeReportPostCode.inf"
+"DxeIpmiIeReportPostCode\DxeIpmiIeReportPostCode.inf"
+"SmmIpmiIeReportPostCode\SmmIpmiIeReportPostCode.inf"
+[files]
+"IpmiIeReportPostCode.sdl"	
+<endComponent>

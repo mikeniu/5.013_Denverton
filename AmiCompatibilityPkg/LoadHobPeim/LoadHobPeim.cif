@@ -1,0 +1,10 @@
+<component>
+	name = "LoadHobPeim"
+	category = eModule
+	LocalRoot = "AmiCompatibilityPkg\LoadHobPeim\"
+	RefName = "AmiCompatibilityPkg.LoadHobPeim"
+[INF]
+"LoadHobPeim.inf"
+[files]
+"LoadHobPeim.sdl"	
+<endComponent>

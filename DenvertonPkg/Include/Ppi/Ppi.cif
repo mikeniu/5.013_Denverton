@@ -1,0 +1,11 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Include\Ppi\"
+	RefName = "DenvertonPkg.Include.Ppi"
+[files]
+"ProcPcieInit.h"	
+"RcMemoryInit.h"	
+"SiPolicy.h"	
+"SmbusPolicy.h"	
+<endComponent>

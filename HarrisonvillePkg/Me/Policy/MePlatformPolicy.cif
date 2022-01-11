@@ -1,0 +1,13 @@
+<component>
+	name = "MePlatformPolicy"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Me\Policy\"
+	RefName = "HarrisonvillePkg.MePlatformPolicy"
+[INF]
+"Dxe\MeDxePolicyInit.inf"
+"Pei\MePolicyInitPei.inf"
+[files]
+"MePlatformPolicy.sdl"	
+[parts]
+"HarrisonvillePkg.Me.Policy.Library"
+<endComponent>

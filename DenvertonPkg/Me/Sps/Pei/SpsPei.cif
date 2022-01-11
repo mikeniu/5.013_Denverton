@@ -1,0 +1,11 @@
+<component>
+	name = "SpsPei"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Me\Sps\Pei\"
+	RefName = "DenvertonPkg.Me.SpsPei"
+[INF]
+"SpsPei.inf"
+[files]
+"SpsPei.sdl"	
+"SpsPei.h"
+<endComponent>

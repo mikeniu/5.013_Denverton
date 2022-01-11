@@ -1,0 +1,8 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Override\IA32FamilyCpuPkg\Include\"
+	RefName = "HarrisonvillePkg.Override.IA32FamilyCpuPkg.Include"
+[files]
+"Protocol\IntelCpuPcdsSetDone.h"
+<endComponent>

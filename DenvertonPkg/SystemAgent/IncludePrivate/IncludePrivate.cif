@@ -1,0 +1,8 @@
+<component>
+	name = "IncludePrivate"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SystemAgent\IncludePrivate\"
+	RefName = "DenvertonPkg.SystemAgent.IncludePrivate"
+[files]
+"Library\VtdInitLib.h"
+<endComponent>

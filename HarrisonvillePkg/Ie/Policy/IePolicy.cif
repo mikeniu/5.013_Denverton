@@ -1,0 +1,12 @@
+<component>
+	name = "IePolicy"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Ie\Policy\"
+	RefName = "HarrisonvillePkg.IePolicy"
+[INF]
+"Library\Pei\IePeiPolicyUpdateLib.inf"
+"Pei\IePolicyInitPei.inf"
+"Dxe\IePolicyInitDxe.inf"
+[files]
+"IePolicy.sdl"	
+<endComponent>

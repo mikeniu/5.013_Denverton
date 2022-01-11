@@ -1,0 +1,21 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Include\Guid\"
+	RefName = "HarrisonvillePkg.Include.Guid"
+[files]
+"AcpiVariable.h"	
+"BootState.h"	
+"CapsuleOnDataCD.h"	
+"CapsuleOnFatFloppyDisk.h"	
+"CapsuleOnFatIdeDisk.h"	
+"CapsuleOnFatUsbDisk.h"	
+"CpuHtCapable.h"	
+"FlashMapHob.h"	
+"MemorySetupData.h"	
+"MultiPlatSupport.h"	
+"PlatformInfo.h"	
+"ServerCapsuleGuid.h"	
+"SetupVariable.h"	
+"SystemNvDataHobGuid.h"	
+<endComponent>

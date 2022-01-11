@@ -1,0 +1,434 @@
+/**@file
+
+@copyright
+ Copyright (c) 2010 - 2017 Intel Corporation. All rights reserved
+ This software and associated documentation (if any) is furnished
+ under a license and may only be used or copied in accordance
+ with the terms of the license. Except as permitted by the
+ license, no part of this software or documentation may be
+ reproduced, stored in a retrieval system, or transmitted in any
+ form or by any means without the express written consent of
+ Intel Corporation.
+ This file contains an 'Intel Peripheral Driver' and is uniquely
+ identified as "Intel Reference Module" and is licensed for Intel
+ CPUs and chipsets under the terms of your license agreement with
+ Intel or your vendor. This file may be modified by the user, subject
+ to additional terms of the license agreement.
+
+@par Specification Reference:
+**/
+External(\_SB.PCI0.XHC1.PS0X, MethodObj) 		    
+External(\_SB.PCI0.XHC1.PS3X, MethodObj) 		    
+External(\_SB.PCI0.XHC1.RHUB.PS0X, MethodObj) 	
+External(\_SB.PCI0.XHC1.RHUB.PS2X, MethodObj) 	
+External(\_SB.PCI0.XHC1.RHUB.PS3X, MethodObj) 	
+External(\_SB.PCI0.XHC1.RHUB.INIR, MethodObj) 	
+External(\_SB.PCI0.XHC1.XHCS, MethodObj) 		    
+
+Scope(\_GPE) {
+  Method(_L6D, 0, Serialized) {
+    \_SB.PCI0.XHC1.GPEH()
+  }
+}
+
+
+Scope(\_SB.PCI0.XHC1) {
+
+
+	//USB CFG space
+    OperationRegion(XPRT,PCI_Config,0x00,0x100)
+    Field(XPRT,AnyAcc,NoLock,Preserve)
+    {
+      DVID, 16,
+      Offset(0x74),
+      D0D3,  2,  // 0x74 BIT[1:0]
+          ,  6,
+      PMEE,  1,  // PME Enable
+          ,  6,
+      PMES,  1,  // PME Status
+    }
+
+    //
+    // Variable to store the maximum D state supported in S0.
+    //
+    Name (XFLT, 0)
+    //
+    // XHCI controller won't go into D3Hot during S0 until _DSM method is evaluated by filter driver.
+    //
+    Method(_DSM,4,serialized){
+    
+      //Ignore filter driver and dont allow D3 transitions
+      return(0)
+    }
+
+    Method(_S3D, 0, NotSerialized)
+    {
+      Return(3)
+    }
+    Method(_S4D, 0, NotSerialized)
+    {
+      Return(3)
+    }
+    Method(_S3W, 0, NotSerialized)
+    {
+      Return(3)
+    }
+    Method(_S4W, 0, NotSerialized)
+    {
+      Return(3)
+    }
+
+    //
+    // Once the filter driver is installed, D3 is allowed.
+    //
+    Method(_S0W, 0x0, NotSerialized)
+    {
+      If(LEqual(XFLT, Zero))
+      {
+        Return(0x0)
+      }
+      Else
+      {
+        Return(0x3)
+      }
+    }
+
+      Method(_PRW, 0)
+      {
+        Return (Package (0x02) {0x6D, 0x4})
+      }
+
+    Method(_DSW, 3)
+    {
+      Store(Arg0, PMEE)
+    }
+
+    Method(_INI) {
+      // _INI for RTD3 run conditionally if implemented in platform specific code
+      If(CondRefOf(\_SB.PCI0.XHC1.RHUB.INIR)) {      // _INI for RTD3
+        \_SB.PCI0.XHC1.RHUB.INIR()
+      }
+
+    }
+
+    //
+    // GPE handler for XHCI, this is part of _Lxx handler for bus 0 PME
+    //
+    Method(GPEH)
+    {
+      If(LEqual(DVID, 0xFFFF)) {
+        Return()
+      }
+      Store(PMES, Local0)
+      Store(1, PMES) // clear PME Status
+      If(LAnd(PMEE, Local0)) {
+        Notify(XHC1, 0x02)
+      }
+    }
+
+    OperationRegion(XHCP, SystemMemory, Add(\_SB.PCI0.GPCB(), 0xA8000), 0x100)
+
+    Field(XHCP,AnyAcc,Lock,Preserve)
+    {
+      Offset(0x4),
+      PDBM, 16,
+      Offset(0x10),
+      MEMB, 64
+    }
+
+    //
+    // USRA (USbR port Address), method for calculating address of first USBR port in XHCI controller
+    //
+    Method(USRA,0,Serialized) {
+		Return (15)
+	}
+
+    Name(XRST, Zero)
+
+    Method(_PS0,0,Serialized)
+    {
+
+      If(LEqual(^DVID,0xFFFF))
+      {
+        Return()
+      }
+
+      Store(^MEMB,Local2)         // Save MBAR
+      Store(^PDBM,Local1)         // Save CMD
+
+      And(^PDBM,Not(0x06),^PDBM)  // Clear MSE/BME
+
+      //
+      // Switch to D0
+      //
+      Store(0,^D0D3)
+
+      Store(\XWMB,^MEMB)          // Set MBAR
+      Or(Local1,0x0002,^PDBM)     // Set MSE
+
+      //
+      //
+      //
+
+      And(^PDBM,Not(0x02),^PDBM)  // Clear MSE
+
+      Store(Local2,^MEMB)         // Restore MBAR
+      Store(Local1,^PDBM)         // Restore CMD
+
+      //
+      // Call platform XHC PS0 method if present
+      //
+      If(CondRefOf(\_SB.PCI0.XHC1.PS0X))
+      {
+        \_SB.PCI0.XHC1.PS0X()
+      }
+    }
+
+    Method(_PS3,0,Serialized)
+    {
+
+      If(LEqual(^DVID,0xFFFF))
+      {
+        Return()
+      }
+
+      Store(^MEMB,Local2)         // Save MBAR
+      Store(^PDBM,Local1)         // Save CMD
+
+      And(^PDBM,Not(0x06),^PDBM)  // Clear MSE/BME
+
+      //
+      // Switch back to D0
+      //
+      Store(0,^D0D3)
+
+      Store(\XWMB,^MEMB)          // Set MBAR
+      Or(Local1,0x0002,^PDBM)     // Set MSE
+
+      //
+      //
+      //
+
+
+      And(^PDBM,Not(0x02),^PDBM)  // Clear MSE
+
+      //
+      // Switch back to D3
+      //
+      Store(3,^D0D3)
+
+      Store(Local2,^MEMB)         // Restore MBAR
+      Store(Local1,^PDBM)         // Restore CMD
+
+      //
+      // Call platform XHC PS3 method if present
+      //
+
+      If(CondRefOf(\_SB.PCI0.XHC1.PS3X))
+      {
+        \_SB.PCI0.XHC1.PS3X()
+      }
+    }
+
+
+    // Apply S3 workaround.
+    // Arguments :
+    //  None
+    // Changes 8090 Bit 10 before S3.
+    //
+    Method(XHCS,0, Serialized) {
+      Store(^MEMB,Local2)         // Save MBAR
+      Store(^PDBM,Local1)         // Save CMD
+
+      And(^PDBM,Not(0x06),^PDBM)  // Clear MSE/BME
+
+      Store(\XWMB,^MEMB)          // Set MBAR
+      Or(Local1,0x0002,^PDBM)     // Set MSE
+
+      OperationRegion(MC11,SystemMemory,\XWMB,0x9000)
+      Field(MC11,DWordAcc,Lock,Preserve)
+      {
+        Offset(0x8090),   //  HC Transfer Manager - TRM
+            ,  10,
+        UCLI,  1,         // CLEAR IN EP
+      }
+
+      Store(0x1,UCLI)
+
+      And(^PDBM,Not(0x02),^PDBM)  // Clear MSE
+
+      Store(Local2,^MEMB)         // Restore MBAR
+      Store(Local1,^PDBM)         // Restore CMD
+
+    }
+
+    //
+    //
+    // Check for XHCI switch UUID
+    //
+    // Arguments:
+    //  Arg0 (Buffer) : UUID
+    //
+    // Returns:
+    //  1: It's valid UUID
+    //  0: Invalid UUID
+    //
+    Method(CUID,1,Serialized) {
+      If(LEqual(Arg0,ToUUID("7c9512a9-1705-4cb4-af7d-506a2423ab71"))) {
+        Return(1)
+      }
+      Return(0)
+    }
+
+    Device(RHUB)
+    {
+    
+    //
+    // Method for creating generic _PLD buffers
+    // _PLD contains lots of data, but for purpose of internal validation we care only about
+    // ports' visibility and pairing (this requires group position)
+    // so these are the only 2 configurable parameters (User Visible, Group Position)
+    //
+    Method(GPLD, 2, Serialized) {
+      Name(PCKG, Package() { Buffer(0x10) {} } )
+      CreateField(DerefOf(Index(PCKG,0)), 0, 7, REV)
+      Store(1,REV)
+      CreateField(DerefOf(Index(PCKG,0)), 64, 1, VISI)
+      Store(Arg0, VISI)
+      CreateField(DerefOf(Index(PCKG,0)), 87, 8, GPOS)
+      Store(Arg1, GPOS)
+
+
+      return (PCKG)
+    }
+
+    //
+    // Method for creating generic _UPC buffers
+    // Similar to _PLD, for internal testing we only care about 1 parameter (port connectable)
+    //
+    Method(GUPC, 1, Serialized) {
+      Name(PCKG, Package(4) { 0, 0xFF, 0, 0 } )
+      Store(Arg0,Index(PCKG,0))
+
+
+      return (PCKG)
+    }
+    
+    
+    
+      Name(_ADR, Zero)
+
+      // PS0 Method for xHCI Root Hub
+      Method(_PS0,0,Serialized)
+      {
+        If(LEqual(\_SB.PCI0.XHC1.DVID,0xFFFF))
+        {
+          Return()
+        }
+        //
+        // Call platform XHC.RHUB PS0 method if present.
+        //
+        If(CondRefOf(\_SB.PCI0.XHC1.RHUB.PS0X))
+        {
+          \_SB.PCI0.XHC1.RHUB.PS0X()
+        }
+      }
+  
+      // PS2 Method for xHCI Root Hub
+      Method(_PS2,0,Serialized)
+      {
+  
+        If(LEqual(\_SB.PCI0.XHC1.DVID,0xFFFF))
+        {
+          Return()
+        }
+        //
+        // Call platform XHC.RHUB PS2 method if present.
+        //
+        If(CondRefOf(\_SB.PCI0.XHC1.RHUB.PS2X))
+        {
+          \_SB.PCI0.XHC1.RHUB.PS2X()
+        }
+      }
+  
+      // PS3 Method for xHCI Root Hub
+      Method(_PS3,0,Serialized)
+      {
+  
+        If(LEqual(\_SB.PCI0.XHC1.DVID,0xFFFF))
+        {
+          Return()
+        }
+        //
+        // Call platform XHC.RHUB PS3 method if present.
+        //
+        If(CondRefOf(\_SB.PCI0.XHC1.RHUB.PS3X))
+        {
+          \_SB.PCI0.XHC1.RHUB.PS3X()
+        }
+  
+      }
+
+
+      Device(HS01)
+      {
+        Name(_ADR,0x00000001)
+  			Method(_UPC) { Return (GUPC(1)) }
+  	    Method(_PLD) {Return (GPLD(1,1))}
+      }
+
+      Device(HS02)
+      {
+        Name(_ADR,0x00000002)
+        Method(_UPC) { Return (GUPC(1)) }
+  			Method(_PLD) {Return (GPLD(1,2))}  
+	    }
+
+      Device(HS03)
+      {
+        Name(_ADR,0x00000003)
+  			Method(_UPC) { Return (GUPC(1)) }
+  			Method(_PLD) {Return (GPLD(1,3))}     
+	    }
+
+      Device(HS04)
+      {
+        Name(_ADR,0x00000004)
+  			Method(_UPC) { Return (GUPC(1)) }
+  			Method(_PLD) {Return (GPLD(1,4))} 	   
+	    }
+
+      Device(SS01)
+      {
+        Name(_ADR,0x00000005)      
+  			Method(_UPC) { Return (GUPC(0)) }
+  			Method(_PLD) {Return (GPLD(0,0))} 		
+	    }
+
+      Device(SS02)
+      {
+        Name(_ADR,0x00000006)      
+  			Method(_UPC) { Return (GUPC(0)) }
+  			Method(_PLD) {Return (GPLD(0,0))}
+	    }
+
+      Device(SS03)
+      {
+        Name(_ADR,0x00000007)      
+  			Method(_UPC) { Return (GUPC(0)) }
+  			Method(_PLD) {Return (GPLD(0,0))}
+	    }
+
+      Device(SS04)
+      {
+        Name(_ADR,0x00000008)      
+  			Method(_UPC) {  			
+  				Return (GUPC(U33C)) 
+  			}
+  			Method(_PLD) {
+  				Return (GPLD(U33V,U33G))
+ 				}
+	    }
+    } // device rhub
+} //scope
+

@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "MemorySubClass_Dxe_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Setup support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "MemorySubClassDxe"
+	File  = "MemorySubClassDxe.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+

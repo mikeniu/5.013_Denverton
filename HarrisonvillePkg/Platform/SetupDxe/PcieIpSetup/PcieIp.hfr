@@ -1,0 +1,482 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may
+// be modified by the user, subject to additional terms of the
+// license agreement
+//
+// *++
+//
+// Copyright (c) 2015 - 2017, Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+//
+//
+// Module Name:
+//
+//   PcieIp.hfr
+//
+// Abstract:
+//
+//   PCIE IP formset.
+//
+// Revision History:
+//
+// --*/
+
+#define PCIE_TITLE_VARIABLE(x) PCIE_TITLE_VARIABLE_H(x)
+#define PCIE_TITLE_VARIABLE_H(v)   STR_PCIE_ROOTPORT##v##_TITLE
+
+#define PCIE_FORM_ID_VARIABLE(x) PCIE_FORM_ID_VARIABLE_H(x)
+#define PCIE_FORM_ID_VARIABLE_H(v)   PCH_PCIERP##v##_OPTIONS_FORM_ID
+
+//-----------------------------------------------------------------------------
+//          PCIE LANES FORM
+//-----------------------------------------------------------------------------
+
+form formid = VFR_FORMID_LANES_PCIE,
+    title     = STRING_TOKEN(STR_VFR_FORMID_LANES_PCIE);
+
+    // Denverton AptioV override start - EIP#332934
+    grayoutif ideqval SYSTEM_CONFIGURATION.FiaMuxOverride == 1;
+    oneof varid  = PCH_SETUP.PcieTopology[0],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY0 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[1],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY1 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[2],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY2 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[3],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY3 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[4],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY4 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[5],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY5 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+    
+    oneof varid  = PCH_SETUP.PcieTopology[6],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY6 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[7],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY7 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[8],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY8 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[9],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY9 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[10],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY10 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[11],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY11 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[12],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY12 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[13],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY13 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[14],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY14 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = PCH_SETUP.PcieTopology[15],
+        prompt = STRING_TOKEN(STR_PCIE_TOPOLOGY15 ),
+        help = STRING_TOKEN(STR_PCIE_TOPOLOGY_HELP),
+        option text = STRING_TOKEN(STR_PCIE_SATA3_STRING)    , value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X4_STRING)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_M2X1_STRING)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_X4_STRING)  , value = 2   , flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_PCIE_X1_STRING)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PCIE_UNKNOWN_TOPOLOGY_STRING), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+    endif; //grayoutif ideqval SYSTEM_CONFIGURATION.FiaMuxOverride == 1;
+
+endform;
+
+/*
+//-----------------------------------------------------------------------------
+//          LINK PCIE INFORMATION
+//-----------------------------------------------------------------------------
+form formid = LINK_STATUS_INFO_FORM,
+  title = STRING_TOKEN(STR_LINK_STATUS_INFO_FORM);
+
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_WIDTH_HELP  ),
+    text   = STRING_TOKEN(RP1_NEGOTIATED_LINK_WIDTH_PROMPT ),
+    text   = STRING_TOKEN(RP1_NEGOTIATED_LINK_WIDTH_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_SPEED_PROMPT  ),
+    text   = STRING_TOKEN(RP1_NEGOTIATED_LINK_SPEED_PROMPT ),
+    text   = STRING_TOKEN(RP1_NEGOTIATED_LINK_SPEED_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  subtitle text = STRING_TOKEN(STR_NULL_STRING);
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_WIDTH_HELP  ),
+    text   = STRING_TOKEN(RP2_NEGOTIATED_LINK_WIDTH_PROMPT ),
+    text   = STRING_TOKEN(RP2_NEGOTIATED_LINK_WIDTH_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  text
+    help   = STRING_TOKEN(RP2_NEGOTIATED_LINK_SPEED_PROMPT  ),
+    text   = STRING_TOKEN(RP2_NEGOTIATED_LINK_SPEED_PROMPT ),
+    text   = STRING_TOKEN(RP2_NEGOTIATED_LINK_SPEED_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  subtitle text = STRING_TOKEN(STR_NULL_STRING);
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_WIDTH_HELP  ),
+    text   = STRING_TOKEN(RP3_NEGOTIATED_LINK_WIDTH_PROMPT ),
+    text   = STRING_TOKEN(RP3_NEGOTIATED_LINK_WIDTH_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_SPEED_PROMPT  ),
+    text   = STRING_TOKEN(RP3_NEGOTIATED_LINK_SPEED_PROMPT ),
+    text   = STRING_TOKEN(RP3_NEGOTIATED_LINK_SPEED_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  subtitle text = STRING_TOKEN(STR_NULL_STRING);
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_WIDTH_HELP  ),
+    text   = STRING_TOKEN(RP4_NEGOTIATED_LINK_WIDTH_PROMPT ),
+    text   = STRING_TOKEN(RP4_NEGOTIATED_LINK_WIDTH_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_SPEED_PROMPT  ),
+    text   = STRING_TOKEN(RP4_NEGOTIATED_LINK_SPEED_PROMPT ),
+    text   = STRING_TOKEN(RP4_NEGOTIATED_LINK_SPEED_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  subtitle text = STRING_TOKEN(STR_NULL_STRING);
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_WIDTH_HELP  ),
+    text   = STRING_TOKEN(RP5_NEGOTIATED_LINK_WIDTH_PROMPT ),
+    text   = STRING_TOKEN(RP5_NEGOTIATED_LINK_WIDTH_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_SPEED_PROMPT  ),
+    text   = STRING_TOKEN(RP5_NEGOTIATED_LINK_SPEED_PROMPT ),
+    text   = STRING_TOKEN(RP5_NEGOTIATED_LINK_SPEED_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  subtitle text = STRING_TOKEN(STR_NULL_STRING);
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_WIDTH_HELP  ),
+    text   = STRING_TOKEN(RP6_NEGOTIATED_LINK_WIDTH_PROMPT ),
+    text   = STRING_TOKEN(RP6_NEGOTIATED_LINK_WIDTH_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_SPEED_PROMPT  ),
+    text   = STRING_TOKEN(RP6_NEGOTIATED_LINK_SPEED_PROMPT ),
+    text   = STRING_TOKEN(RP6_NEGOTIATED_LINK_SPEED_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  subtitle text = STRING_TOKEN(STR_NULL_STRING);
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_WIDTH_HELP  ),
+    text   = STRING_TOKEN(RP7_NEGOTIATED_LINK_WIDTH_PROMPT ),
+    text   = STRING_TOKEN(RP7_NEGOTIATED_LINK_WIDTH_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_SPEED_PROMPT  ),
+    text   = STRING_TOKEN(RP7_NEGOTIATED_LINK_SPEED_PROMPT ),
+    text   = STRING_TOKEN(RP7_NEGOTIATED_LINK_SPEED_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  subtitle text = STRING_TOKEN(STR_NULL_STRING);
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_WIDTH_HELP  ),
+    text   = STRING_TOKEN(RP8_NEGOTIATED_LINK_WIDTH_PROMPT ),
+    text   = STRING_TOKEN(RP8_NEGOTIATED_LINK_WIDTH_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+  text
+    help   = STRING_TOKEN(RP_NEGOTIATED_LINK_SPEED_PROMPT  ),
+    text   = STRING_TOKEN(RP8_NEGOTIATED_LINK_SPEED_PROMPT ),
+    text   = STRING_TOKEN(RP8_NEGOTIATED_LINK_SPEED_VALUE ),
+    flags  = 0,
+    key    = 0;
+
+endform;
+*/
+//-----------------------------------------------------------------------------
+//          PCIE FORM
+//-----------------------------------------------------------------------------
+form formid = VFR_FORMID_PCIE,
+    title     = STRING_TOKEN(STR_PCIE_IP_CONFIG_TITLE);
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.FiaMuxOverride == 1;
+    oneof varid  = SYSTEM_CONFIGURATION.bifurcation[0],
+        prompt = STRING_TOKEN(STR_BIFURCATION0_PROMPT ),
+        help = STRING_TOKEN(STR_BIFURCATION_HELP),
+        option text = STRING_TOKEN(STR_AUTO)    , value = 0xff, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_X8)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_X4X4)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_X4X2X2)  , value = 2   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_X2X2X4)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_X2X2X2X2), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.bifurcation[1],
+        prompt = STRING_TOKEN(STR_BIFURCATION1_PROMPT ),
+        help = STRING_TOKEN(STR_BIFURCATION_HELP),
+        option text = STRING_TOKEN(STR_AUTO)    , value = 0xff, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_X8)      , value = 4   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_X4X4)    , value = 3   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_X4X2X2)  , value = 2   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_X2X2X4)  , value = 1   , flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_X2X2X2X2), value = 0   , flags = RESET_REQUIRED; 
+    endoneof;
+    endif; //grayoutif ideqval SYSTEM_CONFIGURATION.FiaMuxOverride == 1;
+    // Denverton AptioV override end - EIP#332934
+    
+    oneof varid   = PCH_SETUP.PcieComplianceTestMode,
+      prompt      = STRING_TOKEN(STR_PCH_PCIE_COMPLIANCETEST_PROMPT),
+      help        = STRING_TOKEN(STR_PCH_PCIE_COMPLIANCETEST_HELP),
+      option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+    // Denverton AptioV Override Start - EIP#281374
+    /*
+     numeric  varid  = SYSTEM_CONFIGURATION.RootPortRTTO,
+      prompt = STRING_TOKEN(STR_ROOTPORT_REPLAY_TIMER_TIMEOUT_PROMPT),
+      help = STRING_TOKEN(STR_ROOTPORT_REPLAY_TIMER_TIMEOUT_HELP),
+      minimum = 0 ,
+      maximum = 63,
+      step    = 1,
+      default = 3,
+    endnumeric;
+    */
+    // Denverton AptioV Override End - EIP#281374
+    
+
+    goto PCH_PCIERP0_OPTIONS_FORM_ID,
+          prompt  = STRING_TOKEN(STR_PCIE_ROOTPORT0_TITLE),
+          help    = STRING_TOKEN(STR_PCIE_ROOTPORT_TITLE_HELP);
+          
+    goto PCH_PCIERP1_OPTIONS_FORM_ID,
+          prompt  = STRING_TOKEN(STR_PCIE_ROOTPORT1_TITLE),
+          help    = STRING_TOKEN(STR_PCIE_ROOTPORT_TITLE_HELP);
+
+    goto PCH_PCIERP2_OPTIONS_FORM_ID,
+          prompt  = STRING_TOKEN(STR_PCIE_ROOTPORT2_TITLE),
+          help    = STRING_TOKEN(STR_PCIE_ROOTPORT_TITLE_HELP);
+          
+    goto PCH_PCIERP3_OPTIONS_FORM_ID,
+          prompt  = STRING_TOKEN(STR_PCIE_ROOTPORT3_TITLE),
+          help    = STRING_TOKEN(STR_PCIE_ROOTPORT_TITLE_HELP);
+
+    goto PCH_PCIERP4_OPTIONS_FORM_ID,
+          prompt  = STRING_TOKEN(STR_PCIE_ROOTPORT4_TITLE),
+          help    = STRING_TOKEN(STR_PCIE_ROOTPORT_TITLE_HELP);
+          
+    goto PCH_PCIERP5_OPTIONS_FORM_ID,
+          prompt  = STRING_TOKEN(STR_PCIE_ROOTPORT5_TITLE),
+          help    = STRING_TOKEN(STR_PCIE_ROOTPORT_TITLE_HELP);
+
+    goto PCH_PCIERP6_OPTIONS_FORM_ID,
+          prompt  = STRING_TOKEN(STR_PCIE_ROOTPORT6_TITLE),
+          help    = STRING_TOKEN(STR_PCIE_ROOTPORT_TITLE_HELP);
+          
+    goto PCH_PCIERP7_OPTIONS_FORM_ID,
+          prompt  = STRING_TOKEN(STR_PCIE_ROOTPORT7_TITLE),
+          help    = STRING_TOKEN(STR_PCIE_ROOTPORT_TITLE_HELP);
+
+/*
+  goto LINK_STATUS_INFO_FORM, 
+    prompt = STRING_TOKEN(STR_LINK_STATUS_INFO_FORM),
+    help = STRING_TOKEN(STR_LINK_STATUS_INFO_HELP);
+    */
+    // Denverton AptioV Override end - EIP#235760
+  goto VFR_FORMID_LANES_PCIE,
+    prompt = STRING_TOKEN(STR_VFR_FORMID_LANES_PCIE),
+    help = STRING_TOKEN(STR_VFR_FORMID_LANES_PCIE_HELP);
+
+endform;
+
+
+#define ROOTPORT_INDEX 0
+  #include "PcieIpRootPort/PcieIpRootPort.hfr"  
+#undef ROOTPORT_INDEX
+
+#define ROOTPORT_INDEX 1
+  #include "PcieIpRootPort/PcieIpRootPort.hfr"  
+#undef ROOTPORT_INDEX
+
+#define ROOTPORT_INDEX 2
+  #include "PcieIpRootPort/PcieIpRootPort.hfr"  
+#undef ROOTPORT_INDEX
+
+#define ROOTPORT_INDEX 3
+  #include "PcieIpRootPort/PcieIpRootPort.hfr"  
+#undef ROOTPORT_INDEX
+
+#define ROOTPORT_INDEX 4
+  #include "PcieIpRootPort/PcieIpRootPort.hfr"  
+#undef ROOTPORT_INDEX
+
+#define ROOTPORT_INDEX 5
+  #include "PcieIpRootPort/PcieIpRootPort.hfr"  
+#undef ROOTPORT_INDEX
+
+#define ROOTPORT_INDEX 6
+  #include "PcieIpRootPort/PcieIpRootPort.hfr"  
+#undef ROOTPORT_INDEX
+
+#define ROOTPORT_INDEX 7
+  #include "PcieIpRootPort/PcieIpRootPort.hfr"  
+#undef ROOTPORT_INDEX
+
+    

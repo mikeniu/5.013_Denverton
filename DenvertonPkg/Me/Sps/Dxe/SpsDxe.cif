@@ -1,0 +1,11 @@
+<component>
+	name = "SpsDxe"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Me\Sps\Dxe\"
+	RefName = "DenvertonPkg.Me.SpsDxe"
+[INF]
+"SpsDxe.inf"
+[files]
+"SpsDxe.sdl"	
+"SpsDxe.h"	
+<endComponent>

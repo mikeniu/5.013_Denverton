@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "AcpiTablesDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AcpiTablesDxe support in Project"
+	TokenType = Boolean
+	Master = Yes	
+End
+
+INFComponent
+	Name  = "AcpiTablesDxe"
+	File  = "AcpiTables.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "USER_DEFINED"
+End
+

@@ -1,0 +1,13 @@
+<component>
+	name = "StPgIpInit"
+	category = MODULEPART
+	LocalRoot = "DenvertonPkg\StPgIpInit\"
+	RefName = "DenvertonPkg.StPgIpInit"
+[INF]
+"PchPmcStPgIpInit.inf"
+[files]
+"StPgIpInit.sdl"	
+"Include\Guid\PchPmcStPgHobGuid.h"	
+"Include\PchPmcStPg.h"	
+"Include\PchPmcStPgHob.h"	
+<endComponent>

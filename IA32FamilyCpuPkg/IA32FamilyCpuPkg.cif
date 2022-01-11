@@ -1,0 +1,25 @@
+<component>
+	name = "IA32FamilyCpuPkg"
+	category = CPU
+	LocalRoot = "IA32FamilyCpuPkg\"
+	RefName = "IA32FamilyCpuPkg"
+[INF]
+"PiSmmCpuDxeSmm\PiSmmCpuDxeSmm.inf"
+"PiSmmCommunication\PiSmmCommunicationPei.inf"
+"PiSmmCommunication\PiSmmCommunicationSmm.inf"
+[files]
+"IA32FamilyCpuPkg.sdl"	
+"IA32FamilyCpuPkg.dec"	
+"IA32FamilyCpuPkg.uni"	
+"IA32FamilyCpuPkgExtra.uni"	
+[parts]
+"IA32FamilyCpuPkg.Include"
+"IA32FamilyCpuPkg.LibraryInstances"
+"IA32FamilyCpuPkg.CpuArchDxe"
+"IA32FamilyCpuPkg.CpuPei"
+[dependency]
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_10"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_11"
+[dependency.optional]
+UefiCpuPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/UefiCpuPkg;UefiCpuPkg_05"
+<endComponent>

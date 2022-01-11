@@ -1,0 +1,10 @@
+<component>
+	name = "PeiDxeSmmCpuPlatformLib"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Cpu\Library\PeiDxeSmmCpuPlatformLib"
+	RefName = "DenvertonPkg.Cpu.PeiDxeSmmCpuPlatformLib"
+[files]
+"PeiDxeSmmCpuPlatformLib.sdl"	
+[INF]
+"PeiDxeSmmCpuPlatformLib.inf"
+<endComponent>

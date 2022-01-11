@@ -1,0 +1,10 @@
+<component>
+	name = "SmartTimer"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\SmartTimer\"
+	RefName = "DenvertonPkg.SouthCluster.SmartTimer"
+[INF]
+"Dxe\SmartTimer.inf"
+[files]
+"SmartTimer.sdl"	
+<endComponent>

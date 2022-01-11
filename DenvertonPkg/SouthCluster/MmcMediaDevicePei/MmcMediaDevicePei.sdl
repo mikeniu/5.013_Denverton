@@ -1,0 +1,23 @@
+TOKEN
+	Name  = "MmcMediaDevicePei_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling MmcMediaDevicePei support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "MmcMediaDevice_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable MmcMediaDevice support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "MmcMediaDevice"
+	File  = "MmcMediaDevicePei.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+	Token = "MmcMediaDevice_SUPPORT" "=" "1"
+End
+

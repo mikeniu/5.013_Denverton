@@ -1,0 +1,56 @@
+TOKEN
+	Name  = "MeHeciLibrary_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "HeciCoreLib"
+	File  = "HeciCoreLib\HeciCoreLib.inf"
+	Package  = "DenvertonPkg"
+End
+
+INFComponent
+	Name  = "HeciMsgDxeLib"
+	File  = "HeciMsgDxeLib\HeciMsgDxeLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "HeciMsgPeiLib"
+	File  = "HeciMsgPeiLib\HeciMsgPeiLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "MeChipsetLib"
+	File  = "MeChipsetLib\MeChipsetLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "HeciCoreLib"
+	Instance  = "DenvertonPkg.HeciCoreLib"
+End
+
+LibraryMapping
+	Class  = "HeciMsgDxeLib"
+	Instance  = "DenvertonPkg.HeciMsgDxeLib"
+	ModuleTypes  = "DXE_DRIVER DXE_RUNTIME_DRIVER"
+End
+
+LibraryMapping
+	Class  = "HeciMsgPeiLib"
+	Instance  = "DenvertonPkg.HeciMsgPeiLib"
+End
+
+LibraryMapping
+	Class  = "MeChipsetLib"
+	Instance  = "DenvertonPkg.MeChipsetLib"
+End
+

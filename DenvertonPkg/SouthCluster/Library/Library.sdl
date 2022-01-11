@@ -1,0 +1,158 @@
+TOKEN
+	Name  = "DnvSouthClusterLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+    Name  = "BaseTraceHubDebugLibNull"
+    File  = "BaseTraceHubDebugLibNull\BaseTraceHubDebugLibNull.inf"
+    Package  = "DenvertonPkg"
+    ModuleTypes  = "BASE"
+End
+
+INFComponent
+    Name  = "BaseTraceHubInitLibNull"
+    File  = "BaseTraceHubInitLibNull\BaseTraceHubInitLibNull.inf"
+    Package  = "DenvertonPkg"
+    ModuleTypes  = "BASE"
+End
+
+INFComponent
+    Name  = "PeiDxeSmmTraceHubInitLib"
+    File  = "PeiDxeSmmTraceHubInitLib\PeiDxeSmmTraceHubInitLib.inf"
+    Package  = "DenvertonPkg"
+    ModuleTypes  = "BASE"
+End
+
+INFComponent
+    Name  = "PeiDxeSmmTraceHubLib"
+    File  = "PeiDxeSmmTraceHubLib\PeiDxeSmmTraceHubLib.inf"
+    Package  = "DenvertonPkg"
+    ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PeiDxeSmmPchPcrLib"
+	File  = "PeiDxeSmmPchPcrLib\PeiDxeSmmPchPcrLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PeiDxeSmmPchInfoLib"
+	File  = "PeiDxeSmmPchInfoLib\PeiDxeSmmPchInfoLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PeiDxeSmmPchCycleDecodingLib"
+	File  = "PeiDxeSmmPchCycleDecodingLib\PeiDxeSmmPchCycleDecodingLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PeiDxeSmmPchP2sbLib"
+	File  = "PeiDxeSmmPchP2sbLib\PeiDxeSmmPchP2sbLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PeiDxeSmmPchSbiAccessLib"
+	File  = "PeiDxeSmmPchSbiAccessLib\PeiDxeSmmPchSbiAccessLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PeiDxeSmmGpioLib"
+	File  = "PeiDxeSmmGpioLib\PeiDxeSmmGpioLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PeiDxeSmmPchHsioLib"
+	File  = "PeiDxeSmmPchHsioLib\PeiDxeSmmPchHsioLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "BASE"
+End
+
+
+# Denverton AptioV override End - EIP#226369
+INFComponent
+	Name  = "PeiPchPolicyLib"
+	File  = "PeiPchPolicyLib\PeiPchPolicyLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+    Class  = "TraceHubDebugLib"
+    Instance  = "DenvertonPkg.BaseTraceHubDebugLibNull"
+    Token =  "TRACEHUB_SUPPORT" "=" "0"
+End
+
+LibraryMapping
+    Class  = "TraceHubInitLib"
+    Instance  = "DenvertonPkg.BaseTraceHubInitLibNull"
+    Token =  "TRACEHUB_SUPPORT" "=" "0"
+End
+
+LibraryMapping
+    Class  = "TraceHubInitLib"
+    Instance  = "DenvertonPkg.PeiDxeSmmTraceHubInitLib"
+    Token =  "TRACEHUB_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "TraceHubLib"
+    Instance  = "DenvertonPkg.PeiDxeSmmTraceHubLib"
+    Token =  "TRACEHUB_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PchInfoLib"
+	Instance  = "DenvertonPkg.PeiDxeSmmPchInfoLib"
+End
+
+LibraryMapping
+	Class  = "PchPcrLib"
+	Instance  = "DenvertonPkg.PeiDxeSmmPchPcrLib"
+End
+
+LibraryMapping
+	Class  = "PchCycleDecodingLib"
+	Instance  = "DenvertonPkg.PeiDxeSmmPchCycleDecodingLib"
+End
+
+LibraryMapping
+	Class  = "PchP2sbLib"
+	Instance  = "DenvertonPkg.PeiDxeSmmPchP2sbLib"
+End
+
+LibraryMapping
+	Class  = "PchSbiAccessLib"
+	Instance  = "DenvertonPkg.PeiDxeSmmPchSbiAccessLib"
+End
+
+LibraryMapping
+	Class  = "GpioLib"
+	Instance  = "DenvertonPkg.PeiDxeSmmGpioLib"
+End
+
+LibraryMapping
+	Class  = "PchHsioLib"
+	Instance  = "DenvertonPkg.PeiDxeSmmPchHsioLib"
+End
+# Denverton AptioV override Start - EIP#226369
+LibraryMapping
+	Class  = "PchPolicyLib"
+	Instance  = "DenvertonPkg.PeiPchPolicyLib"
+End
+# Denverton AptioV override End - EIP#226369

@@ -1,0 +1,23 @@
+TOKEN
+    Name  = "DxeIpmiTransportInitialize_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling DxeIpmiTransportInitialize support in the project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+End
+
+INFComponent
+    Name  = "DxeIpmiTransportInitialize"
+    File  = "DxeIpmiTransportInitialize.inf"
+    Package  = "AmiIePkg"
+    ModuleTypes  = "DXE_RUNTIME_DRIVER"
+End
+
+FFS_FILE
+    Name  = "DxeIpmiTransportInitialize"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "AmiIePkg.DxeIpmiTransportInitialize"
+    Apriori_Index  = "5"
+End

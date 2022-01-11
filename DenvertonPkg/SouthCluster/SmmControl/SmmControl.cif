@@ -1,0 +1,10 @@
+<component>
+	name = "SmmControl"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\SmmControl\"
+	RefName = "DenvertonPkg.SouthCluster.SmmControl"
+[INF]
+"RuntimeDxe\SmmControl.inf"
+[files]
+"SmmControl.sdl"	
+<endComponent>

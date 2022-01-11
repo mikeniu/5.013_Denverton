@@ -1,0 +1,11 @@
+<component>
+	name = "PlatformStage1Pei"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Platform\PlatformStage1Pei\"
+	RefName = "HarrisonvillePkg.Platform.PlatformStage1Pei"
+[INF]
+"PlatformStage1Pei.inf"
+[files]
+"PlatformStage1Pei.sdl"
+"SmBiosV234.h"	
+<endComponent>

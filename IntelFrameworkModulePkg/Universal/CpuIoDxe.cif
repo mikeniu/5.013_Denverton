@@ -1,0 +1,10 @@
+<component>
+	name = "IntelFrameworkModulePkg.CpuIoDxe"
+	category = eModule
+	LocalRoot = "IntelFrameworkModulePkg\Universal\"
+	RefName = "IntelFrameworkModulePkg.CpuIoDxe"
+[INF]
+"CpuIoDxe\CpuIoDxe.inf"
+[files]
+"CpuIoDxe.sdl"	
+<endComponent>

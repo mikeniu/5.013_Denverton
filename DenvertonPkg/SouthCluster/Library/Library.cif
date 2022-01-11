@@ -1,0 +1,23 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\Library\"
+	RefName = "DenvertonPkg.SouthCluster.Library"
+[parts]
+"DenvertonPkg.SouthCluster.Library.BaseTraceHubDebugLib"
+[INF]
+"BaseTraceHubDebugLibNull\BaseTraceHubDebugLibNull.inf"
+"BaseTraceHubInitLibNull\BaseTraceHubInitLibNull.inf"
+"PeiDxeSmmPchPcrLib\PeiDxeSmmPchPcrLib.inf"
+"PeiDxeSmmPchInfoLib\PeiDxeSmmPchInfoLib.inf"
+"PeiDxeSmmPchCycleDecodingLib\PeiDxeSmmPchCycleDecodingLib.inf"
+"PeiDxeSmmPchSbiAccessLib\PeiDxeSmmPchSbiAccessLib.inf"
+"PeiDxeSmmPchP2sbLib\PeiDxeSmmPchP2sbLib.inf"
+"PeiDxeSmmTraceHubInitLib\PeiDxeSmmTraceHubInitLib.inf"
+"PeiDxeSmmTraceHubLib\PeiDxeSmmTraceHubLib.inf"
+"PeiDxeSmmGpioLib\PeiDxeSmmGpioLib.inf"
+"PeiPchPolicyLib\PeiPchPolicyLib.inf"
+"PeiDxeSmmPchHsioLib\PeiDxeSmmPchHsioLib.inf"
+[files]
+"Library.sdl"	
+<endComponent>

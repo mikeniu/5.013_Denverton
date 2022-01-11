@@ -1,0 +1,10 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\Library\"
+	RefName = "AmiChipsetModulePkg.NbLibrary"
+[INF]
+"NbPciDxeInitLib\NbPciDxeInitLib.inf"
+[parts]
+"AmiChipsetModulePkg.AmiNbCspLib"
+<endComponent>

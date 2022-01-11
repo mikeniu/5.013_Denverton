@@ -1,0 +1,8 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "ServerCommonPkg\Include\Guid\"
+	RefName = "ServerCommonPkg.Guid"
+[files]
+"HiiSetupEnter.h"	
+<endComponent>

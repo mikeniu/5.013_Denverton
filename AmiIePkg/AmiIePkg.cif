@@ -1,0 +1,10 @@
+<component>
+	name = "AmiIePkg"
+	category = eModule
+	LocalRoot = "AmiIePkg\"
+	RefName = "AmiIePkg"
+[files]
+"AmiIePkg.dec"	
+[parts]
+"AmiIePkg.Include"
+<endComponent>

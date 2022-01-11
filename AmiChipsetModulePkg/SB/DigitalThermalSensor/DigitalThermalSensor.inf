@@ -1,0 +1,42 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DigitalThermalSensor
+  FILE_GUID                      = AA3C92A7-DA1D-472E-9E3D-EDF00DCF2887
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = InstallDigitalThermalSensor
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+
+[Sources]
+  DigitalThermalSensor.c
+  DigitalThermalSensor.h  
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  DenvertonPkg/SiPkg.dec
+
+  
+[LibraryClasses]
+  BaseLib
+  PciLib
+  AmiDxeLib
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  
+[Guids]
+  SmmRsTableGuid
+  
+[Protocols]
+  gEfiGlobalNvsAreaProtocolGuid
+  
+[Depex]  	
+  gEfiGlobalNvsAreaProtocolGuid

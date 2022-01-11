@@ -1,0 +1,74 @@
+TOKEN
+	Name  = "DnvLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PeiSiPolicyLib"
+	File  = "PeiSiPolicyLib\PeiSiPolicyLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "BaseConfigBlockLib"
+	File  = "BaseConfigBlockLib\BaseConfigBlockLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "DxeAslUpdateLib"
+	File  = "DxeAslUpdateLib\DxeAslUpdateLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PeiDxeSmmMmPciLib"
+	File  = "PeiDxeSmmMmPciLib\PeiDxeSmmMmPciLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "BaseResetSystemLib"
+	File  = "BaseResetSystemLib\BaseResetSystemLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+    Name  = "MeDummyLib"
+    File  = "..\Me\Heci\Library\MeDummyLib\MeDummyLib.inf"
+    Package  = "DenvertonPkg"
+End
+
+LibraryMapping
+	Class  = "PeiSiPolicyLib"
+	Instance  = "DenvertonPkg.PeiSiPolicyLib"
+End
+
+LibraryMapping
+	Class  = "ConfigBlockLib"
+	Instance  = "DenvertonPkg.BaseConfigBlockLib"
+End
+
+LibraryMapping
+	Class  = "AslUpdateLib"
+	Instance  = "DenvertonPkg.DxeAslUpdateLib"
+End
+
+LibraryMapping
+	Class  = "MmPciLib"
+	Instance  = "DenvertonPkg.PeiDxeSmmMmPciLib"
+End
+
+LibraryMapping
+	Class  = "ResetSystemLib"
+	Instance  = "DenvertonPkg.BaseResetSystemLib"
+End
+

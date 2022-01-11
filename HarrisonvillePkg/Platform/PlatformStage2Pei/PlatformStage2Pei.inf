@@ -1,0 +1,104 @@
+#
+# This file contains an 'Intel Peripheral Driver' and is
+# licensed for Intel CPUs and chipsets under the terms of your
+# license agreement with Intel or your vendor.  This file may
+# be modified by the user, subject to additional terms of the
+# license agreement
+#
+#/*++
+#
+# Copyright (c)  1999 - 2015 Intel Corporation. All rights reserved
+# This software and associated documentation (if any) is furnished
+# under a license and may only be used or copied in accordance
+# with the terms of the license. Except as permitted by such
+# license, no part of this software or documentation may be
+# reproduced, stored in a retrieval system, or transmitted in any
+# form or by any means without the express written consent of
+# Intel Corporation.
+
+#
+#  Module Name:
+#
+#    PlatformStage2Pei.inf
+#
+#  Abstract:
+#
+#    Component description file for the Platform Stage2 PEIM driver.
+#    {233DF097-3218-47b2-9E09-FE58C2B20D22}
+#    0x233df097, 0x3218, 0x47b2, 0x9e, 0x9, 0xfe, 0x58, 0xc2, 0xb2, 0xd, 0x22
+#
+#--*/
+[Defines]
+  INF_VERSION        = 0x00010005
+  BASE_NAME          = PlatformStage2Pei
+  FILE_GUID          = 233DF097-3218-47b2-9E09-FE58C2B20D22
+  MODULE_TYPE        = PEIM
+  VERSION_STRING     = 1.0
+  ENTRY_POINT        = PeiInitPlatformStage2
+
+[Sources]
+  PlatformStage2.h
+  PlatformStage2.c
+  Memory.c
+  MemoryCallback.c
+  PlatformIchInit.c
+#DNV_TODO  PlatformSaInit.c
+#DNV_TODO  Recovery.c
+#  PlatformClock.c
+
+[Packages]
+  ServerCommonPkg/ServerCommonPkg.dec
+  HarrisonvillePkg/PlatformPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec
+  DenvertonPkg/Cpu/CpuPkg.dec
+  DenvertonPkg/SiPkg.dec
+  DenvertonPkg/SystemAgent/Mrc/Mmrc/ProjectData/DNV/Pei/MemoryInit.dec
+#  DenvertonPkg/SystemAgent/SystemAgentPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+
+[LibraryClasses]
+  PeimEntryPoint
+  BaseLib
+  HobLib
+  PeiClockGeneratorLib
+  PeiPlatformHookLib
+#  CpuPlatformLib
+  MmPciLib
+  GpioLib
+  PchInfoLib
+  PchCycleDecodingLib
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gCpPlatFlashTokenSpaceGuid.PcdFlashFvMainBase
+  gCpPlatFlashTokenSpaceGuid.PcdFlashFvMainSize
+  gCpPlatFlashTokenSpaceGuid.PcdBiosBase
+  gCpPlatFlashTokenSpaceGuid.PcdBiosSize
+
+[Protocols]
+
+[Ppis]
+  gPeiPlatformMemorySizePpiGuid
+  gPeiPlatformMemoryRangePpiGuid
+  gEfiPeiMemoryDiscoveredPpiGuid
+  gEfiPeiSmbusPpiGuid
+  gEfiPeiReadOnlyVariable2PpiGuid
+#  gSaPolicyUpdatePpiGuid
+#  gSaPlatformPolicyPpiGuid  
+  gEfiPeiStallPpiGuid
+  gEfiEndOfPeiSignalPpiGuid
+  gPeiCachePpiGuid
+  gPchPolicyPpiGuid
+  
+[Guids]
+  gEfiGlobalVariableGuid
+  gEfiMemoryConfigDataGuid
+  gEfiMemoryTypeInformationGuid
+
+[Depex]
+  gEfiPeiReadOnlyVariable2PpiGuid AND
+  gEfiPeiStallPpiGuid AND
+  gPeiCapsulePpiGuid
+

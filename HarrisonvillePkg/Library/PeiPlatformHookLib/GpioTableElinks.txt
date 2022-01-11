@@ -1,0 +1,1 @@
+#define GPIO_TABLE @elink(GPIO_TABLE, "@Child", "", "")

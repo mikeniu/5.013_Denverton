@@ -1,0 +1,10 @@
+<component>
+	name = "MeFiaMuxLib"
+	category = MODULEPART
+	LocalRoot = "DenvertonPkg\Me\Heci\Library\MeFiaMuxLib\"
+	RefName = "DenvertonPkg.MeFiaMuxLib"
+[INF]
+"MeFiaMuxLib.inf"
+[files]
+"MeFiaMuxLib.sdl"	
+<endComponent>

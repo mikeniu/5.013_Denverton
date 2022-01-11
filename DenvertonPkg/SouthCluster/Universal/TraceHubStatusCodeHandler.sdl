@@ -1,0 +1,29 @@
+TOKEN
+	Name  = "TraceHubHandler_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling TraceHubHandler support in the project"
+	TokenType = Boolean
+	Master = Yes
+	Token =  "TRACEHUB_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "TraceHubStatusCodeHandlerPei"
+	File  = "TraceHubStatusCodeHandler\Pei\TraceHubStatusCodeHandlerPei.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+    Name  = "TraceHubStatusCodeHandlerRuntimeDxe"
+    File  = "TraceHubStatusCodeHandler\RuntimeDxe\TraceHubStatusCodeHandlerRuntimeDxe.inf"
+    Package  = "DenvertonPkg"
+    ModuleTypes  = "DXE_RUNTIME_DRIVER"
+End
+
+INFComponent
+    Name  = "TraceHubStatusCodeHandlerSmm"
+    File  = "TraceHubStatusCodeHandler\Smm\TraceHubStatusCodeHandlerSmm.inf"
+    Package  = "DenvertonPkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+End

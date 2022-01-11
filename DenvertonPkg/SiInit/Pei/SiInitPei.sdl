@@ -1,0 +1,22 @@
+TOKEN
+	Name  = "SiInitPei_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SiInit support in Project"
+	TokenType = Boolean
+	Master = Yes	
+End
+
+INFComponent
+	Name  = "SiInit"
+	File  = "SiInit.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "SiInitPreMem"
+	File  = "SiInitPreMem.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+

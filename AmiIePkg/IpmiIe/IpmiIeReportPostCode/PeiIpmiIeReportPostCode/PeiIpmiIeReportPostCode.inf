@@ -1,0 +1,62 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+#
+# @file PeiIpmiIeReportPostCode.inf
+#
+# INF description file for PeiIeReportPostCode driver
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PeiIpmiIeReportPostCode
+  FILE_GUID                      = B7823B15-B066-4BBA-A310-D3B3C365436D
+  MODULE_TYPE                    = PEIM
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NULL
+	
+[Sources]
+  PeiIpmiIeReportPostCode.c
+  PeiIpmiIeReportPostCode.h
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiIePkg/AmiIePkg.dec
+     
+[Ppis]
+  gEfiPeiIpmiIeTransportPpiGuid     #CONSUMES
+  gEfiPeiMemoryDiscoveredPpiGuid  #CONSUMES
+  
+[Guids]
+  gAmiPostCodeInfoHobGuid         #PRODUCES & CONSUMES
+  
+[LibraryClasses]
+  DebugLib
+  HobLib
+  
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+ 

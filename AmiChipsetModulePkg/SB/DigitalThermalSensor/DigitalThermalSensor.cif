@@ -1,0 +1,11 @@
+<component>
+	name = "DigitalThermalSensor"
+	category = eModule
+	LocalRoot = "AmiChipsetModulePkg\SB\DigitalThermalSensor\"
+	RefName = "DigitalThermalSensor"
+[INF]
+"DigitalThermalSensor.inf"
+[files]
+"DigitalThermalSensor.sdl"	
+"Gpe.asl"	
+<endComponent>

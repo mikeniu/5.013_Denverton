@@ -1,0 +1,18 @@
+<component>
+	name = "Boot Sector Write Protection"
+	category = eModule
+	LocalRoot = "AmiModulePkg\BootSectorWriteProtect\"
+	RefName = "BootSectorWriteProtect"
+[INF]
+"BootSectorWriteProtect.inf"
+[files]
+"BootSectorWriteProtect.sdl"	
+"BootSectorWriteProtect.sd"	
+"BootSectorWriteProtect.uni"	
+"BootSectorWriteProtect.chm"	
+[parts]
+"LegacyMbrWriteProtectCsm16"
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_28"
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;AmiCompatibilityPkg_20"
+<endComponent>

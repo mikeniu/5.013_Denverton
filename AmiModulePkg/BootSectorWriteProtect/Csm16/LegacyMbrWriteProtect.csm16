@@ -1,0 +1,804 @@
+
+        TITLE   LegacyMbrWriteProtect.csm16 - Oem callback function from MBR Protection
+
+;****************************************************************************
+;****************************************************************************
+;**                                                                        **
+;**             (C)Copyright 1985-2014, American Megatrends, Inc.          **
+;**                                                                        **
+;**                          All Rights Reserved.                          **
+;**                                                                        **
+;**                 5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093      **
+;**                                                                        **
+;**                          Phone (770)-246-8600                          **
+;**                                                                        **
+;****************************************************************************
+;****************************************************************************
+
+;----------------------------------------------------------------------------
+;       INCLUDE FILES
+;----------------------------------------------------------------------------
+
+;----------------------------------------------------------------------------
+;       EXTERNS USED
+;----------------------------------------------------------------------------
+.586p
+OEM16_CSEG SEGMENT PARA PUBLIC 'CODE' USE16
+        ASSUME cs:OEM16_CSEG, ds:OEM16_CSEG
+;-------------------------------------------------------------------------
+
+TEXT_ATTRIBUTE      EQU 8Fh             ; Blinking, intensified, normal.
+GRAPHICS_ATTRIBUTE  EQU 07h             ; Normal.
+
+; Escape code indicator for extended ASCII character bytes in the DBCS range
+SBCS_ESCAPE_CODE    EQU 0e0h
+; Equate to identify where substrings end/begin
+SUBSTRING_DELIMITER EQU 0dh
+
+CARRIAGE_RETURN     EQU 0dh
+LINE_FEED           EQU 0ah
+STACK_TOP_B         EQU 1024
+
+        PUBLIC MbrWriteProtectModuleStart
+MbrWriteProtectModuleStart LABEL BYTE
+        jmp     SHORT MbrWriteWarningDisplay
+
+MbrWriteProtectSig         dd "$VP$"
+MbrWriteProtect_ebda_start dw  0h
+Ebda_allocated          db  0h
+
+MbrWriteLine1  db  "   BootSector Write !!",0
+MbrWriteLine2  db  "    Continue (Y/N)?",0
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    MbrWriteWarningDisplay
+;
+; Description:  This routine is implementation of displaying the Warning
+;               message to protect the MBR
+;
+; Input:        None
+;
+; Output:       Al - Y or N value
+;
+; Modified:     None
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+MbrWriteWarningDisplay  PROC FAR PUBLIC
+
+; Assign the Local stack from EBDA 
+        cmp     cs:Ebda_allocated,0aah
+        je      Ebda_Ok
+        mov     al,'N'
+        jmp     MbrWriteWarning_end  
+Ebda_Ok:
+  
+        push    bp
+        push    fs
+        push    0040h
+        pop     fs                      ; FS = 0040h
+        mov     fs, fs:WORD PTR [0Eh]   ; FS = current EBDA segment
+
+        mov     bp, cs:MbrWriteProtect_ebda_start
+        pushf
+        add     bp, STACK_TOP_B
+        pop     WORD PTR fs:[bp-6]      ; Save flags to do CLI
+        cli
+        push    ss
+        push    sp
+        pop     DWORD PTR fs:[bp-4]     ; Save SS:SP
+        push    fs
+        pop     ss
+        sub     bp, 6
+        mov     sp, bp
+        popf                            ; Restore flags
+
+
+        push    bp
+        mov     bp, sp
+
+        mov     ch, 28                  ; Message Length
+        mov     cl, 02h                 ; CL = Lines, CH = Max.Length.
+        call    get_user_response       ; Get user response.
+        pop     bp
+
+    
+; Reassign the Stack to Original one
+
+        mov     bp, cs:MbrWriteProtect_ebda_start
+        pushf                           ; can't pushf after add
+        add     bp, STACK_TOP_B
+        add     WORD PTR fs:[bp-4], 2
+        cli
+        lss     sp, DWORD PTR fs:[bp-4]
+        push    WORD PTR fs:[bp-6]
+        popf
+        pop     fs
+        pop     bp
+
+
+MbrWriteWarning_end:
+
+; Adjust sp as if we returned to csm16_func_ret
+        add     sp, 4                   ; cs:ip of F000:csm16_func_ret
+
+; Save AX, restore it after popad
+        push    ax
+        pop     ds
+
+        popad
+
+        push    ds
+        pop     ax
+
+        pop     gs
+        pop     fs
+        pop     es
+        pop     ds
+
+        popf
+        pop     ds
+        pop     si
+
+        add     sp, 2                   ; Do not "pop ax", preserving return code
+
+        pop     bp
+        add     sp, 4
+
+        clc
+        retf
+MbrWriteWarningDisplay  ENDP
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    DisplayAttribStringMsg_FAR
+;
+; Description:  Displays the given tokened string with attributes at the
+;               current cursor position of video page-0. The cursor position
+;               will be automatically updated for the next character.
+;
+; Input:        BX - String token number.
+;               AL - Attributes for the string.
+;
+; Output:       None.
+;
+; Modified:     None.
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+DisplayAttribStringMsg_FAR  PROC    NEAR    PRIVATE
+
+        push    ds
+        pushad
+
+        movzx   bx, al                  ; BH/BL - Video page/Attribute.
+idaNextChar:
+        lods    BYTE PTR ds:[esi]
+        cmp     al, SBCS_ESCAPE_CODE    ; Look for extended ASCII chars.
+        jne     ida_00                  ; Not extended ASCII.
+        lods    BYTE PTR ds:[esi]       ; Get the actual char.
+ida_00:
+        or      al, al
+        jz      idaExit                 ; End of string.
+        cmp     al, SUBSTRING_DELIMITER
+        jne     ida_01                  ; Not a substring delimeter.
+        mov     al, LINE_FEED           ; Go to new line for next sub string.
+        call    DisplayAttribChar_FAR
+        mov     al,CARRIAGE_RETURN
+ida_01:
+        call    DisplayAttribChar_FAR
+        jmp     idaNextChar             ; Display character by character.
+
+
+idaExit:
+        popad
+        pop     ds
+        ret
+
+DisplayAttribStringMsg_FAR  ENDP
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    single_beep_far
+;
+; Description:  Single Beep sound 
+;
+; Input:        None
+;
+; Output:       None 
+;
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+single_beep_far PROC    NEAR    PRIVATE
+
+        db      09ah                    ; Specific to Amilegacy16.bin
+        dw      0eef0h
+        dw      0f000h
+
+        ret
+single_beep_far ENDP
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    wait_input_char_far
+;
+; Description:  Waits for the Input Char
+;
+; Input:        None
+;
+; Output:       Al- Input Char value 
+;
+; Modified:     
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+wait_input_char_far PROC    NEAR    PRIVATE
+
+        mov     ah, 00h                 ; Read character.
+        int     16h
+
+        ret
+
+wait_input_char_far ENDP
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    INT10hGetCursorPos
+;
+; Description:  Returns the current cursor position from video page.
+;
+; Input:        BH  - Video page number.
+;
+; Output:       DH/DL   - Current cursor position (Row/Column).
+;               CH/CL   - Beginning/Ending line of cursor.
+;
+; Modified:     DX.
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+GetCursorPosPage_FAR    PROC    NEAR    PRIVATE
+
+        push    ax
+        mov     ah, 03h                 ; Return cursor position.
+        int     10h
+        pop     ax
+        ret
+
+GetCursorPosPage_FAR    ENDP
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    INT10hSetCursorType
+;
+; Description:  Sets the cursor type.
+;
+; Input:        CH/CL   - Beginning/Ending line of cursor.
+;
+; Output:       None.
+;
+; Modified:     None.
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+SetCursorType_FAR   PROC    NEAR    PRIVATE
+
+        push    ax
+        mov     ah, 01h                 ; Set cursor type.
+        int     10h
+        pop     ax
+        ret
+
+SetCursorType_FAR   ENDP
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    INT10hSetCursorPos
+;
+; Description:  Sets the cursor position at the given coordinates in the
+;               video page.
+;
+; Input:        DH/DL   - Cursor position to set (Row/Column).
+;               BH  - Video page number.
+;
+; Output:       None.
+;
+; Modified:     None.
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+SetCursorPosPage_FAR    PROC    NEAR    PRIVATE
+
+        push    ax
+        mov     ah, 02h                 ; Set cursor position.
+        int     10h
+        pop     ax
+        ret
+
+SetCursorPosPage_FAR    ENDP
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    INT10hReadAttribChar
+;
+; Description:  Returns the character with attributes from the current cursor
+;               position.
+;
+; Input:        BH  - Video page.
+;
+; Output:       AH/AL   - Attribute/ASCII code of the character.
+;
+; Modified:     AX.
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+;
+
+ReadAttribCharPage_FAR  PROC    NEAR    PRIVATE
+
+        mov     ah, 08h                 ; Return Character or Attribute.
+        int     10h
+        ret
+
+ReadAttribCharPage_FAR  ENDP
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    INT10hDisplayAttribChar
+;
+; Description:  Displays the given character with attributes at the current
+;               cursor position of video page. The cursor position will be
+;               automatically updated for the next character.
+;
+; Input:        AL  - ASCII code of the character.
+;               BL  - Attributes of the character.
+;               BH  - Video page.
+;
+; Output:       None.
+;
+; Modified:     None.
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+;
+
+DisplayAttribChar_FAR       PROC    NEAR    PRIVATE
+
+        push    ax
+        mov     ah, 0Eh                     ; Write character.
+        int     10h
+        pop     ax
+        ret
+
+DisplayAttribChar_FAR       ENDP
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    get_user_response
+;
+; Description:  This routine is invoked if BIOS MbrWrite Protection is enabled
+;               and an attempt was made to write to a Boot-Sector.  The routine
+;               gets user response whether to continue with the current
+;               operation or not.
+;
+; Input:        CH  - Length of message line.
+;               CL  - Number of lines.
+;
+; Output:       ZR  - Continue.
+;               NZ  - Do not continue.
+;
+; Modified:     Nothing.
+;
+; Referrals:    active_page_no, GetCursorPosPage_FAR, SetCursorType_FAR,
+;               calculate_screen_variables, save_screen, display_run_messages,
+;               single_beep_far, wait_input_char_far, restore_screen,
+;               SetCursorPosPage_FAR.
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+get_user_response PROC NEAR PUBLIC
+        push    ds
+        pusha
+        sti
+        sub     sp, 06h                 ; Allocate local space
+        mov     bp, sp
+        mov     [bp], bx
+        mov     [bp + 02h], cx
+        push    040h
+        pop     ds                      ; DS = 0040h.
+        mov     bh, ds:[062h]           ; BH = active page number.
+        call    GetCursorPosPage_FAR    ; Get cursor position and type.
+        push    dx                      ; Save cursor position.
+        push    cx                      ; Save cursor type.
+        mov     cx, 0207h               ; CH, CL = top, bottom line of cursor.
+        call    SetCursorType_FAR       ; Set cursor type.
+
+; Calculate cursor posn for the displaying message.
+        call    calculate_screen_variables; Calculate and store screen
+                    ; variables.
+; DH, DL = display start row,col.
+; BH, BL = active page#, attribute.
+; Save portion of the screen in stack.
+        call    save_screen             ; Save screen image.
+; DH, DL = display start row,col
+; DI    = display start row,col
+; BH,BL = active page#, attribute
+        call    display_run_messages    ; Dipslay message.
+; DI    = display start row,col
+        call    GetCursorPosPage_FAR    ; DH, DL = row, col after after
+                                        ; displaying the messages.
+        sub     dl, 02h                 ; DH,DL = row,col for user input Y/N.
+        call    SetCursorPosPage_FAR
+
+; DI = display start row,col
+; BH,BL = active page#, attribute
+gur_05:
+        call    single_beep_far         ; Give a beep..AX destroyed.
+        call    wait_input_char_far
+        and     al, 0DFh
+        cmp     al, 'Y'                 ; 'Y' ?
+        jz      short gur_06            ; yes
+
+        cmp     al, 'N'                 ; 'N' ?
+        jnz     short gur_05
+
+gur_06:
+        mov     [bp+04h], al            ; Save user response, test/graphics
+                    ; mode.
+        mov     dx, di                  ; DH,DL = start row, col.
+
+; DH,DL = display start row,col
+; DI    = display start row,col
+; BH,BL = active page#, attribute
+; restore the screen
+        call    restore_screen          ; Restore screen.
+        pop     cx                      ; Cursor type.
+        call    SetCursorType_FAR       ; Set cursor type.
+        pop     dx                      ; Original cursor posn.
+        call    SetCursorPosPage_FAR    ; Restore cursor posn.
+        mov     al, [bp+04h]            ; Restore user response.
+        add     sp, 06h                 ; Release local space.
+        cmp     al, 'Y'                 ; ZR/NZ = yes/not continue.
+        mov     ds,ax
+        popa
+        mov     ax,ds
+        pop     ds
+        ret
+get_user_response ENDP
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    calculate_screen_variables
+;
+; Description:  This routine calculates the position of the screen where
+;               message is going to be displayed and stores screen
+;               information in the stack.
+;
+; Input:        [BP+03h]- Length of message line.
+;               BH  - Active page number.
+;               DS  - BDA_DSEG (0040h).
+;
+; Output:       [BP+05h] = BL   - Attribute for message.
+;               DH  - Display start row.
+;                DL  - Display start col.
+;
+; Modified:     AX, BL, CX, DX.
+;
+; Referrals:    mode_of_vdo, columns_of_vdo, rows_of_vdo.
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+calculate_screen_variables PROC NEAR PUBLIC
+        mov     al, ds:[084h]           ; Get number of rows on screen.
+        shr     al, 1                   ; Divide by 2.
+        dec     al
+        mov     dh, al                  ; Display row.
+        mov     ax, ds:[04ah]           ; Get number of cols on screen.
+        movzx   cx, byte ptr [bp+02h+1] ; CX = Length of msg line.
+        sub     ax, cx
+        shr     ax, 1
+        mov     dl, al                  ; Display column.
+; DH,DL = Display start row,col.
+; BH    = Active page number.
+        mov     bl, TEXT_ATTRIBUTE      ; Attribute for text mode.
+        mov     al, ds:[049h]           ; Get current mode.
+        cmp     al, 07h                 ; Text monochrome ?
+        jz      short gur_12            ; Yes.
+    
+        cmp     al, 03h                 ; Text mode ?
+        jbe     short gur_12            ; Yes.
+    
+        mov     bl, GRAPHICS_ATTRIBUTE  ; Attribute for graphics mode.
+
+gur_12:
+        mov     [bp+04h+1], bl          ; Save text/graphics mode information.
+        ret
+calculate_screen_variables ENDP
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    display_run_messages
+;
+; Description:  This routine displays the messages during runtime.
+;
+; Input:        DH, DL  - Display start row, column.
+;               DI  - Display start row, column.
+;               BH  - Active page number.
+;               BL  - Attribute.
+;               [BP+02h]- Number of lines in message.
+;               [BP+03h]- Length of message line.
+;
+; Output:       DI  - Display start row, column.
+;               BH  - Active page number.
+;               BL  - Attribute.
+;
+; Modified:     AX, CX, DX, SI.
+;
+; Referrals:    SetCursorPosPage_FAR, DisplayAttribChar_FAR,
+;               DisplayAttribTokenMsg_FAR, adjust_display_line.
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+display_run_messages PROC NEAR PUBLIC
+        cmp     bl, TEXT_ATTRIBUTE      ; Text/Graphics mode ?
+        jz      gur_13                  ; Text mode.
+
+
+; Graphics mode, clear one line above MbrWrite messages and one line below MbrWrite
+; messages.
+        mov     si, 0002h               ; Two lines to be blanked out
+        dec     dh                      ; One line above MbrWrite messages
+
+gur_14:
+        call    SetCursorPosPage_FAR
+        movzx   cx, byte ptr [bp+02h+1] ; CX = Number of chars in one line.
+        mov     al, 20h
+
+drm_00:
+        call    DisplayAttribChar_FAR   ; Clear the line.
+        loop    drm_00
+        mov     dx, di
+        add     dh, [bp+02h]            ; One line below MbrWrite messages.
+        dec     si
+        jnz     short gur_14
+
+        mov     dx, di
+gur_13:
+; DH,DL = Display start row, col.
+; DI    = Display start row, col.
+; BH,BL = Active page#, attribute.
+; Display first line of message.
+        call    SetCursorPosPage_FAR
+        push    bx
+        mov     al, bl                  ; AL = Attribute.
+
+        push    ds
+        push    cs
+        pop     ds
+        mov     si, offset MbrWriteLine1
+        call    DisplayAttribStringMsg_FAR
+        pop     ds
+
+        pop     bx
+        call    adjust_display_line
+        inc     dh
+        call    SetCursorPosPage_FAR
+        push    bx
+        mov     al, bl                  ; AL = Attribute.
+
+        push    ds
+        push    cs
+        pop     ds
+        mov     si, offset MbrWriteLine2
+        call    DisplayAttribStringMsg_FAR
+        pop     ds
+    
+        pop     bx
+        call    adjust_display_line
+        ret
+
+display_run_messages ENDP
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    adjust_display_line
+;
+; Description:  This routine displays the blanks if necessary.
+;
+; Input:        DI  - Start row, column.
+;               BH, BL  - Active page number, attribute.
+;               [BP+3]  - Length of message line.
+;
+; Output:       None.
+;
+; Modified:     Nothing.
+;
+; Referrals:    GetCursorPosPage_FAR, DisplayAttribChar_FAR.
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+adjust_display_line PROC NEAR PUBLIC
+        pusha
+        and     di, 00FFh               ; DI = Start column.
+        movzx   cx, byte ptr [bp+3]     ; CX = Length of message line.
+        add     cx, di                  ; CX = end column.
+        push    cx
+        call    GetCursorPosPage_FAR    ; DH, DL = current row, column.
+        pop     cx
+        movzx   dx, dl                  ; DX = current column.
+        cmp     dx, cx                  ; End column reached ?
+        jae     short adl_00            ; Yes
+    
+        sub cx, dx                      ; CX = Number of blanks needed.
+
+adl_01:
+        mov     al, ' '                 ; Display ' '.
+        call    DisplayAttribChar_FAR
+        loop    adl_01
+
+adl_00:
+        popa
+        ret
+adjust_display_line ENDP
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    save_screen
+;
+; Description:  This routine saves the asked portion of the screen in stack.
+;
+; Input:        DH, DL  - Display start row, column.
+;               BH  - Active page number.
+;               BL  - Attribute.
+;               [BP+2]  - Number of lines.
+;               [BP+3]  - Length.
+;
+; Output:       DH, DL  - Display start row, column.
+;               DI  - Display start row, column.
+;               BH  - Active page number.
+;               BL  - Attribute.
+;               [BP+2]  - Number of lines.
+;               [BP+3]  - Length.
+;
+; Modified:     AX, CX, SI, DI.
+;
+; Referrals:    SetCursorPosPage_FAR, ReadAttribCharPage_FAR.
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+save_screen PROC NEAR PUBLIC
+        pop     si                      ; SI = Retrun address.
+; save portion of the screen in stack
+        mov     di, dx                  ; Save start row, column.
+
+
+ss_00:
+        movzx   cx, byte ptr [bp+02h+1] ; CX = Number of bytes in a line.
+
+ss_01:
+; DH,DL = Row, column.
+; BH,BL = page number, attribute.
+        call    SetCursorPosPage_FAR
+        call    ReadAttribCharPage_FAR  ; AH, AL = Attribute, character.
+        push    ax                      ; Save attr/char in stack.
+        inc     dl                      ; Next column.
+        loop    ss_01
+    
+        mov     ax, di
+        mov     dl, al                  ; DL = Start column.
+        inc     dh                      ; Row for next line.
+        mov     cx, di
+        add     ch, byte ptr [bp+02h]   ; Add number of lines.
+        cmp     dh, ch
+        jb      short ss_00             ; 2 lines.
+        mov     dx,di                   ; Display start row, column.
+        jmp     si
+
+save_screen ENDP
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Procedure:    restore_screen
+;
+; Description:  This routine restores screen image saved in the stack.
+;
+; Input:        DH, DL  - Display start row, column.
+;               DI  - Display start row, column.
+;               BH  - Active page number.
+;               BL  - Attribute.MbrWriteProtectModuleStart
+;               [BP+2]  - Number of lines.
+;               [BP+3]  - Length.
+;
+; Output:       BH  - Active page number.
+;
+; Modified:     AX, CX, DX, SI.
+;
+; Referrals:    SetCursorPosPage_FAR, DisplayAttribChar_FAR.
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+restore_screen PROC NEAR PUBLIC
+        pop     si                      ; SI = return address
+    
+        mov     cx, [bp+02h]
+        add     dl, ch
+        dec     dl                      ; Length_MbrWrite_Msg_Line - 1.
+        add     dh, cl
+        dec     dh                      ; No_Of_MbrWrite_Msg_Lines - 1.
+        mov     di, dx
+; DH,DL = End row, end column.
+; DI    = End row, end column.
+rs_00:
+        movzx   cx, byte ptr [bp+02h+1] ; CX = Number of bytes in a message
+                                        ; line.
+rs_01:
+; DH,DL = row,col
+        call    SetCursorPosPage_FAR    ; Set cursor position.
+        pop     ax                      ; Get attr/char from stack.
+        cmp     byte ptr [bp+04h+1], TEXT_ATTRIBUTE; text/graphics ?
+        jz      short rs_02             ; Text.
+
+        mov     ax, 0720h               ; Blank out in case of graphics mode.
+
+rs_02:
+        mov     bl, ah                  ; BL = Attribute.
+        call    DisplayAttribChar_FAR   ; Write character.
+        dec     dl                      ; Previous column.
+        loop    rs_01
+
+        mov     ax, di
+        mov     dl, al                  ; DL = End column.
+        dec     dh                      ; Row for prev line.
+        dec     byte ptr [bp+02h]       ; All lines over ?
+        jnz     rs_00                   ; Not yet.
+
+        jmp si
+
+restore_screen ENDP
+
+OEM16_CSEG ENDS
+
+END
+;****************************************************************************
+;****************************************************************************
+;**                                                                        **
+;**             (C)Copyright 1985-2014, American Megatrends, Inc.          **
+;**                                                                        **
+;**                          All Rights Reserved.                          **
+;**                                                                        **
+;**                 5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093      **
+;**                                                                        **
+;**                          Phone (770)-246-8600                          **
+;**                                                                        **
+;****************************************************************************
+;****************************************************************************

@@ -1,0 +1,33 @@
+TOKEN
+	Name  = "IePolicy_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling IE Policy support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "IePeiPolicyUpdateLib"
+	File  = "Library\Pei\IePeiPolicyUpdateLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "IePolicyInitPei"
+	File  = "Pei\IePolicyInitPei.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "IePeiPolicyUpdateLib"
+	Instance  = "HarrisonvillePkg.IePeiPolicyUpdateLib"
+End
+
+INFComponent
+	Name  = "IePolicyInitDxe"
+	File  = "Dxe\IePolicyInitDxe.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End

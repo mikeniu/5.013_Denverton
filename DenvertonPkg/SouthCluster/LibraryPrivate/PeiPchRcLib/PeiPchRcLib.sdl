@@ -1,0 +1,19 @@
+TOKEN
+	Name  = "PeiPchRcLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PeiPchRcLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PeiPchRcLib"
+	File  = "PeiPchRcLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "PchRcLib"
+	Instance  = "DenvertonPkg.PeiPchRcLib"
+End

@@ -1,0 +1,34 @@
+TOKEN
+	Name  = "MemoryInit_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable MemoryInit support in Project"
+	TokenType = Boolean
+	Master = Yes		
+End
+# Denverton AptioV override Start - EIP#239422
+TOKEN
+  Name  = "gPeiIeHeciPpiGuid"
+  Value  = "gPeiIeHeciPpiGuid"
+  Help  = "The Depex is added only when IE_Support is enabled"
+  TokenType = Expression
+  TargetMAK = Yes
+  Token = "Ie_SUPPORT" "=" "1"
+End
+
+TOKEN
+  Name  = "gPeiIeHeciPpiGuid"
+  Value  = "TRUE"
+  Help  = "The Depex is added only when IE_Support is enabled"
+  TokenType = Expression
+  TargetMAK = Yes
+  Token = "Ie_SUPPORT" "=" "0"
+End
+
+INFComponent
+	Name  = "MemoryInit"
+	File  = "MemoryInit.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+	PreProcess = Yes
+End
+# Denverton AptioV override End - EIP#239422

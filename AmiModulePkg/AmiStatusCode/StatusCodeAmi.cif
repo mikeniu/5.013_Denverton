@@ -1,0 +1,15 @@
+<component>
+	name = "AmiStatusCode"
+	category = eCore
+	LocalRoot = "AmiModulePkg\AmiStatusCode\"
+	RefName = "AmiModulePkg.AmiStatusCode"
+[files]
+"StatusCodeAmi.chm"	
+"StatusCodeAmi.sdl"	
+"StatusCodeElinksTemplate.txt"	
+[INF]
+"StatusCodePei.inf"
+"StatusCodeDxe.inf"
+"StatusCodeSmm.inf"
+
+<endComponent>

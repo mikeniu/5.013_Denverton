@@ -1,0 +1,8 @@
+<component>
+	name = "IncludePrivate"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\IncludePrivate\"
+	RefName = "DenvertonPkg.IncludePrivate"
+[files]
+"SiPolicyHob.h"	
+<endComponent>

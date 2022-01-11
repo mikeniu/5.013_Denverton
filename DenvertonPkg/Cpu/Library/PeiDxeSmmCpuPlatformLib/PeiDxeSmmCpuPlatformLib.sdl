@@ -1,0 +1,19 @@
+TOKEN
+	Name  = "CpuPlatformLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling CpuPlatformLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+    Name  = "PeiDxeSmmCpuPlatformLib"
+    File  = "PeiDxeSmmCpuPlatformLib.inf"
+    Package  = "DenvertonPkg"
+    ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+    Class  = "CpuPlatformLib"
+    Instance  = "DenvertonPkg.PeiDxeSmmCpuPlatformLib"
+End

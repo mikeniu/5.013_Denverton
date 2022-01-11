@@ -1,0 +1,8 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "AmiChipsetPkg\Library\"
+	RefName = "AmiChipsetPkg.LibraryInstances"
+[INF]
+"AmiChipsetIoLib\AmiChipsetIoLib.inf"
+<endComponent>

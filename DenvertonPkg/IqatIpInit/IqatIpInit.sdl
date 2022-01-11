@@ -1,0 +1,56 @@
+TOKEN
+	Name  = "IqatIpInit_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling IqatIpInit support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "DxeIqatIpInitLib"
+	File  = "DxeIqatIpInitLib\DxeIqatIpInitLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "IqatIpPolicyInitLib"
+	File  = "IqatIpPolicyInitLib\IqatIpPolicyInitLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PeiDxeSmmIqatIpInitLib"
+	File  = "PeiDxeSmmIqatIpInitLib\PeiDxeSmmIqatIpInitLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PeiIqatIpInitLib"
+	File  = "PeiIqatIpInitLib\PeiIqatIpInitLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "DxeIqatIpInitLib"
+	Instance  = "DenvertonPkg.DxeIqatIpInitLib"
+End
+
+LibraryMapping
+	Class  = "PeiIqatIpPolicyInitLib"
+	Instance  = "DenvertonPkg.IqatIpPolicyInitLib"
+End
+
+LibraryMapping
+	Class  = "IqatIpInitLib"
+	Instance  = "DenvertonPkg.PeiDxeSmmIqatIpInitLib"
+End
+
+LibraryMapping
+	Class  = "PeiIqatIpInitLib"
+	Instance  = "DenvertonPkg.PeiIqatIpInitLib"
+End
+

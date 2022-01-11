@@ -1,0 +1,169 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+TOKEN
+	Name  = "ACPI_PM_PROFILE"
+	Value  = "4"
+	Help  = "Power Management Profile ACPI 2.0\See acpi20.h"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-6 0 = Unspecified; 1 = Desktop; 2 = Modile; 3 = Workstation; 4 = Enterprise Server; 5 = SOHO Server; 6 = Application PC"
+	Token = "ACPI_BUILD_TABLES_2_0" "=" "1"
+End
+
+TOKEN
+	Name  = "==========  SIO  =========="
+	Value  = "0"
+	TokenType = Integer
+End
+
+TOKEN
+	Name  = "NO_SIO_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NO_SIO_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "SIO_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "==========  CPU  =========="
+	Value  = "0"
+	TokenType = Integer
+End
+
+TOKEN
+	Name  = "LOCAL_APIC_BASE"
+	Value  = "0xfee00000"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CPU_MAX_IO_SIZE" # Denverton TODO
+	Value  = "0x10000"
+	Help  = "Maximum I/O size addressable by the CPU"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "========== ACPI =========="
+	Value  = "0"
+	TokenType = Integer
+End
+
+TOKEN
+	Name  = "SW_SMI_PSTATE_CNT"
+	Value  = "0"
+	Help  = "VALUE to write into SMI CMD register to enter\CPU performance state control mode (if any)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-0xff 0 = not supported"
+	Token = "ACPI_BUILD_TABLES_2_0" "=" "1"
+End
+
+TOKEN
+	Name  = "SW_SMI_CST_CNT"
+	Value  = "0"
+	Help  = "Value to write in SMI_CMD reg to support _CST object and change state notification"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-0xff"
+	Token = "ACPI_BUILD_TABLES_2_0" "=" "1"
+End
+
+# Tokens to enable / Disable features as per platform support
+
+TOKEN
+  Name  = "LPCFlash_SUPPORT"
+  Value  = "0"
+  Help  = "Main switch to enable LPC Flash support in Project"
+  TokenType = Boolean
+  TargetEQU = Yes
+  TargetMAK = Yes
+End
+
+TOKEN
+  Name  = "STDFlash_SUPPORT"
+  Value  = "0"
+  Help  = "Main switch to enable STD Flash support in Project"
+  TokenType = Boolean
+  TargetEQU = Yes
+  TargetMAK = Yes
+End
+
+TOKEN
+  Name  = "A_S1"
+  Value  = "0"
+  Help  = "S1 Sleep state enabled in BIOS"
+  TokenType = Boolean
+  TargetMAK = Yes
+End
+
+TOKEN
+  Name  = "A_S3"
+  Value  = "0"
+  Help  = "S3 supported"
+  TokenType = Boolean
+  TargetMAK = Yes
+End
+
+TOKEN
+  Name  = "FACP_FLAG_PCI_EXP_WAK"
+  Value  = "1"
+  Help  = "If set, indicates the platform supports the \PCIEXP_WAKE_STS bit in the PM1 Status \register and the PCIEXP_WAKE_EN bit in \the PM1 Enable register."
+  TokenType = Boolean
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "ACPI_APIC_TBL"
+  Value  = "0"
+  Help  = "Main switch to enable MADT table build in Project"
+  TokenType = Boolean
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "MPS_TABLE_SUPPORT"
+  Value  = "1"
+  Help  = "Main switch to enable MPS V 1.4 Table support in Project"
+  TokenType = Boolean
+  TargetEQU = Yes
+  TargetMAK = Yes
+  TargetH = Yes
+End
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

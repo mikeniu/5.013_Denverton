@@ -1,0 +1,10 @@
+<component>
+    name = "PeiIpmiTransportInitialize"
+    category = ModulePart
+    LocalRoot = "AmiIePkg\IpmiIe\PeiIpmiTransportInitialize\"
+    RefName = "AmiIePkg.IpmiIe.PeiIpmiTransportInitialize"
+[INF]
+"PeiIpmiTransportInitialize.inf"
+[files]
+"PeiIpmiTransportInitialize.sdl"
+<endComponent>

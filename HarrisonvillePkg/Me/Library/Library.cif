@@ -1,0 +1,11 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Me\Library"
+	RefName = "HarrisonvillePkg.Me.Library"
+[INF]
+"MeSetupLib\MeDxeSetupLib.inf"
+"MeSetupLib\MePeiSetupLib.inf"
+[files]
+"Library.sdl"	
+<endComponent>

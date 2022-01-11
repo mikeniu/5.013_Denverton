@@ -1,0 +1,13 @@
+<component>
+	name = "PchSmbus"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\Smbus\"
+	RefName = "DenvertonPkg.SouthCluster.PchSmbus"
+[INF]
+"Dxe\PchSmbusDxe.inf"
+"Smm\PchSmbusSmm.inf"
+[files]
+"PchSmbus.sdl"	
+"Common\PchSmbusCommon.h"
+"Common\PchSmbusExec.c"
+<endComponent>

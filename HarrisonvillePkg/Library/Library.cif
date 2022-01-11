@@ -1,0 +1,23 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Library\"
+	RefName = "HarrisonvillePkg.Library"
+[INF]
+"AcpiTimerLib\AcpiTimerLib.inf"
+"ClockGenerator\Pei\PeiClockGenerator.inf"
+"CpuOnlyResetLib\CpuOnlyResetLib.inf"
+"PlatformCmosLib\PlatformCmosLib.inf"
+"PlatformHookLib\PlatformHookLib.inf"
+"PlatformTimerLib\PlatformTimerLib.inf"
+"SmmCorePlatformHookLib\SmmCorePlatformHookLib.inf"
+[files]
+"Library.sdl"	
+[parts]
+"HarrisonvillePkg.Library.PeiPolicyDebugLib"
+"HarrisonvillePkg.PeiPlatformHookLib"
+"HarrisonvillePkg.PeiPolicyInitLib"
+"HarrisonvillePkg.PeiPolicyUpdateLib"
+"HarrisonvillePkg.PlatformSecLib"
+"HarrisonvillePkg.SmbusLib"
+<endComponent>

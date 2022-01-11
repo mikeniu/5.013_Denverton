@@ -1,0 +1,15 @@
+<component>
+	name = "Chipset Reference Board"
+	category = eBoard
+	Rank = 56
+	LocalRoot = "AmiCRBPkg\CRB\"
+	RefName = "CRB"
+[INF]
+"Dxe\CrbDxe.inf"
+"Pei\CrbPei.inf"
+[parts]
+"CRB.Include"
+[files]
+"Csp.sdl"	
+"Crb.sdl"		
+<endComponent>

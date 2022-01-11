@@ -1,0 +1,16 @@
+<component>
+	name = "SetupDxe"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Platform\SetupDxe\"
+	RefName = "HarrisonvillePkg.SetupDxe"
+[INF]
+"SetupDxe.inf"
+[files]
+"Common.hfr"	
+"Configuration.h"	
+"SetupMisc.h"	
+"SetupPlatform.h"	
+"SetupDxe.sdl"
+"VFR.uni"	
+"WakeFromSx.hfr"
+<endComponent>

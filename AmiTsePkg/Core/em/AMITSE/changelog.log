@@ -1,0 +1,297 @@
+[TAG] 			EIP196309
+[Category]		New Feature
+[Description] 	Support for mantis 0000997: Driver Health Protocol error codes
+[Files] 			TseDrvHealth.h, Uefi21Wapper.c
+
+[TAG]				EIP191225
+[Description]	Need to remove all the EIP related information in TSE module
+[Category]		Action Item
+[Files]			All TSE C and H sources file
+
+[TAG] 			EIP192486
+[Category] 		Bug Fix
+[Severity:] 	Normal
+[Symptom:] 		Displayed HDD password dialog title is not center aligned when multiline support was enabled
+[Root Cause] 	Alignment was not handled when multililne support is enabled for password and String type controls.
+[Solution] 		Handled MULTILINE token properly.
+[Files] 			String.c, Popup.c, PopupEdit.c
+
+
+[TAG]				EIP196303
+[Category]		New Feature
+[Description]	Support EFI_IFR_WARNING_IF opcode in TSE
+[Files]			SetupData.h, TseAdvanced.c, MessageBox.c, CtrlCond.c, CtrlCond.h, Expression.c, Parse.c, TseUefiHii.h, Uefi21Wapper.c
+
+[TAG]				EIP188120
+[Category]		Bug Fix
+[Severity:]		Normal
+[Symptom:]		Duplicate or extra bootOption comes after modifying BootOrder variable with different number
+[Root Cause]	TSE is creating BootData irrespective of BootOption present in BootOrder for BOOT#### variables.
+[Solution]		Creating TSE BootData based on Boot#### presence in BootOrder variable.
+[Files]			Boot.c, HiiString21.c, AMITSE.sdl
+
+[TAG]				EIP193247
+[Category]		Bug Fix
+[Severity:]		Important
+[Symptom:]		System Hang by loading setup defaults when BootGetBootData is NULL
+[Root Cause]	The system hangs because the case if Bootdata is NULL was not handled
+[Solution]		Added proper ASSERT for NULL boot data.
+[Files]			Boot.c
+
+
+[TAG] 			EIP201836
+[Category] 		Bug Fix
+[Severity:] 	Normal
+[Symptom:] 		ARM systems generate exception after 3 invalid password tries in the POST
+[Root Cause] 	Parameters are not used properly for WaitForEvent function during POST password.
+[Solution] 		Handled parameters for WaitForEvent() function.
+[Files] 			commonoem.c
+
+
+TAG]				EIP195930
+[Category]		Bug Fix
+[Severity:]		Normal
+[Symptom:]		Grayed out OrderedList control is opening for feature TSE_SETUP_GRAYOUT_SELECTABLE
+[Root Cause]	TSE_SETUP_GRAYOUT_SELECTABLE token check is not handled in case of orderedlist control. So actions are consumed
+[Solution]		Returning EFI_UNSUPPORTED when token is enabled while handling key/Mouse action to avoid processing actions.
+[Files]			OrdlistBox.c
+
+
+[TAG]  			EIP193383
+[Category]  	Bug Fix
+[Severity]  	Important
+[Symptom]  		Setup settings informations and VFR controls definitions are not same
+[RootCause]  	"Default" OpCode scope is not handled properly.- ControlIndex is not handled properly.
+[Solution]  	Handled Default OpCode end scope properly while parsing controls
+[Files]  		HiiPackageer.cpp
+
+
+[TAG]				EIP190386
+[Category]		Bug Fix
+[Symptom:]		Prompt User Password screen twice and corrupted in POST
+[Root Cause]	Once TPL is raised to application level during validating password, NotificationFunction() is getting call again and this causes to call ActivateInput() again to evaluate password. So this will draw password prompt again and causes screen corruption.
+[Solution]		Handled ActivateInput() using ActivateInputDone flag properly.
+[Files]			Notify.c
+
+
+[TAG]				EIP186193
+[Category]   	New Feature
+[Description]	Use AmiTextOutProtocol to support writing a char in last row column without scrolling the screen.
+[Files]			minisetupext.h, screen.c,buffer.c, CommonHelper.c, AMITSE.sdl
+
+[TAG] 			EIP180008
+[Category] 		Bug Fix
+[Severity:] 	Normal
+[Symptom:] 		When any control is changed in a form within the SIO or PCI dynamic formset, a blank arrow is seen under Advanced setup page
+[Root Cause] 	Offline setupdata pages considered as dynamic page
+[Solution] 		TSE have a check already to not move the offline pages under Advanced menu which having dynamic parsing but if dynamic parsing happens for offline pages then we are incrementing the gDynamicPageCount so empty arrow shows but we not moving offline page under Advanced menu. So if dynamic parsing happen for offline pages, now we are not incrementing gDynamicPageCount
+[Files] 			hii.c and parse.c
+
+[TAG]				EIP173036
+[Category]		Bug Fix
+[Severity:]		Important
+[Symptom:]		In Setup, when Driver Health status shows failed (configuration required) , Critical Boot screen is not displayed.
+[Root Cause]	BrowserCallback is disabled when calling GetHealthStatus.
+[Solution]		Enable BrowserCallback when calling GetHealthStatus.
+[Files]			uefi21wapper.c, Hiistring21.c
+
+
+[TAG]				EIP196242
+[Category]   	Bug Fix
+[Severity]		Important
+[Symptom]  		Build issue in ARM platform after introducing Template feature in TSE
+[RootCause]		In the file AMITSE.mak, there is a missing space before the backslash character in $(ECHO)\ In the file CommonHelper.c, the include file path is case sensitive [#include "protocol/AmiReflashProtocol.h"]
+[Solution]		In the file AMITSE.mak, add space before the backslash character in $(ECHO) \ In the file CommonHelper.c, make the include file path case sensitive [#include "Protocol/AmiReflashProtocol.h"]
+[Files]			AMITSE.mak, CommonHelper.c
+
+[TAG]				EIP197421
+[Category]		Improvement
+[Description]	Need to remove EFI_SPECIFICATION_VERSION token dependency in TSE
+[Files]			AMITSE.sdl, AMITSE.mak, CommonHelper.c
+
+[TAG]				EIP192968
+[Category]   	Bug Fix
+[Severity]		Minor
+[Symptom]  		USB keyboard work abnormally within setup interface
+[RootCause]		Memory leak
+[Solution]		Freed deallocated variables
+[Files]			Boot.c, TseAdvanced.c, Special.c, Frame.c, TseLiteCommon.c, Uefi21Wapper.c
+
+[TAG]				EIP196151 & 180220
+[Category]		Bug Fix
+[Severity:]		Important
+[Symptom:]		Mouse pointer flicker and corrupted in popupEdit of Password and String Control
+[Root Cause]	MouseStop() and MouseRefresh() called frequently in this popupEdit area
+[Solution]		Handle MouseStop() and MouseFreeze() calling based on MousePointer position in popupEdit area
+[Files]			CommonHelper.c, Mouse.c, PopupPassword.c, PopupString.c
+
+[TAG]				EIP198616
+[Category]		New Feature
+[Description]	Provide us token to configure CheckforClick event trigger time
+[Files]			Hiistring21.c, AMITSE.sdl, PostMgmt.c
+
+[TAG] 			EIP196304
+[Category] 		Improvement
+[Description] 	Handling return status for action EFI_BROWSER_ACTION_CHANGING for callBack controls
+[Files] 			HiiCallback.c
+
+[TAG] 			EIP203244
+[Category] 		Improvement
+[Description] 	Removing shell boot when secure boot mode is enabled
+[Files] 			bootflow.c,Uefisetup.ini
+
+
+[TAG]				EIP196151 & 180220/198932
+[Category]		Bug Fix
+[Severity:]		Important
+[Symptom:]		Mouse pointer flicker and corrupted in popupEdit of Password and String Control
+[Root Cause]	MouseStop() and MouseRefresh() called frequently in this popupEdit area
+[Solution]		Handle MouseStop() and MouseFreeze() calling based on MousePointer position in popupEdit area
+[Files]			CommonHelper.c, Mouse.c, PopupPassword.c, PopupString.c
+
+[TAG] 			EIP168801/182890/192078
+[Category] 		Improvement
+[Description] 	Support to follow interactive password control based on spec UEFI_2_4_Errata_B_april_9.pdf
+[Files] 			AMITSE.sdl, AmiTSEStr.uni, CommonHelper.c, FakeTokens.c, EzPortPlus.c, TseAdvanced.c, minisetupext.h, popuppassword.c, hiicallback.c, uefi21wrapper.c
+
+[TAG]				EIP203339
+[Category]		Bug Fix
+[Severity:]		Normal
+[Symptom:]		System asserts while loading iScsi setup page when the token TSE_SUPPORT_DEFAULT_FOR_STRING_CONTROL is enabled
+[Root Cause]	Freeing variable is not handled properly.
+[Solution]		Handled freeing variables properly.
+[Files]			MiniSetupExt.c
+
+[TAG]				EIP194426
+[Category]		Bug Fix
+[Severity:]		Normal
+[Symptom:]		Defaults are not populating properly in binary files
+[Root Cause]	When default value is used for controls for different data type then VFRCompiler is providing size OpCode as 0x45. So UefiHpkTool always setting size as 8 for all types of data type. 
+[Solution]		Modified HpkTool to set size based on dataType used for controls irrespective of IFR data.
+[Files]			HiiPackager.cpp
+
+[TAG] 			EIP197751
+[Category] 		Bug Fix
+[Severity] 		Minor
+[Symptom] 		System boots from disabled legacy boot device
+[RootCause] 	BBS options are not set to BBS_DO_NOT_BOOT_FROM even when options are disabled in BootPage
+[Solution] 		When BBS options are DISABLED in BBSPage/BootPage then setting BootPriority as BBS_DO_NOT_BOOT_FROM
+[Files] 			Bbs.c
+
+[TAG]				EIP191520
+[Category]		Bug Fix
+[Severity:]		Important
+[Symptom:]		When GOP is not available setup crashes
+[Root Cause]	NULL check is not handled properly for variable TSEMouse.
+[Solution]		Handled NULL check properly for variable TSEMouse
+[Files]			Mouse.c
+
+[TAG]				EIP197322
+[Category]		Bug Fix
+[Severity:]		Normal
+[Symptom:]		Focus is not setting proper when clicking on TIME/DATE once SoftKbd launched
+[Root Cause]	While launching softkbd for Mouse action, the DATE/TIME field is getting increased when ever ControlActionSelect happens
+[Solution]		When DATE/TIME control is selecting first or multiple times, launching SoftKbd only once for Mouse action and increasing only DATE/TIME field cyclically
+[Files]			Date.c, Time.c
+
+[TAG]				EIP197420
+[Category]		Bug Fix
+[Severity:]		Important
+[Symptom:]		Possible hang at manufactoring mode due to memory corruption
+[Root Cause]	NULL check is not handle properly for STRING type of control in case of INTERACTIVE
+[Solution]		Handled NULL check and return proper status.
+[Files]			HiiCallback.c
+
+[TAG]				EIP194174
+[Description]	Update TSE Function header and create release notes using Doxygen Tool from VeB
+[Category]   	Action Item
+[Files] 			All C and H files under AMITSE-Binary and AMITSE-Sources
+
+
+[TAG] 			EIP168801
+[Category] 		Improvement
+[Description] 	Support to follow interactive password control based on spec UEFI_2_4_Errata_B_april_9.pdf
+[Files] 			AMITSE.sdl, AmiTSEStr.uni, CommonHelper.c, FakeTokens.c, EzPortPlus.c, TseAdvanced.c, minisetupext.h, popuppassword.c, hiicallback.c, uefi21wrapper.c
+
+
+[TAG]				EIP183889
+[Category]		Bug Fix
+[Severity:]		Minor
+[Symptom:]		Restore BGRT table when Leagcy boot failed.
+[Root Cause]	IF we launch Legacy boot option we uninstall BGRT, so in case if its falied then we dont again reinstall the BGRT
+[Solution]		IF its legacy, then after we boot we again reinstall the BGRT
+[Files]			CommonHelper.c, boot.c, postmgmt.c
+
+
+[TAG] 			EIP193708
+[Category] 		Bug Fix
+[Symptom:]		Setup hangs on selecting 'Save current form now' option repeatedly four times and then selecting 'Discard current changes and exit' option.
+[Root Cause] 	The abnormal offset obtained corrupts the memory. That condition is not handled.
+[Solution] 		A condition is introduced to check for abnormal offset case and skip remaining code and go for next iteration if offset is abnormal.
+[Files] 			uefi21wapper.c
+
+
+[TAG] 			EIP190334
+[Category] 		Bug Fix
+[Severity:] 	Normal
+[Symptom:] 		AMITSE build warning/error with (INT)BuildTools_25.1
+[Root Cause] 	Presence of Depex section
+[Solution] 		Removed Depex section which is not needed here
+[Files] 			SignOn\SignOn.inf 
+
+[TAG] 			EIP187253
+[Category] 		Bug Fix
+[Severity:] 	Normal
+[Symptom:] 		ESRT not working
+[Root Cause] 	SUPPORT_ESRT token disabled by default
+[Solution] 		SUPPORT_ESRT token enabled by default
+[Files] 			AMITSE.sdl
+
+
+[TAG]				EIP186815
+[Category]		Improvement
+[Description]	Create override function to change MsgBoxCatagory value for Progress Bar
+[Files]			AMITSE.sdl, commonhelper.c, minisetup.h, legacy.c, tseadvanced.c and messagebox.c
+
+
+[TAG] 			EIP186214
+[Category] 		Bug Fix
+[Severity:] 	Normal
+[Symptom:] 		Unable to show softkbd in POST on mouse click
+[Root Cause] 	Capturing mouse click in notificication function not invoked properly
+[Solution] 		Since notification function registered in application level, other notification functions got importance. To make our notification function to get high priority notification function registered in notify tpl level
+[Files] 			postmgmt.c
+
+
+[TAG] 			EIP175017
+[Category] 		Bug Fix
+[Severity:] 	Normal
+[Symptom:] 		Setup hangs when sendform called from oemdriverhealth module
+[Solution] 		TSE installs timer to read the keys in conin availability. This timer stopped in PostManagerHandshake but if mainsetuploop called from sendform then this timer not stopped so hang happened in different stages.So stopping timer properly resolves the issue.
+[Files] 			FormBrowser2.c
+
+
+[TAG] 			EIP198559
+[Category] 		Bug Fix
+[Severity] 		Minor
+[Symptom] 		AMITSE 2.17.1249.1 causes a CPU exception D when switching out of quiet boot after launching a legacy option rom
+[RootCause] 	gGOP variable not updated with NULL when gop is removed
+[Solution] 		gGOP variable updated properly on switching to post screen from quiet boot
+[Files] 			commonoem.c
+
+
+[TAG]				EIP 193436
+[Category]		Action Item
+[Symptom]		AMITSE Binary emodule support ARM64
+[Description]	AMITSE Binary emodule support ARM64
+
+
+[TAG]			EIP195048
+[Category]	Bug Fix
+[Symptom:]	Build error in NT32 simulator on Setupdata_asm.asm
+[Solution]	Exportpath is generated in AmiTseGenFds.mak to resolve the environmental issues.
+[Files]		AMITSE.mak
+
+Updated TSEPkg sources function, Structure, file header to new formart
+
+Updated TSEPkg sources by removing EIP number and EIP details

@@ -1,0 +1,13 @@
+<component>
+	name = "Acpi"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Acpi\"
+	RefName = "HarrisonvillePkg.Acpi"
+[INF]
+"AcpiPlatformDxe\AcpiPlatformDxe.inf"
+"AcpiSmm\AcpiSmmPlatform.inf"
+[files]
+"Acpi.sdl"	
+[parts]
+"HarrisonvillePkg.AcpiTables"
+<endComponent>

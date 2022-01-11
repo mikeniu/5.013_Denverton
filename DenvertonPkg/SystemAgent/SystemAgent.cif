@@ -1,0 +1,18 @@
+<component>
+	name = "SystemAgent"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SystemAgent\"
+	RefName = "DenvertonPkg.SystemAgent"
+[INF]
+"AcpiTables\SaAcpiTables.inf"
+[files]
+"SystemAgent.sdl"	
+"SystemAgentPkg.dec"	
+[parts]
+"DenvertonPkg.SystemAgent.Include"
+"DenvertonPkg.SystemAgent.IncludePrivate"
+"DenvertonPkg.SystemAgent.Library"
+"DenvertonPkg.SystemAgent.LibraryPrivate"
+"DenvertonPkg.SystemAgent.Mrc"
+"DenvertonPkg.SystemAgent.SaInit"
+<endComponent>

@@ -1,0 +1,12 @@
+<component>
+	name = "AcpiTables"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Cpu\PowerManagement\AcpiTables\"
+	RefName = "DenvertonPkg.AcpiTables"
+[INF]
+"PowerManagementAcpiTables.inf"
+[files]
+"AcpiTables.sdl"
+"Ssdt\Pstates.asl"	
+"Ssdt\Tstates.asl"
+<endComponent>

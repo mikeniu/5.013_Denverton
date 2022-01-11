@@ -1,0 +1,21 @@
+TOKEN
+	Name  = "PeiPolicyUpdateLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PeiPolicyUpdateLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PlatformPolicyUpdatePeiLib"
+	File  = "PeiPolicyUpdateLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "PeiPolicyUpdateLib"
+	Instance  = "HarrisonvillePkg.PlatformPolicyUpdatePeiLib"
+	ModuleTypes  = "PEIM PEI_CORE SEC"
+End
+

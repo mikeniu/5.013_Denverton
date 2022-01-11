@@ -1,0 +1,14 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Me\Policy\Include\"
+	RefName = "DenvertonPkg.Me.Policy.Include"
+[files]
+"Library\MePlatformPolicyUpdateDxeLib.h"	
+"Library\MePlatformPolicyUpdatePeiLib.h"	
+"Library\MePolicyDebugDumpDxe.h"	
+"Library\MePolicyLib.h"	
+"Library\MePolicyPeiLib.h"
+"Ppi\MePlatformPolicyPei.h"	
+"Protocol\MePlatformPolicyProtocol.h"
+<endComponent>

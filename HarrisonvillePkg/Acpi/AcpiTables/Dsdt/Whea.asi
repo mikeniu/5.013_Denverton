@@ -1,0 +1,246 @@
+/*++
+
+  Copyright (c)  2001 - 2016 Intel Corporation.  All rights reserved.
+
+  This software and associated documentation (if any) is furnished under 
+  a license and may only be used or copied in accordance with the terms 
+  of the license.  Except as permitted by such license, no part of this 
+  software or documentation may be reproduced, stored in a retrieval 
+  system, or transmitted in any form or by any means without the express 
+  written consent of Intel Corporation.
+
+  Module Name:
+
+    WHEAPlatform.asl
+
+  Abstract:
+
+    WHEA ASL device, objects and data
+
+--*/
+
+Scope(\) {
+
+        // Platform capability, bit 16=1 for WHEA. This has to be patched
+        // by WHEA driver
+
+        Name(\PCAP, 0x00010000)
+
+        // WHEA enabled flag
+        Name(\WHEN,0)
+
+}
+
+Scope(\_SB) {
+
+//
+// Operation region for GPI status bits
+//
+//OperationRegion (GSTS, SystemIO, 0x422, 1)
+
+OperationRegion (GSTS, SystemIO, 0x1822, 1)
+Field ( GSTS, ByteAcc, NoLock, Preserve) 
+      {
+       GP0  ,   1,
+             ,   7,
+       }
+OperationRegion (GINV, SystemIO, 0x82C, 1)
+Field (GINV, ByteAcc,NoLock,Preserve) 
+      {
+       GPIN  , 1,
+             ,7 ,
+      }
+
+OperationRegion (DBG0, SystemIO, 0x80, 2)
+Field (DBG0, ByteAcc,NoLock,Preserve) 
+      {
+       IO80, 8,
+       IO81, 8,
+      }
+
+
+    //
+    // WHEA
+    //
+
+    OperationRegion (IOB3, SystemIO, 0xB2, 2)  //MKF_SMIPORT
+    Field (IOB3, ByteAcc, NoLock, Preserve) {
+      SMIC, 8,                           // SW-SMI ctrl port
+      SMIS, 8,                           // SW-SMI status port
+    }
+
+/*
+;<AMI_PHDR_START>
+;------------------------------------------------------------------------
+;
+; Procedure:	OSFL
+;
+; Description:	OSFL object is used to detect the currently running OS
+; Input: Nothing
+; Output: OS type
+; running under 0 - Win 2000
+;               1 - Win 98/Se
+;               2 - Win Me
+;               3 - Linux
+;								4 - WinXP
+;								5 - Windows Server 2003				
+;								6 - FreeBSD		
+;								7 - HP-UX
+;								8 - OpenVMS		
+;               9..n - reserved
+;
+;-------------------------------------------------------------------------
+;<AMI_PHDR_END>
+*/
+	Name(OSVR, Ones)					// Global Name, returns current OS version ID
+	Method(OSFL, 0){
+		if(LNotEqual(OSVR, Ones)) {Return(OSVR)}	// OS version was already detected
+		if(LEqual(PICM,0)) {Store(0xAC, \_SB.IO80)}		// to indicate OS is running in ACPI PIC mode
+		Store(1, OSVR)					// default - Win98
+//// Detect currently running OS
+		if(CondRefOf(\_OSI,Local0))
+		{
+			If(\_OSI("Windows 2009")){Store(12, OSVR)}      // Windows Longhorn server ?
+			ElseIf(\_OSI("Windows 2008")){Store(10, OSVR)}      // Windows Longhorn server ?
+			ElseIf(\_OSI("Windows 2007")){Store(10, OSVR)}      // Windows Longhorn server ?
+			ElseIf(\_OSI("Windows 2006")){Store(11, OSVR)       // Windows Vista
+               // Check for Longhorn server (Vista +SP1)
+               If (\_OSI("Windows 2006.1")){Store (10, OSVR)}}     // Longhorn server
+			ElseIf (\_OSI("Windows 2001")){Store(4, OSVR)}
+			ElseIf (\_OSI("Windows 2001.1")){Store(5, OSVR)}		
+			ElseIf(\_OSI("FreeBSD")){Store(6, OSVR)}
+			ElseIf(\_OSI("HP-UX")){Store(7, OSVR)}
+			ElseIf(\_OSI("OpenVMS")){Store(8, OSVR)}
+		} 
+	Return(OSVR)
+	}
+ 
+
+
+        //////////
+        //
+        // WHEA Operational region for extended CMOS access
+        //
+        OperationRegion (CMOS, SystemIO, 0x70, 4)
+        Field (CMOS, ByteAcc, NoLock, Preserve)
+        {
+            IDX0, 7,
+            , 1,
+            DAT0, 8,
+            IDX1, 7,
+            , 1,
+            DAT1, 8
+        }
+        IndexField (IDX1, DAT1, ByteAcc, NoLock, Preserve)
+        {
+            Offset (0x48),    // Must Match Platform.h
+            OSF1, 32,          // PCAP Flag in CMOS              
+            OSF2, 32          // PCAP Flag in CMOS              
+        }
+
+//This method is used to turn on/off Whea support for BIOS 
+        //
+
+        Method (SWWE,1)   //SW SMI Whea Enable
+        {
+            Store(0, \_SB.SMIS)         //Save SMIS
+            Store(Arg0, \_SB.SMIC)         //Set parameter into SMIC 0x9E enable whea
+                                                       // 0x9D disable whea
+        } //end SWWE        
+
+
+//
+// Define WHEA device object with PNP0C33 (as per Whea platform guide 1.0) that will be 
+// used by OS to install WHEA driver.
+//
+        Device (WERR) {
+            Name(_HID, EISAID("PNP0C33"))   // WHEA Error device
+		    Name (_UID, 0)
+		    Method(_STA){
+		          //SWWE(0x9E)
+                       If(LEqual(OSFL, 10)) {     // Check if Longhorn Windows server
+                          If(And(PCAP,0x00010000)) {
+                             Return(0x0F)
+                          }
+                       }
+                        If(LEqual(OSFL, 12)) {     // Check if Longhorn Windows server
+                          If(And(PCAP,0x00010000)) {
+                             Return(0x0F)
+                          }
+                       }
+                       
+                  
+                       Return(0x00) 
+
+      
+	            }
+  
+		    
+
+		    
+		    
+        }
+
+//
+// Our platform will generate SCI (on ICH GPI0 (SIO GPO62) to indicate
+// all Correctable/recovered errors. This GPE event will have to notify OS via WHEA device 
+// about the error.
+// Note: BIOS Error handler must build error data info before triggering SCI.
+//        
+// Denverton AptioV override start - EIP#300729
+#ifndef DTS_SUPPORT 
+   Method (\_GPE._L62, 0, NotSerialized) {
+      Store(0xBB, \_SB.IO80)
+      Notify (\_SB.WERR, 0x80)        // Notify a WHEA error event (actually for all CE's)
+   }
+#endif
+// Denverton AptioV override End - EIP#300729
+
+//
+// _OSC method will used by the OS the check platform capability for WHEA supprot. Also
+// OS will use to indicate BIOS to enable WHEA support. BIOS will also can deny OS's request
+// to enable WHEA if it's disable by platform or SKU policy (for e.g. WHEA disabled in Setup).
+//        
+
+//#if BUGGY_LH_OS
+
+/// For current LH OS build (buggy) only - WHEA stack in LH doesn't handle _OSC
+/// as per ACPI spec. Final LH release will fix that, till then use this code.
+
+        Method(_OSC , 4)
+
+        {
+            //Now it is OSC for WHEA
+            // Create DWORD Args from the Capabilities Buffer
+            //CreateDWordField(Arg3,0,CPB1)
+            CreateDWordField(Arg3,4,CPB2)
+
+            // Check for WHEA GUID
+            If(LEqual(Arg0, ToUUID("ed855e0c-6c90-47bf-a62a-26de0fc5ad5c")))
+            {
+
+              If(LEqual(OSFL, 12)) {     // Check if Longhorn Windows server
+                //Check WHEA supported by platform
+                If(And(\PCAP,0x00010000))
+                {
+                    // If OS not querying, enable WHEA in platform
+                    SWWE(0x9E)
+
+                    // Set WHEA enabled flag
+                    Store(0x0001, \WHEN)
+                    Return (Arg3)       // Whea supported
+                }
+              }
+            }
+
+            // Clear WHEA enabled flag
+            Store(0x0000, \WHEN)
+
+            // Set Unrecognized UUID
+            Or (CPB2, 0x0004, CPB2)
+            Return (Arg3)
+        }
+//end of "#if BUGGY_LH_OS"
+
+}   // end _SB scope
+

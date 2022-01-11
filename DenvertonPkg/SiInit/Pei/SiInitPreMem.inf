@@ -1,0 +1,90 @@
+## @file
+# Component description file for the Silicon Init Pre Memory module.
+#
+# @copyright
+# Copyright (c) 2013 - 2014 Intel Corporation. All rights reserved
+# This software and associated documentation (if any) is furnished
+# under a license and may only be used or copied in accordance
+# with the terms of the license. Except as permitted by the
+# license, no part of this software or documentation may be
+# reproduced, stored in a retrieval system, or transmitted in any
+# form or by any means without the express written consent of
+# Intel Corporation.
+# This file contains an 'Intel Peripheral Driver' and is uniquely
+# identified as "Intel Reference Module" and is licensed for Intel
+# CPUs and chipsets under the terms of your license agreement with
+# Intel or your vendor. This file may be modified by the user, subject
+# to additional terms of the license agreement.
+#
+# @par Specification
+#
+##
+
+
+[Defines]
+INF_VERSION = 0x00010017
+BASE_NAME = SiInitPreMem
+FILE_GUID = A8499E65-A6F6-48B0-96DB-45C266030D83
+VERSION_STRING = 1.0
+MODULE_TYPE = PEIM
+ENTRY_POINT = SiInitPrePolicy
+
+[Sources]
+SiInitPreMem.c
+
+[Packages]
+MdePkg/MdePkg.dec
+DenvertonPkg/Me/MePkg.dec
+DenvertonPkg/SiPkg.dec
+DenvertonPkg/DnvSiPrivate.dec
+DenvertonPkg/Cpu/CpuPkg.dec
+
+[LibraryClasses]
+PeimEntryPoint
+DebugLib
+PeiServicesLib
+#SaInitLib
+PchInitLib
+#CpuInitLib
+#MeInitLib
+#ActiveManagementLib
+PerformanceLib
+#ifdef SERVER_BIOS_FLAG
+PeiHsuartIpPolicyInitLib
+HeciMsgPeiLib
+StPgIpInitLib
+#endif
+
+[Ppis]
+gPchPolicyPpiGuid   ## CONSUMES
+gSiPolicyPpiGuid    ## CONSUMES
+#gMePolicyPpiGuid    ## CONSUMES
+#gAmtPolicyPpiGuid   ## CONSUMES
+#gSiSaPolicyPpiGuid  ## CONSUMES
+gPeiMePlatformPolicyPpiGuid
+#ifdef SERVER_BIOS_FLAG
+#endif
+
+[Guids]
+##
+## Performance GUIDs
+##
+gPerfPchPrePolicyGuid     ## CONSUMES
+gPerfSiValidateGuid       ## CONSUMES
+gPerfPchValidateGuid      ## CONSUMES
+#gPerfAmtValidateGuid      ## CONSUMES
+#gPerfCpuValidateGuid      ## CONSUMES
+#gPerfMeValidateGuid       ## CONSUMES
+#gPerfSaValidateGuid       ## CONSUMES
+#gPerfHeciPreMemGuid       ## CONSUMES
+gPerfPchPreMemGuid        ## CONSUMES
+#gPerfCpuPreMemGuid        ## CONSUMES
+#gPerfMePreMemGuid         ## CONSUMES
+#gPerfAmtPreMemGuid        ## CONSUMES
+#gPerfSaPreMemGuid         ## CONSUMES
+#gPerfEvlGuid              ## CONSUMES
+#gPerfMemGuid              ## CONSUMES
+
+[Depex]
+TRUE
+

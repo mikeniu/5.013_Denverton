@@ -1,0 +1,12 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Platform\NonVolatileMem\Library\"
+	RefName = "HarrisonvillePkg.Platform.NonVolatileMem.Library"
+[INF]
+"AdrCfgLib\AdrCfgLib.inf"
+"C2fAhciLib\C2fAhciLib.inf"
+"GpioCtrlrLib\GpioCtrlrLib.inf"
+[files]
+"Library.sdl"	
+<endComponent>

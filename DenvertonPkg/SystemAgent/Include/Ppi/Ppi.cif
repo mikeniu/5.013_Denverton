@@ -1,0 +1,12 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SystemAgent\Include\Ppi\"
+	RefName = "DenvertonPkg.SystemAgent.Include.Ppi"
+[files]
+"MemoryConfig.h"	
+"NvMemoryConfig.h"	
+"SaPlatformConfig.h"	
+"SaPolicy.h"	
+"VtdConfig.h"	
+<endComponent>

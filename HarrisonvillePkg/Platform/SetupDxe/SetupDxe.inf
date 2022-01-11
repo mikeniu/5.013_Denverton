@@ -1,0 +1,220 @@
+#
+# This file contains an 'Intel Peripheral Driver' and is      
+# licensed for Intel CPUs and chipsets under the terms of your
+# license agreement with Intel or your vendor.  This file may 
+# be modified by the user, subject to additional terms of the 
+# license agreement                                           
+#
+## @file
+# Component description file for DxePlatform module.
+#
+# This driver initializes platform configuration setting and installs several platform policy potocols.
+# Copyright (c) 2006 - 2016, Intel Corporation. All rights reserved.<BR>
+#
+#  This software and associated documentation (if any) is furnished
+#  under a license and may only be used or copied in accordance
+#  with the terms of the license. Except as permitted by such
+#  license, no part of this software or documentation may be
+#  reproduced, stored in a retrieval system, or transmitted in any
+#  form or by any means without the express written consent of
+#  Intel Corporation.	
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SetupDxe
+  FILE_GUID                      = ABBCE13D-E25A-4d9f-A1F9-2F7710786892
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SetupDriverEntry
+
+#
+#  This flag specifies whether HII resource section is generated into PE image.
+#
+# Aptio V Server Override: Changes done for loading the IntelRcSetup page in Defaults.bin during build time itself.
+  UEFI_HII_RESOURCE_SECTION      = TRUE
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+# Denverton AptioV Override Start - EIP#217439
+  # BootOptions.uni
+  # SysInfoSetupScreen.uni
+# Denverton AptioV Override End - EIP#217439
+  ProcessorSetupStrings.uni
+  ThermalConfigStrings.uni
+  SetupStrings.uni
+  Strings.uni
+  UsbConfigData.uni
+  UqiList.uni
+  CK420ConfigStrings.uni
+  SouthBridge.uni
+  
+  NorthBridgeStrings.uni
+  # IOH.uni # Denverton AptioV Override - EIP#217439
+  EventLogSetupStrings.uni
+  MeConfigData.uni
+  IeConfig.uni
+  PcieIpSetup/PcieIp.uni
+  
+	
+
+# Denverton AptioV Override Start - EIP#217439
+  EventLogSetup.hfr
+  ProcessorSetup.hfr
+  ProcessorLimitsSetup.hfr
+  ThermalConfig.hfr
+  # PciBus.hfr 
+  UsbConfigData.hfr
+  # ResetTesting.hfr
+  CK420Config.hfr
+  SouthBridge.hfr
+  
+  # IOH.hfr
+  NorthBridgeConfig.hfr
+  MeConfigData.hfr
+  IeConfig.hfr
+  PcieIpSetup/PcieIp.hfr
+  PprOption/PprOption.hfr
+  PcieIpSetup/PcieIpRootPort/PcieIpRootPort.hfr
+  
+  ## SATA
+  SataSetup/SataConfig.hfr
+  SataSetup/SataController.uni
+  SataSetup/SataController/SataController.hfr
+  SataSetup/SataController/Port/SataPortConfiguration.hfr
+
+	##USB
+	UsbSetup/UsbController.uni
+	UsbSetup/UsbConfig.hfr
+	UsbSetup/UsbSsController/UsbSsController.hfr
+	UsbSetup/UsbSsController/Port/UsbSsPortConfiguration.hfr
+	UsbSetup/UsbHsController/UsbHsController.hfr
+	UsbSetup/UsbHsController/Port/UsbHsPortConfiguration.hfr
+  
+  IntelRcSetup.vfr
+  ##UART
+  UartController/UartConfig.hfr
+  UartController/UartConfig.uni
+  # Advanced.vfr
+  # Main.vfr
+  # BootOptions.vfr
+  # SysInfoSetupScreen.vfr
+  # Tpm.vfr
+  # Security.vfr
+  # Chipset.vfr
+  SetupFunctions.c
+  SetupInfoRecords.c
+  # SysInfo.c
+  SetupPlatform.c
+  # SecurityCallback.c  
+  MeSetup.c
+  IeSetup.c
+# Denverton AptioV Override End - EIP#217439  
+
+[Packages]
+  MdePkg/MdePkg.dec
+#Denverton AptioV Override Start - EIP#212296 
+#  HarrisonvillePkg/Override/MdeModulePkg/MdeModulePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+#Denverton AptioV Override End - EIP#212296   
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+  HarrisonvillePkg/PlatformPkg.dec
+  DenvertonPkg/SiPkg.dec
+  DenvertonPkg/SystemAgent/Mrc/Mmrc/ProjectData/DNV/Pei/MemoryInit.dec
+  IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec
+  CryptoPkg/CryptoPkg.dec
+  DenvertonPkg/Me/MePkg.dec
+  DenvertonPkg/Ie/IePkg.dec  
+#  SecurityPkg/SecurityPkg.dec # Denverton AptioV Override
+  
+  
+
+[LibraryClasses]
+  DebugLib
+  IoLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  HiiLib
+  HobLib
+  PciLib
+  UefiLib
+  PrintLib
+  BaseMemoryLib
+  PcdLib
+  S3IoLib
+  S3PciLib
+  BaseCryptLib
+#  BiosIdLib	# Denverton Aptiov Override
+  PchInfoLib
+#  DxePcieIpInitLib # Denverton AptioV override
+  MeSetupLib
+
+[Guids]
+  gSetupVariableGuid
+  gMainPkgListGuid
+  gAdvancedPkgListGuid
+  gSysInfoPkgListGuid
+  gSecurityPkgListGuid
+  gChipsetPkgListGuid
+  gTpmPkgListGuid
+  gEfiCpuHtCapableGuid
+  gSignalBeforeEnterSetupGuid
+  gEfiLegacyBootMarkerGuid
+  gEfiMemoryConfigDataGuid                      # GUID ALWAYS_CONSUMED
+  gEfiMrcVersionGuid
+  gEfiSetupEnterGuid      # Denverton AptioV override - EIP#250584
+
+[Protocols]
+  gEfiDevicePathProtocolGuid                    # PROTOCOL ALWAYS_CONSUMED
+  gEfiHiiDatabaseProtocolGuid                   # PROTOCOL ALWAYS_CONSUMED
+  gEfiHiiConfigAccessProtocolGuid               # PROTOCOL ALWAYS_CONSUMED
+  gEfiHiiConfigRoutingProtocolGuid              # PROTOCOL ALWAYS_CONSUMED
+  gEfiTcgProtocolGuid
+  gEfiPlatformPolicyProtocolGuid                # PROTOCOL ALWAYS_PRODUCED
+  gEfiPlatformTypeProtocolGuid
+  gEfiPciRootBridgeIoProtocolGuid
+  gEfiIsaIoProtocolGuid
+  gEfiDiskInfoProtocolGuid
+  gEfiDataHubProtocolGuid
+  gEfiWindowsInt10Workaround       ## Produces
+  gEfiSmbiosProtocolGuid                        # PROTOCOL CONSUMES
+  gHeciProtocolGuid
+  gDxePlatformMePolicyProtocolGuid
+  gEfiRngProtocolGuid
+## Denverton AptioV Override Start - EIP#217439
+  gEfiHiiPackageListProtocolGuid
+## Denverton AptioV Override End - EIP#217439
+
+[Pcd]
+  gServerCommonTokenSpaceGuid.PcdUefiOptimizedBoot
+  gPlatformModuleTokenSpaceGuid.PcdWakeOnRTCS5
+  gPlatformModuleTokenSpaceGuid.PcdRtcWakeupTimeHour
+  gPlatformModuleTokenSpaceGuid.PcdRtcWakeupTimeMinute
+  gPlatformModuleTokenSpaceGuid.PcdRtcWakeupTimeSecond
+  gPlatformModuleTokenSpaceGuid.PcdSMBIOSSystemSKUNumber
+  gEfiCpuTokenSpaceGuid.PcdPlatformCpuAssetTags
+  gEfiCpuTokenSpaceGuid.PcdPlatformCpuSocketNames
+  gEfiCpuTokenSpaceGuid.PcdPlatformCpuSocketCount
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress  ## CONSUMES
+#  gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdPlatformBootTimeOut # Denverton AptioV override - EIP262802
+ 
+[Depex]
+  gEfiVariableArchProtocolGuid      AND 
+  gEfiVariableWriteArchProtocolGuid AND 
+  gEfiHiiDatabaseProtocolGuid       AND 
+  gEfiPlatformTypeProtocolGuid      AND
+## Denverton AptioV Override Start - EIP#217439  
+  gEfiSmbiosProtocolGuid            AND
+  gEfiHiiPackageListProtocolGuid    AND
+## Denverton AptioV Override End - EIP#217439
+  gPcdProtocolGuid
+
+

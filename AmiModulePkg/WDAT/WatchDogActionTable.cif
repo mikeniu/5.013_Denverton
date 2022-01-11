@@ -1,0 +1,12 @@
+<component>
+	name = "WatchDog Action Table"
+	category = eModule
+	LocalRoot = "AmiModulePkg\WDAT\"
+	RefName = "WDAT"
+[files]
+"WatchDogActionTable.sdl"
+"WatchDogActionTable.chm"	
+[parts]
+"WDAT_Core"
+"WDAT_Board"
+<endComponent>

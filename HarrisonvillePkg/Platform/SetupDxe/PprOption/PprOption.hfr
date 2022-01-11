@@ -1,0 +1,103 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may
+// be modified by the user, subject to additional terms of the
+// license agreement
+//
+// *++
+//
+// Copyright (c) 2015 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+//
+//
+// Module Name:
+//
+//   PprOption.hfr
+//
+// Abstract:
+//
+//   Ppr Option formset.
+//
+// Revision History:
+//
+// --*/
+
+form formid = DFX_PPR_FORM_ID_VARIABLE(PPR_INDEX),
+  title = STRING_TOKEN(DFX_PPR_TITLE_VARIABLE(PPR_INDEX));
+
+  oneof varid = SYSTEM_CONFIGURATION.PprEnable[PPR_INDEX],
+    prompt  = STRING_TOKEN(STR_PPR_ENABLE_TITLE),
+    help    = STRING_TOKEN(STR_PPR_ENABLE_HELP),
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+    option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = RESET_REQUIRED ;
+  endoneof;  
+
+  numeric varid = SYSTEM_CONFIGURATION.Row[PPR_INDEX],
+    prompt    = STRING_TOKEN(STR_PPR_ROW_TITLE),
+    help      = STRING_TOKEN(STR_PPR_ROW_HELP),
+    flags     = DISPLAY_UINT_HEX | RESET_REQUIRED,
+    minimum   = 0,
+    maximum   = 0x3FFF,
+    step      = 1,
+    default   = 0,
+  endnumeric;
+
+  numeric varid = SYSTEM_CONFIGURATION.Bank[PPR_INDEX],
+    prompt    = STRING_TOKEN(STR_PPR_BANK_TITLE),
+    help      = STRING_TOKEN(STR_PPR_BANK_HELP),
+    flags     = DISPLAY_UINT_HEX | RESET_REQUIRED,
+    minimum   = 0,
+    maximum   = 3,
+    step      = 1,
+    default   = 0,
+  endnumeric;
+
+  numeric varid = SYSTEM_CONFIGURATION.BankGroup[PPR_INDEX],
+    prompt    = STRING_TOKEN(STR_PPR_BANKG_TITLE),
+    help      = STRING_TOKEN(STR_PPR_BANKG_HELP),
+    flags     = DISPLAY_UINT_HEX | RESET_REQUIRED,
+    minimum   = 0,
+    maximum   = 3,
+    step      = 1,
+    default   = 0,
+  endnumeric;
+
+  numeric varid = SYSTEM_CONFIGURATION.DramDevice[PPR_INDEX],
+    prompt    = STRING_TOKEN(STR_PPR_DRAM_TITLE),
+    help      = STRING_TOKEN(STR_PPR_DRAM_HELP),
+    flags     = RESET_REQUIRED,
+    minimum   = 0,
+    maximum   = 16,
+    step      = 1,
+    default   = 0,
+  endnumeric;
+  
+  numeric varid = SYSTEM_CONFIGURATION.TargetRank[PPR_INDEX],
+    prompt    = STRING_TOKEN(STR_PPR_RANK_TITLE),
+    help      = STRING_TOKEN(STR_PPR_RANK_HELP),
+    flags     = DISPLAY_UINT_HEX | RESET_REQUIRED,
+    minimum   = 0,
+    maximum   = 3,
+    step      = 1,
+    default   = 0,
+  endnumeric;
+
+  numeric varid = SYSTEM_CONFIGURATION.TargetChannel[PPR_INDEX],
+    prompt    = STRING_TOKEN(STR_PPR_CHANNEL_TITLE),
+    help      = STRING_TOKEN(STR_PPR_CHANNEL_HELP),
+    flags     = DISPLAY_UINT_HEX | RESET_REQUIRED,
+    minimum   = 0,
+    maximum   = 1,
+    step      = 1,
+    default   = 0,
+  endnumeric;
+  
+endform;
+

@@ -1,0 +1,71 @@
+TOKEN
+	Name  = "ServerCommonPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling ServerCommonPkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+  Name  = "WheaElog_SUPPORT"
+  Value  = "1"
+  Help  = "Switch for Enabling WheaElog support in the project"
+  TokenType = Boolean
+  Token =  "Whea_SUPPORT" "=" "1"
+End
+
+TOKEN
+  Name  = "WheaSupport_SUPPORT"
+  Value  = "1"
+  Help  = "Switch for Enabling WheaSupport support in the project"
+  TokenType = Boolean
+  Token =  "Whea_SUPPORT" "=" "1"
+End
+
+TOKEN
+  Name  = "WheaPlatformBoot_SUPPORT"
+  Value  = "1"
+  Help  = "Main switch to enable WheaPlatformBoot support in Project"
+  TokenType = Boolean
+  Token =  "Whea_SUPPORT" "=" "1"
+End
+
+TOKEN
+  Name  = "WheaPlatform_SUPPORT"
+  Value  = "1"
+  Help  = "Main switch to enable WheaPlatform support in Project"
+  TokenType = Boolean
+  Token =  "Whea_SUPPORT" "=" "1"
+End
+
+INFComponent
+  Name  = "WheaElog"
+  File  = "Whea\WheaElog\WheaElog.inf"
+  Package  = "WheaElog"
+  ModuleTypes  = "DXE_SMM_DRIVER"
+  Token = "WheaElog_SUPPORT" "=" "1"
+End
+
+INFComponent
+  Name  = "WheaSupport"
+  File  = "Whea\WheaSupport\WheaSupport.inf"
+  Package  = "WheaSupport"
+  ModuleTypes  = "DXE_DRIVER"
+  Token = "WheaSupport_SUPPORT" "=" "1"
+End
+
+INFComponent
+  Name  = "WheaPlatformBoot"
+  File  = "Whea\WheaPlatformBoot\WheaPlatformBoot.inf"
+  Package  = "Whea"
+  ModuleTypes  = "DXE_SMM_DRIVER"
+  Token = "WheaPlatformBoot_SUPPORT" "=" "1"
+End
+
+INFComponent
+  Name  = "WheaPlatform"
+  File  = "Whea\WheaPlatform\WheaPlatform.inf"
+  Package  = "ServerCommonPkg"
+  ModuleTypes  = "DXE_SMM_DRIVER"
+  Token = "WheaPlatform_SUPPORT" "=" "1"
+End

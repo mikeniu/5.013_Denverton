@@ -1,0 +1,32 @@
+TOKEN
+	Name  = "MeTypeLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling MeTypeLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "MeTypeLib"
+	File  = "MeTypeLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "MeTypeSetLib"
+	File  = "MeTypeSetLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "MeTypeLib"
+	Instance  = "DenvertonPkg.MeTypeLib"
+End
+
+LibraryMapping
+	Class  = "MeTypeSetLib"
+	Instance  = "DenvertonPkg.MeTypeSetLib"
+End
+

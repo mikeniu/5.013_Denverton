@@ -1,0 +1,12 @@
+<component>
+	name = "MeTypeLib"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Me\Heci\Library\MeTypeLib\"
+	RefName = "DenvertonPkg.MeTypeLib"
+[INF]
+"MeTypeLib.inf"
+"MeTypeSetLib.inf"
+[files]
+"MeTypeLib.sdl"	
+"MeTypeLibInternal.h"	
+<endComponent>

@@ -1,0 +1,13 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Platform\NonVolatileMem\Include\"
+	RefName = "HarrisonvillePkg.Platform.NonVolatileMem.Include"
+[files]
+"NonVolatileMemTypes.h"	
+"Guid\NonVolatileMemoryHob.h"  
+"Library\AdrCfgLib.h" 
+"Library\C2fAhciLib.h"  
+"Library\GpioCtrlrLib.h"  
+"Ppi\NonVolatileMemPolicy.h"  
+<endComponent>

@@ -1,0 +1,11 @@
+<component>
+	name = "SmmAccess"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Cpu\SmmAccess\"
+	RefName = "DenvertonPkg.Cpu.SmmAccess"
+[INF]
+"Pei\SmmAccess.inf"
+"Dxe\SmmAccess.inf"
+[files]
+"SmmAccess.sdl"	
+<endComponent>

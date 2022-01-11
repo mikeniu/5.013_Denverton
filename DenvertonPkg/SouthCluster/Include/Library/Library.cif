@@ -1,0 +1,22 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\Include\Library\"
+	RefName = "DenvertonPkg.SouthCluster.Include.Library"
+[files]
+"GpioLib.h"
+"GpioNativeLib.h"
+"PchCycleDecodingLib.h"
+"PchHsioLib.h"
+"PchInfoLib.h"
+"PchP2sbLib.h"
+"PchPcrLib.h"
+"PchSbiAccessLib.h"
+"PeiPchPolicyLibrary.h"	
+"PchEspiLib.h"
+"PchPmcLib.h"
+"PchPolicyLib.h"
+"SecPchLib.h"
+"TraceHubDebugLib.h"
+"TraceHubInitLib.h"
+<endComponent>

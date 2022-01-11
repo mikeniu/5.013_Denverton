@@ -1,0 +1,9 @@
+<component>
+	name = "Crypto LIB Includes"
+	category = ModulePart
+	LocalRoot = "AmiCryptoPkg\Include\"
+	RefName = "AmiCryptoLibInc"
+[files]
+"Library\CryptLib.h"	
+"Library\BaseCryptLib.h"
+<endComponent>

@@ -1,0 +1,10 @@
+<component>
+	name = "IePolicyInclude"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Ie\Policy\Include\"
+	RefName = "DenvertonPkg.Ie.IePolicyInclude"
+[files]
+"IeHob.h"
+"Library\IePlatformPolicyUpdatePeiLib.h"
+"Ppi\IePlatformPolicyPei.h"	
+<endComponent>

@@ -1,0 +1,11 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Include\Protocol\"
+	RefName = "DenvertonPkg.Include.Protocol"
+[files]
+"MemInfo.h"
+"SmmUncoreDispatch2.h"	
+"UncorePlatformPolicy.h"
+"GlobalNvsArea.h"	
+<endComponent>

@@ -1,0 +1,17 @@
+<component>
+	name = "AmiChipsetModulePkg"
+	category = eChipset
+	LocalRoot = "AmiChipsetModulePkg\"
+	RefName = "AmiChipsetModulePkg"
+[INF]
+"Library\TscTimerLib\PeiTscTimerLib.inf"
+"Library\TscTimerLib\DxeTscTimerLib.inf"
+[files]
+"AmiChipsetModulePkg.sdl"	
+"AmiChipsetModulePkg.dec"	
+"AmiChipsetModulePkg.chm"	
+[parts]
+"AmiChipsetModulePkg.AmiCspLib"
+"AmiChipsetModulePkg.NorthBridge"
+"AmiChipsetModulePkg.SouthBridge"
+<endComponent>

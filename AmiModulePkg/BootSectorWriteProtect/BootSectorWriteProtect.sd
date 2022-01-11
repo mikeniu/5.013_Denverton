@@ -1,0 +1,64 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/** @file BootSectorWriteProtect.sd
+    Setup option for the Boot Sector Write Protect Driver
+
+**/
+
+#ifdef SETUP_DATA_DEFINITION
+    UINT8  BootSecWp;
+#endif //SETUP_DATA_DEFINITION
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+#define BOOTSECTORWRITEPROTECT_ONEOF\
+    oneof varid     = SETUP_DATA.BootSecWp,\
+        prompt      = STRING_TOKEN(STR_CSM_HDD_BOOTSECTOR_WP),\
+        help        = STRING_TOKEN(STR_CSM_HDD_BOOTSECTOR_WP_HELP),\
+        option text = STRING_TOKEN(STR_CSM_HDD_BOOTSECTOR_NORMAL),	value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_CSM_HDD_BOOTSECTOR_WRITEPROTECT),	value = 1, flags = 0;\
+    endoneof;
+
+#endif
+
+#ifdef CONTROLS_WITH_DEFAULTS
+    BOOTSECTORWRITEPROTECT_ONEOF
+#endif //#ifdef CONTROLS_WITH_DEFAULTS
+
+#ifdef BOOT_FORM_SET
+    #ifdef FORM_SET_ITEM
+
+    BOOTSECTORWRITEPROTECT_ONEOF
+
+    #endif  // FORM_SET_ITEM
+#endif // BOOT_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

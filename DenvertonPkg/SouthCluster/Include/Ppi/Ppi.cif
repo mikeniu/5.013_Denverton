@@ -1,0 +1,16 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\Include\Ppi\"
+	RefName = "DenvertonPkg.SouthCluster.Include.Ppi"
+[files]
+"PchPcieDeviceTable.h"	
+"PchPolicy.h"	
+"PchReset.h"	
+"PeiBlockIo.h"	
+"Sdhc.h"	
+"Spi.h"	
+"Wdt.h"	
+"BlockIoPei.h"
+"PchHsioPtssTable.h"
+<endComponent>

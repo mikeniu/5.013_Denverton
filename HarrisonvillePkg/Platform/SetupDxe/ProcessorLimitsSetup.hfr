@@ -1,0 +1,251 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+// *++
+//
+// Copyright (c) 2015 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// 
+// 
+// Module Name:
+//
+//   ProcessorLimitsSetup.hfr 
+// 
+// Abstract:
+// 
+//   Processor Ratio Limits and Core Count Limits Setup formset.
+// 
+// Revision History: 
+// 
+// --*/
+
+  //
+  // Thermal Trip Events Configuration
+  //
+  form formid = VFR_FORMID_RATIO_LIMITS,
+    title = STRING_TOKEN(STR_RATIO_LIMITS_PROMPT);
+
+    subtitle text = STRING_TOKEN(STR_RATIO_LIMITS_PROMPT);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    //
+    // MSR 0x1AD FREQ_LIMIT_RATIOS - bits 7:0
+    //
+    numeric varid = SYSTEM_CONFIGURATION.RatioLimit0,
+      prompt    = STRING_TOKEN(STR_RATIO_LIMIT_0),
+      help      = STRING_TOKEN(STR_RATIO_LIMIT_0_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+
+    //
+    // MSR 0x1AD FREQ_LIMIT_RATIOS - bits 15:8
+    //
+    numeric varid = SYSTEM_CONFIGURATION.RatioLimit1,
+      prompt    = STRING_TOKEN(STR_RATIO_LIMIT_1),
+      help      = STRING_TOKEN(STR_RATIO_LIMIT_1_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+
+    //
+    // MSR 0x1AD FREQ_LIMIT_RATIOS - bits 23:16
+    //
+    numeric varid = SYSTEM_CONFIGURATION.RatioLimit2,
+      prompt    = STRING_TOKEN(STR_RATIO_LIMIT_2),
+      help      = STRING_TOKEN(STR_RATIO_LIMIT_2_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+
+    //
+    // MSR 0x1AD FREQ_LIMIT_RATIOS - bits 31:24
+    //
+    numeric varid = SYSTEM_CONFIGURATION.RatioLimit3,
+      prompt    = STRING_TOKEN(STR_RATIO_LIMIT_3),
+      help      = STRING_TOKEN(STR_RATIO_LIMIT_3_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+
+    //
+    // MSR 0x1AD FREQ_LIMIT_RATIOS - bits 39:32
+    //
+    numeric varid = SYSTEM_CONFIGURATION.RatioLimit4,
+      prompt    = STRING_TOKEN(STR_RATIO_LIMIT_4),
+      help      = STRING_TOKEN(STR_RATIO_LIMIT_4_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+
+    //
+    // MSR 0x1AD FREQ_LIMIT_RATIOS - bits 47:40
+    //
+    numeric varid = SYSTEM_CONFIGURATION.RatioLimit5,
+      prompt    = STRING_TOKEN(STR_RATIO_LIMIT_5),
+      help      = STRING_TOKEN(STR_RATIO_LIMIT_5_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+
+    //
+    // MSR 0x1AD FREQ_LIMIT_RATIOS - bits 55:48
+    //
+    numeric varid = SYSTEM_CONFIGURATION.RatioLimit6,
+      prompt    = STRING_TOKEN(STR_RATIO_LIMIT_6),
+      help      = STRING_TOKEN(STR_RATIO_LIMIT_6_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+
+    //
+    // MSR 0x1AD FREQ_LIMIT_RATIOS - bits 63:56
+    //
+    numeric varid = SYSTEM_CONFIGURATION.RatioLimit7,
+      prompt    = STRING_TOKEN(STR_RATIO_LIMIT_7),
+      help      = STRING_TOKEN(STR_RATIO_LIMIT_7_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+
+    //
+    // MSR 0x1AE FREQ_LIMIT_CORES - bits 7:0
+    //
+    numeric varid = SYSTEM_CONFIGURATION.CoreCount0,
+      prompt    = STRING_TOKEN(STR_CORE_COUNT_0),
+      help      = STRING_TOKEN(STR_CORE_COUNT_0_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+
+    //
+    // MSR 0x1AE FREQ_LIMIT_CORES - bits 15:8
+    //
+    numeric varid = SYSTEM_CONFIGURATION.CoreCount1,
+      prompt    = STRING_TOKEN(STR_CORE_COUNT_1),
+      help      = STRING_TOKEN(STR_CORE_COUNT_1_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+
+    //
+    // MSR 0x1AE FREQ_LIMIT_CORES - bits 23:16
+    //
+    numeric varid = SYSTEM_CONFIGURATION.CoreCount2,
+      prompt    = STRING_TOKEN(STR_CORE_COUNT_2),
+      help      = STRING_TOKEN(STR_CORE_COUNT_2_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+
+    //
+    // MSR 0x1AE FREQ_LIMIT_CORES - bits 31:24
+    //
+    numeric varid = SYSTEM_CONFIGURATION.CoreCount3,
+      prompt    = STRING_TOKEN(STR_CORE_COUNT_3),
+      help      = STRING_TOKEN(STR_CORE_COUNT_3_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+
+    //
+    // MSR 0x1AE FREQ_LIMIT_CORES - bits 39:32
+    //
+    numeric varid = SYSTEM_CONFIGURATION.CoreCount4,
+      prompt    = STRING_TOKEN(STR_CORE_COUNT_4),
+      help      = STRING_TOKEN(STR_CORE_COUNT_4_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+	
+    //
+    // MSR 0x1AE FREQ_LIMIT_CORES - bits 47:40
+    //
+    numeric varid = SYSTEM_CONFIGURATION.CoreCount5,
+      prompt    = STRING_TOKEN(STR_CORE_COUNT_5),
+      help      = STRING_TOKEN(STR_CORE_COUNT_5_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+
+    //
+    // MSR 0x1AE FREQ_LIMIT_CORES - bits 55:48
+    //
+    numeric varid = SYSTEM_CONFIGURATION.CoreCount6,
+      prompt    = STRING_TOKEN(STR_CORE_COUNT_6),
+      help      = STRING_TOKEN(STR_CORE_COUNT_6_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+	
+    //
+    // MSR 0x1AE FREQ_LIMIT_CORES - bits 63:56
+    //
+    numeric varid = SYSTEM_CONFIGURATION.CoreCount7,
+      prompt    = STRING_TOKEN(STR_CORE_COUNT_7),
+      help      = STRING_TOKEN(STR_CORE_COUNT_7_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | NUMERIC_SIZE_1 | RESET_REQUIRED,
+      minimum   = 0x0,
+      maximum   = 0xff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+	
+  endform;
+

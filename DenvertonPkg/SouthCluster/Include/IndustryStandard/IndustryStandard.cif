@@ -1,0 +1,11 @@
+<component>
+	name = "IndustryStandard"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\Include\IndustryStandard\"
+	RefName = "DenvertonPkg.SouthCluster.Include.IndustryStandard"
+[files]
+"CeAta.h"
+"Mmc.h"
+"SdCard.h"
+"UfsHcRegs.h"
+<endComponent>

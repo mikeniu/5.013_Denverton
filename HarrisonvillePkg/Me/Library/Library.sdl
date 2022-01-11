@@ -1,0 +1,34 @@
+TOKEN
+	Name  = "MeLibrary_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "MeDxeSetupLib"
+	File  = "MeSetupLib\MeDxeSetupLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "MePeiSetupLib"
+	File  = "MeSetupLib\MePeiSetupLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "MeSetupLib"
+	Instance  = "HarrisonvillePkg.MeDxeSetupLib"
+	ModuleTypes  = "DXE_DRIVER DXE_SMM_DRIVER DXE_RUNTIME_DRIVER UEFI_DRIVER"
+End
+
+LibraryMapping
+	Class  = "MeSetupLib"
+	Instance  = "HarrisonvillePkg.MePeiSetupLib"
+    ModuleTypes  = "PEIM"
+End
+

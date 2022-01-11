@@ -1,0 +1,20 @@
+TOKEN
+	Name  = "PeiPolicyInitLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PeiPolicyInitLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PeiPolicyInitLib"
+	File  = "PeiPolicyInitLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "PeiPolicyInitLib"
+	Instance  = "HarrisonvillePkg.PeiPolicyInitLib"
+End
+

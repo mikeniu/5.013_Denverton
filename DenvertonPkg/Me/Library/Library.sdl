@@ -1,0 +1,20 @@
+TOKEN
+	Name  = "MeLibrary_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "MeLibPei"
+	File  = "MeLibPei\MeLibPei.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "MeLibPei"
+	Instance  = "DenvertonPkg.MeLibPei"
+	ModuleTypes  = "PEIM"
+End

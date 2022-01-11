@@ -1,0 +1,41 @@
+TOKEN
+  Name  = "IE_HECI_INTERFACE_SUPPORT"
+  Value  = "1"
+  TokenType = Boolean
+  TargetEQU = Yes
+  TargetMAK = Yes
+  Master = Yes
+  Help  = "Main switch to enable IeHeci interface support in Project"
+End
+
+TOKEN
+  Name  = "IeHeciDxeInit_SUPPORT"
+  Value  = "1"
+  Help  = "Main switch to enable IeHeciDxeInit support in Project"
+  TokenType = Boolean
+End
+
+TOKEN
+  Name  = "IeHeciSmmInit_SUPPORT"
+  Value  = "1"
+  Help  = "Main switch to enable IeHeciSmmInit support in Project"
+  TokenType = Boolean
+End
+
+INFComponent
+  Name  = "IeHeciDxeInit"
+  File  = "Dxe\IeHeciDxeInit.inf"
+  Package  = "DenvertonPkg"
+  ModuleTypes  = "DXE_DRIVER"
+  Token = "IeHeciDxeInit_SUPPORT" "=" "1"
+  Token = "IE_HECI_INTERFACE_SUPPORT" "=" "1"
+End
+
+INFComponent
+  Name  = "IeHeciSmmInit"
+  File  = "Smm\IeHeciSmmInit.inf"
+  Package  = "DenvertonPkg"
+  ModuleTypes  = "DXE_SMM_DRIVER"
+  Token = "IeHeciSmmInit_SUPPORT" "=" "1"
+  Token = "IE_HECI_INTERFACE_SUPPORT" "=" "1"
+End

@@ -1,0 +1,10 @@
+<component>
+	name = "Ras"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Ras\"
+	RefName = "HarrisonvillePkg.Ras"
+[parts]
+"HarrisonvillePkg.Ras.Smm"
+"HarrisonvillePkg.Ras.Whea"
+"RuntimeErrorlog"
+<endComponent>

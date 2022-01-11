@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "PchSmiDispatcher_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PchSmiDispatcher support in Project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PchSmiDispatcher"
+	File  = "PchSmiDispatcher.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+

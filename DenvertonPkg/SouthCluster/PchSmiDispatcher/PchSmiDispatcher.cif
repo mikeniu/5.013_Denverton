@@ -1,0 +1,11 @@
+<component>
+	name = "PchSmiDispatcher"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\PchSmiDispatcher\"
+	RefName = "DenvertonPkg.SouthCluster.PchSmiDispatcher"
+[INF]
+"Smm\PchSmiDispatcher.inf"	
+[files]
+"Smm\PchSmiDispatcher.sdl"
+"Smm\PchSmmEspi.h"
+<endComponent>

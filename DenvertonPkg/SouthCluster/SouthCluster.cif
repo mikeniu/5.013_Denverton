@@ -1,0 +1,26 @@
+<component>
+	name = "SouthCluster"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\"
+	RefName = "DenvertonPkg.SouthCluster"
+[INF]
+"SDControllerDxe\MmcHostDxe.inf"
+[files]
+"SouthCluster.sdl"	
+[parts]
+"DenvertonPkg.SouthCluster.Include"
+"DenvertonPkg.SouthCluster.IncludePrivate"
+"DenvertonPkg.SouthCluster.LegacyInterrupt"
+"DenvertonPkg.SouthCluster.Library"
+"DenvertonPkg.SouthCluster.LibraryPrivate"
+"DenvertonPkg.SouthCluster.PchInit"
+"DenvertonPkg.SouthCluster.PchSmiDispatcher"
+"DenvertonPkg.SouthCluster.PchReset"
+"DenvertonPkg.SouthCluster.SataController"
+"DenvertonPkg.SouthCluster.SmartTimer"
+"DenvertonPkg.SouthCluster.PchSmbus"
+"DenvertonPkg.SouthCluster.SmmControl"
+"DenvertonPkg.MmcMediaDevicePei"
+"DenvertonPkg.SDMediaDeviceDxe"
+"DenvertonPkg.SouthCluster.TraceHubStatusCodeHandler"
+<endComponent>

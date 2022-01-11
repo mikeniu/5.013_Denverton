@@ -1,0 +1,20 @@
+TOKEN
+	Name  = "MeFiaMuxLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling MeFiaMuxLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "MeFiaMuxLib"
+	File  = "MeFiaMuxLib.inf"
+	Package  = "MeFiaMuxLib"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "MeFiaMuxLib"
+	Instance  = "MeFiaMuxLib.MeFiaMuxLib"
+End
+

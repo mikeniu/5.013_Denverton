@@ -1,0 +1,23 @@
+TOKEN
+	Name  = "WatchdogTimer_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Usb support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "WatchdogTimer_DIR"
+	Path  = "MdeModulePkg\Universal\WatchdogTimerDxe"
+End
+
+INFComponent
+	Name  = "WatchdogTimer"
+	File  = "WatchdogTimer.inf"
+	Package  = "MdeModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Path  = "WatchdogTimer_DIR"
+End
+

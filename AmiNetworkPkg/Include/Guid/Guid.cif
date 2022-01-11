@@ -1,0 +1,11 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "AmiNetworkPkg\Include\Guid\"
+	RefName = "AmiNetworkPkg.Guid"
+[files]
+"HttpBootConfigHii.h"
+"Ip6ConfigHii.h"	
+"IScsiConfigHii.h"
+"NetworkStackSetup.h"	
+<endComponent>

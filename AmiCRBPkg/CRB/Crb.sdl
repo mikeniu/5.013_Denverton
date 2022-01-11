@@ -1,0 +1,1265 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+TOKEN
+    Name  = "EFI_SPECIFICATION_VERSION"
+    Value  = "0x2001F"
+    Help  = "version of the supported EFI/UEFI specification:\0x1000A - EFI 1.1\0x20000 - UEFI 2.0\0x2000A- UEFI 2.1"
+    TokenType = Integer
+    TargetMAK = Yes
+    Range  = "0x1000A, 0x20000, 0x2000A"
+End
+
+TOKEN
+    Name  = "CRB_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Chipset Reference Board support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name = "CRB_PLATFORM_SELECT"
+    Value = "1"
+    TokenType = Integer
+    Help = "Determine CRB board flavor:\1:Harcuvar CRB\2:CormorantLake CRB\3:Aspencove CRB"
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name = "TRACEHUB_SUPPORT"
+    Value = "0"
+    TokenType = Boolean
+    Help = "Enables TRACEHUB Support for the CRB"
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "HSUART_MODE"
+    Value = "1"              
+    TokenType = Integer
+    Help = "Determines the HSUART mode. 0 - PCIe, 1 - Legacy, 2 - Hide"
+    TargetDSC = Yes
+End
+
+# When SIO is present the Legacy resources will be claimed by the COMs in the SIO
+# Hence force PCIe mode for the HSUARTs when SIO is present
+TOKEN
+    Name = "HSUART_MODE"
+    Value = "0"
+    TokenType = Integer
+    Help = "Determines the HSUART mode. 0 - PCIe, 1 - Legacy, 2 - Hide"
+    TargetDSC = Yes
+    Token = "SIO_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DEBUG_MODE"
+	Value  = "0"
+	TokenType = Boolean
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "TARGET_ARCH"
+	Value  = "X64"
+	Help  = "Project CPU Architecture"
+	TokenType = Expression
+	TargetMAK = Yes
+	Range  = "IA32 or X64"
+End
+
+TOKEN
+	Name  = "PLATFORM_NAME"
+	Value  = "Harrisonville"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetDSC = Yes
+End
+
+TOKEN
+	Name  = "PLATFORM_GUID"
+	Value  = "71ADFF35-5B71-4231-9030-2B7636516D5B"
+	Help  = "Porting required!!!\The unique platform GUID that does into the description file.\MUST BE CLONED IN EVERY PROJECT!"
+	TokenType = Expression
+	TargetDSC = Yes
+End
+
+TOKEN
+	Name  = "FW_VERSION_GUID"
+	Value  = "{0x00000000, 0x0000, 0x0000, {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}}"
+	Help  = "Porting required!!!\FW Version GUID inserted into Firmware ID structure.\FW version has to be overridden for every project."
+	TokenType = Expression
+	TargetH = Yes
+	Range  = "GUID"
+End
+
+TOKEN
+	Name  = "PLATFORM_PKG_NAME"
+	Value  = "HarrisonvillePkg"
+	Help  = "The package of this platform."
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetDSC = Yes
+	Section  = "Defines"
+End
+
+TOKEN
+	Name  = "PLATFORM_RC_PACKAGE"
+	Value  = "$(PLATFORM_PKG_NAME)"
+	Help  = "!!PORTING REQUIRED!!\Specific your RC code package."
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "CHIPSET_REF_DEC_PATH"
+	Value  = "$(PLATFORM_RC_PACKAGE)\$(PLATFORM_RC_PACKAGE).dec"
+	Help  = "!!PORTING REQUIRED!!\Specific your RC code DEC path."
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "FLASH_SIZE"
+	Value  = "0x800000"
+	Help  = "Size of the Flash Device in bytes\0x100000, 0x200000, 0x400000, 0x800000"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BIOS_SIZE"
+	Value  = "800000h"
+	TokenType = Integer
+	TargetEQU = Yes
+End
+
+TOKEN
+	Name  = "CRB_PROJECT_MAJOR_VERSION"
+	Value  = "0"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CRB_PROJECT_MINOR_VERSION"
+	Value  = "37"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CRB_PROJECT_TAG"
+	Value  = "0ACHI"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PROJECT_MAJOR_VERSION"
+	Value  = "$(CRB_PROJECT_MAJOR_VERSION)"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PROJECT_MINOR_VERSION"
+	Value  = "$(CRB_PROJECT_MINOR_VERSION)"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PROJECT_TAG"
+	Value  = "$(CRB_PROJECT_TAG)"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "BIOS_TAG"
+    Value  = "$(PROJECT_TAG)$(PROJECT_MAJOR_VERSION)$(PROJECT_MINOR_VERSION)"
+    Help  = "BIOS Tag inserted into Firmware ID structure.\9 characters. \5 characters of project tag followed by 3 characters of project version and terminating zero"
+    TokenType = Expression
+    TargetEQU = Yes
+    TargetMAK = Yes     # Denverton Aptiov override - EIP#361002
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "AMI_ROM"
+	Value  = "$(PROJECT_TAG)$(PROJECT_MAJOR_VERSION)$(PROJECT_MINOR_VERSION).rom"
+	Help  = "File name of the BIOS rom image"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "valid file name"
+End
+
+TOKEN
+    Name  = "IE_INTERFACE_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable IE interface support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IE_HECI_INTERFACE_SUPPORT"
+    Value  = "0"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Help  = "Main switch to enable AMI IeHeci support in Project"
+    Token = "IE_INTERFACE_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "IPMI_IE_SUPPORT"
+    Value  = "0"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Help  = "Main switch to enable Ipmi Ie support in Project"
+    Token = "IE_INTERFACE_SUPPORT" "=" "0"    
+End
+
+TOKEN
+	Name  = "DEFAULT_BOOT_TIMEOUT"
+	Value  = "3"
+	Help  = "Number of seconds that the firmware will wait before initiating the original default boot selection. \A value of 0 indicates that the default boot selection is to be initiated immediately on boot. \A value of 65535(0xFFFF) indicates that firmware will wait for user input before booting. \This means the default boot selection is not automatically started by the firmware."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-65535"
+End
+
+TOKEN
+	Name  = "Recovery_Time_Delay"
+	Value  = "40"
+	Help  = "Loop count to calculate the delay for Atapi Recovery"
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+  Name  = "x64_BUILD"
+  Value  = "1"
+  Help  = "Main switch to enable x64 support in Project\DO REBUILD ALL AFTER CHANGING THIS SWITCH!!!"
+  TokenType = Boolean
+  TargetEQU = Yes
+  TargetMAK = Yes
+  TargetH = Yes
+  Token = "TARGET_ARCH" "=" "X64"
+End
+
+TOKEN
+  Name  = "x64_BUILD"
+  Value  = "0"
+  Help  = "Main switch to enable x64 support in Project\DO REBUILD ALL AFTER CHANGING THIS SWITCH!!!"
+  TokenType = Boolean
+  TargetEQU = Yes
+  TargetMAK = Yes
+  TargetH = Yes
+  Token = "TARGET_ARCH" "=" "IA32"
+End
+
+TOKEN
+	Name  = "ISA_IRQ_MASK"
+	Value  = "0xE3BF"       # Denverton AptioV Override - EIP#380568
+	Help  = "This is an IRQ mask which may be used by ISA devices\ If BIT == 0 IRQ Available BIT == 1 IRQ Used.\DEFAULT VALUE == 0xE305."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0...0FFFFh"
+End
+
+TOKEN
+	Name  = "X64_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NCPU"
+	Value  = "16"
+	Help  = "Maximum number of processor threads."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CODE_CACHE_SIZE"
+	Value  = "0x180000"
+	Help  = "Code Cache Size. Size must match alignment of base."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SERVWORK_MICROCODE"
+	Value  = "1"
+	Help  = "Master Server/Workstation CPU uCode Enable"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Range  = "On-Off"
+End
+
+TOKEN
+    Name  = "SERVWORK_506FX"
+    Value = "1"
+    Help  = "Intel(R) Denverton"
+    TokenType = Boolean
+End
+
+TOKEN
+  Name  = "NVRAM_RT_GARBAGE_COLLECTION_SUPPORT"
+  Value  = "1"
+  Help  = "This token enables/disables support of the NVRAM garbage collection at runtime."
+  TokenType = Boolean
+  TargetH = Yes
+End
+
+TOKEN
+	Name  = "DEBUG_COM_PORT"
+	Value  = "1"
+	Help  = "This token indicates whether the debug port is from SIO or from SOC's HSUART. 1 - The debug port is from SOC's HSUART, 2 - The debug port is from SIO"	
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DEBUG_COM_PORT_ADDR"
+	Value  = "0x1000"
+	Help  = "COM Port address the debugger uses."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "DEBUG_COM_PORT" "=" "1"	
+End
+
+ELINK
+	Name  = "gEfiPciIoProtocolGuid"
+	Parent  = "AdditionalSetupProtocols"
+	InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "CrbPei"
+	File  = "Pei/CrbPei.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "CrbDxe"
+	File  = "Dxe/CrbDxe.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+# Tokens to configure the ROM layout
+
+TOKEN
+  Name  = "NVRAM_SIZE"
+  Value  = "0x20000"
+  Help  = "Size of NVRAM area"
+  TokenType = Integer
+  TargetEQU = Yes
+  TargetMAK = Yes
+  TargetH = Yes
+  Range  = "From: 1 To: FLASH_SIZE - FV_MAIN_BLOCKS*FLASH_BLOCK_SIZE"
+End
+
+# Denverton AptioV Override Start - EIP#239760
+TOKEN
+  Name  = "FV_BB_SIZE"
+  Value  = "0x190000"
+  Help  = "Size of the FV_BB area"
+  TokenType = Integer
+  TargetEQU = Yes
+  TargetMAK = Yes
+  TargetH = Yes
+  Range  = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+End
+# Denverton AptioV Override End - EIP#239760
+
+# Library Mapping 
+INFComponent
+	Name  = "SecCore"
+	File  = "SecCore\SecCore.inf"
+	Package  = "UefiCpuPkg"
+	ModuleTypes  = "SEC"
+	Path  = "UEFI_CPU_PKG_DIR"
+End
+
+# Denverton AptioV Override Start - EIP#323097
+PATH
+  Name  = "BaseSerialLib_DIR"
+  Path  = "AmiCRBPkg/Library/BaseSerialPortLib16550"
+End
+
+INFComponent
+  Name  = "BaseSerialPortLib16550"
+  File  = "BaseSerialPortLib16550.inf"
+  Package  = "AmiCRBPkg"
+  Path = "BaseSerialLib_DIR"
+End
+
+LibraryMapping
+  Class = "SerialPortLib"
+  Instance = "AmiCRBPkg.BaseSerialPortLib16550"
+End
+# Denverton AptioV Override End - EIP#323097
+
+LibraryMapping
+  Class  = "SmbusLib"
+  Instance  = "MdePkg.PeiSmbusLibSmbus2Ppi"
+  ModuleTypes  = "PEIM"
+  Disable = "Yes"
+End
+
+LibraryMapping
+  Class  = "SmbusLib"
+  Instance  = "MdePkg.DxeSmbusLib"
+  ModuleTypes  = "DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER"
+  Disable = "Yes"
+End
+
+# Denverton TODO Start
+# Check if these changes are needed, after power-on with real hardware.
+# Currently, the library mappings are maintained same as Intel RC.
+
+# Denverton AptioV Override Start - EIP#212333
+PATH
+  Name  = "BaseS3BootScriptLibNull_DIR"
+  Path  = "MdePkg/Library/BaseS3BootScriptLibNull"
+End
+
+INFComponent
+  Name  = "BaseS3BootScriptLibNull"
+  File  = "BaseS3BootScriptLibNull.inf"
+  Package  = "MdePkg"
+  Path  = "BaseS3BootScriptLibNull_DIR"
+End
+
+LibraryMapping
+  Class  = "S3BootScriptLib"
+  Instance  = "MdePkg.BaseS3BootScriptLibNull"
+  ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+  Class  = "S3BootScriptLib"
+  Instance  = "MdePkg.BaseS3BootScriptLibNull"
+  Override  = "DenvertonPkg.PeiPchInitLib"  
+End
+
+PATH
+  Name  = "DxeS3BootScriptLib_DIR"
+  Path  = "MdeModulePkg\Library\PiDxeS3BootScriptLib\"
+End
+
+INFComponent
+  Name  = "DxeS3BootScriptLib"
+  File  = "DxeS3BootScriptLib.inf"
+  Package  = "MdeModulePkg"
+  Path  = "DxeS3BootScriptLib_DIR"
+End
+
+LibraryMapping
+  Class  = "S3BootScriptLib"
+  Instance  = "MdeModulePkg.DxeS3BootScriptLib"
+End
+
+PATH
+    Name  = "BaseUefiTianoDecompressLib_DIR"
+    Path  = "IntelFrameworkModulePkg\Library\BaseUefiTianoCustomDecompressLib"
+End
+
+INFComponent
+    Name  = "BaseUefiTianoDecompressLib"
+    File  = "BaseUefiTianoCustomDecompressLib.inf"
+    Package  = "IntelFrameworkModulePkg"
+    Path  = "BaseUefiTianoDecompressLib_DIR"
+End
+
+LibraryMapping
+    Class  = "UefiDecompressLib"
+    Instance  = "IntelFrameworkModulePkg.BaseUefiTianoDecompressLib"
+End
+
+#Denverton AptioV override Start - EIP#273894
+
+LibraryMapping
+  Class  = "DebugLib"
+  Instance  = "MdePkg.BaseDebugLibSerialPort"
+  Override  = "MdeModulePkg.DxeMain"
+  Token = "SERIAL_DEBUGGER_SUPPORT" "=" "0"
+End
+
+INFComponent
+    Name  = "BaseDebugLibNull"
+    File  = "../../MdePkg/Library/BaseDebugLibNull/BaseDebugLibNull.inf"
+    Package  = "MdePkg"
+End
+
+LibraryMapping
+    Class  = "DebugLib"
+    Instance  = "MdePkg.BaseDebugLibNull"
+    ModuleTypes  = "SEC"
+    Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+End
+
+#Denverton AptioV override End - EIP#273894
+
+PATH
+  Name  = "BasePcdLibNull_DIR"
+  Path  = "MdePkg/Library/BasePcdLibNull"
+End
+
+INFComponent
+  Name  = "BasePcdLibNull"
+  File  = "BasePcdLibNull.inf"
+  Package  = "MdePkg"
+  Path = "BasePcdLibNull_DIR"
+End
+
+LibraryMapping
+  Class  = "PcdLib"
+  Instance  = "MdePkg.BasePcdLibNull"
+  ModuleTypes  = "DXE_CORE"
+End
+# Denverton AptioV Override End - EIP#212333
+# Denverton TODO more analysis End
+
+# Denverton AptioV Override Start - EIP#210382
+# Denverton PCD mapping referring Intel RC source
+
+# Denverton Aptiov override Start- EIP#373905
+# For enabling Capsule Update support
+PcdMapping
+    Name  = "PcdSupportUpdateCapsuleReset"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFeatureFlag"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+# Denverton Aptiov override  End- EIP#373905
+
+PcdMapping
+    Name  = "PcdCpuIEDEnabled"
+    GuidSpace  = "gEfiCpuTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "FALSE"
+    Arch  = "X64"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "X64_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80000046"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "The value is a bit mask that is used to enable/disable certain types of debug messages.\Bit values are defined by the DEBUG_XXX macros in DebugLib.h"
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdSerialRegisterBase"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsPatchableInModule"
+    Value  = "$(DEBUG_COM_PORT_ADDR)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdSerialPciDeviceInfo"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild
+    DataType  = "Pointer"
+    Value  = "{0x1A,0x00,0x00,0x00,0xFF}"
+    Offset  = 00h
+    Length  = 20h
+    TargetDSC = Yes
+    Token = "DEBUG_COM_PORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdSerialPciDeviceInfo"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild
+    DataType  = "Pointer"
+    Value  = "{0xFF}"
+    Offset  = 00h
+    Length  = 20h
+    TargetDSC = Yes
+    Token = "DEBUG_COM_PORT" "=" "2"
+End
+
+PcdMapping
+    Name  = "PcdPeiCoreMaxPeimPerFv"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x50" # Denverton Aptiov override
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+End
+
+# TODO : May be needed in the future
+#PcdMapping
+#  Name  = "PcdCpuMicrocodePatchAddress"
+#  GuidSpace  = "gEfiCpuTokenSpaceGuid"
+#  PcdType  = "PcdsFixedAtBuild"
+#  DataType  = "UINT64"
+#  #Value  = "$(MICROCODE_BASE)"
+#  Value  = "0xFFE30060"
+#  Offset  = 00h
+#  Length  = 01h
+#  TargetDSC = Yes
+#End
+
+# TODO : May be needed in the future
+#PcdMapping
+#  Name  = "PcdCpuMicrocodePatchRegionSize"
+#  GuidSpace  = "gEfiCpuTokenSpaceGuid"
+#  PcdType  = "PcdsFixedAtBuild"
+#  DataType  = "UINT64"
+#  Value  = "0x3FFA0"
+#  Offset  = 00h
+#  Length  = 01h
+#  TargetDSC = Yes
+#End
+
+PcdMapping
+    Name  = "PcdTemporaryRamBase"
+    GuidSpace  = "gEfiCpuTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "$(CAR_BASE_ADDRESS)"  
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdTemporaryRamSize"
+    GuidSpace  = "gEfiCpuTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "$(CAR_TOTAL_SIZE)"  
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdFlashAreaBaseAddress"
+    GuidSpace  = "gPlatformModuleTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "$(FLASH_BASE)"  
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdFlashAreaSize"
+    GuidSpace  = "gPlatformModuleTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "$(FLASH_SIZE)"  
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdFlashFvMainBase"
+    GuidSpace  = "gCpPlatFlashTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "$(FV_MAIN_BASE)"  
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdFlashFvMainSize"
+    GuidSpace  = "gCpPlatFlashTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "$(FV_MAIN_SIZE)"  
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+  Name  = "PcdMaximumLinkedListLength"
+  GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+  PcdType  = "PcdsFixedAtBuild"
+  DataType  = "Uint32"
+  Value  = "0"
+  Offset  = 00h
+  Length  = 01h
+  TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdNemCodeCacheBase"
+    GuidSpace  = "gSiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "$(FV_BB_BASE)"  
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdNemCodeCacheSize"
+    GuidSpace  = "gSiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "$(CODE_CACHE_SIZE)"  
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+# Denverton AptioV Override End - EIP#210382
+
+# Denverton Aptiov override Start - EIP#256053 
+# BIOSBasicTest utility expects the Maximum valid Year to be 9999
+PcdMapping
+    Name  = "PcdMaximalValidYear"
+    GuidSpace  = "gPcAtChipsetPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "9999"  
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+# Denverton AptioV Override End - EIP#256053 
+
+# Denverton AptioV Override Start - EIP#353139
+PcdMapping
+    Name  = "PcdSerialFifoControl"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT8"
+    Value  = "0x27"  
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+# Denverton AptioV Override End - EIP#353139
+
+# Denverton Aptiov override Start - EIP#249150
+
+TOKEN
+	Name  = "FV_WHEA_SIZE"
+	Value  = "0"
+	Help  = "Size of WHEA area"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 1 To: FLASH_SIZE - FV_MAIN_BLOCKS*FLASH_BLOCK_SIZE"
+End
+
+TOKEN
+	Name  = "FV_WHEA_SIZE"
+	Value  = "0x10000"
+	Help  = "Size of WHEA area"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 1 To: FLASH_SIZE - FV_MAIN_BLOCKS*FLASH_BLOCK_SIZE"
+	Token = "Whea_SUPPORT" "=" "1"
+End
+
+FD_AREA
+	Name  = "FV_WHEA"
+	TYPE = "RAW"
+	FD_INFO  = "AMIROM"
+	Offset  = "$(NVRAM_OFFSET) + $(NVRAM_SIZE)"
+	Size  = "$(FV_WHEA_SIZE)"
+	Layout_Attribute  = "0xC00" # Denverton AptioV Override - EIP#275412
+	Attributes  = "0xffff"
+	Alignment  = "16"
+	Token = "Whea_SUPPORT" "=" "1"
+End
+FD_AREA
+	Name  = "FV_WHEA"
+	TYPE = "RAW"
+	FD_INFO  = "AMIROM"
+	Offset  = "$(NVRAM_OFFSET) + $(NVRAM_SIZE)*2"
+	Size  = "$(FV_WHEA_SIZE)"
+	Layout_Attribute  = "0xC00" # Denverton AptioV Override - EIP#275412
+	Attributes  = "0xffff"
+	Alignment  = "16"
+	Token = "FAULT_TOLERANT_NVRAM_UPDATE" "=" "1"
+	Token = "Whea_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "FV_WHEA_BASE"
+	Value  = "$(FLASH_BASE)+ $(NVRAM_OFFSET) + $(NVRAM_SIZE)"
+	Help  = "WHEA Base address"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "Whea_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "FV_WHEA_BASE"
+	Value  = "$(FLASH_BASE)+ $(NVRAM_OFFSET) + $(NVRAM_SIZE)*2"
+	Help  = "WHEA Base address"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "FAULT_TOLERANT_NVRAM_UPDATE" "=" "1"
+	Token = "Whea_SUPPORT" "=" "1"
+End
+
+# Denverton Aptiov override End - EIP#249150
+
+# Denverton Aptiov override Start - EIP#251434
+FD_AREA
+	Name  = "GPNV"
+	TYPE = "RAW"
+	FD_INFO  = "AMIROM"
+	Offset  = "$(NVRAM_OFFSET) + $(NVRAM_SIZE) + $(FV_WHEA_SIZE)"
+	Size  = "$(GPNV_SIZE)"
+	Layout_Attribute  = "0x0" 
+	Attributes  = "0xffff"
+	Alignment  = "16"
+	Token = "GpnvErrorLogging_SUPPORT" "=" "1"
+End
+
+FD_AREA
+	Name  = "GPNV"
+	TYPE = "RAW"
+	FD_INFO  = "AMIROM"
+	Offset  = "$(NVRAM_OFFSET) + $(NVRAM_SIZE)*2 + $(FV_WHEA_SIZE)"
+	Size  = "$(GPNV_SIZE)"
+	Layout_Attribute  = "0x0" 
+	Attributes  = "0xffff"
+	Alignment  = "16"
+	Token = "FAULT_TOLERANT_NVRAM_UPDATE" "=" "1"
+	Token = "GpnvErrorLogging_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "GPNV_SIZE"
+	Value  = "0"
+	Help  = "Size of GPNV area"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 1 To: FLASH_SIZE - FV_MAIN_BLOCKS*FLASH_BLOCK_SIZE"
+End
+
+TOKEN
+	Name  = "GPNV_SIZE"
+	Value  = "0x10000"
+	Help  = "Size of GPNV area"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 1 To: FLASH_SIZE - FV_MAIN_BLOCKS*FLASH_BLOCK_SIZE"
+	Token = "GpnvErrorLogging_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "FV_MAIN_OFFSET"
+	Value  = "$(NVRAM_OFFSET)+$(NVRAM_SIZE) + $(FV_WHEA_SIZE) +  $(GPNV_SIZE)"
+	Help  = "Offset to the start of the FV_MAIN area from the start of the ROM image"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+End
+
+TOKEN
+	Name  = "FV_MAIN_OFFSET"
+	Value  = "$(NVRAM_OFFSET)+$(NVRAM_SIZE)*2 +  $(FV_WHEA_SIZE) +  $(GPNV_SIZE)"
+	Help  = "Offset to the start of the FV_MAIN area from the start of the ROM image"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+	Token = "FAULT_TOLERANT_NVRAM_UPDATE" "=" "1"
+End
+# Denverton Aptiov override End - EIP#251434
+
+# Denverton AptioV Override Start - EIP#239760
+PcdMapping
+    Name  = "PcdUsbXhciPciAddress"
+    GuidSpace  = "gEfiAMIDebugRxPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "0x000A8000"  
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "AMIDEBUG_RX_SUPPORT" "=" "1"
+End
+# Denverton AptioV Override End - EIP#239760
+
+ 
+ PcdMapping
+    Name  = "PcdMinimalValidYear"
+    GuidSpace  = "gPcAtChipsetPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(MINIMUM_YEAR)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdMaximalValidYear"
+    GuidSpace  = "gPcAtChipsetPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(MAXIMUM_YEAR)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+End
+
+# Denverton AptioV Override Start - EIP#251019
+TOKEN
+	Name  = "SPI_REGISTERS"
+	Value  = "{ 0xFD10, 4, 8, 0x10, 0x90, 0x91, 0x94, 0x96, 0x98, 0xB0, 0xB4, 0xC4, 0xC8, 0xCC, 0xD0 }"
+	Help  = "SPI Registers Configuration.\{ SPI Bus/Device/Function/Register, HwSeqStsCtl, FlashAddr, FlashData, SwSeqStatus, SwSeqCtrl, PrefixOp, OpType, OpMenu, FDOC, FDOD, LVSCC, UVSCC, PT Index, PT Data}"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SPI_USE_HARDWARE_SEQUENCE" "<=" "1"
+End
+
+TOKEN
+	Name  = "SPI_REGISTERS"
+	Value  = "{ 0xFD10, 4, 8, 0x10, 0xA0, 0xA1, 0xA4, 0xA6, 0xA8, 0xB4, 0xB8, 0xC4, 0xC8, 0xCC, 0xD0 }"
+	Help  = "SPI Registers Configuration.\{ SPI Bus/Device/Function/Register, HwSeqStsCtl, FlashAddr, FlashData, SwSeqStatus, SwSeqCtrl, PrefixOp, OpType, OpMenu, FDOC, FDOD, LVSCC, UVSCC, PT Index, PT Data}"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SPI_USE_HARDWARE_SEQUENCE" ">=" "2"
+End
+# Denverton AptioV Override End - EIP#251019
+
+# Denverton Aptiov override Start - EIP#282862
+TOKEN
+    Name  = "TCO_BASE_ADDRESS"
+    Value  = "0x400" 
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "UHCI_EMUL_PCI_DEVICES"
+    Value  = "{0xF8, 0, 0x01, 0x06, 0x94}"
+    Help  = "List of supported UHCI controllers in the following format: {dev1, ITF, SCC, BCC, offset}, {dev2, ITF, SCC, BCC, offset},...,{devN, ITF, SCC, BCC, offset}\dev represents the location of UHCI controller on PCI bus: dev = Bus << 8 + Dev << 3 + Func.\ITF represents the interface type of PCI device, for UHCI it must be 0.\SCC represents the sub class code of PCI device, for UHCI it must be 0x03.\BCC represents the base class code of PCI device, for UHCI it must be 0x0C.\offset represents the offset of legacy support register, for UHCI it must be 0xC0."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "UHCI_EMUL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SW_IRQ_GENERATION_REG"
+    Value  = "$(TCO_BASE_ADDRESS)+0x10"
+    Help  = "Software IRQ generation regsiter from SB to generate the IRQ12 and IRQ1."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IRQ_EMUL_SUPPORT" "=" "1"
+    Token = "UHCI_EMUL_SUPPORT" "=" "1"
+End
+
+# Denverton Aptiov override End - EIP#282862
+
+# Denverton AptioV Override Start - EIP#275412
+TOKEN
+    Name  = "ELAR_SIZE"
+    Value  = "2000h"
+    Help  = "Size of Error Log Address Range."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ERST_BUSY_STS_VALUE"
+    Value  = "1"
+    TokenType = Integer
+    TargetH = Yes
+End
+# Denverton AptioV Override End - EIP#275412
+
+# Denverton AptioV Override Start - EIP300529 
+#Porting changes for Esrt module 
+TOKEN
+    Name = "OEM_ESRT_FIRMWARE_GUID"
+    Value = "$(FW_VERSION_GUID)"
+    Help = "FW Version GUID inserted into Firmware ID structure.\FW version has to be overridden for every project."
+    TokenType = Expression
+    TargetH = Yes
+    Range = "GUID"
+End
+
+# To solve System ASSERT at AInt13.c. Legacy BIOS Region is not enough when TPM chip is present
+TOKEN
+    Name  = "OPROM_MAX_ADDRESS"
+    Value  = "0xE3FFF"
+    Help  = "The last address that can be used by Option ROM."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Range  = "0xC7FFF...0xEBFFF"
+End
+
+# To solve issue: AMI Logo and POST messages not appearing when CSM Video = UEFI mode
+TOKEN
+        Name  = "BDS_START_PCI_BEFORE_END_OF_DXE"
+        Value  = "1"
+        Help  = "When this token is enabled, PCI bus enumeration,\creation of PCI I/O handles, and launch of OpROM for onboard devices\are performed before generation of the End-of-DXE event.\This feature requires PciBus_12 or newer."
+        TokenType = Boolean
+End
+# Denverton AptioV Override End - EIP#300529 
+
+# Denverton AptioV Override Start - EIP#299343 
+
+ELINK
+    Name  = "$(BUILD_DIR)/EventLogsAutoId.h"
+    Parent  = "AMITSE_OEM_HEADER_LIST"
+    Token = "EventLogsSetupPage_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(BUILD_DIR)/ServerAutoId.h"
+    Parent  = "AMITSE_OEM_HEADER_LIST"
+    Token = "ServerMgmtSetup_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+# MdePkg_12 - System hang, due to SmmPciExpressLib mapping in MdePkg.sdl
+LibraryMapping
+    Class  = "PciExpressLib"
+    Instance  = "MdePkg.BasePciExpressLib"
+    ModuleTypes  = "DXE_SMM_DRIVER SMM_CORE"
+    Token = "SMM_SUPPORT" "=" "1"
+End
+# Denverton AptioV Override End - EIP#299343 
+
+# Denverton AptioV Override Start - EIP#304451
+# Removed Denverton A1 Stepping Support
+TOKEN
+    Name  = "SERVWORK_M01506F0"
+    Value  = "0"
+    Help  = "Intel(R) Denverton Processor A-0 Stepping"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+# Denverton AptioV Override End - EIP#304451
+
+# Denverton AptioV Override Start - EIP#288690 #DSDT update made in PciHostBridge.c is skipped
+TOKEN
+	Name  = "DONT_UPDATE_RB_RES_ASL"
+	Value  = "1"
+	Help  = "A switch to not update RB_RES.ASL place holders on ready to boot event."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DONT_UPDATE_PEBS_IN_AML"
+	Value  = "1"
+	Help  = "A switch to not update PEBS place holders for PCI Express Base Address on ready to boot event."
+	TokenType = Boolean
+	TargetH = Yes
+End
+# Denverton AptioV Override End - EIP#288690
+
+# Denverton AptioV Override Start - EIP#316261 
+TOKEN
+    Name  = "SMBIOS_TABLE_LOCATION"
+    Value  = "0"
+    Help  = "SMBIOS Table (version 2.X) location: \0 = Above 1MB only \1 = Auto (E000 Segment, if unable to allocate to E000, then put table above 1MB)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "CSM_SUPPORT" "=" "1"
+End
+# Denverton AptioV Override End - EIP#316261 
+
+
+#Denverton AptioV Override Start- EIP#305575
+
+TOKEN
+     Name  = "HOTPLUG_SUPPORT"
+     Value  = "0"
+     Help  = "Enables / Disables Pci Bus Driver Native PCI Hotplug support"
+     TokenType = Boolean
+     TargetMAK = Yes
+     TargetH = Yes
+     TargetDSC = Yes
+End
+
+# For high resource padding support
+TOKEN
+    Name  = "ABOVE_4G_PCI_DECODE_DEFAULT_VALUE"
+    Value  = "1"
+    Help  = "Sets Above 4G Address Space Decode Default option for BIOS Setup."
+    TokenType = Boolean
+    TargetH = Yes
+    Range  = "ON or OFF default is OFF"
+    Token = "HOTPLUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "CSM_VGA_64BITBAR_WORKAROUND"
+    Value  = "1"
+    Help  = "VBE is limited to 32 bit for an address of Video Linear Buffer.\If this token is on, the code will attempt to build the correct 64-bit linear buffer address."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "ABOVE_4G_PCI_DECODE_DEFAULT_VALUE" "=" "1"
+End
+
+TOKEN
+    Name  = "PCI_DEVICE_64BIT_RESOURCE_THRESHOLD"
+    Value  = "0xFFFFFFFFFF"
+    Help  = "Forces PCI Bus driver to disable Device if it's 64bit resource request exceeds this value"
+    TokenType = Expression
+    TargetH = Yes
+    Range  = "Up to 1024G. Max possible MMIOH per stack is 1024G as per RC setup option so setting default value to 1024G"
+    Token = "HOTPLUG_SUPPORT" "=" "1"
+End
+
+# PCIE (OOR)Out Of Resource Handling Support
+TOKEN
+    Name  = "CRB_OUT_OF_RESOURCE_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable CRB defined OUTOFRESOURCE (MMIO/IO)HANDLING support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "HOTPLUG_SUPPORT" "=" "1"
+End
+
+#Denverton AptioV Override End- EIP#305575
+
+#Denverton AptioV Override Start- EIP#348922
+TOKEN
+    Name  = "BoardPciRes_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable PCI out of Resource support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "CRB_OUT_OF_RESOURCE_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PCI_OUT_OF_RESOURCE_SETUP_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable PCI out of Resource Setup Page support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "CRB_OUT_OF_RESOURCE_SUPPORT" "=" "1"
+End
+#Denverton AptioV Override End- EIP#348922
+
+#Denverton AptioV Override Start - EIP#347947
+#LEK2: GBE NCSI Support for Cormorant Lake CRB
+TOKEN
+    Name = "CML_GBE_NCSI_SUPPORT"
+    Value = "0"
+    TokenType = Boolean
+    Help = "Switch to select (LEK2) interface for GBEA and GBEB: 0 - NoMNG, 1 – NCSI"
+    TargetH = Yes
+    TargetMAK = Yes
+End
+#Denverton AptioV Override End - EIP#347947
+
+
+
+# Denverton Aptiov override Start - EIP#361002
+# To provide FIT Table support on Denverton
+
+TOKEN
+    Name  = "FLASH_BLOCK_SIZE"
+    Value  = "0x1000"
+    Help  = "Size of the Flash Device Block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+# Denverton Aptiov override End - EIP#361002
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

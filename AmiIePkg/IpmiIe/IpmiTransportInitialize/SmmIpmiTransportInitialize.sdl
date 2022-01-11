@@ -1,0 +1,16 @@
+TOKEN
+    Name  = "SmmIpmiTransportInitialize_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling SmmIpmiTransportInitialize support in the project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+End
+
+INFComponent
+    Name  = "SmmIpmiTransportInitialize"
+    File  = "SmmIpmiTransportInitialize.inf"
+    Package  = "AmiIpmiIePkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+End

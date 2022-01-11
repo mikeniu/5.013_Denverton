@@ -1,0 +1,239 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may
+// be modified by the user, subject to additional terms of the
+// license agreement
+//
+// *++
+//
+// Copyright (c) 2016 - 2017 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+//
+//
+// Module Name:
+//
+//   PcieIpRootPort.hfr
+//
+// Abstract:
+//
+//   PCIE IP Root Port formset.
+//
+// Revision History:
+//
+// --*/
+
+form formid = PCIE_FORM_ID_VARIABLE(ROOTPORT_INDEX),
+    title = STRING_TOKEN(PCIE_TITLE_VARIABLE(ROOTPORT_INDEX));
+
+
+    oneof varid = SYSTEM_CONFIGURATION.RootPortLinkSpeed[ROOTPORT_INDEX],
+        prompt   = STRING_TOKEN(STR_ROOTPORT_LINK_SPEED_PROMPT),
+        help     = STRING_TOKEN(STR_ROOTPORT_LINK_SPEED_HELP),
+        option text = STRING_TOKEN(STR_RP_GEN1), value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_RP_GEN2), value = 2, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_RP_GEN3), value = 3, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+    endoneof;
+    
+    oneof varid = SYSTEM_CONFIGURATION.RootPortClockGating[ROOTPORT_INDEX],
+        prompt   = STRING_TOKEN(STR_ROOTPORT_CLOCK_GATING_PROMPT),
+        help     = STRING_TOKEN(STR_ROOTPORT_CLOCK_GATING_HELP),
+        option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.RootPortMaxPayload[ROOTPORT_INDEX],
+        prompt   = STRING_TOKEN(STR_ROOTPORT_MAX_PAYLOAD_PROMPT),
+        help     = STRING_TOKEN(STR_ROOTPORT_MAX_PAYLOAD_HELP),
+        option text = STRING_TOKEN(STR_MP128), value = 0,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_MP256), value = 1,  flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_MP512), value = 2,  flags = RESET_REQUIRED;
+		option text = STRING_TOKEN(STR_MP1024),  value = 3, flags = RESET_REQUIRED;
+		option text = STRING_TOKEN(STR_MP2048),  value = 4, flags = RESET_REQUIRED;
+		option text = STRING_TOKEN(STR_MP4096),  value = 5, flags = RESET_REQUIRED;
+    endoneof;
+    
+    oneof varid = SYSTEM_CONFIGURATION.RootPortMaxReadRequest[ROOTPORT_INDEX],
+        prompt   = STRING_TOKEN(STR_ROOTPORT_MAX_READ_REQUEST_PROMPT),
+        help     = STRING_TOKEN(STR_ROOTPORT_MAX_READ_REQUEST_HELP),
+		option text = STRING_TOKEN(STR_AUTO),   value = 55, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+		option text = STRING_TOKEN(STR_MP128),  value = 0,  flags = RESET_REQUIRED;
+		option text = STRING_TOKEN(STR_MP256),  value = 1,  flags = RESET_REQUIRED;
+		option text = STRING_TOKEN(STR_MP512),  value = 2,  flags = RESET_REQUIRED;
+		option text = STRING_TOKEN(STR_MP1024), value = 3,  flags = RESET_REQUIRED;
+		option text = STRING_TOKEN(STR_MP2048), value = 4,  flags = RESET_REQUIRED;
+		option text = STRING_TOKEN(STR_MP4096), value = 5,  flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.RootPortExtTagField[ROOTPORT_INDEX],
+        prompt   = STRING_TOKEN(STR_ROOTPORT_EXT_TAG_FIELD_PROMPT),
+        help     = STRING_TOKEN(STR_ROOTPORT_EXT_TAG_FIELD_HELP),
+        option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.RootPortRelaxedOrdering[ROOTPORT_INDEX],
+        prompt   = STRING_TOKEN(STR_ROOTPORT_RELAXED_ORDERING_PROMPT),
+        help     = STRING_TOKEN(STR_ROOTPORT_RELAXED_ORDERING_HELP),
+        option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.RootPortExtSync[ROOTPORT_INDEX],
+        prompt   = STRING_TOKEN(STR_ROOTPORT_EXT_SYNC_PROMPT),
+        help     = STRING_TOKEN(STR_ROOTPORT_EXT_SYNC_HELP),
+        option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.RootPortDeEmphasis[ROOTPORT_INDEX],
+        prompt   = STRING_TOKEN(STR_ROOTPORT_DEEMPHASIS_PROMPT),
+        help     = STRING_TOKEN(STR_ROOTPORT_DEEMPHASIS_HELP),
+        option text = STRING_TOKEN(STR_3_5), value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_6_0), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.RootPortStopScream[ROOTPORT_INDEX],
+        prompt   = STRING_TOKEN(STR_BWR_PCIE_STOP_SCREAM_SUPPORT),
+        help     = STRING_TOKEN(STR_STOP_SCREAM_SUPPORT_HELP),
+        option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.PcieRootPortAspm[ROOTPORT_INDEX],
+        prompt   = STRING_TOKEN(STR_PCIE_ASPM_EN_PROMPT),
+        help     = STRING_TOKEN(STR_PCIE_ASPM_EN_HELP),
+        option text = STRING_TOKEN(STR_L1),  value = 2, flags = DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.PcieRootPortSLD[ROOTPORT_INDEX],
+        prompt   = STRING_TOKEN(STR_PCIE_LSD_PROMPT),
+        help     = STRING_TOKEN(STR_PCIE_LSD_HELP),
+        option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.CapabilityLock[ROOTPORT_INDEX],
+      prompt = STRING_TOKEN(STR_BWR_PCIERPLOCK_SUPPORT),
+      help = STRING_TOKEN(STR_LOCK_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_UNLOCK), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+      option text = STRING_TOKEN(STR_LOCK),   value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.RootPortLaneReversal[ROOTPORT_INDEX],
+        prompt   = STRING_TOKEN(STR_ROOTPORT_LANE_REVERSAL_PROMPT),
+        help     = STRING_TOKEN(STR_ROOTPORT_LANE_REVERSAL_HELP),
+        option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+    endoneof;
+       
+    oneof varid  = SYSTEM_CONFIGURATION.RootPortCTO[ROOTPORT_INDEX] ,
+      prompt       = STRING_TOKEN(STR_ROOTPORT_COMPLETION_TIMEOUT_PROMPT),
+      help         = STRING_TOKEN(STR_ROOTPORT_COMPLETION_TIMEOUT_HELP),
+      option text  = STRING_TOKEN(STR_ENABLED),  value = 1, flags = RESET_REQUIRED;
+      option text  = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.RootPortCTO[ROOTPORT_INDEX] == 1;
+      oneof varid = SYSTEM_CONFIGURATION.RootPortCTORange[ROOTPORT_INDEX],
+          prompt  = STRING_TOKEN(STR_ROOTPORT_COMPLETION_TIMEOUT_RANGE_PROMPT),
+          help    = STRING_TOKEN(STR_ROOTPORT_COMPLETION_TIMEOUT_RANGE_HELP),
+          option text = STRING_TOKEN(STR_DEFAULT),     value = 0x0,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_50US_50MS),   value = 0x1,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_50US_100US),  value = 0x2,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_1MS_10MS),    value = 0x3,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_16MS_55MS),   value = 0x4,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_65MS_210MS),  value = 0x5,  flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+          option text = STRING_TOKEN(STR_260MS_900MS), value = 0x6,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_1S_3_5S),     value = 0x7,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_4S_13S),      value = 0x8,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_17S_64S),     value = 0x9,  flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+   
+
+#if PCIE_HOTPLUG_SUPPORT == 1
+    checkbox varid    = SYSTEM_CONFIGURATION.PcieRootPortEn[ROOTPORT_INDEX],
+         prompt   = STRING_TOKEN(STR_PCH_PCIERP_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_PCIERP_HELP),
+         // Flags behavior for checkbox is overloaded so that it equals
+         // a DEFAULT value.  1 = ON, 0 = off
+         flags    = CHECKBOX_DEFAULT,
+    endcheckbox;
+
+    oneof varid  = SYSTEM_CONFIGURATION.PcieRootPortHPE[ROOTPORT_INDEX] ,
+      prompt       = STRING_TOKEN(STR_HOTPLUG_PROMPT),
+      help         = STRING_TOKEN(STR_HOTPLUG_HELP),
+      option text  = STRING_TOKEN(STR_ENABLED),  value = 1, flags = RESET_REQUIRED;
+      option text  = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+    endoneof;
+
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortHPE[ROOTPORT_INDEX] == 0;
+      numeric varid = SYSTEM_CONFIGURATION.PcieExtraBusRsvd[ROOTPORT_INDEX],
+          prompt      = STRING_TOKEN (STR_PCH_PCIE_RBUS_PROMPT),
+          help        = STRING_TOKEN (STR_PCH_PCIE_RBUS_HELP),
+          minimum     = 0,
+          maximum     = MAX_EXTRA_BUS_RESERVED_VALUE,
+          step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+          default     = 0,    // default no extra bus reserved
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieMemRsvd[ROOTPORT_INDEX], 
+          prompt      = STRING_TOKEN (STR_PCH_PCIE_RMEM_PROMPT),
+          help        = STRING_TOKEN (STR_PCH_PCIE_RMEM_HELP),
+          minimum     = 1,
+          maximum     = MAX_PCIE_MEM_RESERVED_VALUE,
+          step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+          default     = 10,   // Default 10MB Memory Reserved
+      endnumeric;
+      
+
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieMemRsvdalig[ROOTPORT_INDEX], 
+          prompt      = STRING_TOKEN (STR_PCH_PCIE_RMEM_ALIG_PROMPT),
+          help        = STRING_TOKEN (STR_PCH_PCIE_RMEM_ALIG_HELP),
+          minimum     = 1,
+          maximum     = 31,
+          step        = 1,
+          default     = 26,
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.PciePFMemRsvd[ROOTPORT_INDEX], 
+          prompt      = STRING_TOKEN (STR_PCH_PCIE_PF_RMEM_PROMPT),
+          help        = STRING_TOKEN (STR_PCH_PCIE_PF_RMEM_HELP),
+          minimum     = 1,
+          maximum     = MAX_PCIE_PF_MEM_RESERVED_VALUE,
+          step        = 1,
+          default     = 10,    // Default 10MB Memory Reserved
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.PciePFMemRsvdalig[ROOTPORT_INDEX], 
+          prompt      = STRING_TOKEN (STR_PCH_PCIE_PF_RMEM_ALIG_PROMPT),
+          help        = STRING_TOKEN (STR_PCH_PCIE_PF_RMEM_ALIG_HELP),
+          minimum     = 1,
+          maximum     = 31,
+          step        = 1,
+          default     = 28,
+      endnumeric;
+      numeric varid = SYSTEM_CONFIGURATION.PcieIoRsvd[ROOTPORT_INDEX], 
+          prompt      = STRING_TOKEN (STR_PCH_PCIE_RVIO_PROMPT),
+          help        = STRING_TOKEN (STR_PCH_PCIE_RVIO_HELP),
+          minimum     = 0,
+          maximum     = MAX_PCIE_IO_RESERVED_VALUE,
+          step        = 4,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+          default     = 0,    // Default 0K IO Reserved
+      endnumeric;
+    endif; // suppressif ideqval PCH_RC_CONFIGURATION.PcieRootPortHPE[ROOTPORT_INDEX] == 0;
+
+#endif // Endif of PCIE_HOTPLUG_SUPPORT
+
+endform;
+

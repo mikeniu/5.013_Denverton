@@ -1,0 +1,249 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may
+// be modified by the user, subject to additional terms of the
+// license agreement
+//
+// *++
+//
+// Copyright (c) 1999 - 2015 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+//
+//
+// Module Name:
+//
+//   EventLogSetup.hfr
+//
+// Abstract:
+//
+//   Setup Event Log formset.
+//
+// Revision History:
+//
+// --*/
+  form formid = VFR_FORMID_ELOG,
+
+    title  = STRING_TOKEN(STR_ELOG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_ELOG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    //
+    // Log Errors
+    //
+    oneof varid = SYSTEM_CONFIGURATION.SystemErrorEn,
+      prompt = STRING_TOKEN(STR_SYSTEM_ERRORS_PROMPT),
+      help        = STRING_TOKEN(STR_SYSTEM_ERRORS_HELP),
+      option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+      option text = STRING_TOKEN(STR_AUTO),    value = 2, flags = RESET_REQUIRED;      
+    endoneof;
+    
+    //
+    // Memory Error Logging setup options
+    //
+    suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00;
+      goto VFR_FORMID_ELOGMEM, 
+        prompt = STRING_TOKEN(STR_ELOGMEM_FORM_TITLE),
+        help   = STRING_TOKEN(STR_ELOGMEM_FORM_HELP);
+    endif;
+
+    //
+    // PCIe Error Logging setup options
+    //
+    suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00;
+      goto VFR_FORMID_ELOGPCIE, 
+        prompt = STRING_TOKEN(STR_ELOGPCIE_FORM_TITLE),
+        help   = STRING_TOKEN(STR_ELOGPCIE_FORM_HELP);
+    endif;
+	
+    //
+    // Whea setup options
+    //
+    goto VFR_FORMID_WHEA, 
+      prompt = STRING_TOKEN(STR_WHEA_FORM_TITLE),
+      help   = STRING_TOKEN(STR_WHEA_FORM_HELP);
+	
+  endform;
+
+  //
+  // Memory Error Logging Configuration Form
+  //
+  form formid = VFR_FORMID_ELOGMEM,
+
+    title  = STRING_TOKEN(STR_ELOGMEM_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_ELOGMEM_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    oneof varid = SYSTEM_CONFIGURATION.MemoryErrorLog,
+      prompt = STRING_TOKEN(STR_ELOGMEM_SUPPORT_PROMPT),  
+      help = STRING_TOKEN(STR_ELOGMEM_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING ;
+    endoneof;
+
+    suppressif  ideqval SYSTEM_CONFIGURATION.MemoryErrorLog == 0x00;
+      oneof varid = SYSTEM_CONFIGURATION.EnableParityCheck,
+        prompt      = STRING_TOKEN(STR_CHECK_PARITY_PROMPT),
+        help        = STRING_TOKEN(STR_CHECK_PARITY_HELP),
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1,  flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+        option text = STRING_TOKEN(STR_DISABLE), value = 0,  flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    suppressif  ideqval SYSTEM_CONFIGURATION.MemoryErrorLog == 0x00;
+      oneof varid = SYSTEM_CONFIGURATION.MemoryCorrErrorLog,
+        prompt = STRING_TOKEN(STR_ELOGMEM_CORR_SUPPORT_PROMPT),  
+        help = STRING_TOKEN(STR_ELOGMEM_CORR_SUPPORT_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+      endoneof;
+    endif;
+
+    suppressif  ideqval SYSTEM_CONFIGURATION.MemoryErrorLog == 0x00;
+      oneof varid = SYSTEM_CONFIGURATION.MemoryUnCorrErrorLog,
+        prompt = STRING_TOKEN(STR_ELOGMEM_UC_SUPPORT_PROMPT),  
+        help = STRING_TOKEN(STR_ELOGMEM_UC_SUPPORT_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+      endoneof;
+    endif;
+    
+  //
+  // Enabling Error Cloaking
+  //
+  
+    oneof varid   = SYSTEM_CONFIGURATION.ErrorCloakingEnable,
+      prompt      = STRING_TOKEN(STR_ERROR_CLOAKING_PROMPT),  
+      help        = STRING_TOKEN(STR_ERROR_CLOAKING_HELP),
+      option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+  endform;
+  
+  
+  //
+  // PCIe Error Logging Configuration Form
+  //
+  form formid = VFR_FORMID_ELOGPCIE,
+
+    title  = STRING_TOKEN(STR_ELOGPCIE_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_ELOGPCIE_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    oneof varid = SYSTEM_CONFIGURATION.PCIeErrorLog,
+      prompt = STRING_TOKEN(STR_ELOGPCIE_SUPPORT_PROMPT),  
+      help = STRING_TOKEN(STR_ELOGPCIE_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+    endoneof;
+
+    suppressif  ideqval SYSTEM_CONFIGURATION.PCIeErrorLog == 0x00;
+      oneof varid  = SYSTEM_CONFIGURATION.PCIeFatalErrorLog,
+        prompt = STRING_TOKEN(STR_FATAL_ERR_PROMPT),
+        help = STRING_TOKEN(STR_FATAL_ERR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+    endif;
+	
+	suppressif  ideqval SYSTEM_CONFIGURATION.PCIeErrorLog == 0x00;
+      oneof varid  = SYSTEM_CONFIGURATION.PCIeNFErrorLog,
+        prompt = STRING_TOKEN(STR_NON_FATAL_ERR_PROMPT),
+        help = STRING_TOKEN(STR_NON_FATAL_ERR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+    endif;
+	
+    suppressif  ideqval SYSTEM_CONFIGURATION.PCIeErrorLog == 0x00;
+      oneof varid  = SYSTEM_CONFIGURATION.PCIeCorrErrorLog,
+        prompt = STRING_TOKEN(STR_CORRECTABLE_ERR_PROMPT),
+        help = STRING_TOKEN(STR_CORRECTABLE_ERR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+    endif;
+    
+    suppressif  ideqval SYSTEM_CONFIGURATION.PCIeErrorLog == 0x00;
+      oneof varid = SYSTEM_CONFIGURATION.PCIeSystemErrEnable,
+        prompt      = STRING_TOKEN(STR_PCIE_SYSTEM_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_PCIE_SYSTEM_ERROR_HELP),
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1,  flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+        option text = STRING_TOKEN(STR_DISABLE), value = 0,  flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    suppressif  ideqval SYSTEM_CONFIGURATION.PCIeErrorLog == 0x00;
+      oneof varid = SYSTEM_CONFIGURATION.PCIeParityErrEnable,
+        prompt      = STRING_TOKEN(STR_PCIE_PARITY_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_PCIE_PARITY_ERROR_HELP),
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1,  flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+        option text = STRING_TOKEN(STR_DISABLE), value = 0,  flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+  endform;
+
+  //
+  // WHEA Configuration Form
+  //
+  form formid = VFR_FORMID_WHEA,
+
+    title  = STRING_TOKEN(STR_WHEA_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_WHEA_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    oneof varid = SYSTEM_CONFIGURATION.WheaSupport,
+      prompt = STRING_TOKEN(STR_WHEA_SUPPORT_PROMPT),  
+      help = STRING_TOKEN(STR_WHEA_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+    endoneof;
+
+    suppressif  ideqval SYSTEM_CONFIGURATION.WheaSupport == 0x00;
+      oneof varid = SYSTEM_CONFIGURATION.WheaEinj_05Extn,
+        prompt = STRING_TOKEN(STR_WHEA_ACPI5_SUPPORT_PROMPT),  
+        help = STRING_TOKEN(STR_WHEA_ACPI5_SUPPORT_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+      endoneof;
+    endif;
+
+    suppressif  ideqval SYSTEM_CONFIGURATION.WheaSupport == 0x00;
+      oneof varid = SYSTEM_CONFIGURATION.WheaLogging,
+        prompt = STRING_TOKEN(STR_WHEA_FFM_LOG_PROMPT),  
+        help = STRING_TOKEN(STR_WHEA_FFM_LOG_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+      endoneof;
+    endif;
+
+    //
+    //Whea PCIe Error Injection
+    //
+    suppressif  ideqval SYSTEM_CONFIGURATION.WheaSupport == 0x00;
+      oneof varid = SYSTEM_CONFIGURATION.WheaPcieErrInj,
+        prompt = STRING_TOKEN(STR_WHEA_PCIERRINJ_PROMPT),
+        help        = STRING_TOKEN(STR_WHEA_PCIERRINJ_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;      
+      endoneof;
+    endif;
+
+  endform;

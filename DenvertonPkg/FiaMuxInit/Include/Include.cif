@@ -1,0 +1,15 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\FiaMuxInit\Include\"
+	RefName = "DenvertonPkg.FiaMuxInit.Include"
+[files]
+"FiaMuxHob.h"	
+"FiaMuxPolicy.h"
+"Guid\FiaMuxHobGuid.h"	
+"Guid\FiaMuxVariableGuid.h"
+"Library\PeiDxeSmmFiaMuxHelperLib.h"	
+"Library\PeiFiaMuxConfigInitLib.h"	
+"Library\PeiFiaMuxPolicyInitLib.h"	
+"Ppi\FiaMuxPolicyPpi.h"	
+<endComponent>

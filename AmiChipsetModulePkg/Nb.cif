@@ -1,0 +1,16 @@
+<component>
+	name = "Denverton - NorthBridge"
+	category = eChipset
+	LocalRoot = "AmiChipsetModulePkg\"
+	RefName = "AmiChipsetModulePkg.NorthBridge"
+[files]
+"Nb.sdl"	
+"Nb.mak"	
+"Elink\NbElinks.txt"	
+"NB\ReleaseNotes.chm"	
+[parts]
+"AmiChipsetModulePkg.NbInit"
+"AmiChipsetModulePkg.NbSetup"
+"AmiChipsetModulePkg.NbLibrary"
+"AmiChipsetModulePkg.NbInclude"
+<endComponent>

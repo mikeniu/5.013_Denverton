@@ -1,0 +1,11 @@
+<component>
+	name = "WheaErrorInj"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Ras\Whea\WheaErrorInj\"
+	RefName = "HarrisonvillePkg.WheaErrorInj"
+[INF]
+"WheaErrorInj.inf"
+[files]
+"WheaErrorInj.h"	
+"WheaErrorInj.sdl"	
+<endComponent>

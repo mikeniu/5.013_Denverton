@@ -1,0 +1,38 @@
+TOKEN
+	Name  = "Sps_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Sps support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "SpsAcpiHooks_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SpsAcpiHooks support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "SpsAcpiSsdt_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SpsAcpiSsdt support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "SpsAcpiHooks"
+	File  = "Acpi\SpsAcpiHooks.inf"
+	ModuleTypes  = "DXE_DRIVER"
+	Package  = "DenvertonPkg"
+	Token = "SpsAcpiHooks_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "SpsAcpiSsdt"
+	File  = "Acpi\SpsAcpiSsdt.inf"
+	ModuleTypes  = "USER_DEFINED"
+	Package  = "DenvertonPkg"
+	Token = "SpsAcpiSsdt_SUPPORT" "=" "1"
+End
+

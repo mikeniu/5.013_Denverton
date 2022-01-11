@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "PchResetRuntime_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PchResetRuntime support in Project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PchResetRuntime"
+	File  = "RuntimeDxe\PchResetRuntime.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_RUNTIME_DRIVER"
+End
+

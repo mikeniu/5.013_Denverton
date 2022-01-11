@@ -1,0 +1,13 @@
+<component>
+	name = "CpuPei"
+	category = ModulePart
+	Rank = 30
+	LocalRoot = "IA32FamilyCpuPkg\CpuPei\"
+	RefName = "IA32FamilyCpuPkg.CpuPei"
+[INF]
+"CpuPei.inf"
+[files]
+"IA32CpuPei.sdl"	
+"CpuPei.uni"	
+"CpuPeiExtra.uni"	
+<endComponent>

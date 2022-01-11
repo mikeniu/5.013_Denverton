@@ -1,0 +1,32 @@
+TOKEN
+	Name  = "HsuartIpInit_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling HsuartIpInit support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PeiHsuartIpInitLib"
+	File  = "PeiHsuartIpInitLib\PeiHsuartIpInitLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PeiHsuartIpPolicyInitLib"
+	File  = "PeiHsuartIpPolicyInitLib\PeiHsuartIpPolicyInitLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "PeiHsuartIpInitLib"
+	Instance  = "DenvertonPkg.PeiHsuartIpInitLib"
+End
+
+LibraryMapping
+	Class  = "PeiHsuartIpPolicyInitLib"
+	Instance  = "DenvertonPkg.PeiHsuartIpPolicyInitLib"
+End
+

@@ -1,0 +1,23 @@
+<component>
+	name = "Register"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\Include\Register\"
+	RefName = "DenvertonPkg.SouthCluster.Include.Register"
+[files]
+"PchRegsDci.h"
+"PchRegsFia.h"
+"PchRegsGpio.h"
+"PchRegsHsio.h"
+"PchRegsItss.h"
+"PchRegsLpc.h"
+"PchRegsP2sb.h"
+"PchRegsPcr.h"
+"PchRegsPmc.h"
+"PchRegsPsf.h"
+"PchRegsSata.h"
+"PchRegsScc.h"
+"PchRegsSmbus.h"
+"PchRegsSpi.h"
+"PchRegsTraceHub.h"
+"PchRegsUsb.h"
+<endComponent>

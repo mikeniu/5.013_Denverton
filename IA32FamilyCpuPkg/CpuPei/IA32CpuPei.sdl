@@ -1,0 +1,16 @@
+TOKEN
+	Name  = "CpuPei_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable CpuPei support in Project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "CpuPei"
+	File  = "CpuPei.inf"
+	Package  = "IA32FamilyCpuPkg"
+	ModuleTypes  = "PEIM"
+	Token = "CpuPei_SUPPORT" "=" "1"
+End
+

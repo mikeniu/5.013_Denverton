@@ -1,0 +1,13 @@
+<component>
+	name = "SiInitPei"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SiInit\Pei\"
+	RefName = "DenvertonPkg.SiInitPei"
+[INF]
+"SiInit.inf"
+"SiInitPreMem.inf"
+[files]
+"SiInitPei.sdl"	
+"SiInit.h"	
+"SiInitPreMem.h"	
+<endComponent>

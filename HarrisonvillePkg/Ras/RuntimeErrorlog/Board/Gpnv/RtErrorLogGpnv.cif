@@ -1,0 +1,11 @@
+<component>
+  name = "RtErrorLogGpnv"
+  category = ModulePart
+  LocalRoot ="HarrisonvillePkg\Ras\RuntimeErrorlog\Board\Gpnv\"
+  RefName = "RtErrorLogGpnv"
+  [INF]
+  "RtErrorLogGpnv.inf"
+  "RtErrorLogGpnvNullLib.inf"
+  [files]
+  "RtErrorLogGpnv.sdl"
+  <endComponent>

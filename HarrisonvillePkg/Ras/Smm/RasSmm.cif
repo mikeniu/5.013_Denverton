@@ -1,0 +1,10 @@
+<component>
+	name = "RasSmm"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Ras\Smm\"
+	RefName = "HarrisonvillePkg.Ras.Smm"
+[INF]
+"SmmErrorLog\SmmErrorLog.inf"
+[files]
+"RasSmm.sdl"	
+<endComponent>

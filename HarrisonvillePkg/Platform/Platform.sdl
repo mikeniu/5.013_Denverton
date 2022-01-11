@@ -1,0 +1,47 @@
+TOKEN
+	Name  = "Platform_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Platform support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PlatformTypeDxe"
+	File  = "PlatformTypeDxe/PlatformTypeDxe.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "SaveMemoryConfigDxe"
+	File  = "SaveMemoryConfigDxe/SaveMemoryConfigDxe.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "PlatformInfoPei"
+	File  = "PlatformInfo/Pei/PlatformInfoPei.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PowerButtonSmm"
+	File  = "PowerButtonSmm/PowerButtonSmm.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+INFComponent
+	Name  = "IPMIPlatformID"
+	File  = "IPMIPlatformID/IPMIPlatformID.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "PlatformInfoPeiLib"
+	Instance  = "HarrisonvillePkg.PlatformInfoPei"
+End

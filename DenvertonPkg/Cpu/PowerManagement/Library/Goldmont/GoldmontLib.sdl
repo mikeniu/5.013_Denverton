@@ -1,0 +1,21 @@
+TOKEN
+	Name  = "GoldmontLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Goldmont Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PpmLib"
+	File  = "GoldmontPpmLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "UEFI_DRIVER"
+End
+
+LibraryMapping
+	Class  = "PpmLib"
+	Instance  = "DenvertonPkg.PpmLib"
+	ModuleTypes  = "DXE_DRIVER DXE_SMM_DRIVER UEFI_DRIVER UEFI_APPLICATION"
+End
+

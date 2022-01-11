@@ -1,0 +1,11 @@
+<component>
+	name = "Desktop CoffeeLake uCode Patches (906EX)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\Desktop\"
+	RefName = "CoffeeLakeDesktopUc"
+[files]
+"CoffeeLakeDesktopUc.sdl"
+"M02906EB_0000007C.mcb"	= "DESKTOP MICROCODE UPDATES"
+"M22906EA_00000074.mcb" = "DESKTOP MICROCODE UPDATES"
+"M22906EA_0000007C.mcb" = "DESKTOP MICROCODE UPDATES"
+<endComponent>

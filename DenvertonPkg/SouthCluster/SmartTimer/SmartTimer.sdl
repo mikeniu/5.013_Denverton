@@ -1,0 +1,16 @@
+TOKEN
+	Name  = "SmartTimer_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SmartTimer support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "SmartTimer"
+	File  = "Dxe\SmartTimer.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SmartTimer_SUPPORT" "=" "1"
+End
+

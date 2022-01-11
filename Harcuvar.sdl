@@ -1,0 +1,1146 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+TOKEN
+        Name  = Harcuvar_SUPPORT
+        Value  = 0
+        TokenType = Boolean
+        TargetEQU = Yes
+        TargetMAK = Yes
+        Master = Yes
+        Help  = "Main switch to enable Harcuvar CRB support in Project"
+End
+
+######### HARCUVAR CRB SDL TOKENS #########
+
+#  IPMI is Enabled only to CormorantLake CRB
+TOKEN
+    Name  = "IPMI_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable IPMI support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+# Denverton AptioV override Start- EIP#262828
+PCIDEVICE
+  Title  = "PCI Express Slot 0"
+  Parent  = "PCI Express Port 0"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Dev  = 00h
+  Slot  = 01h
+  ASLdeviceName  = "SLT0"
+  IntA =  \_SB.PCI0.LPC0.LNKA; 16
+  IntB =  \_SB.PCI0.LPC0.LNKB; 17
+  IntC =  \_SB.PCI0.LPC0.LNKC; 18
+  IntD =  \_SB.PCI0.LPC0.LNKD; 19
+  DeviceType = Slot
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+  Token = "Harcuvar_SUPPORT" "=" "1" # Denverton AptioV override - EIP#262828
+End
+# Denverton AptioV override End- EIP#262828
+
+# Denverton AptioV Override Start - EIP#281657 - GPIO Table for Harcuvar CRB
+ELINK
+	NAME = "GPIO_TABLE"
+	InvokeOrder = ReplaceParent
+END
+
+
+#GPIO_0
+ELINK
+	Name  = "{ NORTH_ALL_GPIO_0              , {GpioPadModeNative3  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_1
+ELINK
+	Name  = "{ NORTH_ALL_GPIO_1              , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_2
+ELINK
+	Name  = "{ NORTH_ALL_GPIO_2              , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_3
+ELINK
+	Name  = "{ SOUTH_GROUP1_GPIO_3           , {GpioPadModeGpio     , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_4
+ELINK
+	Name  = "{ SOUTH_GROUP0_GPIO_4           , {GpioPadModeNative3  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_5
+ELINK
+	Name  = "{ SOUTH_GROUP0_GPIO_5           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_6
+ELINK
+	Name  = "{ SOUTH_GROUP0_GPIO_6           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_7
+ELINK
+	Name  = "{ SOUTH_GROUP0_GPIO_7           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_8
+ELINK
+	Name  = "{ SOUTH_GROUP0_GPIO_8           , {GpioPadModeNative3  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_9
+ELINK
+	Name  = "{ SOUTH_GROUP0_GPIO_9           , {GpioPadModeNative3  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_10
+ELINK
+	Name  = "{ SOUTH_GROUP1_GPIO_10          , {GpioPadModeGpio     , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_11
+ELINK
+	Name  = "{ SOUTH_GROUP1_GPIO_11          , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_12
+ELINK
+	Name  = "{ SOUTH_GROUP0_GPIO_12          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_13
+ELINK
+	Name  = "{ SOUTH_GROUP0_SMB5_GBE_ALRT_N  , {GpioPadModeNative3  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_14
+ELINK
+	Name  = "{ NORTH_ALL_GBE0_SDP0           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_15
+ELINK
+
+	Name  = "{ NORTH_ALL_GBE1_SDP0           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInInvOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_16
+ELINK
+	Name  = "{ NORTH_ALL_GBE0_SDP1           , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_17
+ELINK
+	Name  = "{ NORTH_ALL_GBE1_SDP1           , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_18
+ELINK
+
+	Name  = "{ NORTH_ALL_GBE0_SDP2           , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_19
+ELINK
+	Name  = "{ NORTH_ALL_GBE1_SDP2           , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_20
+ELINK
+	Name  = "{ NORTH_ALL_GBE0_SDP3           , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_21
+ELINK
+	Name  = "{ NORTH_ALL_GBE1_SDP3           , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_22
+ELINK
+	Name  = "{ NORTH_ALL_GBE2_LED0           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+       
+#GPIO_23
+ELINK
+	Name  = "{ NORTH_ALL_GBE2_LED1           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END        
+
+#GPIO_24
+ELINK
+	Name  = "{ NORTH_ALL_GBE0_I2C_CLK        , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_25
+ELINK
+	Name  = "{ NORTH_ALL_GBE0_I2C_DATA       , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_26
+ELINK
+	Name  = "{ NORTH_ALL_GBE1_I2C_CLK        , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END        
+
+#GPIO_27
+ELINK
+	Name  = "{ NORTH_ALL_GBE1_I2C_DATA       , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_28
+ELINK
+	Name  = "{ NORTH_ALL_NCSI_RXD0           , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_29
+ELINK
+	Name  = "{ NORTH_ALL_NCSI_CLK_IN         , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_30
+ELINK
+	Name  = "{ NORTH_ALL_NCSI_RXD1           , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_31
+ELINK
+	Name  = "{ NORTH_ALL_NCSI_CRS_DV         , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_32
+ELINK
+	Name  = "{ NORTH_ALL_NCSI_ARB_IN         , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_33
+ELINK
+	Name  = "{ NORTH_ALL_NCSI_TX_EN          , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_34
+ELINK
+	Name  = "{ NORTH_ALL_NCSI_TXD0           , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_35
+ELINK
+	Name  = "{ NORTH_ALL_NCSI_TXD1           , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_36
+ELINK
+	Name  = "{ NORTH_ALL_NCSI_ARB_OUT        , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_37
+ELINK
+	Name  = "{ NORTH_ALL_GBE0_LED0           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_38
+ELINK
+	Name  = "{ NORTH_ALL_GBE0_LED1           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_39
+ELINK
+	Name  = "{ NORTH_ALL_GBE1_LED0           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_40
+ELINK
+	Name  = "{ NORTH_ALL_GBE1_LED1           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_41
+ELINK
+	Name  = "{ NORTH_ALL_PCIE_CLKREQ0_N      , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_42
+ELINK
+	Name  = "{ NORTH_ALL_PCIE_CLKREQ1_N      , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_43
+ELINK
+	Name  = "{ NORTH_ALL_PCIE_CLKREQ2_N      , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_44
+ELINK
+	Name  = "{ NORTH_ALL_PCIE_CLKREQ3_N      , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_45
+ELINK
+	Name  = "{ NORTH_ALL_PCIE_CLKREQ4_N      , {GpioPadModeGpio     , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_47
+ELINK
+	Name  = "{ NORTH_ALL_SVID_ALERT_N        , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_48
+ELINK
+	Name  = "{ NORTH_ALL_SVID_DATA           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_49
+ELINK
+	Name  = "{ NORTH_ALL_SVID_CLK            , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_50
+ELINK
+	Name  = "{ NORTH_ALL_THERMTRIP_N         , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_51
+ELINK
+	Name  = "{ NORTH_ALL_PROCHOT_N           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_52
+ELINK
+	Name  = "{ NORTH_ALL_MEMHOT_N            , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_53
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT_CLK0       , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_54
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT_CLK1       , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_55
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT0           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_56
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT1           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_57
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT2           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_58
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT3           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_59
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT4           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_60
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT5           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_61
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT6           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_62
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT7           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_63
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT8           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_64
+ELINK
+	Name  = "{ SOUTH_GROUP1_ESPI_IO0         , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_65
+ELINK
+	Name  = "{ SOUTH_GROUP1_ESPI_IO1         , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_66
+ELINK
+	Name  = "{ SOUTH_GROUP1_ESPI_IO2         , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_67
+ELINK
+	Name  = "{ SOUTH_GROUP1_ESPI_IO3         , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_68
+ELINK
+	Name  = "{ SOUTH_GROUP1_ESPI_CS0_N       , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_69
+ELINK
+	Name  = "{ SOUTH_GROUP1_ESPI_CLK         , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_70
+ELINK
+	Name  = "{ SOUTH_GROUP1_ESPI_RST_N       , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_71
+ELINK
+	Name  = "{ SOUTH_GROUP1_ESPI_ALRT0_N     , {GpioPadModeNative2  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_72
+ELINK
+	Name  = "{ SOUTH_GROUP1_SPI_CS0_N        , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_73
+ELINK
+	Name  = "{ SOUTH_GROUP1_SPI_CS1_N        , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_74
+ELINK
+	Name  = "{ SOUTH_GROUP1_SPI_MOSI_IO0     , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_75
+ELINK
+	Name  = "{ SOUTH_GROUP1_SPI_MISO_IO1     , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_76
+ELINK
+	Name  = "{ SOUTH_GROUP1_SPI_IO2          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_77
+ELINK
+	Name  = "{ SOUTH_GROUP1_SPI_IO3          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_78
+ELINK
+	Name  = "{ SOUTH_GROUP1_SPI_CLK          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_79
+ELINK
+	Name  = "{ SOUTH_GROUP1_SUSPWRDNACK      , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_80
+ELINK
+	Name  = "{ SOUTH_GROUP1_PMU_SUSCLK       , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_81
+ELINK
+	Name  = "{ SOUTH_GROUP1_ADR_TRIGGER      , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_82
+ELINK
+	Name  = "{ SOUTH_GROUP1_PMU_SLP_S45_N    , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_83
+ELINK
+	Name  = "{ SOUTH_GROUP1_PMU_SLP_S3_N     , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_84
+ELINK
+	Name  = "{ SOUTH_GROUP1_PMU_WAKE_N       , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_85
+ELINK
+	Name  = "{ SOUTH_GROUP1_PMU_PWRBTN_N     , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_86
+ELINK
+	Name  = "{ SOUTH_GROUP1_PMU_RESETBUTTON_N, {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_87
+ELINK
+	Name  = "{ SOUTH_GROUP1_PMU_PLTRST_N     , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_88
+ELINK
+	Name  = "{ SOUTH_GROUP1_SUS_STAT_N       , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_89
+ELINK
+	Name  = "{ SOUTH_GROUP1_SLP_S0IX_N       , {GpioPadModeGpio     , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_90
+ELINK
+	Name  = "{ SOUTH_GROUP0_SATA0_LED_N      , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_91
+ELINK
+	Name  = "{ SOUTH_GROUP0_SATA1_LED_N      , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_92
+ELINK
+	Name  = "{ SOUTH_GROUP0_SATA_PDETECT0    , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_93
+ELINK
+	Name  = "{ SOUTH_GROUP0_SATA_PDETECT1    , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_94
+ELINK
+	Name  = "{ SOUTH_GROUP0_SATA0_SDOUT      , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_95
+ELINK
+	Name  = "{ SOUTH_GROUP0_SATA1_SDOUT      , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_96
+ELINK
+	Name  = "{ SOUTH_GROUP0_UART1_RXD        , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_97
+ELINK
+	Name  = "{ SOUTH_GROUP0_UART1_TXD        , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_98
+ELINK
+	Name  = "{ SOUTH_GROUP0_PCIE_CLKREQ5_N   , {GpioPadModeGpio     , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntSmi    , GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_99
+ELINK
+	Name  = "{ SOUTH_GROUP0_PCIE_CLKREQ6_N   , {GpioPadModeGpio     , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntNmi    , GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_100
+ELINK
+	Name  = "{ SOUTH_GROUP0_PCIE_CLKREQ7_N   , {GpioPadModeNative3  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_101
+ELINK
+	Name  = "{ SOUTH_GROUP0_UART0_RXD        , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_102
+ELINK
+	Name  = "{ SOUTH_GROUP0_UART0_TXD        , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_103
+ELINK
+	Name  = "{ SOUTH_GROUP0_SMB5_GBE_CLK     , {GpioPadModeNative3  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_104
+ELINK
+	Name  = "{ SOUTH_GROUP0_SMB5_GBE_DATA    , {GpioPadModeNative3  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetPwrGood, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_105
+ELINK
+	Name  = "{ SOUTH_GROUP0_ERROR2_N         , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_106
+ELINK
+	Name  = "{ SOUTH_GROUP0_ERROR1_N         , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_107
+ELINK
+	Name  = "{ SOUTH_GROUP0_ERROR0_N         , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_108
+ELINK
+	Name  = "{ SOUTH_GROUP0_IERR_N           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_109
+ELINK
+	Name  = "{ SOUTH_GROUP0_MCERR_N          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_110
+ELINK
+	Name  = "{ SOUTH_GROUP0_SMB0_LEG_CLK     , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_111
+ELINK
+	Name  = "{ SOUTH_GROUP0_SMB0_LEG_DATA    , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_112
+ELINK
+	Name  = "{ SOUTH_GROUP0_SMB0_LEG_ALRT_N  , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_113
+ELINK
+	Name  = "{ SOUTH_GROUP0_SMB1_HOST_DATA   , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_114
+ELINK
+	Name  = "{ SOUTH_GROUP0_SMB1_HOST_CLK    , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_115
+ELINK
+	Name  = "{ SOUTH_GROUP0_SMB2_PECI_DATA   , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_116
+ELINK
+	Name  = "{ SOUTH_GROUP0_SMB2_PECI_CLK    , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_117
+ELINK
+	Name  = "{ SOUTH_GROUP0_SMB4_CSME0_DATA  , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_118
+ELINK
+	Name  = "{ SOUTH_GROUP0_SMB4_CSME0_CLK   , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_119
+ELINK
+	Name  = "{ SOUTH_GROUP0_SMB4_CSME0_ALRT_N, {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_120
+ELINK
+	Name  = "{ SOUTH_GROUP0_USB_OC0_N        , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_121
+ELINK
+	Name  = "{ SOUTH_GROUP0_FLEX_CLK_SE0     , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_122
+ELINK
+	Name  = "{ SOUTH_GROUP0_FLEX_CLK_SE1     , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_123
+ELINK
+	Name  = "{ SOUTH_GROUP1_EMMC_CMD         , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermWpu20K, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_124
+ELINK
+	Name  = "{ SOUTH_GROUP1_EMMC_STROBE      , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_125
+ELINK
+	Name  = "{ SOUTH_GROUP1_EMMC_CLK         , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermWpu20K, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_126
+ELINK
+	Name  = "{ SOUTH_GROUP1_EMMC_D0          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermWpu20K, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_127
+ELINK
+	Name  = "{ SOUTH_GROUP1_EMMC_D1          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermWpu20K, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_128
+ELINK
+	Name  = "{ SOUTH_GROUP1_EMMC_D2          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermWpu20K, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_129
+ELINK
+	Name  = "{ SOUTH_GROUP1_EMMC_D3          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermWpu20K, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_130
+ELINK
+	Name  = "{ SOUTH_GROUP1_EMMC_D4          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermWpu20K, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_131
+ELINK
+	Name  = "{ SOUTH_GROUP1_EMMC_D5          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermWpu20K, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_132
+ELINK
+	Name  = "{ SOUTH_GROUP1_EMMC_D6          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermWpu20K, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_133
+ELINK
+	Name  = "{ SOUTH_GROUP1_EMMC_D7          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermWpu20K, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_134
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT9           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_135
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT10          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_136
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT11          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_137
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT12          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_138
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT13          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_139
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT14          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_140
+ELINK
+	Name  = "{ SOUTH_DFX_DFX_PORT15          , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_141
+ELINK
+	Name  = "{ SOUTH_GROUP0_TCK              , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_142
+ELINK
+	Name  = "{ SOUTH_GROUP0_TRST_N           , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_143
+ELINK
+	Name  = "{ SOUTH_GROUP0_TMS              , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_144
+ELINK
+	Name  = "{ SOUTH_GROUP0_TDI              , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_145
+ELINK
+	Name  = "{ SOUTH_GROUP0_TDO              , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_146
+ELINK
+	Name  = "{ SOUTH_GROUP0_CX_PRDY_N        , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirOut   , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_147
+ELINK
+	Name  = "{ SOUTH_GROUP0_CX_PREQ_N        , {GpioPadModeNative1  , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_148
+ELINK
+	Name  = "{ SOUTH_GROUP0_CTBTRIGINOUT     , {GpioPadModeGpio     , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_149
+ELINK
+	Name  = "{ SOUTH_GROUP0_CTBTRIGOUT       , {GpioPadModeGpio     , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_150
+ELINK
+	Name  = "{ SOUTH_GROUP0_DFX_SPARE2       , {GpioPadModeGpio     , GpioHostOwnGpio, GpioDirInOut , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_151
+ELINK
+	Name  = "{ SOUTH_GROUP0_DFX_SPARE3       , {GpioPadModeGpio     , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+#GPIO_152
+ELINK
+	Name  = "{ SOUTH_GROUP0_DFX_SPARE4       , {GpioPadModeGpio     , GpioHostOwnGpio, GpioDirIn    , GpioOutDefault , GpioIntDefault, GpioResetDefault, GpioTermDefault, GpioLockDefault}} ,"
+	Parent  = "GPIO_TABLE"
+	InvokeOrder = AfterParent
+END
+
+# Denverton AptioV Override End - EIP#281657 - GPIO Table for Harcuvar CRB
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+

@@ -1,0 +1,10 @@
+<component>
+	name = "SDMediaDeviceDxe"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\SDMediaDeviceDxe\"
+	RefName = "DenvertonPkg.SDMediaDeviceDxe"
+[INF]
+"MmcMediaDeviceDxe.inf"
+[files]
+"SDMediaDeviceDxe.sdl"	
+<endComponent>

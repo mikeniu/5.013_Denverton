@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "SouthCluster_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SouthCluster support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "MmcHost"
+	File  = "SDControllerDxe\MmcHostDxe.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "UEFI_DRIVER"
+End
+

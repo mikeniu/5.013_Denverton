@@ -1,0 +1,96 @@
+TOKEN
+  Name  = "IpmiIeReportPostCode_SUPPORT"
+  Value  = "1"
+  Help  = "Main switch to enable IpmiIeReportPostCode support in Project"
+  TokenType = Boolean
+  TargetEQU = Yes
+  TargetMAK = Yes
+  Master = Yes
+End
+
+TOKEN
+  Name  = "PeiIpmiIeReportPostCode_SUPPORT"
+  Value  = "1"
+  Help  = "Main switch to enable PeiIpmiIeReportPostCode support in Project"
+  TokenType = Boolean
+End
+
+TOKEN
+  Name  = "DxeIpmiIeReportPostCode_SUPPORT"
+  Value  = "1"
+  Help  = "Main switch to enable DxeIpmiIeReportPostCode support in Project"
+  TokenType = Boolean
+End
+
+TOKEN
+  Name  = "SmmIpmiIeReportPostCode_SUPPORT"
+  Value  = "1"
+  Help  = "Main switch to enable SmmIpmiIeReportPostCode support in Project"
+  TokenType = Boolean
+End
+
+ELINK
+  Name  = "PeiIpmiIeReportPostCode,"
+  Parent  = "PeiReportCheckpoint"
+  Help  = "Hook function to send post codes of PEI drivers to IpmiIe"
+  InvokeOrder = AfterParent
+  Token = "PeiIpmiIeReportPostCode_SUPPORT" "=" "1"
+End
+
+ELINK
+  Name  = "DxeIpmiIeReportPostCode,"
+  Parent  = "DxeReportCheckpoint"
+  Help  = "Hook function to send post codes of DXE drivers to IpmiIe"
+  Token = "DxeIpmiIeReportPostCode_SUPPORT" "=" "1"
+  InvokeOrder = AfterParent
+End
+
+ELINK
+  Name  = "SmmIpmiIeReportPostCode,"
+  Parent  = "SmmReportCheckpoint"
+  Help  = "Hook function to send post codes of SMM drivers to IpmiIe"
+  Token = "SmmIpmiIeReportPostCode_SUPPORT" "=" "1"
+  InvokeOrder = AfterParent
+End
+
+INFComponent
+  Name  = "PeiIpmiIeReportPostCode"
+  File  = "PeiIpmiIeReportPostCode/PeiIpmiIeReportPostCode.inf"
+  Package  = "AmiIePkg"
+  Token = "PeiIpmiIeReportPostCode_SUPPORT" "=" "1"
+End
+
+INFComponent
+  Name  = "DxeIpmiIeReportPostCode"
+  File  = "DxeIpmiIeReportPostCode/DxeIpmiIeReportPostCode.inf"
+  Package  = "AmiIePkg"
+  Token = "DxeIpmiIeReportPostCode_SUPPORT" "=" "1"
+End
+
+INFComponent
+  Name  = "SmmIpmiIeReportPostCode"
+  File  = "SmmIpmiIeReportPostCode\SmmIpmiIeReportPostCode.inf"
+  Package  = "AmiIePkg"
+  Token = "SmmIpmiIeReportPostCode_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+  Class  = "NULL"
+  Instance  = "AmiIePkg.PeiIpmiIeReportPostCode"
+  Override  = "AmiModulePkg.StatusCodePei"
+  Token = "PeiIpmiIeReportPostCode_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+  Class  = "NULL"
+  Instance  = "AmiIePkg.DxeIpmiIeReportPostCode"
+  Override  = "AmiModulePkg.StatusCodeDxe"
+  Token = "DxeIpmiIeReportPostCode_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+  Class  = "NULL"
+  Instance  = "AmiIePkg.SmmIpmiIeReportPostCode"
+  Override  = "AmiModulePkg.StatusCodeSmm"
+  Token = "SmmIpmiIeReportPostCode_SUPPORT" "=" "1"
+End

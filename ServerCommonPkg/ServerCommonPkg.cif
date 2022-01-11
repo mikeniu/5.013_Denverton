@@ -1,0 +1,17 @@
+<component>
+	name = "ServerCommonPkg"
+	category = eMODULE
+	LocalRoot = "ServerCommonPkg\"
+	RefName = "ServerCommonPkg.ServerCommonPkg"
+[files]
+"ServerCommonPkg.dec"	
+"ServerCommonPkg.sdl"	
+[INF]
+"Whea\WheaElog\WheaElog.inf"
+"Whea\WheaSupport\WheaSupport.inf"
+"Whea\WheaPlatformBoot\WheaPlatformBoot.inf"
+"Whea\WheaPlatform\WheaPlatform.inf"
+[parts]
+"ServerCommonPkg.Include"
+"ServerCommonPkg.Library"
+<endComponent>

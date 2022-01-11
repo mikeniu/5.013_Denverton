@@ -1,0 +1,58 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+#
+# @file SmmIpmiIeReportPostCode.inf
+#
+# INF description file for SmmIpmiIeReportPostCode driver
+#
+
+[Defines]
+  INF_VERSION                = 0x00010005
+  BASE_NAME                  = SmmIpmiIeReportPostCode
+  FILE_GUID                  = E5042582-7EB4-4962-AEEB-FCB5B2366533
+  MODULE_TYPE                = DXE_SMM_DRIVER
+  VERSION_STRING             = 1.0
+  PI_SPECIFICATION_VERSION   = 0x0001000A
+  VERSION_STRING             = 1.0
+  LIBRARY_CLASS              = NULL
+	
+[Sources]
+  SmmIpmiIeReportPostCode.c
+  SmmIpmiIeReportPostCode.h
+  
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiIePkg/AmiIePkg.dec
+  
+[LibraryClasses]
+  DebugLib
+  SmmServicesTableLib
+  
+[Protocols]
+  gEfiSmmIpmiIeTransportProtocolGuid  #CONSUMES
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

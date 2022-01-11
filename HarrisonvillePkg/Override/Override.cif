@@ -1,0 +1,8 @@
+<component>
+	name = "Override"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Override\"
+	RefName = "HarrisonvillePkg.Override"
+[parts]
+"HarrisonvillePkg.Override.IA32FamilyCpuPkg"
+<endComponent>

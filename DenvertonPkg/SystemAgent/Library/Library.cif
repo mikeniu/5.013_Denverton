@@ -1,0 +1,10 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SystemAgent\Library\"
+	RefName = "DenvertonPkg.SystemAgent.Library"
+[INF]
+"PeiSaPolicyLib\PeiSaPolicyLib.inf"
+[files]
+"Library.sdl"	
+<endComponent>

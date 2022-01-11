@@ -1,0 +1,13 @@
+<component>
+	name = "RTCWakeup"
+	category = eModule
+	LocalRoot = "AmiModulePkg\RtcWake\"
+	RefName = "RTCWakeup"
+[INF]
+"RTCWakeup.inf"
+[files]
+"RTCWakeup.sd"
+"RTCWakeup.sdl"		
+"RTCWakeup.chm"
+"RTCWakeup.uni"	
+<endComponent>

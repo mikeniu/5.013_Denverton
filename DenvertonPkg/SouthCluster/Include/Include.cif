@@ -1,0 +1,22 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\Include\"
+	RefName = "DenvertonPkg.SouthCluster.Include"
+[files]
+"GpioConfig.h"
+"GpioPinsSklH.h"	
+"GpioPinsSklLp.h"	
+"PchAccess.h"	
+"PchLimits.h"	
+"PchPolicyCommon.h"	
+"PchReservedResources.h"
+"MediaDeviceDriver.h"
+"MediaDeviceDriverPei.h"	
+[parts]
+"DenvertonPkg.SouthCluster.Include.IndustryStandard"
+"DenvertonPkg.SouthCluster.Include.Library"
+"DenvertonPkg.SouthCluster.Include.Ppi"
+"DenvertonPkg.SouthCluster.Include.Protocol"
+"DenvertonPkg.SouthCluster.Include.Register"
+<endComponent>

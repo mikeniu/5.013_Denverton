@@ -1,0 +1,12 @@
+<component>
+    name = "IpmiIeCommonAccess"
+    category = ModulePart
+    LocalRoot = "AmiIePkg\IpmiIe\IpmiIeCommonAccess\"
+    RefName = "AmiIePkg.IpmiIe.IpmiIeCommonAccess"
+[files]
+"IpmiIeCommunicate.c"
+"IpmiIeCommunicate.h"
+"IeDcmi.c"
+"IeDcmi.h"
+"DxeSmmIpmiTransport.h"
+<endComponent>

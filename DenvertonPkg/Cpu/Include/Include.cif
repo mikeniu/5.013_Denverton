@@ -1,0 +1,25 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Cpu\Include\"
+	RefName = "DenvertonPkg.Cpu.Include"
+[files]	
+"CMOSMap.h"	
+"CpuBaseLib.h"	
+"CpuCsr.h"	
+"CpuDataStruct.h"	
+"CpuPpmLib.h"	
+"CpuRegs.h"	
+"CpuType.h"	
+"DigitalThermalSensorLib.h"	
+"Hpet.h"	
+"Mcfg.h"	
+"McfgTable.h"	
+"MmioAccess.h"	
+"PpmCommon.h"	
+[parts]
+"DenvertonPkg.Cpu.Include.Guid"
+"DenvertonPkg.Cpu.Include.Library"
+"DenvertonPkg.Cpu.Include.Ppi"
+"DenvertonPkg.Cpu.Include.Protocol"
+<endComponent>

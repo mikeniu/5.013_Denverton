@@ -1,0 +1,14 @@
+<component>
+	name = "SB Init"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\SB\SbInit\"
+	RefName = "AmiChipsetModulePkg.SbInit"
+[INF]
+"SbPei.inf"
+"SbDxe.inf"
+"SbRun.inf"
+"SbRunSmm.inf"
+"SleepSmi.inf"
+"SbIde.inf"
+"PeriodicSmiControl.inf"
+<endComponent>

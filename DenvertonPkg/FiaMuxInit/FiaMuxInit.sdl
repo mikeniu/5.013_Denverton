@@ -1,0 +1,58 @@
+TOKEN
+	Name  = "FiaMuxInit_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling FiaMuxInit support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PeiFiaMuxConfigInitLib"
+	File  = "PeiFiaMuxConfigInitLib\PeiFiaMuxConfigInitLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PeiFiaMuxHelperLib"
+	File  = "PeiFiaMuxHelperLib\PeiFiaMuxHelperLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PeiFiaMuxPolicyInitLib"
+	File  = "PeiFiaMuxPolicyInitLib\PeiFiaMuxPolicyInitLib.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+	PreProcess = Yes
+End
+
+INFComponent
+  Name  = "MeFiaMuxLibNull"
+  File  = "MeFiaMuxLibNull\MeFiaMuxLibNull.inf"
+  Package  = "DenvertonPkg"
+  ModuleTypes  = "PEIM"
+  Token = "ME_SUPPORT" "=" "0"
+End
+
+LibraryMapping
+	Class  = "PeiFiaMuxConfigInitLib"
+	Instance  = "DenvertonPkg.PeiFiaMuxConfigInitLib"
+End
+
+LibraryMapping
+	Class  = "PeiFiaMuxHelperLib"
+	Instance  = "DenvertonPkg.PeiFiaMuxHelperLib"
+End
+
+LibraryMapping
+	Class  = "PeiFiaMuxPolicyInitLib"
+	Instance  = "DenvertonPkg.PeiFiaMuxPolicyInitLib"
+End
+
+LibraryMapping
+  Class  = "MeFiaMuxLib"
+  Instance  = "DenvertonPkg.MeFiaMuxLibNull"
+  Token = "ME_SUPPORT" "=" "0"
+End

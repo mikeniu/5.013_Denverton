@@ -1,0 +1,98 @@
+TOKEN
+    Name  = "IPMI_IE_SUPPORT"
+    Value  = "1"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+    Help  = "Main switch to enable Ipmi Ie support in Project"
+End
+
+PATH
+    Name = "IPMI_IE_DIR"
+End
+
+TOKEN
+    Name  = "SERVER_IPMI_IE_DEBUG_MESSAGE_SUPPORT"
+    Value  = "0"
+    Help  = "Enables/Disables Debug message support from IE module. Default is disabled. This token is provided to track flow of the modules when IpmiIe module is not working as expected. "
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+TOKEN
+    Name  = "SERVER_IPMI_IE_DEBUG_MESSAGE_SUPPORT"
+    Value  = "0"
+    Help  = "Added to resolve build error in release mode. Do not change this token. This should always be disabled for Release mode"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "DEBUG_MODE" "=" "0"
+End
+
+TOKEN
+    Name  = "SERVER_IPMI_IE_DEBUG(Arguments)"
+    Value  = "DEBUG(Arguments)"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "SERVER_IPMI_IE_DEBUG_MESSAGE_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SERVER_IPMI_IE_DEBUG(Arguments)"
+    Value  = " "
+    TokenType = Expression
+    TargetH = Yes
+    Token = "SERVER_IPMI_IE_DEBUG_MESSAGE_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "SERVER_IPMI_IE_TRACE(Arguments)"
+    Value  = "TRACE(Arguments)"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "SERVER_IPMI_IE_DEBUG_MESSAGE_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SERVER_IPMI_IE_TRACE(Arguments)"
+    Value  = " "
+    TokenType = Expression
+    TargetH = Yes
+    Token = "SERVER_IPMI_IE_DEBUG_MESSAGE_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "IPMI_IE_SLAVE_ADDRESS"
+    Value  = "0x20"
+    Help  = "IE Base Slave Address"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IPMI_SELF_TEST_COMMAND_RETRY_COUNT"
+    Value  = "0x05"
+    Help  = "IE Self test command will be send to IE, RETRY_COUNT number of times to get SELF test results."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BIOS_IE_HECI_SLAVE_ADDRESS"
+    Value  = "0x01"
+    Help  = "BIOS Slave address with in IE HECI device"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DCMI_IE_HECI_SLAVE_ADDRESS"
+    Value  = "0x1F"
+    Help  = "DCMI client Slave address with in IE HECI device "
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End

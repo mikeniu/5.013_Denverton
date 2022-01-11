@@ -1,0 +1,10 @@
+<component>
+    name = "CacheVariablePei"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\EnhancePeiVariable\CacheVariablePei\"
+    RefName = "CacheVariablePei"
+[files]
+"CacheVariablePei.txt"
+"CacheVariablePei.c"
+"CacheVariablePei.h"
+<endComponent>

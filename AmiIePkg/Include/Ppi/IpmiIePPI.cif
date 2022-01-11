@@ -1,0 +1,8 @@
+<component>
+    name = "IpmiIePpi"
+    category = ModulePart
+    LocalRoot = "AmiIePkg\Include\Ppi\"
+    RefName = "AmiIePkg.Include.IpmiIePpi"
+[files]
+"IpmiIeTransportPpi.h"
+<endComponent>

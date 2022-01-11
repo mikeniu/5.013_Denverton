@@ -1,0 +1,37 @@
+TOKEN
+  Name  = "DigitalThermalSensor_SUPPORT"
+  Value  = "1"
+  Help  = "Main switch to enable DigitalThermalSensor support in Project"
+  TokenType = Boolean
+  Master = Yes
+End
+
+INFComponent
+  Name  = "DigitalThermalSensor"
+  File  = "DigitalThermalSensor.inf"
+  Package  = "AmiChipsetModulePkg"
+  ModuleTypes  = "DXE_SMM_DRIVER"
+  Token = "DigitalThermalSensor_SUPPORT" "=" "1"
+End
+
+TOKEN
+  Name  = "UPDATE_DTS_EVERY_SMI"
+  Value  = "0"
+  Help  = "Update DTS values on every SMI triggered"
+  TokenType = Boolean
+  TargetH = Yes
+End
+
+PCIDEVICE
+  Title  = "DTS Container"
+  Parent  = "PciHost (Virtual)"
+  Attribute  = "0x0"
+  Dev_type  = "Container"
+  Dev  = 00h
+  Fun  = 00h
+  ASLfile  = "'AmiChipsetModulePkg\SB\DigitalThermalSensor\Gpe.asl';After Pci Tree'"
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  Virtual = Yes
+End

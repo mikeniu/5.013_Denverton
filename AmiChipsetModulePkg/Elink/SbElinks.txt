@@ -1,0 +1,4 @@
+#define ACPI_ENABLE_CALL_BACK_LIST @Elink(AcpiEnableCallbackList, "@Child", " ", "%n")
+#define ACPI_DISABLE_CALL_BACK_LIST @Elink(AcpiDisableCallbackList, "@Child", " ", "%n")
+#define SB_OEM_SETUP_CALLBACK_LIST @Elink(SbConfigurationList, "@Child", " ", "%n")
+#define SB_RESET_CALLBACK_LIST @Elink(SbResetCallbackList, "@Child", " ", "%n")

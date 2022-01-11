@@ -1,0 +1,21 @@
+TOKEN
+	Name  = "Intel_Acpi_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Acpi support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "AcpiPlatform"
+	File  = "AcpiPlatformDxe\AcpiPlatformDxe.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "AcpiSmmPlatform"
+	File  = "AcpiSmm\AcpiSmmPlatform.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End

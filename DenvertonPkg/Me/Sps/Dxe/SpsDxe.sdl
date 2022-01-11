@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "SpsDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SpsDxe support in Project"
+	TokenType = Boolean
+	Master = Yes	
+End
+
+INFComponent
+	Name  = "SpsDxe"
+	File  = "SpsDxe.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+

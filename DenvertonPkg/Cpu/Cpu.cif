@@ -1,0 +1,13 @@
+<component>
+	name = "Cpu"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Cpu\"
+	RefName = "DenvertonPkg.Cpu"
+[files]
+"CpuPkg.dec"	
+[parts]
+"DenvertonPkg.Cpu.Include"
+"DenvertonPkg.Cpu.PowerManagement"
+"DenvertonPkg.Cpu.SmmAccess"
+"DenvertonPkg.Cpu.PeiDxeSmmCpuPlatformLib"
+<endComponent>

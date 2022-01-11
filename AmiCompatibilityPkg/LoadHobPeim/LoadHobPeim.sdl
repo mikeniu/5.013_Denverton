@@ -1,0 +1,17 @@
+TOKEN
+	Name  = "LoadHobPeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable LoadHobPeim support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+INFComponent
+	Name  = "LoadHobPeim"
+	File  = "LoadHobPeim.inf"
+	Package  = "AmiCompatibilityPkg"
+	ModuleTypes = "PEIM"
+End
+

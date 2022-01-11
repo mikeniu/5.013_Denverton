@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "SmmErrorLog_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SmmErrorLog support in Project"
+	TokenType = Boolean
+        TargetH = Yes
+	Master = Yes
+End
+
+INFComponent
+	Name  = "SmmErrorLog"
+	File  = "SmmErrorLog\SmmErrorLog.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End

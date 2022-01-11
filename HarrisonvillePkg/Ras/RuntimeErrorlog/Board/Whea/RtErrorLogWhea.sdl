@@ -1,0 +1,36 @@
+TOKEN
+	Name  = RtErrorLogWhea_SUPPORT
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+	Help  = "Main switch to enable RtErrorLogWhea support in Project"
+	
+End
+
+ELINK
+    Name = "LogMemErrorToWhea,"
+    Parent = "MemErrorHandlers"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "LogPciErrorToWhea,"
+    Parent = "PciErrorHandlers"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "RtErrorLogWheaLib"
+    File  = "RtErrorLogWhea.inf"
+    Package  = "HarrisonvillePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+    Class  = "RtErrorLogWheaLib"
+    Instance  = "HarrisonvillePkg.RtErrorLogWheaLib"
+    ModuleTypes  = "DXE_DRIVER DXE_SMM_DRIVER"
+    Arch  = "common"
+End

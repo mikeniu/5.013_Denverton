@@ -1,0 +1,16 @@
+TOKEN
+	Name  = "SataController_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SataController support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "SataController"
+	File  = "Dxe\SataController.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "UEFI_DRIVER"
+	Token = "SataController_SUPPORT" "=" "1"
+End
+

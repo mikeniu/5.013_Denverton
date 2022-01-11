@@ -1,0 +1,7 @@
+TOKEN
+    Name  = "IA32FamilyCpuPkg_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling IA32FamilyCpuPkg support in the project"
+    TokenType = Boolean
+    Master = Yes
+End

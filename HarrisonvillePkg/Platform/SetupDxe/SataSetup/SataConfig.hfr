@@ -1,0 +1,121 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may
+// be modified by the user, subject to additional terms of the
+// license agreement
+//
+// *++
+//
+// Copyright (c) 1999 - 2015 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+//
+
+#define SATA_TITLE_VARIABLE(x) SATA_TITLE_VARIABLE_H(x)
+#define SATA_TITLE_VARIABLE_H(v)   STR_SATA##v##_TITLE
+
+#define SATA_FORM_ID_VARIABLE(x) SATA_FORM_ID_VARIABLE_H(x)
+#define SATA_FORM_ID_VARIABLE_H(v)   VFR_SATA##v##_CONFIGURATION_FORM_ID
+
+#define SATA_PORT_FORM_ID_VARIABLE(c,p) SATA_PORT_FORM_ID_VARIABLE_H(c,p)
+#define SATA_PORT_FORM_ID_VARIABLE_H(c,p)   VFR_SATA##c##_PORT##p##_CONFIGURATION_FORM_ID
+
+#define SATA_PORT_TITLE_VARIABLE(x) SATA_PORT_TITLE_VARIABLE_H(x)
+#define SATA_PORT_TITLE_VARIABLE_H(v)   STR_SATA_PORT##v##_CONFIGURATION
+
+
+//-----------------------------------------------------------------------------
+//          SATA FORM
+//-----------------------------------------------------------------------------
+form formid = VFR_SATA_CONFIGURATION_FORM_ID,
+    title     = STRING_TOKEN(STR_SATA_TITLE);
+
+    goto VFR_SATA0_CONFIGURATION_FORM_ID,
+          prompt  = STRING_TOKEN(STR_SATA0_TITLE),
+          help    = STRING_TOKEN(STR_SATA_TITLE_HELP);
+          
+    goto VFR_SATA1_CONFIGURATION_FORM_ID,
+          prompt  = STRING_TOKEN(STR_SATA1_TITLE),
+          help    = STRING_TOKEN(STR_SATA_TITLE_HELP);
+endform;
+
+
+#define CONTROLLER_INDEX 0
+  #include "SataController/SataController.hfr"  
+    #define PORT_INDEX 0
+    #define ARRAY_PORT_INDEX 0  
+      #include "SataController/Port/SataPortConfiguration.hfr"
+
+    
+    #define PORT_INDEX 1  
+    #define ARRAY_PORT_INDEX 1
+      #include "SataController/Port/SataPortConfiguration.hfr"
+
+    #define PORT_INDEX 2  
+    #define ARRAY_PORT_INDEX 2
+      #include "SataController/Port/SataPortConfiguration.hfr"
+
+    #define PORT_INDEX 3  
+    #define ARRAY_PORT_INDEX 3
+      #include "SataController/Port/SataPortConfiguration.hfr"
+
+    #define PORT_INDEX 4  
+    #define ARRAY_PORT_INDEX 4
+      #include "SataController/Port/SataPortConfiguration.hfr"
+
+    #define PORT_INDEX 5  
+    #define ARRAY_PORT_INDEX 5
+      #include "SataController/Port/SataPortConfiguration.hfr"
+
+    #define PORT_INDEX 6  
+    #define ARRAY_PORT_INDEX 6
+      #include "SataController/Port/SataPortConfiguration.hfr"
+
+    #define PORT_INDEX 7  
+    #define ARRAY_PORT_INDEX 7
+      #include "SataController/Port/SataPortConfiguration.hfr"
+#undef CONTROLLER_INDEX
+
+#define CONTROLLER_INDEX 1
+  #include "SataController/SataController.hfr"
+  #define PORT_INDEX 0  
+  #define ARRAY_PORT_INDEX 8
+    #include "SataController/Port/SataPortConfiguration.hfr"
+
+  #define PORT_INDEX 1  
+  #define ARRAY_PORT_INDEX 9
+    #include "SataController/Port/SataPortConfiguration.hfr"
+
+  #define PORT_INDEX 2  
+  #define ARRAY_PORT_INDEX 10
+    #include "SataController/Port/SataPortConfiguration.hfr"
+
+  #define PORT_INDEX 3  
+  #define ARRAY_PORT_INDEX 11
+    #include "SataController/Port/SataPortConfiguration.hfr"
+
+  #define PORT_INDEX 4  
+  #define ARRAY_PORT_INDEX 12
+    #include "SataController/Port/SataPortConfiguration.hfr"
+
+  #define PORT_INDEX 5  
+  #define ARRAY_PORT_INDEX 13
+    #include "SataController/Port/SataPortConfiguration.hfr"
+
+  #define PORT_INDEX 6  
+  #define ARRAY_PORT_INDEX 14
+    #include "SataController/Port/SataPortConfiguration.hfr"
+
+  #define PORT_INDEX 7  
+  #define ARRAY_PORT_INDEX 15
+    #include "SataController/Port/SataPortConfiguration.hfr"
+
+#undef CONTROLLER_INDEX
+
+

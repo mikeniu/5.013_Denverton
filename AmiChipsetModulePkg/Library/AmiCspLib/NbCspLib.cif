@@ -1,0 +1,8 @@
+<component>
+	name = "AmiNbCspLib"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\Library\AmiCspLib\"
+	RefName = "AmiChipsetModulePkg.AmiNbCspLib"
+[files]
+"NbGeneric.c"	
+<endComponent>

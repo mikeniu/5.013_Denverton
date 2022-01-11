@@ -1,0 +1,35 @@
+TOKEN
+    Name  = "AmiCRBPkg_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling AmiCRBPkg support in the project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+End
+
+#Denverton AptioV Override Start- EIP#305575
+#PCIE Hotplug support
+TOKEN
+    Name  = "SbPciHotPlugLib_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SbPciHotPlugLib support in Project"
+    TokenType = Boolean
+    Token = "HOTPLUG_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "SbPciHotPlugLib"
+    File  = "CRB\Chipset\SB\SbPciHotPlugLib\SbPciHotPlugLib.inf"
+    Package  = "AmiCRBPkg"
+    Path = "AmiCRBPkg"
+    Token = "SbPciHotPlugLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "AmiPciHotPlugLib"
+    Instance  = "AmiCRBPkg.SbPciHotPlugLib"
+    ModuleTypes  = "DXE_DRIVER UEFI_DRIVER"
+    Token = "SbPciHotPlugLib_SUPPORT" "=" "1"
+End
+#Denverton AptioV Override End- EIP#305575

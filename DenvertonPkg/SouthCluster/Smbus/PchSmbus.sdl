@@ -1,0 +1,21 @@
+TOKEN
+	Name  = "PchSmbus_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PchSmbus support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PchSmbusDxe"
+	File  = "Dxe\PchSmbusDxe.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "PchSmbusSmm"
+	File  = "Smm\PchSmbusSmm.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End

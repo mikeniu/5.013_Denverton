@@ -1,0 +1,184 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//**********************************************************************
+// $Header: /Alaska/SOURCE/Modules/RTCWakeup/RTCWakeup.sd 4     5/19/11 1:50p Yul $
+//
+// $Revision: 4 $
+//
+// $Date: 5/19/11 1:50p $
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:        RTCWakeup.sd
+//
+// Description: RTC Wakeup Form Template
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example: UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+  UINT8 RtcWakeType;
+  UINT8 FixedTimeHour;
+  UINT8 FixedTimeMin;
+  UINT8 FixedTimeSec;
+  UINT8 DynamicMinIncrease;
+#endif
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+#define RTC_WAKEUP_TYPE\
+        oneof   varid   = SETUP_DATA.RtcWakeType,\
+                prompt      = STRING_TOKEN(STR_WAKE_ON_RTC_PROMPT),\
+                help        = STRING_TOKEN(STR_WAKE_ON_RTC_HELP),\
+                option text = STRING_TOKEN(STR_DISABLED), value=0, flags= DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_FIXED_TIME), value=1, flags= RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_DYNAMIC_TIME), value=2, flags= RESET_REQUIRED;\
+				endoneof;
+
+#define RTC_FIXED_TIME_HOUR\
+        numeric varid  = SETUP_DATA.FixedTimeHour,\
+              prompt      = STRING_TOKEN(STR_RTC_WAKEUP_HOUR_PROMPT),\
+              help        = STRING_TOKEN(STR_RTC_HOUR_HELP),\
+              flags       = RESET_REQUIRED,\
+              minimum     = 0,\
+              maximum     = 23,\
+              step        = 1,\
+              default     = 0,\
+        endnumeric;
+
+#define RTC_FIXED_TIME_MIN\
+        numeric varid  = SETUP_DATA.FixedTimeMin,\
+              prompt      = STRING_TOKEN(STR_RTC_WAKEUP_MINUTE_PROMPT),\
+              help        = STRING_TOKEN(STR_RTC_MIN_HELP),\
+              flags       = RESET_REQUIRED,\
+              minimum     = 0,\
+              maximum     = 59,\
+              step        = 1,\
+              default     = 0,\
+        endnumeric;
+
+#define RTC_FIXED_TIME_SEC\
+        numeric varid  = SETUP_DATA.FixedTimeSec,\
+              prompt      = STRING_TOKEN(STR_RTC_WAKEUP_SECOND_PROMPT),\
+              help        = STRING_TOKEN(STR_RTC_SEC_HELP),\
+              flags       = RESET_REQUIRED,\
+              minimum     = 0,\
+              maximum     = 59,\
+              step        = 1,\
+              default     = 0,\
+        endnumeric;
+
+#define RTC_DYNAMIC_TIME_MIN\
+        numeric varid  = SETUP_DATA.DynamicMinIncrease,\
+              prompt      = STRING_TOKEN(STR_RTC_WAKEUP_MINUTE_INCREASE_PROMPT),\
+              help        = STRING_TOKEN(STR_TIME_MINUTE_INCREASE_HELP),\
+              flags       = RESET_REQUIRED,\
+              minimum       = 1,\
+              maximum       = 5,\
+              step          = 1,\
+              default       = 1,\
+        endnumeric;
+
+
+#endif //#ifdef CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+
+    RTC_WAKEUP_TYPE
+    RTC_FIXED_TIME_HOUR
+    RTC_FIXED_TIME_MIN
+    RTC_FIXED_TIME_SEC
+
+#endif //#ifdef CONTROLS_WITH_DEFAULTS
+
+#ifdef ADVANCED_FORM_SET 
+
+#ifndef SUPPRESS_GRAYOUT_ENDIF
+#define SUPPRESS_GRAYOUT_ENDIF endif;
+#endif
+
+    #ifdef FORM_SET_TYPEDEF
+    // Add any additional type definitions here
+    #endif
+
+    #ifdef FORM_SET_VARSTORE
+    // Define custom varstore's here
+    #endif
+
+    #ifdef FORM_SET_ITEM
+    // Define controls to be added to the main page of the formset
+    #endif
+
+    #ifdef FORM_SET_GOTO
+        // Define goto commands for the forms defined in this file
+        goto S5_RTCWAKE_FORM_ID, 
+            prompt = STRING_TOKEN(STR_S5_RTCWAKE_FORM),
+            help = STRING_TOKEN(STR_S5_RTCWAKE_FORM_HELP);
+    #endif
+
+    #ifdef FORM_SET_FORM
+
+        #ifndef RTC_WAKEUP_FORM_MAIN
+        #define RTC_WAKEUP_FORM_MAIN
+
+            // Define forms
+            form formid = AUTO_ID(S5_RTCWAKE_FORM_ID),
+            title = STRING_TOKEN(STR_S5_RTCWAKE_FORM);
+
+            RTC_WAKEUP_TYPE
+
+            suppressif NOT ideqval SETUP_DATA.RtcWakeType == 0x1;
+            RTC_FIXED_TIME_HOUR
+            endif;
+
+            suppressif NOT ideqval SETUP_DATA.RtcWakeType == 0x1;
+            RTC_FIXED_TIME_MIN
+            endif;
+
+            suppressif NOT ideqval SETUP_DATA.RtcWakeType == 0x1;
+            RTC_FIXED_TIME_SEC
+            endif;
+
+            suppressif NOT ideqval SETUP_DATA.RtcWakeType == 0x2;
+            RTC_DYNAMIC_TIME_MIN
+            endif;
+
+            endform;    // S5_RTCWAKE_FORM_ID
+        #endif    // RTC_WAKEUP_FORM_MAIN
+    #endif    // FORM_SET_FORM
+#endif    // ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

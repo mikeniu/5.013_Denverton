@@ -1,0 +1,89 @@
+## @file
+#  Component description file for PeiPolicyInit library.
+#
+#@copyright
+#  Copyright (c) 2014 - 2015 Intel Corporation. All rights reserved
+#  This software and associated documentation (if any) is furnished
+#  under a license and may only be used or copied in accordance
+#  with the terms of the license. Except as permitted by the
+#  license, no part of this software or documentation may be
+#  reproduced, stored in a retrieval system, or transmitted in any
+#  form or by any means without the express written consent of
+#  Intel Corporation.
+#  This file contains a 'Sample Driver' and is licensed as such
+#  under the terms of your license agreement with Intel or your
+#  vendor. This file may be modified by the user, subject to
+#  the additional terms of the license agreement.
+#
+#@par Specification Reference:
+##
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PeiPolicyInit
+  FILE_GUID                      = B494DF39-A5F8-48A1-B2D0-EF523AD91C55
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PeiPolicyInit
+
+[Sources]
+  PeiPolicyInitPreMem.c
+  PeiPolicyInit.c
+  PeiPolicyInit.h
+#  PeiCpuPolicyInit.c
+#  PeiCpuPolicyInit.h
+#  PeiMePolicyInit.c
+#  PeiMePolicyInit.h
+  PeiPchPolicyInit.c
+  PeiPchPolicyInit.h
+  PeiSaPolicyInit.c
+  PeiSaPolicyInit.h
+  PeiSiPolicyInit.c
+  PeiPcieIpPolicyInit.c
+  PeiPcieIpPolicyInit.h
+  PeiIqatIpPolicyInit.c
+  PeiIqatIpPolicyInit.h
+  PeiRasPolicyInit.c
+  PeiRasPolicyInit.h
+  PeiFiaMuxPolicyInit.c
+  PeiFiaMuxPolicyInit.h
+
+################################################################################
+#
+# Package Dependency Section - list of Package files that are required for
+#                              this module.
+#
+################################################################################
+[Packages]
+  MdePkg/MdePkg.dec
+  HarrisonvillePkg/PlatformPkg.dec
+  DenvertonPkg/SiPkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  BaseLib
+#  CpuPlatformLib
+  DebugLib
+  DebugPrintErrorLevelLib
+  HobLib
+  IoLib
+  MemoryAllocationLib
+  MmPciLib
+  PeiServicesLib
+  PeiPolicyUpdateLib
+  PostCodeLib
+  SmbusLib
+  PchPolicyLib
+  PeiSaPolicyLib
+  ConfigBlockLib
+#  PeiCpuPolicyLib
+  PeiSiPolicyLib
+#  PeiMePolicyLib
+  PeiPcieIpPolicyInitLib
+  PeiIqatIpPolicyInitLib
+  PeiRasPolicyInitLib
+  PeiFiaMuxPolicyInitLib
+  PeiPolicyDebugLib
+  
+[Ppis]
+  gEfiPeiReadOnlyVariable2PpiGuid               ## CONSUMES
+  gPchPcieDeviceTablePpiGuid

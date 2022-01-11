@@ -1,0 +1,11 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "IA32FamilyCpuPkg\Include\Protocol\"
+	RefName = "IA32FamilyCpuPkg.Protocol"
+[files]
+"IntelCpuPcdsSetDone.h"	
+"SmmCpuService.h"	
+"SmmCpuSync.h"	
+"SmmCpuSync2.h"	
+<endComponent>

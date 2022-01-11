@@ -1,0 +1,23 @@
+TOKEN
+	Name  = "SDMediaDeviceDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SDMediaDeviceDxe support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "MmcMediaDevice_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable MmcMediaDevice support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "MmcMediaDevice"
+	File  = "MmcMediaDeviceDxe.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "UEFI_DRIVER"
+	Token = "MmcMediaDevice_SUPPORT" "=" "1"
+End
+

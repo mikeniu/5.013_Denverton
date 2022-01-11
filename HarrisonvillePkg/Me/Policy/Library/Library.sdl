@@ -1,0 +1,33 @@
+TOKEN
+	Name  = "MePolicyLibrary_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "MePolicyUpdateDxeLib"
+	File  = "Dxe\MePolicyUpdateDxeLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "MePeiPolicyUpdateLib"
+	File  = "Pei\MePeiPolicyUpdateLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "MePolicyUpdateDxeLib"
+	Instance  = "HarrisonvillePkg.MePolicyUpdateDxeLib"
+	ModuleTypes  = "DXE_DRIVER DXE_RUNTIME_DRIVER"
+End
+
+LibraryMapping
+	Class  = "MePeiPolicyUpdateLib"
+	Instance  = "HarrisonvillePkg.MePeiPolicyUpdateLib"
+End
+

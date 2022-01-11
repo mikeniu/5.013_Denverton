@@ -1,0 +1,15 @@
+<component>
+	name = "FiaMuxInit"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\FiaMuxInit\"
+	RefName = "DenvertonPkg.FiaMuxInit"
+[INF]
+"PeiFiaMuxConfigInitLib\PeiFiaMuxConfigInitLib.inf"
+"PeiFiaMuxHelperLib\PeiFiaMuxHelperLib.inf"
+"PeiFiaMuxPolicyInitLib\PeiFiaMuxPolicyInitLib.inf"
+"MeFiaMuxLibNull\MeFiaMuxLibNull.inf"
+[files]
+"FiaMuxInit.sdl"	
+[parts]
+"DenvertonPkg.FiaMuxInit.Include"
+<endComponent>

@@ -1,0 +1,33 @@
+TOKEN
+	Name  = "AMI_MODULE_PKG_VERSION"
+	Value  = "39"
+	Help  = "AmiModulePkg version.\Do not change."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Lock = Yes
+End
+
+PcdMapping
+	Name  = "AmiPcdPerformanceProfilingSupport"
+	GuidSpace  = "gAmiModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFeatureFlag"
+	Value  = "TRUE"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+	Token = "PERFORMANCE_MEASUREMENTS_SUPPORT" "=" "1"
+End
+
+PcdMapping
+	Name  = "AmiPcdSmmMemLibProperties"
+	GuidSpace  = "gAmiModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	Value  = "4"
+	Offset  = 00h
+	Length  = 00h
+	Help  = "Bit mask that defines protections supported by AmiBufferValidationLib.\Default value zero sets the strongest level of protection.\Setting individual bits disables certain types of buffer validation.\BIT0 - allow access to memory regions that after ExitBootServices are owned by OS.\  If BIT0 is set, system is not compliant with Microsoft Device Guard requirements.\  If BIT0 is not set, OS applications that allocate SMM Communication \  memory using OS services and Firmware drivers that use boot time memory\  for SMM Communication buffers will not work.\BIT1 - allow MMIO in the regions marked as reserved in GCD memory map.\BIT2 - allow MMIO in the regions marked as non-existent in GCD memory map.\  BIT2 must be set if PCI bus enumeration happens after EndOfDxe,\  which is the case when BDS SDL token BDS_START_PCI_BEFORE_END_OF_DXE is to Off.\  Enabling MMIO in non-existent regions is required because depending on implementation\  of the PCI root bridge driver, PCI resources may get added to GCD only during PCI enumeration.\  Since AmiBufferValidationLib saves GCD map in the EndOfDxe callback, all non-existent memory\  ranges have to be treated by the library as a potential PCI MMIO space."
+	TargetDSC = Yes
+	Token = "BDS_START_PCI_BEFORE_END_OF_DXE" "=" "0"
+End
+

@@ -1,0 +1,35 @@
+TOKEN
+	Name  = "NonVolatileMem_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling NonVolatileMem support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "CopyToFlashSmi"
+	File  = "Dxe\CopyToFlashSmi.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+INFComponent
+	Name  = "NonVolatileMemDxe"
+	File  = "Dxe\NonVolatileMemDxe.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+  Name  = "NonVolatileMemPolicyInit"
+  File  = "Ppi\NonVolatileMemPolicyInit.inf"
+  Package  = "HarrisonvillePkg"
+  ModuleTypes  = "PEIM"
+End
+
+INFComponent
+  Name  = "NonVolatileMem"
+  File  = "Pei\NonVolatileMemPei.inf"
+  Package  = "HarrisonvillePkg"
+  ModuleTypes  = "PEIM"
+End

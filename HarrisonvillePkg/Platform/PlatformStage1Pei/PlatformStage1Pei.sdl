@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "PlatformStage1_Pei_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PlatformStage1 support in Project"
+	TokenType = Boolean
+	Master = Yes	
+End
+
+INFComponent
+	Name  = "PlatformStage1Pei"
+	File  = "PlatformStage1Pei.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "PEIM"
+End
+

@@ -1,0 +1,269 @@
+#
+# This file contains an 'Intel Peripheral Driver' and is      
+# licensed for Intel CPUs and chipsets under the terms of your
+# license agreement with Intel or your vendor.  This file may 
+# be modified by the user, subject to additional terms of the 
+# license agreement                                           
+#
+## @file
+# Component description file for AcpiPlatform module.
+#
+# This is an implementation of the ACPI platform driver, whose requirements are from ACPI External Product Specification.
+# Copyright (c) 2010 - 2016, Intel Corporation.
+#
+#  All rights reserved.
+#  This software and associated documentation (if any) is furnished
+#  under a license and may only be used or copied in accordance
+#  with the terms of the license. Except as permitted by such
+#  license, no part of this software or documentation may be
+#  reproduced, stored in a retrieval system, or transmitted in any
+#  form or by any means without the express written consent of
+#  Intel Corporation.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AcpiPlatform
+  FILE_GUID                      = 368B3649-F204-4cd0-89A8-091077C070FA
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AcpiPlatformEntryPoint
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  AcpiPlatform.c
+  AcpiPlatform.h
+  MadtPlatform.c
+  Madt.h
+  AcpiPciUpdate.c
+  AcpiPciUpdate.h
+
+[Packages]
+  DenvertonPkg/SiPkg.dec
+  DenvertonPkg/SystemAgent/Mrc/Mmrc/ProjectData/DNV/Pei/MemoryInit.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  HarrisonvillePkg/PlatformPkg.dec
+  DenvertonPkg/SiPkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+  PcAtChipsetPkg/PcAtChipsetPkg.dec
+  DenvertonPkg/DnvSiPrivate.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # Denverton AptioV override
+
+[LibraryClasses]
+  UefiLib
+  DxeServicesLib
+  PcdLib
+  IoLib
+  BaseMemoryLib
+  DebugLib
+  UefiRuntimeServicesTableLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  DevicePathLib
+  HobLib
+  PchP2sbLib
+#  PchSerialIoLib	# Denverton AptioV Override
+
+[Protocols]
+  gEfiGlobalNvsAreaProtocolGuid                 # PROTOCOL ALWAYS_CONSUMED
+  gEfiMpServiceProtocolGuid                     # PROTOCOL SOMETIMES_CONSUMED
+  gEfiAcpiTableProtocolGuid                     # PROTOCOL ALWAYS_CONSUMED
+  gEfiAcpiSdtProtocolGuid                       # PROTOCOL ALWAYS_CONSUMED
+  gEfiSerialIoProtocolGuid
+  gEfiLpcPolicyProtocolGuid
+
+[Guids]
+  gEfiGlobalVariableGuid
+  gEfiPcAnsiGuid
+  gEfiVT100PlusGuid
+  gEfiVT100Guid
+  gEfiVTUTF8Guid
+  gPlatformInfoHobGuid				# ALWAYS_CONSUMED
+  gEfiBdatMemoryData2Guid                       # ALWAYS_CONSUMED
+  gPchPolicyHobGuid				# ALWAYS_CONSUMED
+
+[Pcd]
+  gServerCommonTokenSpaceGuid.PcdUefiOptimizedBoot
+  gPlatformModuleTokenSpaceGuid.PcdHpetEnable
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiTableStorageFile
+#  gPlatformModuleTokenSpaceGuid.PcdEdisonvilleDeviceEnables
+# Denverton AptioV Override Start - EIP#314064
+# Update OemId and OemTableId from SDL Token (AMI Format)
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemId
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemTableId
+# Denverton AptioV Override End - EIP#314064
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable0Enable   
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable0SourceIrq 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable0Polarity  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable0TrigerMode
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable0GlobalIrq 
+                                                                             
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable1Enable    
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable1SourceIrq 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable1Polarity  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable1TrigerMode
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable1GlobalIrq    
+                                                                            
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable2Enable    
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable2SourceIrq 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable2Polarity  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable2TrigerMode
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable2GlobalIrq          
+                                                                             
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable3Enable    
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable3SourceIrq 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable3Polarity  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable3TrigerMode
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable3GlobalIrq    
+                                                                             
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable4Enable    
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable4SourceIrq 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable4Polarity  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable4TrigerMode
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable4GlobalIrq 
+                                                                             
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable5Enable    
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable5SourceIrq 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable5Polarity  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable5TrigerMode
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable5GlobalIrq    
+                                                                            
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable6Enable    
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable6SourceIrq 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable6Polarity  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable6TrigerMode
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable6GlobalIrq          
+                                                                             
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable7Enable    
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable7SourceIrq 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable7Polarity  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable7TrigerMode
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable7GlobalIrq    
+                                                                             
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable8Enable    
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable8SourceIrq 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable8Polarity  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable8TrigerMode
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable8GlobalIrq 
+                                                                            
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable9Enable    
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable9SourceIrq 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable9Polarity  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable9TrigerMode
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable9GlobalIrq    
+                                                                             
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable10Enable     
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable10SourceIrq  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable10Polarity   
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable10TrigerMode 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable10GlobalIrq              
+                                                                               
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable11Enable     
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable11SourceIrq  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable11Polarity   
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable11TrigerMode 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable11GlobalIrq        
+                                                                               
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable12Enable     
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable12SourceIrq  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable12Polarity   
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable12TrigerMode 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable12GlobalIrq  
+                                                                               
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable13Enable     
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable13SourceIrq  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable13Polarity   
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable13TrigerMode 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable13GlobalIrq        
+                                                                               
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable14Enable     
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable14SourceIrq  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable14Polarity   
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable14TrigerMode 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable14GlobalIrq              
+                                                                               
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable15Enable     
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable15SourceIrq  
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable15Polarity   
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable15TrigerMode 
+  gPlatformModuleTokenSpaceGuid.PcdInterruptOverrideSettingTable15GlobalIrq        
+                                                    
+  gPcAtChipsetPkgTokenSpaceGuid.PcdIoApicBaseAddress                         
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingIoApicAddress
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingGlobalInterruptBase
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingIoApicId
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingNmiEnable
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingNmiSource
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingPolarity
+  gPlatformModuleTokenSpaceGuid.PcdIoApicSettingTrigerMode  
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicSettingNmiEnabelApicIdMask
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicSettingAddressOverrideEnable
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicSettingPolarity
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicSettingTrigerMode
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicSettingLocalApicLint
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicAddress
+  gPlatformModuleTokenSpaceGuid.PcdLocalApicAddressOverride
+
+  gPlatformModuleTokenSpaceGuid.PcdPciDeviceInfoNumber
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice1Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice2Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice3Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice4Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice5Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice6Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice7Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice8Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice9Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice10Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice11Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice12Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice13Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice14Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice15Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice16Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice17Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice18Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice19Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice20Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice21Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice22Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice23Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice24Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice25Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice26Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice27Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice28Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice29Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice30Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice31Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice32Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice33Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice34Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice35Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice36Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice37Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice38Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice39Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice40Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice41Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice42Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice43Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice44Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice45Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice46Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice47Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice48Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice49Info
+  gPlatformModuleTokenSpaceGuid.PcdPciDevice50Info
+
+[Depex]
+  gEfiAcpiTableProtocolGuid AND gEfiMpServiceProtocolGuid

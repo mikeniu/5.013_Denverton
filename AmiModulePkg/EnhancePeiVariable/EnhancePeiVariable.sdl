@@ -1,0 +1,93 @@
+TOKEN
+    Name  = "EnhancePeiVariable_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable EnhancePeiVariable support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+End
+
+ELINK
+    Name  = "VariableToBeCachedElink"
+    Help  = "Elink for specific variables to be cached"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = '{L"Setup", { 0xEC87D643, 0xEBA4, 0x4BB5, 0xA1, 0xE5, 0x3F, 0x3E, 0x36, 0xB2, 0x0D, 0xA9 }},'
+    Parent  = "VariableToBeCachedElink"
+    InvokeOrder = AfterParent
+End
+
+TOKEN
+    Name  = "GET_FROM_STD_DEFAULT"
+    Value  = "1"
+    Help  = "Switch to turn on to get variable from StdDefault in FV_BB when NVRAM is corrupt."
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+PATH
+    Name  = "EnhancePeiVariable_DIR"
+End
+
+MODULE
+    Path  = "$(EnhancePeiVariable_DIR)"
+    File  = "EnhancePeiVariable.mak"
+End
+
+ELINK
+    Name  = "ENHANCE_PEI_VARIABLE_SOURCES"
+    InvokeOrder = ReplaceParent
+End
+
+INFComponent
+    Name  = "EnhancePeiVariable"
+    File  = "../../Build/EnhancePeiVariable.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "PEIM"
+End
+
+FFS_FILE
+    Name  = "EnhancePeiVariable"
+    FD_AREA  = "FV_BB"
+    INFComponent  = "AmiModulePkg.EnhancePeiVariable"
+    Help  = "Let EnhancePeiVariable be dispatched after NvramPei"
+    Apriori_Index  = "2"
+End
+
+ELINK
+    Name  = "$(NVRAM_DIR)/NvramRead.c"
+    Parent  = "ENHANCE_PEI_VARIABLE_SOURCES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(EnhancePeiVariable_DIR)/GetVarFromStdDefault/GetVarFromStdDefaultPei.c"
+    Parent  = "ENHANCE_PEI_VARIABLE_SOURCES"
+    InvokeOrder = AfterParent
+    Token  = "GET_FROM_STD_DEFAULT" "=" "1"
+End
+
+ELINK
+    Name  = "$(EnhancePeiVariable_DIR)/GetVarFromStdDefault/GetVarFromStdDefault.h"
+    Parent  = "ENHANCE_PEI_VARIABLE_SOURCES"
+    InvokeOrder = AfterParent
+    Token  = "GET_FROM_STD_DEFAULT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "FvBbStdDefaultsFile"
+    FD_AREA  = "FV_BB"
+    FILE_Stmt  = "AmiModulePkg/EnhancePeiVariable/GetVarFromStdDefault/FvBbStdDefaultsFile.txt"
+    Token  = "GET_FROM_STD_DEFAULT" "=" "1"
+End
+
+OUTPUTREGISTER
+    Name  = "CACHED_VARIABLE_ELINKS_H"
+    Path  = "Build"
+    File  = "CachedVariableElink.h"
+    Template  = "CacheVariablePei/CacheVariablePei.txt"
+End

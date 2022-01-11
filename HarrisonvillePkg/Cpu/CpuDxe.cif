@@ -1,0 +1,13 @@
+<component>
+	name = "CpuDxe"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Cpu\"
+	RefName = "HarrisonvillePkg.Cpu"
+[INF]
+"Dxe\PlatformCpuPolicyForNativeCpu\PlatformCpuPolicy.inf"
+"Dxe\PpmPolicy\PpmPolicy.inf"
+[files]
+"CpuDxe.sdl"	
+"Dxe\PlatformCpuPolicyForNativeCpu\PlatformCpuPolicy.h"	
+"Dxe\PpmPolicy\PpmPolicy.h"
+<endComponent>

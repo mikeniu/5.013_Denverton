@@ -1,0 +1,21 @@
+TOKEN
+	Name  = "PeiPolicyDebugLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PeiPolicyDebugLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PeiPolicyDebugLib"
+	File  = "PeiPolicyDebugLib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "PeiPolicyDebugLib"
+	Instance  = "HarrisonvillePkg.PeiPolicyDebugLib"
+	ModuleTypes  = "PEIM PEI_CORE SEC"
+End
+

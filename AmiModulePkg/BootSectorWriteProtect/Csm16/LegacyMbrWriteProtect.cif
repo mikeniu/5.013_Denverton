@@ -1,0 +1,8 @@
+<component>
+    name = "LegacyMbrWriteProtectCsm16"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\BootSectorWriteProtect\Csm16\"
+    RefName = "LegacyMbrWriteProtectCsm16"
+[files]
+"LegacyMbrWriteProtect.csm16"
+<endComponent>

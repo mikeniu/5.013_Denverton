@@ -1,0 +1,215 @@
+TOKEN
+	Name  = "VirtualSerial_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Virtual Serial Device support in Project"
+	TokenType = Boolean
+	Master = Yes
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "VIRTUAL_SERIAL_DEVICE1_UID"
+	Value  = "0"
+	Help  = "Virtual Serial Device 1 UID. Make sure this UID is not used by any SIO serial ports"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "VIRTUAL_SERIAL_DEVICE1_BASE_ADDRESS"
+	Value  = "0x3F8"
+	Help  = "Virtual Serial Device 1 Base Address."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "VIRTUAL_SERIAL_DEVICE1_IRQ"
+	Value  = "4"
+	Help  = "Virtual Serial Device 1 IRQ."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "VIRTUAL_SERIAL_DEVICE2_UID"
+	Value  = "1"
+	Help  = "Virtual Serial Device 2 UID. Make sure this UID is not used by any SIO serial ports"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "VIRTUAL_SERIAL_DEVICE2_BASE_ADDRESS"
+	Value  = "0x3F8"
+	Help  = "Virtual Serial Device 2 Base Address."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "VIRTUAL_SERIAL_DEVICE2_IRQ"
+	Value  = "4"
+	Help  = "Virtual Serial Device 2 IRQ."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "VIRTUAL_SERIAL_DEVICE3_UID"
+	Value  = "0"
+	Help  = "Virtual Serial Device 3 UID. Make sure this UID is not used by any SIO serial ports"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "VIRTUAL_SERIAL_DEVICE3_BASE_ADDRESS"
+	Value  = "0"
+	Help  = "Virtual Serial Device 3 Base Address."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "VIRTUAL_SERIAL_DEVICE3_IRQ"
+	Value  = "0"
+	Help  = "Virtual Serial Device 3 IRQ."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "VDA1"
+    Value  = "$(VIRTUAL_SERIAL_DEVICE1_BASE_ADDRESS)"
+    Help  = "Virtual Serial Device 1 Base Address."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "VDA2"
+    Value  = "$(VIRTUAL_SERIAL_DEVICE2_BASE_ADDRESS)"
+    Help  = "Virtual Serial Device 1 Base Address."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "VDA3"
+    Value  = "$(VIRTUAL_SERIAL_DEVICE3_BASE_ADDRESS)"
+    Help  = "Virtual Serial Device 3 Base Address."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "VIR1"
+    Value  = "$(VIRTUAL_SERIAL_DEVICE1_IRQ)"
+    Help  = "Virtual Serial Device 1 IRQ."
+    TokenType = Integer
+    TargetASL = Yes	
+End
+
+TOKEN
+    Name  = "VIR2"
+    Value  ="$(VIRTUAL_SERIAL_DEVICE2_IRQ)"
+    Help  = "Virtual Serial Device 2 IRQ."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "VIR3"
+    Value  = "$(VIRTUAL_SERIAL_DEVICE3_IRQ)"
+    Help  = "Virtual Serial Device 3 IRQ."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "UID1"
+    Value  = "$(VIRTUAL_SERIAL_DEVICE1_UID)"
+    Help  = "Virtual Serial Device 1 UID."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "UID2"
+    Value  = "$(VIRTUAL_SERIAL_DEVICE2_UID)"
+    Help  = "Virtual Serial Device 2 UID."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "UID3"
+    Value  = "$(VIRTUAL_SERIAL_DEVICE3_UID)"
+    Help  = "Virtual Serial Device 3 UID."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+PCIDEVICE
+    Title  = "COM1 Container"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg\VirtualSerial\VirtualSerialComPort1.asl;After Pci Tree'"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+    Token = "VIRTUAL_SERIAL_DEVICE1_BASE_ADDRESS" "!=" "0"
+End
+
+PCIDEVICE
+    Title  = "COM2 Container"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg\VirtualSerial\VirtualSerialComPort2.asl';After Pci Tree'"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+    Token = "VIRTUAL_SERIAL_DEVICE2_BASE_ADDRESS" "!=" "0"
+End
+
+PCIDEVICE
+    Title  = "COM3 Container"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg\VirtualSerial\VirtualSerialComPort3.asl';After Pci Tree'"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+    Token = "VIRTUAL_SERIAL_DEVICE3_BASE_ADDRESS" "!=" "0"
+End
+
+PATH
+	Name  = "VirtualSerial_DIR"
+	Path  = "AmiModulePkg\VirtualSerial"
+End
+
+INFComponent
+	Name  = "VirtualSerial"
+	File  = "VirtualSerial.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "VirtualSerial_SUPPORT" "=" "1"
+End
+

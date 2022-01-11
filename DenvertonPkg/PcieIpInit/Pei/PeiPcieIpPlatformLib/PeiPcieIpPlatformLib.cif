@@ -1,0 +1,10 @@
+<component>
+	name = "PeiPcieIpPlatformLib"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\PcieIpInit\Pei\PeiPcieIpPlatformLib"
+	RefName = "DenvertonPkg.PcieIpInit.Pei.PeiPcieIpPlatformLib"
+[INF]
+"PeiPcieIpPlatformLib.inf"
+[files]
+"PeiPcieIpPlatformLib.sdl"	
+<endComponent>

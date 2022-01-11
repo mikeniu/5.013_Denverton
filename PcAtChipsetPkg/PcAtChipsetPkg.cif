@@ -1,0 +1,13 @@
+<component>
+	name = "PcAtChipsetPkg"
+	category = eChipset
+	LocalRoot = "PcAtChipsetPkg\"
+	RefName = "PcAtChipsetPkg"
+[INF]
+"8259InterruptControllerDxe\8259.inf"
+"PcatRealTimeClockRuntimeDxe\PcatRealTimeClockRuntimeDxe.inf"
+"PcatRealTimeClockSmm\PcatRealTimeClockSmm.inf"
+[files]
+"PcAtChipsetPkg.dec"	
+"PcAtChipsetPkg.sdl"	
+<endComponent>

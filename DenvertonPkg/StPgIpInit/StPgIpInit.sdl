@@ -1,0 +1,20 @@
+TOKEN
+	Name  = "StPgIpInit_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling StPgIpInit support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "StPgIpInitLib"
+	File  = "PchPmcStPgIpInit.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "StPgIpInitLib"
+	Instance  = "DenvertonPkg.StPgIpInitLib"
+End
+

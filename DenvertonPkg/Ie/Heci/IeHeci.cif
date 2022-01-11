@@ -1,0 +1,11 @@
+<component>
+	name = "IeHeci"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Ie\Heci\"
+	RefName = "DenvertonPkg.Ie.Heci"
+[INF]
+"Library\IeHeciCoreLib\IeHeciCoreLib.inf"
+"Pei\IeHeciInit.inf"
+[files]
+"IeHeci.sdl"	
+<endComponent>

@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "PowerManagement_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PowerManagement support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PowerManagement2"
+	File  = "PpmDxe\PowerManagement.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+

@@ -1,0 +1,14 @@
+<component>
+	name = "IpmiIe"
+	category = ModulePart
+	LocalRoot = "AmiIePkg\IpmiIe\"
+	RefName = "AmiIePkg.IpmiIe"
+[files]
+"IpmiIe.sdl"	
+[parts]
+"AmiIePkg.IpmiIe.PeiIpmiTransportInitialize"
+"AmiIePkg.IpmiIe.DxeIpmiTransportInitialize"
+"AmiIePkg.IpmiIe.SmmIpmiTransportInitialize"
+"AmiIePkg.IpmiIe.IpmiIeCommonAccess"
+"AmiIePkg.IpmiIe.IpmiIeReportPostCode"
+<endComponent>

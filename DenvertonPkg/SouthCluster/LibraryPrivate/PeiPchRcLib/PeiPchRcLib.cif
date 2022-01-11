@@ -1,0 +1,11 @@
+<component>
+	name = "PeiPchRcLib"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\LibraryPrivate\PeiPchRcLib"
+	RefName = "DenvertonPkg.PeiPchRcLib"
+[INF]
+"PeiPchRcLib.inf"
+[files]
+"PeiPchRcLib.sdl"	
+"PchRcLibrary.h"
+<endComponent>

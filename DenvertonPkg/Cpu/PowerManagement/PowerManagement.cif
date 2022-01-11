@@ -1,0 +1,14 @@
+<component>
+	name = "PowerManagement"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Cpu\PowerManagement\"
+	RefName = "DenvertonPkg.Cpu.PowerManagement"
+[INF]
+"PpmDxe\PowerManagement.inf"
+[files]
+"PowerManagement.sdl"	
+[parts]
+"DenvertonPkg.Cpu.PowerManagement.Include"
+"DenvertonPkg.Cpu.PowerManagement.Library"
+"DenvertonPkg.AcpiTables"
+<endComponent>

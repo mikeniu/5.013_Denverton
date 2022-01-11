@@ -1,0 +1,23 @@
+TOKEN
+	Name  = "MePolicyInit_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling MePolicyInit support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "MePolicyInitPei"
+	File  = "Pei\MePolicyInitPei.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "MeDxePolicyInit"
+	File  = "Dxe\MeDxePolicyInit.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+

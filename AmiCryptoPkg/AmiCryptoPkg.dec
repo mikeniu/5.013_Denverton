@@ -1,0 +1,55 @@
+## @file
+#  Package for cryptography modules.
+#
+#  This Package provides cryptographic-related libraries for UEFI
+#  security modules.
+#
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = AmiCryptoPkg
+  PACKAGE_GUID                   = 18698C70-5956-4C26-97B6-53550DE5C24D
+  PACKAGE_VERSION                = 0.92
+
+[Includes]
+Include
+Include/Library
+../MdePkg/Include
+../MdePkg/Include/Guid
+../AmiCompatibilityPkg/Include
+../IntelFrameworkPkg/Include
+../IntelFrameworkModulePkg/Include
+
+
+[LibraryClasses]
+  ##  @libraryclass  Provides basic library functions for cryptographic primitives.
+  ##
+  BaseCryptLib| ../../AmiCompatibilityPkg/Include/Library/BaseCryptLib.h
+  AmiCryptLib|../../AmiCompatibilityPkg/Include/Library/CryptLib.h
+  PeiCryptLib|../../AmiCompatibilityPkg/Include/Library/CryptLib.h
+
+[Guids]  
+#temp###will be moved to Ami AmiCompatibilityPkg.dec
+  gBdsConnectDriversProtocolGuid  =  { 0x3aa83745, 0x9454, 0x4f7a, { 0xa7, 0xc0, 0x90, 0xdb, 0xd0, 0x2f, 0xab, 0x8e }}
+  ## Include/Protocol/Hash.h
+  gEfiHashAlgorithmSha1NoPadGuid = { 0x24c5dc2f, 0x53e2, 0x40ca, { 0x9e, 0xd6, 0xa5, 0xd9, 0xa4, 0x9f, 0x46, 0x3b }}
+  gEfiHashAlgorithmSha256NoPadGuid = { 0x8628752a, 0x6cb7, 0x4814, { 0x96, 0xfc, 0x24, 0xa8, 0x15, 0xac, 0x22, 0x26 }}
+##temp# Include/Guid/ImageAuthentication.h
+   #ECR1009
+  gEfiCertX509Sha256Guid    ={ 0x3bd2a492, 0x96c0, 0x4079, {0xb4, 0x20, 0xfc, 0xf9, 0x8e, 0xf1, 0x03, 0xed }}
+  gEfiCertX509Sha384Guid    ={ 0x7076876e, 0x80c2, 0x4ee6, {0xaa, 0xd2, 0x28, 0xb3, 0x49, 0xa6, 0x86, 0x5b }} 
+  gEfiCertX509Sha512Guid    ={ 0x446dbf63, 0x2502, 0x4cda, {0xbc, 0xfa, 0x24, 0x65, 0xd2, 0xb0, 0xfe, 0x9d }}
+
+[Ppis]
+  gAmiDigitalSignaturePPIGuid = { 0x86c29aa5, 0xdb0, 0x4343, { 0xbd, 0x52, 0x7a, 0x72, 0x9f, 0x37, 0xc9, 0x6d }}
+  # temp. will be moved to Ami Module Pkg.dec
+  gFlashUpdBootModePpiGuid =  { 0x2A6E902B, 0xF1F3, 0x4275, { 0xBC, 0x7B, 0x40, 0xFD, 0x4B, 0x54, 0x81, 0xE7 }}
+
+[Protocols]
+  ## Include/Protocol/RuntimeCrypt.h
+  gAmiDigitalSignatureProtocolGuid =    { 0x5f87ba17, 0x957d, 0x433d, {0x9e, 0x15, 0xc0, 0xe7, 0xc8, 0x79, 0x88, 0x99 }}
+  gAmiSmmDigitalSignatureProtocolGuid = { 0x91ABC830, 0x16FC, 0x4D9E, {0xA1, 0x89, 0x5F, 0xC8, 0xBB, 0x41, 0x14, 0x02 }}
+  # temp. will be moved to Ami Module Pkg.dec
+  gSecureSMIFlashProtocolGuid = { 0x3bf4af16, 0xab7c, 0x4b43, { 0x89, 0x8d, 0xab, 0x26, 0xac, 0x5d, 0xdc, 0x6c }}
+    
+  

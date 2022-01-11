@@ -1,0 +1,29 @@
+TOKEN
+	Name  = "PeiPlatformHookLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PeiPlatformHookLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PeiPlatformHookLib"
+	File  = "PeiPlatformHooklib.inf"
+	Package  = "HarrisonvillePkg"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "PeiPlatformHookLib"
+	Instance  = "HarrisonvillePkg.PeiPlatformHookLib"
+	ModuleTypes  = "PEIM PEI_CORE SEC"
+End
+
+# Denverton AptioV Override Start - EIP#281657 - To dynamically generate the header file with values for GPIOTable defined in it
+OUTPUTREGISTER
+	Name  = "AUTOGEN_GPIO_TABLE_ELINKS"
+	Path  = "Build"
+	File  = "GpioTable.h"
+	Template  = "GpioTableElinks.txt"
+End
+# Denverton AptioV Override End - EIP#281657

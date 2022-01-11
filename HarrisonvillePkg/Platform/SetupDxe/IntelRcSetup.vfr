@@ -1,0 +1,773 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+// *++
+//
+// Copyright (c)  1999 - 2015 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// 
+// 
+// Module Name:
+//
+//   Advanced.vfr 
+// 
+// Abstract:
+// 
+//   Setup Advanced formset.
+// 
+// Revision History: 
+// 
+// --*/
+
+#include "Configuration.h"
+#include "SetupDxeStrDefs.h"
+#include <Include/SetupVariable.h>
+#include "Common.hfr"
+// Denverton AptioV override start - EIP#217439
+formset 
+    guid      = SYSTEM_CONFIGURATION_GUID,
+    title     = STRING_TOKEN(STR_INTELRCSETUP_TITLE),
+    help      = STRING_TOKEN(STR_INTELRCSETUP_HELP),
+    class     = VFR_INTELRCSETUP_CLASS,
+    subclass  = 0,
+
+    VFR_VARSTORE_SETUP
+    VFR_VARSTORE_PCH_SETUP // Denverton Aptiov Override
+
+#define SYSTEM_CONFIGURATION  IntelSetup
+
+    form formid = VFR_FORMID_INTELRCSETUP,
+
+        title = STRING_TOKEN(STR_INTELRCSETUP_TITLE);
+
+
+	
+
+
+	// PCI setup page is from AMI
+	/*
+        // Jump to PCI Form
+        //
+         goto VFR_PCI_FORM_ID, 
+             prompt = STRING_TOKEN(STR_PCI_FORM),
+             help = STRING_TOKEN(STR_PCI_FORM_HELP);
+	 */
+
+    //
+    // Platform Type Display
+    //
+    text
+        help  = STRING_TOKEN(STR_NULL_STRING),
+        text  = STRING_TOKEN(STR_PLATFORM_REVISION_PROMPT),
+        text  = STRING_TOKEN(STR_PLATFORM_REVISION_VALUE),
+        flags = 0, key = 0;
+        
+    //
+    // RC Revision Display
+    //
+    text 
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_RC_REVISION_PROMPT),
+        text   = STRING_TOKEN(STR_RC_REVISION_VALUE),
+        flags  = 0, key = 0;
+        
+    //
+    // Processor Revision Display
+    //
+    text
+        help  = STRING_TOKEN(STR_NULL_STRING),
+        text  = STRING_TOKEN(STR_CPU_BSP_REVISION_PROMPT),
+        text  = STRING_TOKEN(STR_CPU_BSP_REVISION_VALUE),
+        flags = 0, key = 0;
+        
+    text
+        help  = STRING_TOKEN(STR_NULL_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_MICROCODE_STRING),
+        text  = STRING_TOKEN(STR_PROCESSOR_MICROCODE_VALUE),
+        flags = 0, key = 0;
+
+    oneof varid = SYSTEM_CONFIGURATION.RelaxSecConf,
+        prompt   = STRING_TOKEN(STR_RELAX_SEC_CONF),
+        help     = STRING_TOKEN(STR_RELAX_SEC_CONF_HELP),
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+    endoneof;
+    
+        subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+        goto VFR_FORMID_FIAMUX_ID,
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_TITLE),
+          help   = STRING_TOKEN(STR_FIA_CONFIG_TITLE_HELP);        
+
+         //
+        // Jump to Processor Configuration Form
+        //
+        goto VFR_FORMID_PROCESSOR, 
+            prompt = STRING_TOKEN(STR_PROCESSOR_CONFIG_FORM_TITLE),
+            help   = STRING_TOKEN(STR_PROCESSOR_CONFIG_FORM_HELP);
+
+         
+        //
+        // Jump to Thermal Configuration Form
+        //
+        goto VFR_FORMID_THERMAL, 
+             prompt = STRING_TOKEN(STR_THERMAL_CONFIGURATION),
+             help   = STRING_TOKEN(STR_THERMAL_CONFIGURATION_HELP);
+
+        //
+        // Jump to USB Configuration Form
+        //
+        // Denverton AptioV Override Start - EIP#235760
+        /*
+        goto VFR_FORMID_USB, 
+             prompt = STRING_TOKEN(STR_USB_CONFIGURATION),
+             help   = STRING_TOKEN(STR_USB_CONFIGURATION_HELP);
+	*/
+	// Denverton AptioV Override End - EIP#235760
+	    
+        //
+        // Jump to CK420 Configuration Form
+        //
+        goto VFR_FORMID_CK420, 
+             prompt = STRING_TOKEN(STR_SV_CK420_SETTINGS),
+             help   = STRING_TOKEN(STR_SV_CK420_SETTINGS);
+	     
+        //
+        // Jump to Network Configuration Form
+        //
+        // Denverton AptioV Override Start - EIP#235760
+        /*
+        goto VFR_FORMID_NETWORK, 
+             prompt = STRING_TOKEN(STR_NETWORK_CONFIGURATION),
+             help   = STRING_TOKEN(STR_NETWORK_CONFIGURATION_HELP);
+        */
+	// Denverton AptioV Override End - EIP#235760
+        
+        //
+        // Jump to Miscelleneous Configuration Form
+        //
+        goto VFR_FORMID_MISC, 
+             prompt = STRING_TOKEN(STR_MISC_FORM_TITLE),
+             help   = STRING_TOKEN(STR_MISC_FORM_HELP);
+
+        //
+        // Jump to WOL Configuration Form
+        //
+        goto VFR_WOL_FORM_ID, 
+             prompt = STRING_TOKEN(STR_WOL_CONFIGURATION),
+             help   = STRING_TOKEN(STR_WOL_CONFIGURATION_HELP);          
+
+#ifdef IE_SUPPORT
+        goto VFR_FORMID_IE,
+            prompt = STRING_TOKEN(STR_SERVER_IE_FORM),
+            help   = STRING_TOKEN(STR_SERVER_IE_FORM_HELP);
+#endif //IE_SUPPORT
+	    
+        //
+        // Jump to ME Debug Form
+        //
+        goto VFR_FORMID_ME,
+            prompt = STRING_TOKEN(STR_SERVER_ME_FORM),
+            help   = STRING_TOKEN(STR_SERVER_ME_FORM_HELP);
+
+        //
+        // Jump to FW Debug Form
+        //
+         goto VFR_FORMID_FWDEBUG,
+            prompt  = STRING_TOKEN(STR_FWDEBUG_FORM),
+            help    = STRING_TOKEN(STR_FWDEBUG_FORM_HELP);
+
+	//
+        // Jump to ELOG Configuration Form
+        //
+        goto VFR_FORMID_ELOG, 
+            prompt = STRING_TOKEN(STR_ELOG_FORM_TITLE),
+            help   = STRING_TOKEN(STR_ELOG_FORM_HELP);
+        
+/*    
+        subtitle text = STRING_TOKEN(STR_NULL_STRING);
+        subtitle text = STRING_TOKEN(STR_NULL_STRING);
+        subtitle text = STRING_TOKEN(STR_NULL_STRING);
+        subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+        subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+        subtitle text = STRING_TOKEN(STR_WARNING_MESSAGE1);
+        subtitle text = STRING_TOKEN(STR_WARNING_MESSAGE2);
+        subtitle text = STRING_TOKEN(STR_WARNING_MESSAGE3);
+*/
+		// Denverton AptioV override start - EIP#217439
+		//
+		// Jump to North Bridge Configuration Form
+		//
+		goto VFR_FORMID_CHIPSET_NB, 
+			prompt = STRING_TOKEN(STR_NB_FORM),
+			help   = STRING_TOKEN(STR_NB_FORM);
+
+		//
+		// Jump to SouthBridge form
+		//
+		 goto VFR_SB_FORM_ID, 
+			  prompt  = STRING_TOKEN(STR_SB_FORM),
+			  help    = STRING_TOKEN(STR_SB_FORM_HELP);
+		// Denverton AptioV override end - EIP#217439
+endform;
+
+    //
+    // Miscelleneous Configuration Form
+    //
+    form formid = VFR_FORMID_MISC,
+
+        title    = STRING_TOKEN(STR_MISC_FORM_TITLE);
+
+        subtitle text = STRING_TOKEN(STR_MISC_FORM_TITLE);
+        subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+        subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+        //
+        // Video Support
+        //
+suppressif TRUE;        
+        oneof varid     = SYSTEM_CONFIGURATION.VideoSelect,
+            prompt      = STRING_TOKEN(STR_VIDEO_SELECT_PROMPT),
+            help        = STRING_TOKEN(STR_VIDEO_SELECT_HELP),
+            option text = STRING_TOKEN(STR_AUTO),                 value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+            option text = STRING_TOKEN(STR_VIDEO_SELECT_ONBOARD), value = 1, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_VIDEO_SELECT_PCIE),    value = 2, flags = RESET_REQUIRED;
+        endoneof;
+endif;
+
+        oneof varid     = SYSTEM_CONFIGURATION.CoreBGF,
+            prompt      = STRING_TOKEN(STR_MAILBOX_CORE_PUNIT_BGF_PROMPT),
+            help        = STRING_TOKEN(STR_MAILBOX_CORE_PUNIT_BGF_HELP),
+            option text = STRING_TOKEN(STR_VALUE_8_STRING),               value = 8, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_VALUE_4_STRING),               value = 4, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+            option text = STRING_TOKEN(STR_VALUE_2_STRING),               value = 2, flags = RESET_REQUIRED;
+        endoneof;
+        
+        oneof varid     = SYSTEM_CONFIGURATION.SataSelect,
+            prompt      = STRING_TOKEN(STR_SATA_SELECT_PROMPT),
+            help        = STRING_TOKEN(STR_SATA_SELECT_HELP),
+            option text = STRING_TOKEN(STR_SATA_SELECT_ONBOARD), value = 0, flags = RESET_REQUIRED | DEFAULT;
+            option text = STRING_TOKEN(STR_SATA_SELECT_PCIE),    value = 1, flags = RESET_REQUIRED| MANUFACTURING;
+        endoneof;
+
+        // modphy Inspeccmm
+        oneof varid  = SYSTEM_CONFIGURATION.InspeccmmEn,
+     	    prompt = STRING_TOKEN(STR_INSPECCMMCLB_OPTION_PROMPT),
+     	    help   = STRING_TOKEN(STR_INSPECCMMCLB_OPTION_HELP),
+     	    option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = MANUFACTURING | DEFAULT;
+            option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags =  RESET_REQUIRED;
+        endoneof;
+
+
+        oneof varid  = SYSTEM_CONFIGURATION.IOComplianceEn,
+          prompt = STRING_TOKEN(STR_IOCOMPLIANCEEN_PROMPT ),
+          help = STRING_TOKEN(STR_IOCOMPLIANCEEN_HELP),
+          option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_VII),  value = 7, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_III),  value = 3, flags = RESET_REQUIRED;
+        endoneof;
+
+
+        //
+        // EfiVideoInt10Workaround Support
+        //
+        oneof varid     = SYSTEM_CONFIGURATION.EfiWindowsInt10Workaround,
+            prompt      = STRING_TOKEN(STR_EFI_INT10_PROMPT),
+            help        = STRING_TOKEN(STR_EFI_INT10_HELP),
+            option text = STRING_TOKEN(STR_DISABLE),              value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+            option text = STRING_TOKEN(STR_ENABLE),               value = 1, flags = RESET_REQUIRED;
+        endoneof;
+        
+        //
+        // Console Redirection setup option
+        //
+        // Denverton AptioV Override Start - EIP#235760
+        /*
+        oneof varid     = SYSTEM_CONFIGURATION.ConsoleRedir,
+            prompt      = STRING_TOKEN(STR_CONSOLE_REDIR_PROMPT),
+            help        = STRING_TOKEN(STR_CONSOLE_REDIR_HELP),
+            option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        endoneof;
+        */
+        // Denverton AptioV Override End - EIP#235760
+        
+        // Denverton AptioV Override Start- EIP#310480
+        // Rtc wakeup from S5 option will be available in AMI setup's Advanced page, hence commenting out this duplicate token. 
+        /*
+        oneof   varid   = SYSTEM_CONFIGURATION.WakeOnRTCS5,
+	  prompt      = STRING_TOKEN(STR_WAKE_ON_RTC_PROMPT),
+	  help        = STRING_TOKEN(STR_WAKE_ON_RTC_HELP),
+	  option text = STRING_TOKEN(STR_DISABLE), value=0, flags=  DEFAULT | MANUFACTURING | RESET_REQUIRED;
+	  option text = STRING_TOKEN(STR_ENABLE), value= 1, flags= RESET_REQUIRED;
+	endoneof;
+
+	suppressif  ideqval SYSTEM_CONFIGURATION.WakeOnRTCS5 == 0;
+	  numeric varid  = SYSTEM_CONFIGURATION.RTCWakeupTimeHour,
+		prompt      = STRING_TOKEN(STR_RTC_WAKEUP_HOUR_PROMPT),
+		help        = STRING_TOKEN(STR_RTC_HOUR_HELP),
+	        flags       = RESET_REQUIRED,
+		minimum     = 0,
+		maximum     = 23,
+		step        = 1,
+		default     = 0,
+	  endnumeric;
+
+	  numeric varid  = SYSTEM_CONFIGURATION.RTCWakeupTimeMinute,
+		prompt      = STRING_TOKEN(STR_RTC_WAKEUP_MINUTE_PROMPT),
+		help        = STRING_TOKEN(STR_TIME_MINUTE_HELP),
+		flags       = RESET_REQUIRED,
+		minimum       = 0,
+		maximum       = 59,
+		step          = 1,
+		default       = 0,
+	  endnumeric;
+
+	  numeric varid  = SYSTEM_CONFIGURATION.RTCWakeupTimeSecond,
+		prompt      = STRING_TOKEN(STR_RTC_WAKEUP_SECOND_PROMPT),
+		help        = STRING_TOKEN(STR_TIME_SECOND_HELP),
+		flags       = RESET_REQUIRED,
+		minimum       = 0,
+		maximum       = 59,
+		step          = 1,
+		default       = 0,
+	  endnumeric;
+	endif;
+        */
+        // Denverton AptioV Override End - EIP#310480
+
+	//
+        // Debug Level config
+        //
+        // Denverton AptioV Override Start - EIP#235760
+        /*
+        oneof varid     = SYSTEM_CONFIGURATION.DebugPrintErrorLevel,
+            prompt      = STRING_TOKEN(STR_DEBUGLEVEL_PROMPT),
+            help        = STRING_TOKEN(STR_DEBUGLEVEL_HELP),
+            option text = STRING_TOKEN(STR_NONE),                      value = 0x00000000, flags = MANUFACTURING;
+            option text = STRING_TOKEN(STR_DEBUGLEVEL_ERRORS),         value = 0x80000000, flags = 0;
+            option text = STRING_TOKEN(STR_DEBUGLEVEL_WARNINGS),       value = 0x80000002, flags = 0;
+            option text = STRING_TOKEN(STR_DEBUGLEVEL_INFORMATIONAL),  value = 0x80000042, flags = 0;
+            option text = STRING_TOKEN(STR_DEBUGLEVEL_VERBOSE),        value = 0x80400042, flags = DEFAULT;
+        endoneof;
+
+        //
+        // Jump to additional debug messages form
+        //
+        goto VFR_FORMID_DBGMSG, 								//0x170
+             prompt = STRING_TOKEN(STR_DBGMSG_TITLE),		//"Additional debug messages"
+             help   = STRING_TOKEN(STR_DBGMSG_HELP);	//"Select additional debug messages from list"
+        */
+        // Denverton AptioV Override End - EIP#235760
+    endform;
+  // Denverton AptioV Override Start - EIP#235760
+  /*
+  form formid = VFR_FORMID_DBGMSG,
+
+    title     = STRING_TOKEN(STR_DBGMSG_TITLE);
+
+        subtitle text = STRING_TOKEN(STR_DBGMSG_SUBTITLE);
+        subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+        subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintInit,
+        prompt     = STRING_TOKEN(STR_DBGMSG_INIT),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintWarn,
+        prompt     = STRING_TOKEN(STR_DBGMSG_WARN),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintLoad,
+        prompt     = STRING_TOKEN(STR_DBGMSG_LOAD),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintFS,
+        prompt     = STRING_TOKEN(STR_DBGMSG_FS),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintPool,
+        prompt     = STRING_TOKEN(STR_DBGMSG_POOL),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintPage,
+        prompt     = STRING_TOKEN(STR_DBGMSG_PAGE),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintInfo,
+        prompt     = STRING_TOKEN(STR_DBGMSG_INFO),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintDispatch,
+        prompt     = STRING_TOKEN(STR_DBGMSG_DISPATCH),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintVariable,
+        prompt     = STRING_TOKEN(STR_DBGMSG_VARIABLE),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintBM,
+        prompt     = STRING_TOKEN(STR_DBGMSG_BM),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintBlkIO,
+        prompt     = STRING_TOKEN(STR_DBGMSG_BLKIO),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintNet,
+        prompt     = STRING_TOKEN(STR_DBGMSG_NET),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+    
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintUNDI,
+        prompt     = STRING_TOKEN(STR_DBGMSG_UNDI),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintLoadfile,
+        prompt     = STRING_TOKEN(STR_DBGMSG_LOADFILE),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintEvent,
+        prompt     = STRING_TOKEN(STR_DBGMSG_EVENT),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugGCD,
+        prompt     = STRING_TOKEN(STR_DEBUG_GCD),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugCache,
+        prompt     = STRING_TOKEN(STR_DEBUG_CACHE),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintVerbose,
+        prompt     = STRING_TOKEN(STR_DBGMSG_VERBOSE),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.DebugPrintError,
+        prompt     = STRING_TOKEN(STR_DBGMSG_ERROR),
+        help       = STRING_TOKEN(STR_NULL_STRING), 
+    endcheckbox;
+			
+  endform;
+
+  form formid = VFR_FORMID_NETWORK,
+
+    title     = STRING_TOKEN(STR_NETWORK_CONFIGURATION);
+   
+    oneof varid = SYSTEM_CONFIGURATION.EfiNetworkSupport,
+      prompt   = STRING_TOKEN(STR_EFI_NETWORK_CONTROL),
+      help     = STRING_TOKEN(STR_EFI_NETWORK_CONTROL_HELP),
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING |RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.LegacyPxeRom,
+      prompt   = STRING_TOKEN(STR_PCH_PXEROM_CONTROL),
+      help     = STRING_TOKEN(STR_PCH_PXEROM_CONTROL_HELP),
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+    endoneof;
+
+   
+    oneof varid = SYSTEM_CONFIGURATION.gbeEn[0],
+      prompt   = STRING_TOKEN(STR_EFI_NETWORK_CONTROLER_0),
+      help     = STRING_TOKEN(STR_EFI_NETWORK_CONTROLER_HELP),
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  DEFAULT | RESET_REQUIRED | MANUFACTURING;
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.gbeEn[1],
+      prompt   = STRING_TOKEN(STR_EFI_NETWORK_CONTROLER_1),
+      help     = STRING_TOKEN(STR_EFI_NETWORK_CONTROLER_HELP),
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  DEFAULT | RESET_REQUIRED | MANUFACTURING;
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.gbeEn[2],
+      prompt   = STRING_TOKEN(STR_EFI_NETWORK_CONTROLER_2),
+      help     = STRING_TOKEN(STR_EFI_NETWORK_CONTROLER_HELP),
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  DEFAULT | RESET_REQUIRED | MANUFACTURING;
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.gbeEn[3],
+      prompt   = STRING_TOKEN(STR_EFI_NETWORK_CONTROLER_3),
+      help     = STRING_TOKEN(STR_EFI_NETWORK_CONTROLER_HELP),
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  DEFAULT | RESET_REQUIRED | MANUFACTURING;
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+    endoneof;
+
+  endform;
+  */
+  // Denverton AptioV Override End - EIP#235760
+  form formid = VFR_FORMID_FIAMUX_ID,
+     title = STRING_TOKEN(STR_FIA_CONFIG_FORM_TITLE);
+    checkbox varid = SYSTEM_CONFIGURATION.FiaMuxOverride,
+          prompt     = STRING_TOKEN(STR_FIA_CONFIG_OVERRIDE),
+          help       = STRING_TOKEN(STR_FIA_CONFIG_OVERRIDE_HELP),
+    endcheckbox;
+    grayoutif ideqval SYSTEM_CONFIGURATION.FiaMuxOverride == 0;
+      // Denverton AptioV override start - EIP#332934
+      // Setup question to Select the Bifurcation setting for Cluster 0
+      oneof varid = SYSTEM_CONFIGURATION.BifCtl[0],
+          prompt = STRING_TOKEN(STR_FIA_BIF_CLUSTER_0_PROMPT),
+          help    = STRING_TOKEN(STR_FIA_BIF_CLUSTER_0_HELP),
+          option text = STRING_TOKEN(STR_FIA_BIF_X2X2X2X2), value = 0x0F, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_BIF_X2X2X4), value = 0x07, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_BIF_X4X2X2), value = 0x0D, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_BIF_X4X4), value = 0x05, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_BIF_X8), value = 0x01, flags = RESET_REQUIRED;
+      endoneof;
+      // Setup question to Select the Bifurcation setting for Cluster 1
+      oneof varid = SYSTEM_CONFIGURATION.BifCtl[1],
+          prompt = STRING_TOKEN(STR_FIA_BIF_CLUSTER_1_PROMPT),
+          help    = STRING_TOKEN(STR_FIA_BIF_CLUSTER_1_HELP),
+          option text = STRING_TOKEN(STR_FIA_BIF_X2X2X2X2), value = 0xF0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_BIF_X2X2X4), value = 0x70, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_BIF_X4X2X2), value = 0xD0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_BIF_X4X4), value = 0x50, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_BIF_X8), value = 0x10, flags = RESET_REQUIRED;
+      endoneof;
+      // Denverton AptioV override end - EIP#332934
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[0],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE0_PROMPT),
+          help    = STRING_TOKEN(STR_FIA_CONFIG_PCIE),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[1],
+           prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE1_PROMPT),
+           help = STRING_TOKEN(STR_FIA_CONFIG_PCIE),
+           option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+           option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[2],
+            prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE2_PROMPT),
+            help = STRING_TOKEN(STR_FIA_CONFIG_PCIE),
+            option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+            option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[3],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE3_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[4],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE4_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[5],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE5_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[6],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE6_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[7],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE7_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[8],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE8_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[9],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE9_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[10],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE10_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[11],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE11_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[12],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE12_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[13],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE13_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[14],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE14_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[15],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE15_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_PCIE), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[16],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE16_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_SATA_XHCI),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_XHCI), value = 3, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[17],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE17_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_XHCI), value = 3, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[18],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE18_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_XHCI), value = 3, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaLaneConfig[19],
+          prompt = STRING_TOKEN(STR_FIA_CONFIG_LANE19_PROMPT),
+          help = STRING_TOKEN(STR_FIA_CONFIG_PCIE_SATA),
+          option text = STRING_TOKEN(STR_FIA_LANE_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_LANE_SATA), value = 2, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FIA_LANE_XHCI), value = 3, flags = RESET_REQUIRED;
+      endoneof;
+      // Denverton AptioV override start - EIP#332934
+      // Setup options to configure the PCIE ROOT PORT LINK WIDTH
+      //If PCIE ROOT PORT LINK WIDTH = "BICTRL"=>: Disable the RP if ANY of the LANE below it is NOT PCIE
+      //If PCIE ROOT PORT LINK WIDTH =   "X1"  =>: Does not disable the RP if its LANE[0], below it, is assigned as PCIE
+      
+      subtitle text = STRING_TOKEN(STR_NULL_STRING);
+      subtitle text = STRING_TOKEN(STR_FIA_PCIE_RP_LINK_WIDTH_CONFIG_SUBTITLE);
+      
+      oneof varid = SYSTEM_CONFIGURATION.FiaPcieRootPortLinkWidth[0],
+          prompt = STRING_TOKEN(STR_FIA_PCIE_RP0_LINK_WIDTH_CONFIG_PROMPT),
+          help = STRING_TOKEN(STR_FIA_PCIE_RP_LINK_WIDTH_CONFIG),
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_BICTRL), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_X1), value = 0xF, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaPcieRootPortLinkWidth[1],
+          prompt = STRING_TOKEN(STR_FIA_PCIE_RP1_LINK_WIDTH_CONFIG_PROMPT),
+          help = STRING_TOKEN(STR_FIA_PCIE_RP_LINK_WIDTH_CONFIG),
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_BICTRL), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_X1), value = 0xF, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaPcieRootPortLinkWidth[2],
+          prompt = STRING_TOKEN(STR_FIA_PCIE_RP2_LINK_WIDTH_CONFIG_PROMPT),
+          help = STRING_TOKEN(STR_FIA_PCIE_RP_LINK_WIDTH_CONFIG),
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_BICTRL), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_X1), value = 0xF, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaPcieRootPortLinkWidth[3],
+          prompt = STRING_TOKEN(STR_FIA_PCIE_RP3_LINK_WIDTH_CONFIG_PROMPT),
+          help = STRING_TOKEN(STR_FIA_PCIE_RP_LINK_WIDTH_CONFIG),
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_BICTRL), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_X1), value = 0xF, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaPcieRootPortLinkWidth[4],
+          prompt = STRING_TOKEN(STR_FIA_PCIE_RP4_LINK_WIDTH_CONFIG_PROMPT),
+          help = STRING_TOKEN(STR_FIA_PCIE_RP_LINK_WIDTH_CONFIG),
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_BICTRL), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_X1), value = 0xF, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaPcieRootPortLinkWidth[5],
+          prompt = STRING_TOKEN(STR_FIA_PCIE_RP5_LINK_WIDTH_CONFIG_PROMPT),
+          help = STRING_TOKEN(STR_FIA_PCIE_RP_LINK_WIDTH_CONFIG),
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_BICTRL), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_X1), value = 0xF, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaPcieRootPortLinkWidth[6],
+          prompt = STRING_TOKEN(STR_FIA_PCIE_RP6_LINK_WIDTH_CONFIG_PROMPT),
+          help = STRING_TOKEN(STR_FIA_PCIE_RP_LINK_WIDTH_CONFIG),
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_BICTRL), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_X1), value = 0xF, flags = RESET_REQUIRED;
+      endoneof;
+      oneof varid = SYSTEM_CONFIGURATION.FiaPcieRootPortLinkWidth[7],
+          prompt = STRING_TOKEN(STR_FIA_PCIE_RP7_LINK_WIDTH_CONFIG_PROMPT),
+          help = STRING_TOKEN(STR_FIA_PCIE_RP_LINK_WIDTH_CONFIG),
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_BICTRL), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+          option text = STRING_TOKEN(STR_FIA_RP_LINKWIDTH_X1), value = 0xF, flags = RESET_REQUIRED;
+      endoneof;
+      // Denverton AptioV override end - EIP#332934
+    endif;
+  endform;
+  #include  "ProcessorSetup.hfr"
+  // Denverton AptioV Override Start - EIP#235760
+  //#include  "UsbConfigData.hfr"
+  // Denverton AptioV Override End - EIP#235760
+  #include  "ThermalConfig.hfr"  
+  #include  "CK420Config.hfr"
+  // #include  "ResetTesting.hfr"
+  // #include  "PciBus.hfr"  // Pci Setup options will be available in AMI setup`s Advanced page.
+  #include  "WakeFromSx.hfr"
+  #include  "EventLogSetup.hfr"
+  #include  "MeConfigData.hfr"
+
+#ifdef IE_SUPPORT
+  #include "IeConfig.hfr"
+#endif //IE_SUPPORT
+  #include  "SouthBridge.hfr"
+  #include  "NorthBridgeConfig.hfr"
+  // Denverton AptioV override end - EIP#217439
+ endformset;

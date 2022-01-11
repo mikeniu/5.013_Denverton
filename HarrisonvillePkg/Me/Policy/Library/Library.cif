@@ -1,0 +1,11 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Me\Policy\Library\"
+	RefName = "HarrisonvillePkg.Me.Policy.Library"
+[INF]
+"Dxe\MePolicyUpdateDxeLib.inf"
+"Pei\MePeiPolicyUpdateLib.inf"
+[files]
+"Library.sdl"	
+<endComponent>

@@ -1,0 +1,10 @@
+TOKEN
+	Name  = "PcieIpInit_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling RasPolicyInit support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+
+

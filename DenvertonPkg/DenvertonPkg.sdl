@@ -1,0 +1,9 @@
+TOKEN
+	Name  = "DenvertonPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling DenvertonPkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+

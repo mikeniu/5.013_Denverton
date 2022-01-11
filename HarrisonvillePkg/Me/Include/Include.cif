@@ -1,0 +1,8 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Me\Include\"
+	RefName = "HarrisonvillePkg.Me.Include"
+[files]
+"Library\MeSetupLib.h"
+<endComponent>

@@ -1,0 +1,8 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Cpu\Include\Guid\"
+	RefName = "DenvertonPkg.Cpu.Include.Guid"
+[files]
+"PowerManagementAcpiTableStorage.h"	
+<endComponent>

@@ -1,0 +1,11 @@
+<component>
+	name = "IeHeci"
+	category = ModulePart
+	LocalRoot = "AmiIePkg\IeHeci\"
+	RefName = "AmiIePkg.IeHeci"
+[INF]
+"Dxe\IeHeciDxeInit.inf"
+"Smm\IeHeciSmmInit.inf"
+[files]
+"IeHeci.sdl"	
+<endComponent>

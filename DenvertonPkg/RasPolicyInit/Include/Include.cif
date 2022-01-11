@@ -1,0 +1,10 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\RasPolicyInit\Include\"
+	RefName = "DenvertonPkg.RasPolicyInit.Include"
+[files]
+"RasPolicy.h"	
+"PeiRasPolicyLib.h"	
+"Ppi\PeiRasPolicyPpi.h"	
+<endComponent>

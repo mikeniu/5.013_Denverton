@@ -1,0 +1,16 @@
+TOKEN
+	Name  = "SmmControl_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SmmControl support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "SmmControl"
+	File  = "RuntimeDxe\SmmControl.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_RUNTIME_DRIVER"
+	Token = "SmmControl_SUPPORT" "=" "1"
+End
+

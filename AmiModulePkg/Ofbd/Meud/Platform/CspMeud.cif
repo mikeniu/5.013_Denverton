@@ -1,0 +1,11 @@
+<component>
+	name = "Denverton SPS FW"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg/Ofbd/Meud/Platform/"
+	RefName = "CspMeud"
+[files]
+"CspMeud.c"	
+"CspMeud.h"	
+"CspMeud.sdl"
+"CspMeud10Gbe.c"
+<endComponent>

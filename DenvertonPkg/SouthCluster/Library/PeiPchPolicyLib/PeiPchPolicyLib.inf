@@ -1,0 +1,63 @@
+## @file
+# Component description file for the PeiPchPolicy libbrary.
+#
+# @copyright
+# Copyright (c) 2014 - 2015 Intel Corporation. All rights reserved
+# This software and associated documentation (if any) is furnished
+# under a license and may only be used or copied in accordance
+# with the terms of the license. Except as permitted by the
+# license, no part of this software or documentation may be
+# reproduced, stored in a retrieval system, or transmitted in any
+# form or by any means without the express written consent of
+# Intel Corporation.
+# This file contains an 'Intel Peripheral Driver' and is uniquely
+# identified as "Intel Reference Module" and is licensed for Intel
+# CPUs and chipsets under the terms of your license agreement with
+# Intel or your vendor. This file may be modified by the user, subject
+# to additional terms of the license agreement.
+# 
+# @par Specification Reference:
+#
+##
+
+
+[Defines]
+INF_VERSION = 0x00010017
+BASE_NAME = PeiPchPolicyLib
+FILE_GUID = BB1AC992-B2CA-4744-84B7-915C185576C5
+VERSION_STRING = 1.0
+MODULE_TYPE = PEIM
+LIBRARY_CLASS = PchPolicyLib
+
+
+[LibraryClasses]
+DebugLib
+IoLib
+PcdLib
+PeiServicesLib
+BaseMemoryLib
+MemoryAllocationLib
+PchInfoLib
+
+
+[Packages]
+MdePkg/MdePkg.dec
+DenvertonPkg/SiPkg.dec
+
+
+[Pcd]
+gSiPkgTokenSpaceGuid.PcdAcpiBaseAddress 
+gSiPkgTokenSpaceGuid.PcdSmbusBaseAddress 
+#ifndef SERVER_BIOS_FLAG
+#gSiPkgTokenSpaceGuid.PcdSerialIoUartDebugEnable
+#gSiPkgTokenSpaceGuid.PcdSerialIoUartNumber
+#endif
+
+[Sources]
+PeiPchPolicyLib.c
+PeiPchPolicyLibrary.h
+PchPrintPolicy.c
+
+
+[Ppis]
+gPchPolicyPpiGuid ## PRODUCES

@@ -1,0 +1,107 @@
+## @file
+# Component description file for the Pch SMI Dispatch Handlers module
+#
+# @copyright
+# Copyright (c) 1999 - 2015 Intel Corporation. All rights reserved
+# This software and associated documentation (if any) is furnished
+# under a license and may only be used or copied in accordance
+# with the terms of the license. Except as permitted by the
+# license, no part of this software or documentation may be
+# reproduced, stored in a retrieval system, or transmitted in any
+# form or by any means without the express written consent of
+# Intel Corporation.
+# This file contains an 'Intel Peripheral Driver' and is uniquely
+# identified as "Intel Reference Module" and is licensed for Intel
+# CPUs and chipsets under the terms of your license agreement with
+# Intel or your vendor. This file may be modified by the user, subject
+# to additional terms of the license agreement.
+# 
+# @par Specification Reference:
+#
+##
+
+
+[Defines]
+INF_VERSION = 0x00010017
+BASE_NAME = PchSmiDispatcher
+FILE_GUID = B0D6ED53-B844-43f5-BD2F-61095264E77E
+VERSION_STRING = 1.0
+MODULE_TYPE = DXE_SMM_DRIVER
+PI_SPECIFICATION_VERSION = 1.10
+ENTRY_POINT = InitializePchSmmDispatcher
+
+
+[LibraryClasses]
+UefiBootServicesTableLib
+UefiDriverEntryPoint
+IoLib
+DebugLib
+PcdLib
+BaseLib
+BaseMemoryLib
+HobLib
+DevicePathLib
+PchCycleDecodingLib
+PchPcrLib
+SmmServicesTableLib
+ReportStatusCodeLib
+PerformanceLib
+DxeServicesTableLib
+GpioLib
+GpioPrivateLib
+S3BootScriptLib
+AmiDxeLib #Denverton AptioV Override - EIP#364288 
+[Packages]
+MdePkg/MdePkg.dec
+DenvertonPkg/SiPkg.dec
+DenvertonPkg/DnvSiPrivate.dec
+AmiCompatibilityPkg/AmiCompatibilityPkg.dec #Denverton AptioV Override - EIP#364288 
+
+[Pcd]
+# Progress Code for S3 Suspend end.
+# PROGRESS_CODE_S3_SUSPEND_END   = (EFI_SOFTWARE_SMM_DRIVER | (EFI_OEM_SPECIFIC | 0x00000001))    = 0x03078001
+gSiPkgTokenSpaceGuid.PcdProgressCodeS3SuspendEnd
+
+[Sources]
+PchSmm.h
+PchSmmCore.c
+PchSmmHelpers.h
+PchSmmHelpers.c
+PchxSmmHelpers.h
+PchxSmmHelpers.c
+PchSmmUsb.c
+PchSmmGpi.c
+PchSmmPowerButton.c
+PchSmmSw.c
+PchSmmSx.c
+PchSmmPeriodicTimer.c
+PchSmiDispatch.c
+PchSmmEspi.c
+
+
+[Protocols]
+gEfiPciRootBridgeIoProtocolGuid ## CONSUMES
+gEfiSmmGpiDispatch2ProtocolGuid ## PRODUCES
+gEfiSmmSxDispatch2ProtocolGuid ## PRODUCES
+gEfiSmmSwDispatch2ProtocolGuid ## PRODUCES
+gEfiSmmUsbDispatch2ProtocolGuid ## PRODUCES
+gEfiSmmPowerButtonDispatch2ProtocolGuid ## PRODUCES
+gEfiSmmPeriodicTimerDispatch2ProtocolGuid ## PRODUCES
+gEfiSmmCpuProtocolGuid ## CONSUMES
+gEfiSmmReadyToLockProtocolGuid ## CONSUMES
+gPchTcoSmiDispatchProtocolGuid ## PRODUCES
+gPchPcieSmiDispatchProtocolGuid ## PRODUCES
+gPchAcpiSmiDispatchProtocolGuid ## PRODUCES
+gPchGpioUnlockSmiDispatchProtocolGuid ## PRODUCES
+gPchSmiDispatchProtocolGuid ## PRODUCES
+gPchEspiSmiDispatchProtocolGuid ## PRODUCES
+gPchSmmPeriodicTimerControlGuid ## PRODUCES
+
+[Guids]
+SmmRsTableGuid #Denverton AptioV Override - EIP#364288 
+
+[Depex]
+gEfiPciRootBridgeIoProtocolGuid AND
+gEfiPciHostBridgeResourceAllocationProtocolGuid AND ## This is to ensure that PCI MMIO resource has been prepared and available for this driver to allocate.
+gEfiSmmCpuProtocolGuid AND
+gEfiSmmBase2ProtocolGuid ## This is for SmmServicesTableLib

@@ -1,0 +1,7 @@
+<component>
+	name = "CormorantLake"
+	category = Flavor
+	RefName = "CormorantLake"
+[files]
+"CormorantLake.sdl"
+<endComponent>

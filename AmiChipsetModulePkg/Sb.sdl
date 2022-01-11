@@ -1,0 +1,3329 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+TOKEN
+	Name  = "SB_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Template - SouthBridge support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "CHIPSET_VENDOR"
+	Value  = "0"
+	Help  = "Chipset Vendor for OEM reference. 0 = Intel, 1 = AMD, 2 = VIA.."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "CPVD"
+	Value  = "$(CHIPSET_VENDOR)"
+	Help  = "Chipset Vendor for OEM reference. 0 = Intel, 1 = AMD, 2 = VIA.."
+	TokenType = Integer
+	TargetASL = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "SB_DEBUG_MESSAGE"
+	Value  = "1"
+	Help  = "Enables/disables debug message in SB module"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+	Token = "DEBUG_MODE" "!=" "0"
+End
+
+TOKEN
+	Name  = "SB_IDE_SETUP_PROTOCOL_SUPPORT"
+	Value  = "0" # Denverton Aptiov override - EIP#210294
+	Help  = "Enable this token if reset PPI is from south bridge.\ If not disable this and provide reset functionality from other PEIM."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ACOUSTIC_MANAGEMENT_SUPPORT"
+	Value  = "0" # Denverton Aptiov override - EIP#210294
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DiPM_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_RESET_PPI_SUPPORT"
+	Value  = "0" # Denverton Aptiov override - EIP#210294
+	Help  = "Enable this token if reset PPI is from south bridge.\ If not disable this and provide reset functionality from other PEIM."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_STALL_PPI_SUPPORT"
+	Value  = "0" # Denverton Aptiov override - EIP#210294
+	Help  = "Enable this token if Stall PPI is from south bridge.\ If not disable this and provide reset functionality from other PEIM."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_ACPI_TIMER_LIB_SUPPORT"
+	Value  = "0" # Denverton Aptiov override - EIP#210294
+	Help  = "Enable this token if TimerLib is from south bridge.\ If not disable this and provide TimerLib from other module."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_8259_PROTOCOL_SUPPORT"
+	Value  = "0" # Denverton Aptiov override - EIP#210294
+	Help  = "Enable this token if 8259 Protocol is from south bridge.\ If not disable this and provide 8259 protocol from other module."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_TIMER_ARCH_PROTOCOL_SUPPORT"
+	Value  = "0" # Denverton Aptiov override - EIP#210294
+	Help  = "Enable this token if Timer Architectural protocol is from south bridge.\ If not disable this and provide Timer Architectural protocol from other module."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_WATCHDOG_TIMER_PROTOCOL_SUPPORT"
+	Value  = "0" # Denverton Aptiov override - EIP#210294
+	Help  = "Enable this token if Watchdog Timer Architectural protocol is from south bridge.\ If not disable this and provide Watchdog Timer Architectural protocol from other module."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_SMM_CONTROL2_PROTOCOL_SUPPORT"
+	Value  = "0" # Denverton Aptiov override - EIP#210294
+	Help  = "Enable this token if SmmControl2 protocol is from south bridge.\ If not disable this and provide SmmControl2 protocol from other module."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "SMM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PCI_EHCI_BUS_NUMBER"
+	Value  = "0x0"
+	Help  = "EHCI controller bus number"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "USB_DEBUG_TRANSPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PCI_EHCI_DEV_FUNC_NUMBER"
+	Value  = "0xEF"
+	Help  = "EHCI controller device and function number. \Bit 0-2 represents function number and\ Bit 3-7 represents device number"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "USB_DEBUG_TRANSPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PCI_EHCI_BAR_OFFSET"
+	Value  = "0x10"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "USB_DEBUG_TRANSPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "EHCI_MMIO_BASE_ADDRESS"
+	Value  = "0xDFFFFC00"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "USB_DEBUG_TRANSPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "XHCI_MMIO_BASE_ADDRESS"
+	Value  = "0xFE400000"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "EHCI_MMIO_SIZE"
+	Value  = "0x400"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "USB_DEBUG_TRANSPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SMBUS_BASE_ADDRESS"
+	Value  = "0xEFA0"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBS"
+	Value  = "$(SMBUS_BASE_ADDRESS)"
+	Help  = "SMBus I/O Registes Base Address"
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "SMBL"
+	Value  = "0x20"
+	Help  = "SMBus I/O Registes Range"
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "SB_PIRQ_ROUTER_VID" # Denverton TODO
+	Value  = "0x1022"
+	Help  = "IRQ Router Vendor ID. \PLEASE CHANGE THIS AS PER CHIPSET"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_PIRQ_ROUTER_DID" # Denverton TODO
+	Value  = "0x7468"
+	Help  = "IRQ Router Device ID. \PLEASE CHANGE THIS AS PER CHIPSET"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PM_BASE_ADDRESS"
+	Value  = "0x1800" # Denverton Aptiov override - EIP#210294
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PBLK"
+	Value  = "$(PM_BASE_ADDRESS) + 10h"
+	Help  = "Boot-strap CPU Control Block register address. Use return value of PM_BASE_ADDRESS with proper offset.\Value can be returned by CPUx_PBLK tokens, x is the Processor index the PBLK is wired to.\Example : $(PM_BASE_ADDRESS) + 10h\"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Lock = Yes
+	Range  = "16-bit IO register"
+End
+
+TOKEN
+	Name  = "SB_MAX_SMBUS_CONTROLLER"
+	Value  = "2"
+	Help  = "Maximum number of SMBUS controller supported by this module"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_SMBUS_PCI_DEVICES" # Denverton TODO
+	Value  = "{2, 0x20, 0, 3, 0x000100010020}, {2, 0x20, 0, 3, 0x000100010024}"
+	Help  = "PCI addresses (Seg, bus, dev, func, reg) for the SMBus Controllers. \It is specified in ACPI GAS 3.0 structure. \Format: {2-PCI, W-Width in bits, O-Offset in bits, A-Access Size, S-Seg, B-Bus, D-Device, F-Function, R-Register).\ Number of entries should be equal to SB_MAX_SMBUS_CONTROLLER token"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PMBS"
+	Value  = "$(PM_BASE_ADDRESS)"
+	Help  = "ASL alias for ACPI I/O base address."
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PMLN"
+	Value  = "0x80"
+	Help  = "Power Management registers block length"
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SW_SMI_IO_ADDRESS"
+	Value  = "0xB2"
+	Help  = "PLEASE CHANGE THIS VALUE AS PER PM_BASE_ADDRESS"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMIP"
+	Value  = "$(SW_SMI_IO_ADDRESS)"
+	Help  = "Token to go to ASL Name Definitions"
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "GPIO_BASE_ADDRESS"
+	Value  = "0x0500"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "GPBS"
+	Value  = "$(GPIO_BASE_ADDRESS)"
+	Help  = "ASL alias for GPIO base Address"
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "GPLN"
+	Value  = "0x40"
+	Help  = "GPIO Register Block length"
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IDE_BASE_ADDRESS"
+	Value  = "0x0FFA0"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "APCB"
+	Value  = "0x0FEC00000"
+	Help  = "Default I/O APIC(s) memory start address, bytes\0x0FEC00000 - default, 0 - I/O APIC's disabled"
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "APCL"
+	Value  = "0x1000"
+	Help  = "I/O APIC(s) memory decoded range, bytes\0x1000 - default,\0 - I/O APIC's not decoded "
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_RCRB_BASE_ADDRESS"
+	Value  = "0xFED1C000"
+	Help  = "\The Root Complex Base Address of ESB2.\Must be aligned a 16-KB boundary."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "RCRB"
+	Value  = "$(SB_RCRB_BASE_ADDRESS)"
+	Help  = "Root Complex Base Address"
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "RCRL"
+	Value  = "0x4000"
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "HPET_SUPPORT"
+	Value  = "0"
+	Help  = "Enables High Performance Event Timer (HPET) Support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "HPET_SUPPORT"
+	Value  = "1"
+	Help  = "Enables High Performance Event Timer (HPET) Support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "ACPI_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "HPET_BASE_ADDRESS"
+	Value  = "0xFED00000"
+	Help  = "HPET Block Registers"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0xFED00000 or 0xFED01000 or 0xFED02000 or 0xFED03000"
+	Token = "HPET_SUPPORT" "=" "1"
+End
+
+# Denverton AptioV override start- EIP#309702 - # HPTB is defined in PchNvs.asl in WW51 RC
+#TOKEN
+#	Name  = "HPTB"
+#	Value  = "$(HPET_BASE_ADDRESS)"
+#	Help  = "Same as HPET_BASE_ADDRESS for ASL use "
+#	TokenType = Integer
+#	TargetASL = Yes
+#	TargetH = Yes
+#	Token = "HPET_SUPPORT" "=" "1"
+#End
+# Denverton AptioV override End- EIP#309702 
+
+# Denverton AptioV override start- EIP#210294
+# HPTC is available in the PCI configuration space of P2SB
+#TOKEN
+#	Name  = "HPTC"
+#	Value  = "$(SB_RCBA)+0x3404"
+#	Help  = "High Precision Event Timer Configuration Register"
+#	TokenType = Integer
+#	TargetASL = Yes
+#	TargetH = Yes
+#	Range  = "offset 0x3404 from RCBA "
+#	Token = "HPET_SUPPORT" "=" "1"
+#End
+# Denverton AptioV override end- EIP#210294
+
+TOKEN
+	Name  = "HPET_PROTOCOL_SUPPORT"
+	Value  = "0"
+	Help  = "Use High Performance Event Timer (HPET) instead of 8254 to support Timer protocol in Project"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "HPET_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "HPET_DEFAULT_TICK_DURATION"
+	Value  = "10000"
+	Help  = "The unit is 100ns, the default value is 1ms."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "HPET_SUPPORT" "=" "1"
+	Token = "HPET_PROTOCOL_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "HPET_OFFSET"
+	Value  = "0"
+	Help  = "The offset of High Performance Event Timer.\This value can't exceed in the number of HPET capability.\The timer must also be able to support periodic mode."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "HPET_SUPPORT" "=" "1"
+	Token = "HPET_PROTOCOL_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "HPET_APIC_INTERRUPT_MODE"
+	Value  = "0"
+	Help  = "Off : The timer interrupt will be routed to PIC(8259).\On : The timer interrupt will be routed to APIC."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "HPET_SUPPORT" "=" "1"
+	Token = "HPET_PROTOCOL_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "HPET_APIC_INTERRUPT_PIN"
+	Value  = "20"
+	Help  = "Select an APIC interrupt pin for the timer's interrupt.\Notice! Please refer to your HPET F/W porting guide to know which APIC interrupt pins can be used for this timer's interrupt."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "20, 21, 22, 23"
+	Token = "HPET_SUPPORT" "=" "1"
+	Token = "HPET_PROTOCOL_SUPPORT" "=" "1"
+	Token = "HPET_APIC_INTERRUPT_MODE" "=" "1"
+End
+
+TOKEN
+	Name  = "HPET_INTERRUPT_POLARITY"
+	Value  = "0"
+	Help  = "On : The polarity is high.\Off : The polarity is low."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "HPET_SUPPORT" "=" "1"
+	Token = "HPET_PROTOCOL_SUPPORT" "=" "1"
+	Token = "HPET_APIC_INTERRUPT_MODE" "=" "1"
+End
+
+TOKEN
+	Name  = "HPET_INTERRUPT_TRIGGER"
+	Value  = "0"
+	Help  = "On : level triggered.\Off : edge triggered."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "HPET_SUPPORT" "=" "1"
+	Token = "HPET_PROTOCOL_SUPPORT" "=" "1"
+	Token = "HPET_APIC_INTERRUPT_MODE" "=" "1"
+End
+
+TOKEN
+	Name  = "SPI_BASE_ADDRESS"
+	Value  = "0xFE010000" # Denverton Aptiov override - EIP#235471
+	Help  = "This defines the register or offset of the SPI registers in the system"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SPIFlash_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SPI_OPCODE_WRITE_INDEX "
+	Value  = "0"
+	Help  = "Write Opcode Menu slot command reference"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SPIFlash_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SPI_OPCODE_READ_INDEX"
+	Value  = "1"
+	Help  = "Read Opcode menu slot reference"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SPIFlash_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SPI_OPCODE_ERASE_INDEX"
+	Value  = "2"
+	Help  = "Erase Opcode menu slot reference"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SPIFlash_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SPI_OPCODE_READ_S_INDEX"
+	Value  = "3"
+	Help  = "Read Status Opcode Menu Slot reference"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SPIFlash_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SPI_OPCODE_READ_ID_INDEX"
+	Value  = "4"
+	Help  = "Read identification opcode menu slot reference"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SPIFlash_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SPI_OPCODE_WRITE_S_INDEX"
+	Value  = "5"
+	Help  = "Write Status opcode menu slot reference"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SPIFlash_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SbRuntimeServiceLib_Support"
+	Value  = "1"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "SPI_OPCODE_TYPE_READ_NO_ADDRESS"
+	Value  = "0"
+	Help  = "Opcode type that indicates that the command is a read command that doesn't need an Address sent with it"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SPIFlash_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SPI_OPCODE_TYPE_WRITE_NO_ADDRESS"
+	Value  = "1"
+	Help  = "Opcode type that indicates that the command is a write command that doesn't need an Address sent with it"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SPIFlash_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SPI_OPCODE_TYPE_READ_WITH_ADDRESS"
+	Value  = "2"
+	Help  = "Opcode type that indicates that the command is a read command that needs an Address sent with it"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SPIFlash_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SPI_OPCODE_TYPE_WRITE_WITH_ADDRESS"
+	Value  = "3"
+	Help  = "Opcode type that indicates that the command is a write command that needs an Address sent with it"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SPIFlash_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SPI_MAX_TRANSFER"
+	Value  = "64"
+	Help  = "This token represents the Maximum amount of data that can be sent across the SPI Bus in one transaction in the chipset"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SPIFlash_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "A_POS_DECODE"
+	Value  = "0"
+	TokenType = Boolean
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "PM30"
+	Value  = "$(PM_BASE_ADDRESS)+0x30"
+	Help  = "SMI Control Register"
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "ACPI_SCI_INT"
+	Value  = "9"
+	Help  = "SCI Interrupt number"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "3-15"
+End
+
+TOKEN
+	Name  = "ACPI_ALARM_EVERYDAY_SUPPORT"
+	Value  = "0"
+	Help  = "Determine if support RTC wakeup every day (Time->Day = 0). Note:Enabling it would cause UEFI Runtime Services set wakeup time test failed."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ACPI_ALARM_DAY_CMOS"
+	Value  = "0Dh"
+	Help  = "RTC Index of the Day-of-Month alarm"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 - 0xff 0 = not supported"
+End
+
+TOKEN
+	Name  = "ACPI_ALARM_MONTH_CMOS"
+	Value  = "0h"
+	Help  = "RTC Index of the Month-of-year alarm\"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-0xff 0 = not supported"
+End
+
+TOKEN
+	Name  = "ACPI_CENTURY_CMOS"
+	Value  = "0x32"
+	Help  = "RTC Index of the Century-of-Data\"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-0xff 0 = not supported"
+End
+
+TOKEN
+	Name  = "ACPI_RESET_REG_ADDRESS"
+	Value  = "0CF9h"
+	Help  = "Reset Register Address (Part of GAS Structure refer, to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 = not Supported other values depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "ACPI_RESET_REG_TYPE"
+	Value  = "1"
+	Help  = "Reset Register Id (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0=System memory; 1=System I/O; 2=PCI Config Space; 3=Embeded Controller; 4=SMBus; 0x7F=Functional Fixed Hardware; All other values reserved"
+End
+
+TOKEN
+	Name  = "ACPI_RESET_REG_BITWIDTH"
+	Value  = "8"
+	Help  = "Reset Register Bit Width (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "ACPI_RESET_REG_BITOFFSET"
+	Value  = "0"
+	Help  = "Reset Register Bit Offset (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "ACPI_RESET_REG_VALUE"
+	Value  = "6"
+	Help  = "Value to write to the Reset Register to initiate System Reset"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "? - chipset specific"
+End
+
+TOKEN
+	Name  = "PM1A_EVT_BLK_ADDRESS"
+	Value  = "$(PM_BASE_ADDRESS)"
+	Help  = "PM1a_EVT BLK Base Address (Part of GAS Structure refer, to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 = not Supported other values depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM1A_EVT_BLK_TYPE"
+	Value  = "1"
+	Help  = "PM1a_EVT BLK Registes Id (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0=System memory; 1=System I/O; 2=PCI Config Space; 3=Embeded Controller; 4=SMBus; 0x7F=Functional Fixed Hardware; All other values reserved"
+End
+
+TOKEN
+	Name  = "PM1A_EVT_BLK_BITWIDTH"
+	Value  = "32"
+	Help  = "PM1a_EVT BLK Registes Bit Width (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM1A_EVT_BLK_BITOFFSET"
+	Value  = "0"
+	Help  = "PM1a_EVT BLK Registes Bit Offset (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM1_EVT_LENGTH"
+	Value  = "4"
+	Help  = "PM1a_EVT BLK length in bytes"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM1A_CNT_BLK_ADDRESS"
+	Value  = "$(PM_BASE_ADDRESS)+0x04"
+	Help  = "PM1a_CNT BLK Base Address (Part of GAS Structure refer, to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 = not Supported other values depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM1A_CNT_BLK_TYPE"
+	Value  = "1"
+	Help  = "PM1a_CNT BLK Registes Id (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0=System memory; 1=System I/O; 2=PCI Config Space; 3=Embeded Controller; 4=SMBus; 0x7F=Functional Fixed Hardware; All other values reserved"
+End
+
+TOKEN
+	Name  = "PM1A_CNT_BLK_BITWIDTH"
+	Value  = "16"
+	Help  = "PM1a_CNT BLK Registes Bit Width (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM1A_CNT_BLK_BITOFFSET"
+	Value  = "0"
+	Help  = "PM1a_CNTT BLK Registes Bit Offset (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM1_CNT_LENGTH"
+	Value  = "2"
+	Help  = "PM1a_CNT BLK length in bytes"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM1B_EVT_BLK_ADDRESS"
+	Value  = "0"
+	Help  = "PM1b_EVT BLK Base Address (Part of GAS Structure refer, to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 = not Supported other values depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM1B_EVT_BLK_TYPE"
+	Value  = "1"
+	Help  = "PM1b_EVT BLK Registes Id (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0=System memory; 1=System I/O; 2=PCI Config Space; 3=Embeded Controller; 4=SMBus; 0x7F=Functional Fixed Hardware; All other values reserved"
+End
+
+TOKEN
+	Name  = "PM1B_EVT_BLK_BITWIDTH"
+	Value  = "0"
+	Help  = "PM1a_EVT BLK Registes Bit Width (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM1B_EVT_BLK_BITOFFSET"
+	Value  = "0"
+	Help  = "PM1a_EVT BLK Registes Bit Offset (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM1B_CNT_BLK_ADDRESS"
+	Value  = "0"
+	Help  = "PM1b_CNT BLK Base Address (Part of GAS Structure refer, to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 = not Supported other values depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM1B_CNT_BLK_TYPE"
+	Value  = "1"
+	Help  = "PM1a_CNT BLK Registes Id (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0=System memory; 1=System I/O; 2=PCI Config Space; 3=Embeded Controller; 4=SMBus; 0x7F=Functional Fixed Hardware; All other values reserved"
+End
+
+TOKEN
+	Name  = "PM1B_CNT_BLK_BITWIDTH"
+	Value  = "0"
+	Help  = "PM1a_CNT BLK Registes Bit Width (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM1B_CNT_BLK_BITOFFSET"
+	Value  = "0"
+	Help  = "PM1a_CNTT BLK Registes Bit Offset (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM2_CNT_BLK_ADDRESS"
+	Value  = "$(PM_BASE_ADDRESS) + 0x50" # Denverton AptioV Override - EIP#221424
+	Help  = "PM2_CNT BLK Base Address (Part of GAS Structure refer, to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 = not Supported other values depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM2_CNT_BLK_TYPE"
+	Value  = "1"
+	Help  = "PM2_CNT BLK Registes Id (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0=System memory; 1=System I/O; 2=PCI Config Space; 3=Embeded Controller; 4=SMBus; 0x7F=Functional Fixed Hardware; All other values reserved"
+End
+
+TOKEN
+	Name  = "PM2_CNT_BLK_BITWIDTH"
+	Value  = "8"
+	Help  = "PM2_CNT BLK Registes Bit Width (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM2_CNT_BLK_BITOFFSET"
+	Value  = "0"
+	Help  = "PM2_CNT BLK Registes Bit Offset (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM2_CNT_LENGTH"
+	Value  = "1" # Denverton AptioV Override - EIP#221424
+	Help  = "PM2_CNT BLK length in bytes"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM_TMR_BLK_ADDRESS"
+	Value  = "$(PM_BASE_ADDRESS)+0x08"
+	Help  = "PM_TMR BLK Base Address (Part of GAS Structure refer, to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 = not Supported other values depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM_TMR_BLK_TYPE"
+	Value  = "1"
+	Help  = "PM_TMR BLK Registes Id (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0=System memory; 1=System I/O; 2=PCI Config Space; 3=Embeded Controller; 4=SMBus; 0x7F=Functional Fixed Hardware; All other values reserved"
+End
+
+TOKEN
+	Name  = "PM_TMR_BLK_BITWIDTH"
+	Value  = "32"
+	Help  = "PM_TMR BLK Registes Bit Width (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM_TMR_BLK_BITOFFSET"
+	Value  = "0"
+	Help  = "PM_TMR BLK Registes Bit Offset (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "PM_TMR_LENGTH"
+	Value  = "4"
+	Help  = "PM_TMR BLK length in bytes"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "GPE0_BLK_ADDRESS"
+	Value  = "$(PM_BASE_ADDRESS)+0x80" # Denverton AptioV Override - EIP#221424
+	Help  = "GPE0 BLK Base Address (Part of GAS Structure refer, to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 = not Supported other values depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "GPE0_BLK_TYPE"
+	Value  = "1"
+	Help  = "GPE0 BLK Registes Id (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0=System memory; 1=System I/O; 2=PCI Config Space; 3=Embeded Controller; 4=SMBus; 0x7F=Functional Fixed Hardware; All other values reserved"
+End
+
+TOKEN
+	Name  = "GPE0_BLK_BITWIDTH"
+	Value  = "128"
+	Help  = "GPE0 BLK Registes Bit Width (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "GPE0_BLK_BITOFFSET"
+	Value  = "0"
+	Help  = "GPE0 BLK Registes Bit Offset (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "GPE0_BLK_LENGTH"
+	Value  = "0x20" # Denverton AptioV Override - EIP#221424
+	Help  = "GPE0 BLK length in bytes"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "GPE1_BLK_ADDRESS"
+	Value  = "0" # Denverton AptioV Override - EIP#221424
+	Help  = "GPE1 BLK Base Address (Part of GAS Structure refer, to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 = not Supported other values depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "GPE1_BLK_TYPE"
+	Value  = "1"
+	Help  = "GPE1 BLK Registes Id (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0=System memory; 1=System I/O; 2=PCI Config Space; 3=Embeded Controller; 4=SMBus; 0x7F=Functional Fixed Hardware; All other values reserved"
+End
+
+TOKEN
+	Name  = "GPE1_BLK_BITWIDTH"
+	Value  = "64"
+	Help  = "GPE1 BLK Registes Bit Width (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "GPE1_BLK_BITOFFSET"
+	Value  = "0"
+	Help  = "GPE1 BLK Registes Bit Offset (Part of GAS Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "GPE1_BLK_LENGTH"
+	Value  = "0" # Denverton AptioV Override - EIP#221424
+	Help  = "GPE1 BLK length in bytes"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS elements"
+End
+
+TOKEN
+	Name  = "GPE1_BASE_OFFSET"
+	Value  = "0" # Denverton AptioV Override - EIP#221424
+	Help  = "GPE1 Base offset within the ACPI general purpose event model (FADT byte 94)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-0xff"
+End
+
+TOKEN
+	Name  = "PRIMARY_CHANNEL_ENABLE"
+	Value  = "1"
+	Help  = "Enable/Disable Primary Channel"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PRIMARY_MASTER_DRIVE_ENABLE"
+	Value  = "1"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "MAX_UDMA"
+	Value  = "4"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PRIMARY_SLAVE_DRIVE_ENABLE"
+	Value  = "1"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SECONDARY_CHANNEL_ENABLE"
+	Value  = "1"
+	Help  = "Enable/Disable Primary Channel"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SECONDARY_MASTER_DRIVE_ENABLE"
+	Value  = "1"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SECONDARY_SLAVE_DRIVE_ENABLE"
+	Value  = "1"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BUSMASTER_ENABLE"
+	Value  = "1"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "MASTER_INTERRUPT_BASE"
+	Value  = "0x68"
+	Help  = "This value set the Interrupt Vector base for the master. Hardware IRQ0 = this base.\In legacy real mode this value is 8. It can not be 8 in protected mode.\This value must be a multiple of 8, and the this value must be different than SLAVE_INTERRUPT_BASE."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-F8"
+End
+
+TOKEN
+	Name  = "SLAVE_INTERRUPT_BASE"
+	Value  = "0x70"
+	Help  = "This value set the Interrupt Vector base for the slave. Hardware IRQ8 = this base.\In legacy real mode this value is 0x70.\This value must be a multiple of 8, and the this value must be different than MASTER_INTERRUPT_BASE."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-F8"
+End
+
+TOKEN
+	Name  = "A_S0_PKG"
+	Value  = "0x0,0x0,0,0"
+	Help  = "Intel ICH(x) example. Modify for a new Chipset"
+	TokenType = Expression
+	TargetMAK = Yes
+	Range  = "4 decimal or Hex (use '0x' prefix) values sepparated with ','"
+End
+
+TOKEN
+	Name  = "A_S1_PKG"
+	Value  = "0x1,0x0,0,0"
+	Help  = "Intel ICH(x) example. Modify for a new Chipset"
+	TokenType = Expression
+	TargetMAK = Yes
+	Range  = "4 decimal or Hex (use '0x' prefix) values separated with ','"
+End
+
+TOKEN
+	Name  = "A_S2_PKG"
+	Value  = "0x2,0x0,0,0"
+	TokenType = Expression
+	TargetMAK = Yes
+	Range  = "4 decimal or Hex (use '0x' prefix) values separated with ','"
+End
+
+TOKEN
+	Name  = "A_S3_PKG"
+	Value  = "0x5,0x0,0,0"
+	Help  = "Intel ICH(x) example. Modify for a new Chipset"
+	TokenType = Expression
+	TargetMAK = Yes
+	Range  = "4 decimal or Hex (use '0x' prefix) values separated with ','"
+End
+
+TOKEN
+	Name  = "A_S4_PKG"
+	Value  = "0x6,0x0,0,0"
+	Help  = "Intel ICH(x) example. Modify for a new Chipset"
+	TokenType = Expression
+	TargetMAK = Yes
+	Range  = "4 decimal or Hex (use '0x' prefix) values separated with ','"
+End
+
+TOKEN
+	Name  = "A_S5_PKG"
+	Value  = "0x7,0x0,0,0"
+	Help  = "Intel ICH(x) example. Modify for a new Chipset"
+	TokenType = Expression
+	TargetMAK = Yes
+	Range  = "4 decimal or Hex (use '0x' prefix) values separated with ','"
+End
+
+TOKEN
+	Name  = "SB_TEMPLATE_VER"
+	Value  = "0007"
+	Help  = "South Bridge Template Version Number.\ DO NOT CHANGE THIS VALUE"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "INCLUDE_SB_ASM_FILE_IN_SEC"
+	Value  = "1"
+	Help  = "Includes an ASM file and an eLink in SEC build process for SB code modification:"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "DEFAULT_YEAR"
+	Value  = "2008"
+	Help  = "Year, that will be set in RTC in case of date corruption"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "1998-2099"
+End
+
+TOKEN
+	Name  = "DEFAULT_MONTH"
+	Value  = "1"
+	Help  = "Month, that will be set in RTC in case of date corruption"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "1-12"
+End
+
+TOKEN
+	Name  = "DEFAULT_DAY"
+	Value  = "1"
+	Help  = "Day, that will be set in RTC in case of date corruption"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "1-31"
+End
+
+TOKEN
+	Name  = "MINIMUM_YEAR"
+	Value  = "1998"
+	Help  = "If year, stored in RTC is less than this value, date will be considered as incorrect"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "1998"
+End
+
+TOKEN
+	Name  = "MAXIMUM_YEAR"
+	Value  = "2099"
+	Help  = "If year, stored in RTC is greater than this value, date will be considered as incorrect"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "2099, 9999"
+End
+
+TOKEN
+	Name  = "S4_WAKE_FROM_RTC_SUPPORTED"
+	Value  = "0"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "REMOTE_POWER_ON_SUPPORTED"
+	Value  = "1" # Denverton Aptiov override - EIP#210294
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SIO_SB_DEV_NUM"
+	Value  = "0x1F"
+	Help  = "SB LPC PCI Device Number, Porting required"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+# Denverton AptioV override Start - EIP#294261
+TOKEN
+	Name  = "SB_PCI_DEVICES_SSID_TABLE" 
+	Value  = "{GLREG_BUS_DEV_FUN, 0x00008086}, {RCEC_BUS_DEV_FUN, 0x00008086}, {QAT_BUS_DEV_FUN, 0x00008086}, {RP0_BUS_DEV_FUN, 0x00008086}, {RP1_BUS_DEV_FUN, -1}, {RP2_BUS_DEV_FUN, -1}, {RP3_BUS_DEV_FUN, -1}, {RP4_BUS_DEV_FUN, -1}, {RP5_BUS_DEV_FUN, -1}, {RP6_BUS_DEV_FUN, -1}, {RP7_BUS_DEV_FUN, -1},{SMB_BUS_DEV_FUN, 0x00008086}, {SATA0_BUS_DEV_FUN, 0x72708086}, {SATA1_BUS_DEV_FUN, 0x72708086}, {USB_BUS_DEV_FUN, 0x72708086}, {LAN0_BUS_DEV_FUN, 0x00008086}, {LAN1_BUS_DEV_FUN, 0x00008086}, {SYSMGT0_BUS_DEV_FUN, 0x19D38086}, {SYSMGT1_BUS_DEV_FUN, -1}, {SYSMGT3_BUS_DEV_FUN, -1}, {SYSMGT4_BUS_DEV_FUN, -1}, {HSUART0_BUS_DEV_FUN, 0x00008086}, {HSUART1_BUS_DEV_FUN, 0x00008086}, {HSUART2_BUS_DEV_FUN, 0x00008086}, {EMMC_BUS_DEV_FUN, 0x72708086}, {LPC_BUS_DEV_FUN, 0x72708086}, {P2SB_BUS_DEV_FUN, -1}, {PMC_BUS_DEV_FUN, 0x72708086}, {SMB_BUS_LEGACY_DEV_FUN, 0x72708086}, {SPI_BUS_DEV_FUN, 0x72708086}, {TRACEHUB_BUS_DEV_FUN, 0x72708086}, {-1, -1}" 
+	Help  = "List of PCI device's Sub-System ID in the following format:\{Device#1 Bus/Device/Function, Device#1 Sub-ID}, {Device#2 Bus/Device/Function, Device#2 Sub-ID}...\The format of the PCI bus/device/function is followed by EFI_PCI_CONFIGURATION_ADDRESS.\If the value of Sub-ID is -1, that means BIOS will use PCI Vendor-ID and Device-ID instead.\The last structure {-1, -1} is end of the table, don't remove it!"
+	TokenType = Expression
+	TargetH = Yes
+End
+# Denverton AptioV override End - EIP#294261
+
+TOKEN
+	Name  = "BIOS_SECURITY"
+	Value  = "1"
+	Help  = "1:Set SMI Lock & BIOS Lock Enable"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BIOS_LOCK_ENABLE"
+	Value  = "0"
+	Help  = "1:Enable BIOS Lock.\0:Disable BIOS Lock."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "BIOS_SECURITY" "=" "0"
+End
+
+TOKEN
+	Name  = "SMI_LOCK_ENABLE"
+	Value  = "0"
+	Help  = "1:Enable SMI Lock.\0:Disable SMI Lock."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "BIOS_SECURITY" "=" "0"
+End
+
+TOKEN
+	Name  = "BIOS_LOCK_ENABLE"
+	Value  = "1"
+	Help  = "1:Enable BIOS Lock.\0:Disable BIOS Lock."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "BIOS_SECURITY" "=" "1"
+End
+
+TOKEN
+	Name  = "SMI_LOCK_ENABLE"
+	Value  = "1"
+	Help  = "1:Enable SMI Lock.\0:Disable SMI Lock."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "BIOS_SECURITY" "=" "1"
+End
+
+TOKEN
+	Name  = "ENABLE_SPI_LOCK"
+	Value  = "0"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "HIDE_BIOS_SECURITY_PAGE"
+	Value  = "0"
+	Help  = "Hide BIOS security page in the setup."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PCH_FLASH_START_ADDRESS"
+	Value  = "0xFFFFFFFF - $(FLASH_SIZE) + 1"
+	TokenType = Integer
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "SPI_FV_BB_PROTECTED_RANGE_BASE"
+	Value  = "$(FV_BB_BASE) - $(PCH_FLASH_START_ADDRESS)"
+	Help  = "If you set the type of protected range 0 to BIOS Type(2), we will use this token for Protection Range Base(MUST be 4KB alignment) in BIOS Region - For FV_BB"
+	TokenType = Integer
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "SPI_FV_MAIN_PROTECTED_RANGE_BASE"
+	Value  = "$(FV_MAIN_BASE) - $(PCH_FLASH_START_ADDRESS)"
+	Help  = "If you set the type of protected range 1 to BIOS Type(2), we will use this token for Protection Range Base(MUST be 4KB alignment) in BIOS Region - For FV_MAIN"
+	TokenType = Integer
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "SPI_PROTECTED_RANGE_0"
+	Value  = "{2, FALSE, FALSE, $(SPI_FV_BB_PROTECTED_RANGE_BASE), $(FV_BB_SIZE)}"
+	Help  = "Format:\ 1st - The type of protected range 0, the available types are Undefined Type(0), Descriptor Type(1), BIOS Type(2), ME/TXE Type(3) and GBE Type(4).\ 2nd - Write Protected Enable.\ 3rd - Read Protected Enable.\ 4th - The protected range base MUST to be 4KB alignment, it is only used for the protected types 0(Undefined) and 2(BIOS).\ 5th - The protection range length(the minimum length MUST be 4KB).\ Note : If 2nd & 3rd parameters both are 0, then this protected range will be disabled.\ FV_BB is default for the protected range 0, but you can update it according to your design."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SPI_PROTECTED_RANGE_1"
+	Value  = "{2, FALSE, FALSE, $(SPI_FV_MAIN_PROTECTED_RANGE_BASE), $(FV_MAIN_SIZE)}"
+	Help  = "Format:\ 1st - The type of protected range 1, the available types are Undefined Type(0), Descriptor Type(1), BIOS Type(2), ME/TXE Type(3) and GBE Type(4).\ 2nd - Write Protected Enable.\ 3rd - Read Protected Enable.\ 4th - The protected range base MUST to be 4KB alignment, it is only used for the protected types 0(Undefined) and 2(BIOS).\ 5th - The protection range length(the minimum length MUST be 4KB).\ Note : If 2nd & 3rd parameters both are 0, then this protected range will be disabled.\ FV_MAIN is default for the protected range 1, but you can update it according to your design."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SPI_PROTECTED_RANGE_2"
+	Value  = "{0, FALSE, FALSE, 0, 0}"
+	Help  = "Format:\ 1st - The type of protected range 2, the available types are Undefined Type(0), Descriptor Type(1), BIOS Type(2), ME/TXE Type(3) and GBE Type(4).\ 2nd - Write Protected Enable.\ 3rd - Read Protected Enable.\ 4th - The protected range base MUST to be 4KB alignment, it is only used for the protected types 0(Undefined) and 2(BIOS).\ 5th - The protection range length(the minimum length MUST be 4KB).\ Note : If 2nd & 3rd parameters both are 0, then this protected range will be disabled.\ OEM Reserve is default for the protected range 2, but you can update it according to your design."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SPI_PROTECTED_RANGE_3"
+	Value  = "{0, FALSE, FALSE, 0, 0}"
+	Help  = "Format:\ 1st - The type of protected range 3, the available types are Undefined Type(0), Descriptor Type(1), BIOS Type(2), ME/TXE Type(3) and GBE Type(4).\ 2nd - Write Protected Enable.\ 3rd - Read Protected Enable.\ 4th - The protected range base MUST to be 4KB alignment, it is only used for the protected types 0(Undefined) and 2(BIOS).\ 5th - The protection range length(the minimum length MUST be 4KB).\ Note : If 2nd & 3rd parameters both are 0, then this protected range will be disabled.\ OEM Reserve is default for the protected range 3, but you can update it according to your design."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SPI_PROTECTED_RANGE_4"
+	Value  = "{0, FALSE, FALSE, 0, 0}"
+	Help  = "Format:\ 1st - The type of protected range 4, the available types are Undefined Type(0), Descriptor Type(1), BIOS Type(2), ME/TXE Type(3) and GBE Type(4).\ 2nd - Write Protected Enable.\ 3rd - Read Protected Enable.\ 4th - The protected range base MUST to be 4KB alignment, it is only used for the protected types 0(Undefined) and 2(BIOS).\ 5th - The protection range length(the minimum length MUST be 4KB).\ Note : If 2nd & 3rd parameters both are 0, then this protected range will be disabled.\ OEM Reserve is default for the protected range 4, but you can update it according to your design."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "COLD_RESET_WITH_POWER_CYCLE"
+	Value  = "0"
+	Help  = "1: EfiResetCold issues a full reset (Port 0xCF9[7:0] = 0x0E)./0: EfiResetCold issues a hard reset (Port 0xCF9[7:0] = 0x06)."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_WAKEUP_TYPE_FN"
+	Value  = "1"
+	Help  = "Indicate the support for getWakeupTypeForSmbios function\0 = Not supported\1 = Supported"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "SMBIOS_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DEFAULT_SYSTEM_WAKEUP_TYPE"
+	Value  = "0x06"
+	Help  = "Specifies the System Wake-up Type while PcdSbWakeType is invalid.\00h     -     Reserved\01h     -     Other\02h     -     Unknown\03h     -     APM Timer\04h     -     Modem Ring\05h     -     LAN Remote\06h     -     Power Switch\07h     -     PCI PME#\08h     -     AC Power Restored"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0x01 - 0x08"
+	Token = "SB_WAKEUP_TYPE_FN" "=" "1"
+End
+
+TOKEN
+	Name  = "SMM_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SMM support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SW_SMI_SB_ACPI_S3"
+	Value  = "0xb8"
+	Help  = "Value to be written into SMI command register \to enable S3 patched codes"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0xB7 - 0xBD"
+End
+
+TOKEN
+	Name  = "DEBUG_EHCI_BUS_NUMBER"
+	Value  = "0x00"
+	Help  = "EHCI controller bus number."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "USB_DEBUG_TRANSPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DEBUG_EHCI_DEVICE_NUMBER"
+	Value  = "0x1A"
+	Help  = "EHCI controller device number."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "USB_DEBUG_TRANSPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DEBUG_EHCI_FUNCTION_NUMBER"
+	Value  = "0x00"
+	Help  = "EHCI controller function number."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "USB_DEBUG_TRANSPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DEBUG_XHCI_BUS_NUMBER"
+	Value  = "0x00"
+	Help  = "XHCI controller bus number."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DEBUG_XHCI_DEVICE_NUMBER"
+	Value  = "0x14"
+	Help  = "XHCI controller device number."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DEBUG_XHCI_FUNCTION_NUMBER"
+	Value  = "0x00"
+	Help  = "XHCI controller function number."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CTRL_HOME_CHECK_LOOP"
+	Value  = "15"
+	Help  = "Loop count for Ctrl + Home Key Scan."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DISABLE_DAYLIGHT_SAVINGS"
+	Value = "0"
+	Help  = "1: Disable Daylight Savings; 0: Enable Daylight Savings"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CREATE_CMOS_BAD_HOB"
+	Value = "1"
+	Help  = "1: Create CMOS BAD HOB while Rtc Power is invalid; 0: Never create CMOS BAD HOB"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_DEVICE_REGS_RC_DEFINITION_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_DEVICE_REGS_RC_DEFINITION_HEADER"
+	Value  = "<Vlv2DeviceRefCodePkg/ValleyView2Soc/SouthCluster/Include/PchAccess.h>"
+	Help  = "PORTING REQUIRED. It is to include the header file for South Bridge in the reference code."
+	TokenType = Expression
+	TargetH = Yes
+	Lock = Yes
+	Token = "SB_DEVICE_REGS_RC_DEFINITION_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SB_SMBUS_LIB_SUPPORT"
+	Value  = "1"
+	Help  = "When disabled, the default library instances: PeiSmbusLibSmbus2Ppi and DxeSmbusLib (see MdePkg.sdl) will be used."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_AMI_IO_DECODE_LIB_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "TICK_PERIOD"
+	Value  = "100"
+	Help  = "Specifies the value of TickPeriod in EFI_METRONOME_ARCH_PROTOCOL. Please refer to the reference CRB BIOS for the setting. The unit of TickPeriod is 100ns. 100 (10uS/100ns) means delay 10uS."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "100 - 2000"
+End
+
+TOKEN
+	Name  = "SB_BAD_BATTERY_ERR_CODE_SUPPORT"
+	Value  = "1"
+	Help  = "Determine if support DXE_SB_BAD_BATTERY error code or not."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "GENERIC_BAD_DATE_TIME_ERR_CODE_SUPPORT"
+	Value  = "1"
+	Help  = "Determine if support GENERIC_BAD_DATE_TIME_ERROR error code or not."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = " "
+	TokenType = Integer
+End
+
+PATH
+	Name  = "SB_LIBRARY_DIR"
+	Path  = "AmiChipsetModulePkg/Library"
+End
+
+PATH
+	Name  = "SB_INCLUDE_DIR"
+	Path  = "AmiChipsetModulePkg/Include"
+End
+
+PATH
+	Name  = "SB_LIBRARY_INCLUDE_DIR"
+	Path  = "AmiChipsetModulePkg/Include/Library"
+End
+
+PATH
+	Name  = "SB_CSPLIB_DIR"
+	Path  = "AmiChipsetModulePkg/Library/AmiCspLib"
+End
+
+PATH
+	Name  = "SB_INIT_DIR"
+	Path  = "AmiChipsetModulePkg/SB/SbInit"
+End
+
+MODULE
+	Help  = "Includes Sb.mak to Project"
+	File  = "Sb.mak"
+End
+
+ELINK
+	Name  = "SBPEIDBG_Initialize,"
+	Parent  = "PeiDebugInitialize"
+	Priority  = 10
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "SBPEIDBG_InitUsbEhci,"
+	Parent  = "PeiDebugInitialize"
+	Priority  = 150
+	Token = "USB_3_DEBUG_SUPPORT" "=" "0"
+	Token = "USB_DEBUG_TRANSPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "SbPeiDbgInitXhci,"
+	Parent  = "PeiDebugInitialize"
+	Priority  = 150
+	Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+	Token = "USB_DEBUG_TRANSPORT" "=" "0"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "SBPEIDBG_IsS3,"
+	Parent  = "PeiDbgIsS3Hook,"
+	Token = "AMIDEBUG_RX_SUPPORT" "=" "1"
+	Token = "PeiDebugger_SUPPORT" "=" "1"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "{0, 0, 0x80, 0xff, ReadWriteCmosBank2},"
+	Parent  = "CMOS_PORT_MAPPING"
+	Help  = "Second bank CMOS access range (Registers in range: 0x80-0xff)"
+	Token = "CMOS_MANAGER_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "SbGetRtcPowerStatus,"
+	Parent  = "CMOS_BATTERY_TEST_MAPPING"
+	Help  = "Link the standard function to determine whether or not the CMOS battery is good."
+	Token = "CMOS_MANAGER_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "SbIsDefaultConfigMode,"
+	Parent  = "IsResetConfigMode"
+	Help  = "If you want to keep the password, you will need to change Parent to IsDefaultConfigMode."
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "BiosLockEnableSmiFlashHook,"
+	Parent  = "SMIFlashEndHandlerList"
+	Token = "BIOS_LOCK_ENABLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(SB_CSPLIB_DIR)/SbGeneric.c"
+	Parent  = "AMI_CSP_PEI_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(SB_CSPLIB_DIR)/SbGeneric.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "AmiChipsetPkg/AmiChipsetPkg.dec"
+	Parent  = "AMI_CSP_PACKAGES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "gAmiChipsetModulePkgTokenSpaceGuid.PcdRcrbBaseAddress"
+	Parent  = "AMI_CSP_PCD"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "gAmiChipsetModulePkgTokenSpaceGuid.PcdGpioPortBaseAddress"
+	Parent  = "AMI_CSP_PCD"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "gAmiChipsetModulePkgTokenSpaceGuid.PcdSbWakeType"
+	Parent  = "AMI_CSP_PCD"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "gAmiChipsetPkgTokenSpaceGuid.PcdAcpiIoPortBaseAddress"
+	Parent  = "AMI_CSP_PCD"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "SignalExitPmAuthProtocolEvent,"
+	Parent  = "SignalAllDriversConnectedEvent,"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "PciLib"
+	Parent  = "AMI_CSP_LIBRARIES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "AmiDxeLib"
+	Parent  = "AMI_CSP_DXE_LIBRARIES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "AmiPeiLib"
+	Parent  = "AMI_CSP_PEI_LIBRARIES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "SbTimerSaveRestoreRegistersCallbacks"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "OEM_HDA_VERB_TABLE"
+	InvokeOrder = ReplaceParent
+End
+# Denverton AptioV override start - EIP#258527
+ELINK
+	Name  = "/D LPC0=SBRG"
+	Parent  = "MSFT:*_*_*_ASLPP_FLAGS"
+	InvokeOrder = AfterParent
+End
+# Denverton AptioV override start - EIP#258527
+ELINK
+	Name  = "MSFT:*_*_*_ASLPP_FLAGS"
+	Type  = "BuildOptions"
+	InvokeOrder = ReplaceParent
+	OutDSC = Yes
+End
+
+ELINK
+	Name  = "SbPlatformHookBeforeAfterSmmDispatch,"
+	Parent  = "PLATFORMHOOK_BEFORE_AFTER_SMMDISPATCH"
+	InvokeOrder = AfterParent
+	Token = "AMI_SMM_PLATFORMHOOK_SUPPORT" "=" "1" # Denverton Aptiov override - EIP#235962
+End
+
+ELINK
+	Name  = "IsCtrlHomePressed,"
+	Parent  = "IsRecovery"
+	Help  = "Ctr+Home detection"
+	Token = "KBC_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "SbConfigurationList"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name = "SbResetCallbackList"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "SB_RUN_GUIDS"
+	InvokeOrder = ReplaceParent
+	OutDSC = Yes
+End
+
+ELINK
+	Name  = "gAmiResetSystemEventGuid"
+	Parent  = "SB_RUN_GUIDS"
+	Token = "AMI_MODULE_PKG_VERSION" ">=" "28"
+	InvokeOrder = AfterParent
+	OutDSC = Yes
+End
+
+# Denverton Aptiov override Start - EIP#263454 
+# Added for Flash_09 Support
+ELINK
+    Name  = "ChipsetFlashDeviceWriteEnable,"
+    Parent  = "OemFlashWriteEnableList"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ChipsetFlashDeviceWriteDisable,"
+    Parent  = "OemFlashWriteDisableList"
+    InvokeOrder = AfterParent
+End
+
+LibraryMapping 
+    Class = "AmiCspFlashLib" 
+    Instance = "AmiChipsetModulePkg.AmiCspLibDxe" 
+    ModuleTypes = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER SMM_CORE UEFI_APPLICATION UEFI_DRIVER" 
+End 
+
+LibraryMapping 
+    Class = "AmiCspFlashLib" 
+    Instance = "AmiChipsetModulePkg.AmiCspLibPei" 
+    ModuleTypes = "PEIM" 
+End 
+# Denverton Aptiov override End - EIP#263454 
+OUTPUTREGISTER
+	Name  = "SbElinkList"
+	Path  = "Build"
+	File  = "SbElinks.h"
+	Template  = "Elink/SbElinks.txt"
+End
+
+INFComponent
+	Name  = "SbAcpiTimerLib"
+	File  = "SbAcpiTimerLib/SbAcpiTimerLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "SB_LIBRARY_DIR"
+	Token = "SB_ACPI_TIMER_LIB_SUPPORT" "=" "1"
+End
+
+# Denverton Aptiov override Start - EIP#316095
+INFComponent
+	Name  = "SbPeiDebugger"
+	File  = "SbPeiDebugger/SbPeiDebugger.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "SB_LIBRARY_DIR"
+End
+# Denverton Aptiov override End - EIP#316095
+
+INFComponent
+	Name  = "SbRuntimeServiceLib"
+	File  = "SbRuntimeServiceLib/SbRuntimeServiceLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "SB_LIBRARY_DIR"
+	Token = "SbRuntimeServiceLib_Support" "=" "1"
+End
+
+INFComponent
+	Name  = "SbCspDxeLib"
+	File  = "SbCspDxeLib/SbCspDxeLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "SB_LIBRARY_DIR"
+End
+
+INFComponent
+	Name  = "SbSmmLib"
+	File  = "SbSmmLib/SbSmmLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "SB_LIBRARY_DIR"
+	Token = "SB_SMM_LIBRARY_SUPPORT" "=" "1"  # Denverton Aptiov override - EIP#210294
+End
+
+INFComponent
+	Name  = "SbPei"
+	File  = "SbPei.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "PEIM"
+	Path  = "SB_INIT_DIR"
+End
+
+INFComponent
+	Name  = "SbDxe"
+	File  = "SbDxe.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Path  = "SB_INIT_DIR"
+End
+
+INFComponent
+	Name  = "SbRun"
+	File  = "SbRun.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_RUNTIME_DRIVER"
+	Path  = "SB_INIT_DIR"
+	PreProcess = Yes
+	Token = "SB_RUNTIME_SUPPORT" "=" "1"  # Denverton Aptiov override - EIP#210294
+End
+
+INFComponent
+	Name  = "SbRunSmm"
+	File  = "SbRunSmm.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Path  = "SB_INIT_DIR"
+End
+
+INFComponent
+	Name  = "SleepSmi"
+	File  = "SleepSmi.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Path  = "SB_INIT_DIR"
+End
+
+INFComponent
+	Name  = "PeriodicSmiControl"
+	File  = "PeriodicSmiControl.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Path  = "SB_INIT_DIR"
+End
+
+INFComponent
+	Name  = "SbIde"
+	File  = "SbIde.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Path  = "SB_INIT_DIR"
+	Token = "SB_IDE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "SbPciDxeInitLib"
+	File  = "SbPciDxeInitLib/SbPciDxeInitLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "SB_LIBRARY_DIR"
+End
+
+INFComponent
+	Name  = "SbSmmCorePlatformHookLib"
+	File  = "SbSmmCorePlatformHookLib/SbSmmCorePlatformHookLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "SB_LIBRARY_DIR"
+	Token = "SMM_SUPPORT" "=" "1"
+	Token = "AMI_SMM_PLATFORMHOOK_SUPPORT" "=" "1" # Denverton Aptiov override - EIP#235962
+End
+
+INFComponent
+	Name  = "SbHdaVerbTableLib"
+	File  = "SbHdaVerbTableLib/SbHdaVerbTableLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "SB_LIBRARY_DIR"
+End
+
+INFComponent
+	Name  = "SbCspIoDecodeLib"
+	File  = "SbCspIoDecodeLib/SbCspIoDecodeLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "SB_LIBRARY_DIR"
+End
+
+LibraryMapping
+	Class  = "TimerLib"
+	Instance  = "AmiChipsetModulePkg.SbAcpiTimerLib"
+	Token = "SB_ACPI_TIMER_LIB_SUPPORT" "=" "1"
+End
+# Denverton AptioV Override Start - EIP#316095
+LibraryMapping
+	Class  = "DebugPortingLib"
+	Instance  = "AmiChipsetModulePkg.SbPeiDebugger"
+End
+# Denverton AptioV Override End - EIP#316095
+
+LibraryMapping
+	Class  = "AmiChipsetRuntimeServiceLib"
+	Instance  = "AmiChipsetModulePkg.SbRuntimeServiceLib"
+	ModuleTypes  = "DXE_SMM_DRIVER DXE_RUNTIME_DRIVER"
+	Token = "SbRuntimeServiceLib_Support" "=" "1"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiChipsetModulePkg.SbCspDxeLib"
+	Override  = "AmiModulePkg.Bds"
+End
+
+LibraryMapping
+	Class  = "SmmLib"
+	Instance  = "AmiChipsetModulePkg.SbSmmLib"
+	Token = "SB_SMM_LIBRARY_SUPPORT" "=" "1"  # Denverton AptioV Override  - EIP#210294
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiChipsetModulePkg.SbSmmCorePlatformHookLib"
+	Override  = "MdeModulePkg.PiSmmCore"
+	Token = "AMI_SMM_PLATFORMHOOK_SUPPORT" "=" "1" # Denverton Aptiov override - EIP#235962
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiChipsetModulePkg.SbPciDxeInitLib"
+	ModuleTypes  = "DXE_DRIVER"
+	Override  = "AmiModulePkg.PciDxeInit"
+End
+
+LibraryMapping
+	Class  = "SbHdaVerbTableLib"
+	Instance  = "AmiChipsetModulePkg.SbHdaVerbTableLib"
+End
+
+LibraryMapping
+	Class  = "AmiIoDecodeLib"
+	Instance  = "AmiChipsetModulePkg.SbCspIoDecodeLib"
+End
+
+# Denverton Aptiov override start - EIP#218066 
+# Denverton AptioV Override start - EIP#221424
+# In Denverton, PIRQ registers no longer reside at 60h, 61h etc in LPC device.
+# So LNKA to LNKH reg values are changed to 01h -08h.
+# Denverton AptioV Override Start - EIP#380568
+# Removed IRQ7 assignments to prevent spurious IRQ 7 issue in DOS
+
+IRQLINK
+	Name  = "\_SB.PCI0.LPC0.LNKA"
+	Reg  = 01h
+	IrqList  = 6,10,11,12,14,15
+	InterruptType = LevelLow
+End
+
+IRQLINK
+	Name  = "\_SB.PCI0.LPC0.LNKB"
+	Reg  = 02h
+	IrqList  = 6,10,11,12,14,15
+	InterruptType = LevelLow
+End
+
+IRQLINK
+	Name  = "\_SB.PCI0.LPC0.LNKC"
+	Reg  = 03h
+	IrqList  = 6,10,11,12,14,15
+	InterruptType = LevelLow
+End
+
+IRQLINK
+	Name  = "\_SB.PCI0.LPC0.LNKD"
+	Reg  = 04h
+	IrqList  = 6,10,11,12,14,15
+	InterruptType = LevelLow
+End
+
+IRQLINK
+	Name  = "\_SB.PCI0.LPC0.LNKE"
+	Reg  = 05h
+	IrqList  = 6,10,11,12,14,15
+	InterruptType = LevelLow
+End
+
+IRQLINK
+	Name  = "\_SB.PCI0.LPC0.LNKF"
+	Reg  = 06h
+	IrqList  = 6,10,11,12,14,15
+	InterruptType = LevelLow
+End
+
+IRQLINK
+	Name  = "\_SB.PCI0.LPC0.LNKG"
+	Reg  = 07h
+	IrqList  = 6,10,11,12,14,15
+	InterruptType = LevelLow
+End
+
+IRQLINK
+	Name  = "\_SB.PCI0.LPC0.LNKH"
+	Reg  = 08h
+	IrqList  = 6,10,11,12,14,15
+	InterruptType = LevelLow
+End
+# Denverton AptioV Override End - EIP#380568
+
+PCIDEVICE
+	Title  = "LpcBridge"
+	Parent  = "PciRoot"
+	Attribute  = "0x60003"
+	Dev_type  = "LpcBridge"
+	Dev  = 01fh
+	Fun  = 00h
+	GPEbit  = 00h
+	SleepNum  = 01h
+	ASLdeviceName  = "LPC0"
+# Denverton AptioV override Start - EIP#288065
+#	ASLfile  = "'HarrisonvillePkg\Acpi\AcpiTables\Dsdt\PciIrq.asi','HarrisonvillePkg\Acpi\AcpiTables\Dsdt\Mother.asi','HarrisonvillePkg\Acpi\AcpiTables\Dsdt\IpmiOprRegions.asi','HarrisonvillePkg\Acpi\AcpiTables\Dsdt\Tpm.asi','HarrisonvillePkg\Acpi\AcpiTables\Dsdt\SIO.asi'"
+	ASLfile  = "'HarrisonvillePkg\Acpi\AcpiTables\Dsdt\PciIrq.asi','HarrisonvillePkg\Acpi\AcpiTables\Dsdt\Mother.asi','HarrisonvillePkg\Acpi\AcpiTables\Dsdt\IpmiOprRegions.asi','HarrisonvillePkg\Acpi\AcpiTables\Dsdt\SIO.asi'"
+# Denverton AptioV override End - EIP#288065
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	PCIExpress = Yes
+	InitRoutine  = "CspSbPciInitLpcBridge"
+End
+
+PCIDEVICE
+  Title  = "PCI Express Port 0"
+  Parent  = "PciRoot"
+  Attribute  = "0x303f"
+  Dev_type  = "Pci2PciBridge"
+  Bus  = 00h
+  Dev  = 09h
+  Fun  = 00h
+  GPEbit  = 09h
+  SleepNum  = 04h
+  ASLdeviceName  = "PEX0"
+  IntA =  \_SB.PCI0.LPC0.LNKA; 16
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  PCIBridge = Yes
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  InitRoutine = "InitPciPortSettings"   # Denverton Aptiov override - EIP#379099
+End
+
+PCIDEVICE
+  Title  = "PCI Express Port 1"
+  Parent  = "PciRoot"
+  Attribute  = "0x303f"
+  Dev_type  = "Pci2PciBridge"
+  Bus  = 00h
+  Dev  = 0Ah
+  Fun  = 00h
+  GPEbit  = 09h
+  SleepNum  = 04h
+  ASLdeviceName  = "PEX1"
+  IntB =  \_SB.PCI0.LPC0.LNKB; 17
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  PCIBridge = Yes
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  InitRoutine = "InitPciPortSettings"   # Denverton Aptiov override - EIP#379099
+End
+
+PCIDEVICE
+  Title  = "PCI Express Slot 1"
+  Parent  = "PCI Express Port 1"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Dev  = 00h
+  Slot  = 02h
+  ASLdeviceName  = "SLT1"
+  IntA = \_SB.PCI0.LPC0.LNKB; 17
+  IntB = \_SB.PCI0.LPC0.LNKC; 18
+  IntC = \_SB.PCI0.LPC0.LNKD; 19
+  IntD = \_SB.PCI0.LPC0.LNKA; 16
+  DeviceType = Slot
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "PCI Express Port 2"
+  Parent  = "PciRoot"
+  Attribute  = "0x303f"
+  Dev_type  = "Pci2PciBridge"
+  Bus  = 00h
+  Dev  = 0Bh
+  Fun  = 00h
+  GPEbit  = 09h
+  SleepNum  = 04h
+  ASLdeviceName  = "PEX2"
+  IntC =  \_SB.PCI0.LPC0.LNKC; 18
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  PCIBridge = Yes
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  InitRoutine = "InitPciPortSettings"   # Denverton Aptiov override - EIP#379099
+End
+
+PCIDEVICE
+  Title  = "PCI Express Slot 2"
+  Parent  = "PCI Express Port 2"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Dev  = 00h
+  Slot  = 02h
+  ASLdeviceName  = "SLT2"
+  IntA = \_SB.PCI0.LPC0.LNKC; 18
+  IntB = \_SB.PCI0.LPC0.LNKD; 19
+  IntC = \_SB.PCI0.LPC0.LNKA; 16
+  IntD = \_SB.PCI0.LPC0.LNKB; 17
+  DeviceType = Slot
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "PCI Express Port 3"
+  Parent  = "PciRoot"
+  Attribute  = "0x303f"
+  Dev_type  = "Pci2PciBridge"
+  Bus  = 00h
+  Dev  = 0Ch
+  Fun  = 00h
+  GPEbit  = 09h
+  SleepNum  = 04h
+  ASLdeviceName  = "PEX3"
+  IntD = \_SB.PCI0.LPC0.LNKD; 19
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  PCIBridge = Yes
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  InitRoutine = "InitPciPortSettings"   # Denverton Aptiov override - EIP#379099
+End
+
+PCIDEVICE
+  Title  = "PCI Express Slot 3"
+  Parent  = "PCI Express Port 3"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Dev  = 00h
+  Slot  = 04h
+  ASLdeviceName  = "SLT3"
+  IntA = \_SB.PCI0.LPC0.LNKD; 19
+  IntB = \_SB.PCI0.LPC0.LNKA; 16
+  IntC = \_SB.PCI0.LPC0.LNKB; 17
+  IntD = \_SB.PCI0.LPC0.LNKC; 18
+  DeviceType = Slot
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "PCI Express Port 4"
+  Parent  = "PciRoot"
+  Attribute  = "0x303f"
+  Dev_type  = "Pci2PciBridge"
+  Bus  = 00h
+  Dev  = 0Eh
+  Fun  = 00h
+  GPEbit  = 09h
+  SleepNum  = 04h
+  ASLdeviceName  = "PEX4"
+  IntA = \_SB.PCI0.LPC0.LNKE; 20
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  PCIBridge = Yes
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  InitRoutine = "InitPciPortSettings"   # Denverton Aptiov override - EIP#379099
+End
+
+PCIDEVICE
+  Title  = "PCI Express Slot 4"
+  Parent  = "PCI Express Port 4"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Dev  = 00h
+  Slot  = 05h
+  ASLdeviceName  = "SLT4"
+  IntA = \_SB.PCI0.LPC0.LNKE; 20
+  IntB = \_SB.PCI0.LPC0.LNKF; 21
+  IntC = \_SB.PCI0.LPC0.LNKG; 22
+  IntD = \_SB.PCI0.LPC0.LNKH; 23
+  DeviceType = Slot
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "PCI Express Port 5"
+  Parent  = "PciRoot"
+  Attribute  = "0x303f"
+  Dev_type  = "Pci2PciBridge"
+  Bus  = 00h
+  Dev  = 0Fh
+  Fun  = 00h
+  GPEbit  = 09h
+  SleepNum  = 04h
+  ASLdeviceName  = "PEX5"
+  IntB = \_SB.PCI0.LPC0.LNKF; 21
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  PCIBridge = Yes
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  InitRoutine = "InitPciPortSettings"   # Denverton Aptiov override - EIP#379099
+End
+
+PCIDEVICE
+  Title  = "PCI Express Slot 5"
+  Parent  = "PCI Express Port 5"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Dev  = 00h
+  Slot  = 06h
+  ASLdeviceName  = "SLT5"
+  IntA = \_SB.PCI0.LPC0.LNKF; 21
+  IntB = \_SB.PCI0.LPC0.LNKG; 22
+  IntC = \_SB.PCI0.LPC0.LNKH; 23
+  IntD = \_SB.PCI0.LPC0.LNKE; 20
+  DeviceType = Slot
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "PCI Express Port 6"
+  Parent  = "PciRoot"
+  Attribute  = "0x303f"
+  Dev_type  = "Pci2PciBridge"
+  Bus  = 00h
+  Dev  = 10h
+  Fun  = 00h
+  GPEbit  = 09h
+  SleepNum  = 04h
+  ASLdeviceName  = "PEX6"
+  IntC = \_SB.PCI0.LPC0.LNKG; 22
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  PCIBridge = Yes
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  InitRoutine = "InitPciPortSettings"   # Denverton Aptiov override - EIP#379099
+End
+
+PCIDEVICE
+  Title  = "PCI Express Slot 6"
+  Parent  = "PCI Express Port 6"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Dev  = 00h
+  Slot  = 07h
+  ASLdeviceName  = "SLT6"
+  IntA = \_SB.PCI0.LPC0.LNKG; 22
+  IntB = \_SB.PCI0.LPC0.LNKH; 23
+  IntC = \_SB.PCI0.LPC0.LNKE; 20
+  IntD = \_SB.PCI0.LPC0.LNKF; 21
+  DeviceType = Slot
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "PCI Express Port 7"
+  Parent  = "PciRoot"
+  Attribute  = "0x303f"
+  Dev_type  = "Pci2PciBridge"
+  Bus  = 00h
+  Dev  = 11h
+  Fun  = 00h
+  GPEbit  = 09h
+  SleepNum  = 04h
+  ASLdeviceName  = "PEX7"
+  IntD = \_SB.PCI0.LPC0.LNKH; 23
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  PCIBridge = Yes
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  InitRoutine = "InitPciPortSettings"   # Denverton Aptiov override - EIP#379099
+End
+
+PCIDEVICE
+  Title  = "PCI Express Slot 7"
+  Parent  = "PCI Express Port 7"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Dev  = 00h
+  Slot  = 08h
+  ASLdeviceName  = "SLT7"
+  IntA = \_SB.PCI0.LPC0.LNKH; 23
+  IntB = \_SB.PCI0.LPC0.LNKE; 20
+  IntC = \_SB.PCI0.LPC0.LNKF; 21
+  IntD = \_SB.PCI0.LPC0.LNKG; 22
+  DeviceType = Slot
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "SMBus Controller 1"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 12h
+  Fun  = 00h
+  ASLdeviceName  = "SMB1"
+  IntA = \_SB.PCI0.LPC0.LNKA; 16
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "SATA controller 0"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 13h
+  Fun  = 00h
+  ASLdeviceName  = "SAT0"
+  IntA = \_SB.PCI0.LPC0.LNKE; 20
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "SATA controller 1"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 014h
+  Fun  = 00h
+  ASLdeviceName  = "SAT1"
+  IntA = \_SB.PCI0.LPC0.LNKF; 21
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "XHCI USB controller"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 15h
+  Fun  = 00h
+  ASLdeviceName  = "XHC1"
+  ASLfile  = "'HarrisonvillePkg\Acpi\AcpiTables\Dsdt\Xhci.asi'"  
+  IntA = \_SB.PCI0.LPC0.LNKD; 19
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "UART 0"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 1Ah
+  Fun  = 00h
+  ASLdeviceName  = "UAR0"
+  IntA = \_SB.PCI0.LPC0.LNKA; 16
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "UART 1"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 1Ah
+  Fun  = 01h
+  ASLdeviceName  = "UAR1"
+  IntB = \_SB.PCI0.LPC0.LNKB; 17
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "UART 2"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 1Ah
+  Fun  = 02h
+  ASLdeviceName  = "UAR2"
+  IntC = \_SB.PCI0.LPC0.LNKC; 18
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "IE HECI1"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 1Bh
+  Fun  = 00h
+  ASLdeviceName  = "IEH1"
+  IntA = \_SB.PCI0.LPC0.LNKA; 16
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "IE HECI2"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 1Bh
+  Fun  = 01h
+  ASLdeviceName  = "IEH2"
+  IntB = \_SB.PCI0.LPC0.LNKB; 17
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "IE - Keyboard and Text (KT)"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 1Bh
+  Fun  = 03h
+  ASLdeviceName  = "IEKT"
+  IntC = \_SB.PCI0.LPC0.LNKC; 18
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "IE HECI3"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 1Bh
+  Fun  = 04h
+  ASLdeviceName  = "IEH3"
+  IntD = \_SB.PCI0.LPC0.LNKD; 19
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "Global Register"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 04h
+  Fun  = 00h
+  ASLdeviceName  = "GREG"
+  IntA = \_SB.PCI0.LPC0.LNKA; 16
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "RCEC"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 05h
+  Fun  = 00h
+  ASLdeviceName  = "RCEC"
+  IntA = \_SB.PCI0.LPC0.LNKH; 23
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "Virtual root port 2"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "Pci2PciBridge"
+  Bus  = 00h
+  Dev  = 06h
+  Fun  = 00h
+  ASLdeviceName  = "VRP2"
+  IntC = \_SB.PCI0.LPC0.LNKC; 18
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "Intel QuickAssist Technology"
+  Parent  = "Virtual root port 2"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Dev  = 00h
+  ASLdeviceName  = "IQAT"
+  IntA = \_SB.PCI0.LPC0.LNKC; 18
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "Virtual root port 0"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "Pci2PciBridge"
+  Bus  = 00h
+  Dev  = 16h
+  Fun  = 00h
+  ASLdeviceName  = "VRP0"
+  IntA = \_SB.PCI0.LPC0.LNKA; 16
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "Virtual root port 1"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "Pci2PciBridge"
+  Bus  = 00h
+  Dev  = 17h
+  Fun  = 00h
+  ASLdeviceName  = "VRP1"
+  IntB = \_SB.PCI0.LPC0.LNKB; 17
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+# Denverton AptioV override Start - EIP#346607
+# Legacy PXE support
+PCIDEVICE
+  Title  = "NIC 0 [Legacy]"
+  Parent  = "Virtual root port 0"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Dev  = 00h
+  Fun  = 00h
+  GPEbit  = 070h
+  SleepNum  = 05h
+  ASLdeviceName  = "LAN0"
+  IntA = \_SB.PCI0.LPC0.LNKA; 16
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  OptionROM = Yes
+  LegacyRom = Yes
+  ROMFile = "AmiCRBPkg/15ce03.LOM"
+  FFSFileName  = "ROM Storage"
+  ROMSectionGuid  = "CF768310-AD5D-4ff2-AE01-4F3489C27259"
+End
+
+PCIDEVICE
+  Title  = "NIC 1 [Legacy]"
+  Parent  = "Virtual root port 0"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Dev  = 00h
+  Fun  = 01h
+  GPEbit  = 070h
+  SleepNum  = 05h
+  ASLdeviceName  = "LAN1"
+  IntB = \_SB.PCI0.LPC0.LNKB; 17
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  OptionROM = Yes
+  LegacyRom = Yes
+  LinkDevice = Yes
+  LinkDeviceName  = "NIC 0 [Legacy]"
+End
+
+PCIDEVICE
+  Title  = "NIC 2 [Legacy]"
+  Parent  = "Virtual root port 1"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Dev  = 00h
+  Fun  = 00h
+  GPEbit  = 070h
+  SleepNum  = 05h
+  ASLdeviceName  = "LAN2"
+  IntA = \_SB.PCI0.LPC0.LNKA; 16
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  OptionROM = Yes
+  LegacyRom = Yes
+  LinkDevice = Yes
+  LinkDeviceName  = "NIC 0 [Legacy]" 
+End
+
+PCIDEVICE
+  Title  = "NIC 3 [Legacy]"
+  Parent  = "Virtual root port 1"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Dev  = 00h
+  Fun  = 01h
+  GPEbit  = 070h
+  SleepNum  = 05h
+  ASLdeviceName  = "LAN3"
+  IntB = \_SB.PCI0.LPC0.LNKB; 17
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  OptionROM = Yes
+  LegacyRom = Yes
+  LinkDevice = Yes
+  LinkDeviceName  = "NIC 0 [Legacy]" 
+End
+
+PCIDEVICE
+  Title  = "NIC 0"
+  Parent  = "Virtual root port 0"
+  Attribute  = "0x0"
+  Dev_type  = "Container"
+  Dev  = 00h
+  Fun  = 00h
+  GPEbit  = 070h
+  SleepNum  = 05h
+  ASLdeviceName  = "LAN0"
+  IntA = \_SB.PCI0.LPC0.LNKA; 16
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  OptionROM = Yes
+  UefiRom = Yes
+  ROMFile = "AmiCRBPkg/E5804X4.EFI"
+  FFSFileName  = "ROM Storage"
+  ROMSectionGuid  = "5B615275-5934-48db-B55A-12B666CBB796"
+End
+
+PCIDEVICE
+  Title  = "NIC 1"
+  Parent  = "Virtual root port 0"
+  Attribute  = "0x0"
+  Dev_type  = "Container"
+  Dev  = 00h
+  Fun  = 01h
+  GPEbit  = 070h
+  SleepNum  = 05h
+  ASLdeviceName  = "LAN1"
+  IntB = \_SB.PCI0.LPC0.LNKB; 17
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  OptionROM = Yes
+  UefiRom = Yes
+  ROMFile = "AmiCRBPkg/E5804X4.EFI"
+  FFSFileName  = "ROM Storage"
+  ROMSectionGuid  = "5B615275-5934-48db-B55A-12B666CBB796" 
+End
+
+PCIDEVICE
+  Title  = "NIC 2"
+  Parent  = "Virtual root port 1"
+  Attribute  = "0x0"
+  Dev_type  = "Container"
+  Dev  = 00h
+  Fun  = 00h
+  GPEbit  = 070h
+  SleepNum  = 05h
+  ASLdeviceName  = "LAN2"
+  IntA = \_SB.PCI0.LPC0.LNKA; 16
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  OptionROM = Yes
+  UefiRom = Yes
+  ROMFile = "AmiCRBPkg/E5804X4.EFI"
+  FFSFileName  = "ROM Storage"
+  ROMSectionGuid  = "5B615275-5934-48db-B55A-12B666CBB796"  
+End
+
+PCIDEVICE
+  Title  = "NIC 3"
+  Parent  = "Virtual root port 1"
+  Attribute  = "0x0"
+  Dev_type  = "Container"
+  Dev  = 00h
+  Fun  = 01h
+  GPEbit  = 070h
+  SleepNum  = 05h
+  ASLdeviceName  = "LAN3"
+  IntB = \_SB.PCI0.LPC0.LNKB; 17
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  WakeEnabled = Yes
+  ROMMain = No
+  PCIExpress = Yes
+  OptionROM = Yes
+  UefiRom = Yes
+  ROMFile = "AmiCRBPkg/E5804X4.EFI"
+  FFSFileName  = "ROM Storage"
+  ROMSectionGuid  = "5B615275-5934-48db-B55A-12B666CBB796" 
+End
+# Denverton AptioV override End - EIP#346607
+
+PCIDEVICE
+  Title  = "ME HECI"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 18h
+  Fun  = 00h
+  ASLdeviceName  = "HECI"
+  IntA = \_SB.PCI0.LPC0.LNKA; 16
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "ME HECI2"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 18h
+  Fun  = 01h
+  ASLdeviceName  = "HEC2"
+  IntB = \_SB.PCI0.LPC0.LNKB; 17
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "MEKT on PCH"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 18h
+  Fun  = 03h
+  ASLdeviceName  = "MEKT"
+  IntC = \_SB.PCI0.LPC0.LNKC; 18
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "ME HECI3"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 18h
+  Fun  = 04h
+  ASLdeviceName  = "HEC3"
+  IntD = \_SB.PCI0.LPC0.LNKD; 19
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "eMMC"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 1Ch
+  Fun  = 00h
+  ASLdeviceName  = "EMMC"
+  ASLfile  = "'HarrisonvillePkg\Acpi\AcpiTables\Dsdt\EMMC.asi'"
+  IntA = \_SB.PCI0.LPC0.LNKA; 16
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "Primary to Sideband Bridge"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 1Fh
+  Fun  = 01h
+  ASLdeviceName  = "P2SB"
+  ASLfile  = "'HarrisonvillePkg\Acpi\AcpiTables\Dsdt\P2SB.asi'"
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "Power Management Controller"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 1Fh
+  Fun  = 02h
+  ASLdeviceName  = "PMC0"
+  ASLfile  = "'HarrisonvillePkg\Acpi\AcpiTables\Dsdt\PMC.asi'"
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "Legacy SMBUS Controller"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 1Fh
+  Fun  = 04h
+  ASLdeviceName  = "SMB0"
+  IntA = \_SB.PCI0.LPC0.LNKH; 23
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+End
+
+PCIDEVICE
+  Title  = "SPI controller"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 1Fh
+  Fun  = 05h
+  ASLdeviceName  = "SPI0"
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+  InitRoutine  = "PciPortSkipDeviceInit" # Denverton Aptiov override - EIP#235471
+End
+
+PCIDEVICE
+  Title  = "Northpeak DFX"
+  Parent  = "PciRoot"
+  Attribute  = "0x0"
+  Dev_type  = "PciDevice"
+  Bus  = 00h
+  Dev  = 1Fh
+  Fun  = 07h
+  ASLdeviceName  = "NPK0"
+  ASLfile  = "'HarrisonvillePkg\Acpi\AcpiTables\Dsdt\Npk.asi'"
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  PCIExpress = Yes
+  InitRoutine  = "PciPortSkipDeviceInit" # Denverton Aptiov override - EIP#273570
+End
+
+PCIDEVICE
+  Title  = "SbPciHost"
+  Parent  = "PciHost (Virtual)"
+  Attribute  = "0x0"
+  Dev_type  = "Container"
+  Dev  = 00h
+  Fun  = 00h
+  SleepNum  = 01h
+  ASLfile  = "'HarrisonvillePkg\Acpi\AcpiTables\Dsdt\Whea.asi;After Pci Tree','HarrisonvillePkg\Acpi\AcpiTables\Dsdt\GlobalNvs.asi;Before Pci Tree','AmiChipsetModulePkg\ASL\RriorDma.asl;After Pci Tree'" # Denverton AptioV Override - EIP#258527
+  DeviceType = OnBoard
+  PCIBusSize = 32bit
+  ROMMain = No
+  Virtual = Yes
+End
+# Denverton AptioV Override end - EIP#221424
+# Denverton Aptiov override end - EIP#218066 
+
+IOAPIC
+	Title  = "IO APIC 1"
+	APICID  = 02h
+	VectorBase  = 00h
+	VectorRange  = 018h
+	AddressBase  = 0fec00000h
+End
+
+# Denverton has 4 HPET each having 0x1000 lenght, using length as 0x4000 combining all
+TOKEN
+  Name  = "HPET_MMIO_SIZE"
+  Value  = "0x4000"
+  Help  = "HPET MMIO Lenght"
+  TokenType = Integer
+  TargetH = Yes
+  Token = "HPET_SUPPORT" "=" "1"
+End
+
+TOKEN
+  Name  = "PCH_BASE_ADDRESS"
+  Value  = "0xFD000000" 
+  TokenType = Integer
+  TargetEQU = Yes
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "PCH_MMIO_SIZE"
+  Value  = "0x01800000"
+  Help  = "PCH MMIO Lenght"
+  TokenType = Integer
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "MCH_BASE_ADDRESS"
+  Value  = "0xFED10000" 
+  TokenType = Integer
+  TargetEQU = Yes
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "MCH_MMIO_SIZE"
+  Value  = "0x00008000"
+  Help  = "MCH MMIO Lenght"
+  TokenType = Integer
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "GDXC_BASE_ADDRESS"
+  Value  = "0xFED84000" 
+  TokenType = Integer
+  TargetEQU = Yes
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "GDXC_MMIO_SIZE"
+  Value  = "0x00001000"
+  Help  = "GDXC MMIO Lenght"
+  TokenType = Integer
+  TargetH = Yes
+End
+
+# Adding entries for programing made in MemoryCallback.c
+RSVCHIPSET
+  Name  = "PciExpressExdConfig"
+  BASEADDR  = "$(PCIEX_BASE_ADDRESS)"
+  LENGTH  = "$(PCIEX_LENGTH)" 
+  TYPE  = "EfiGcdMemoryTypeReserved"
+  ATTRIBUTES  = "0x8000000000000001"
+End
+
+RSVCHIPSET
+  Name  = "IOAPIC Dedicated Space"
+  BASEADDR  = "$(APCB)"
+  LENGTH  = "$(APCL)"
+  TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+  ATTRIBUTES  = "0x1"
+End
+
+RSVCHIPSET
+  Name  = "HPET Memory Mapped Space"
+  BASEADDR  = "$(HPET_BASE_ADDRESS)"
+  LENGTH  = "$(HPET_MMIO_SIZE)"  
+  TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+  ATTRIBUTES  = "0x1"
+  Token = "HPET_SUPPORT" "=" "1"
+End
+
+# PCH MMIO region, combines the PCR, PWRM and SPI regions
+RSVCHIPSET
+  Name  = "PCH Base"
+  BASEADDR  = "$(PCH_BASE_ADDRESS)"
+  LENGTH  = "$(PCH_MMIO_SIZE)" 
+  TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+  ATTRIBUTES  = "0x8000000000000001"
+End
+
+RSVCHIPSET
+  Name  = "MCH Base"
+  BASEADDR  = "$(MCH_BASE_ADDRESS)"
+  LENGTH  = "$(MCH_MMIO_SIZE)" 
+  TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+  ATTRIBUTES  = "0x1"
+End
+
+RSVCHIPSET
+  Name  = "GDXC Base"
+  BASEADDR  = "$(GDXC_BASE_ADDRESS)"
+  LENGTH  = "$(GDXC_MMIO_SIZE)" 
+  TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+  ATTRIBUTES  = "0x1"
+End
+
+# Flash region is set to Write protected for Performance improvement
+RSVCHIPSET
+  Name  = "Flash resources Region - Reserved with Write Protected attributes"
+  BASEADDR  = "$(FLASH_BASE)"
+  LENGTH  = "$(FLASH_SIZE)"
+  TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+  ATTRIBUTES  = "0x8000000000000001"
+End
+# Denverton AptioV Override Start - EIP#234259
+RSVCHIPSET
+	Name  = "ME Flash resources Region"
+	BASEADDR  = "0xFF000000"
+	LENGTH  = "0x800000"
+	TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+	ATTRIBUTES  = "0x8000000000000001"
+End
+# Denverton AptioV Override End - EIP#234259
+
+# Denverton AptioV Override Start - EIP#323097
+# In RC, CpuArchDxe driver is adding this memory to GCD.
+# Code in CpuArchDxe driver is commented to add it through RSVCHIPSET.
+#RSVCHIPSET
+#  Name  = "LocalApicSpace"
+#  BASEADDR  = "$(LOCAL_APIC_BASE)"
+#  LENGTH  = "$(LAPL)"
+#  TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+#  ATTRIBUTES  = "0x1"
+#End
+# Denverton AptioV Override End - EIP#323097
+
+# Reserver various IO space used
+RSVCHIPSET
+  Name  = "IO Used by ACPI PM Registers"
+  BASEADDR  = "$(PM_BASE_ADDRESS)"
+  LENGTH  = "$(PMLN)"
+  TYPE  = "EfiGcdIoTypeIo"
+  ATTRIBUTES  = "-1"
+End
+
+RSVCHIPSET
+  Name  = "IO Used by GPIO Registers"
+  BASEADDR  = "$(GPIO_BASE_ADDRESS)"
+  LENGTH  = "$(GPLN)"
+  TYPE  = "EfiGcdIoTypeIo"
+  ATTRIBUTES  = "-1"
+End
+
+RSVCHIPSET
+  Name  = "SW SMI IO Port"
+  BASEADDR  = "0xB1"
+  LENGTH  = "0x2"
+  TYPE  = "EfiGcdIoTypeIo"
+  ATTRIBUTES  = "-1"
+End
+
+RSVCHIPSET
+  Name  = "SMBUS register block"
+  BASEADDR  = "$(SMBS)"
+  LENGTH  = "$(SMBL)"
+  TYPE  = "EfiGcdIoTypeIo"
+  ATTRIBUTES  = "-1"
+End
+
+RSVCHIPSET
+  Name  = "PCI Config Space Index Data"
+  BASEADDR  = "0xCF8"
+  LENGTH  = "0x8"
+  TYPE  = "EfiGcdIoTypeIo"
+  ATTRIBUTES  = "-1"
+End
+
+# Denverton Aptiov Override start - EIP#221424
+ELINK
+  Name  = "DenvertonPkg/SiPkg.dec"
+  Parent  = "AMI_CSP_PACKAGES"
+  InvokeOrder = AfterParent
+End
+# Denverton Aptiov Override End - EIP#221424
+# Denverton Aptiov Override Start - EIP#210294
+TOKEN
+  Name  = "SB_SMM_LIBRARY_SUPPORT"
+  Value  = "0"
+  Help  = "Main switch to enable SB Smm Library support in Project"
+  TokenType = Boolean
+  TargetEQU = Yes
+  TargetMAK = Yes
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "SB_RUNTIME_SUPPORT"
+  Value  = "1" # Denverton AptioV override - EIP#238625
+  Help  = "Main switch to enable SB Runtime support in Project"
+  TokenType = Boolean
+  TargetEQU = Yes
+  TargetMAK = Yes
+  TargetH = Yes
+End
+# Denverton Aptiov Override End - EIP#210294
+
+#Denverton AptioV Override Start- EIP#305575
+TOKEN
+    Name = "MAX_EXTRA_BUS_RESERVED"
+    Value = "7"
+    Help = "The Max number of extra Bus Reserved for bridges behind this Root Bridge "
+    TokenType = Integer
+    TargetH = Yes
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name = "MAX_PCIE_MEM_RESERVED"
+    Value = "1200"
+    Help = "The Max reserved memory (in MB) for this Root Bridge."
+    TokenType = Integer
+    TargetH = Yes
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name = "MAX_PCIE_PF_MEM_RESERVED"
+    Value = "1200"
+    Help = "The Max prefetchable memory reserved (in MB) for this Root Bridge."
+    TokenType = Integer
+    TargetH = Yes
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name = "MAX_PCIE_IO_RESERVED"
+    Value = "20"
+    Help = "The Default IO resource reserved (in KB) for this Root Bridge."
+    TokenType = Integer
+    TargetH = Yes
+    TargetDSC = Yes
+End
+
+#Denverton Aptiov override start - EIP#362871
+TOKEN
+    Name  = "CLEAR_TIME_BAD_CMOS"
+    Value = "1"
+    Help  = "1: Clear CMOS Time while RTC Power Failure status is set"
+    TokenType = Boolean
+    TargetH = Yes
+End
+#Denverton Aptiov override end - EIP#362871
+
+#Denverton AptioV Override End- EIP#305575
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+

@@ -1,0 +1,120 @@
+/*++
+
+  Copyright (c)  2001 - 2013 Intel Corporation.  All rights reserved.
+
+  This software and associated documentation (if any) is furnished under 
+  a license and may only be used or copied in accordance with the terms 
+  of the license.  Except as permitted by such license, no part of this 
+  software or documentation may be reproduced, stored in a retrieval 
+  system, or transmitted in any form or by any means without the express 
+  written consent of Intel Corporation.
+
+  Module Name:
+
+    osc.asi
+
+  Abstract:
+
+    OSC method to be used on SB.PCI0 context
+
+--*/
+
+//Post code port 0x80
+//OperationRegion (DEB0, SystemIO, 0x80, 1)    //DBG
+//Field (DEB0, ByteAcc,NoLock,Preserve)        //DBG
+//{ DBGM, 8,}                    //DBG
+
+OperationRegion(PXCS,PCI_Config,0x40,0xC0) 
+  Field(PXCS,AnyAcc, NoLock, Preserve)
+    {      
+        Offset(0x10), // LCTL - Link Control Register
+        L0SE,   1,    // 0,   L0s Entry Enabled
+        ,   7,
+        Offset(0x12), // LSTS - Link Status Register
+        ,   13,
+        LASX,   1,    // 0,   Link Active Status
+        Offset(0x1A), // SLSTS[7:0] - Slot Status Register
+        ABPX,   1,    // 0,   Attention Button Pressed
+        ,   2,
+        PDCX,   1,    // 3,   Presence Detect Changed
+        ,   2,
+        PDSX,   1,    // 6,   Presence Detect State       
+        ,   1,
+        Offset(0x20), // RSTS - Root Status Register
+        ,   16,
+        PSPX,   1,    // 16,  PME Status
+        Offset(0x98), // MPC - Miscellaneous Port Configuration Register
+        ,   30,
+        HPEX,   1,    // 30,  Hot Plug SCI Enable
+        PMEX, 1,       // 31,    Power Management SCI Enable 
+        Offset(0x9C), // SMSCS - SMI/SCI Status Register
+        ,   30,
+        HPSX,   1,    // 30,    Hot Plug SCI Status
+        PMSX,   1     // 31,    Power Management SCI Status         
+  }
+
+   Name(SUPP,0)  // PCI _OSC Support Field value
+   Name(CTRL,0)  // PCI _OSC Control Field value
+
+
+Method(_OSC,4)
+{ // Check for proper UUID
+  If(LEqual(Arg0,ToUUID("33DB4D5B-1FF7-401C-9657-7441C03DD766")))
+  {
+    // Create DWord-adressable fields from the Capabilities Buffer
+    CreateDWordField(Arg3,0,CDW1)
+    CreateDWordField(Arg3,4,CDW2)
+    CreateDWordField(Arg3,8,CDW3)
+    
+    // Save Capabilities DWord2 & 3
+    Store(CDW2,SUPP)
+    Store(CDW3,CTRL)
+    
+    //Set Post code to verify method execution
+    //Store(0x23,DBGM)
+    
+    // Only allow native hot plug control if OS supports:
+    // * ASPM
+    // * Clock PM
+    // * MSI/MSI-X
+    If(LNotEqual(And(SUPP, 0x16), 0x16))
+    {
+      And(CTRL,0x1E,CTRL) // Mask bit 0 (and undefined bits) 
+    }
+    
+    // Always allow native PME, AER (no dependencies)
+    // Never allow SHPC (no SHPC controller in this system)
+    And(CTRL,0x1D,CTRL) 
+    
+    If(Not(And(CDW1,1))) // Query flag clear?
+    { 
+      // Disable GPEs for features granted native control.
+      If(And(CTRL,0x01)) // Hot plug control granted?
+      {
+        Store(0,HPEX) // clear the hot plug SCI enable bit
+        Store(1,HPSX) // clear the hot plug SCI status bit
+      }
+      
+      If(And(CTRL,0x04)) // PME control granted?
+      {
+        Store(0,PMEX) // clear the PME SCI enable bit
+        Store(1,PMSX) // clear the PME SCI status bit
+      }
+    }
+	
+    If(LNotEqual(Arg1,One))
+    { // Unknown revision
+      Or(CDW1,0x08,CDW1)
+    }
+    If(LNotEqual(CDW3,CTRL))
+    { // Capabilities bits were masked
+      Or(CDW1,0x10,CDW1)
+    } // Update DWORD3 in the buffer
+    Store(CTRL,CDW3)
+    Return(Arg3)
+  }Else
+  {
+    Or(CDW1,4,CDW1) // Unrecognized UUID
+    Return(Arg3)
+  }
+} // End _OSC

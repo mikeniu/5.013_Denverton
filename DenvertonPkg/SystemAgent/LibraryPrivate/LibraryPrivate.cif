@@ -1,0 +1,10 @@
+<component>
+	name = "LibraryPrivate"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SystemAgent\LibraryPrivate\"
+	RefName = "DenvertonPkg.SystemAgent.LibraryPrivate"
+[INF]
+"PeiVtdInitLib\PeiVtdInitLib.inf"
+[files]
+"LibraryPrivate.sdl"	
+<endComponent>

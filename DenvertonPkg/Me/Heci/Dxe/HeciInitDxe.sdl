@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "HeciInitDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling HeciInitDxe support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "HeciInitDxe"
+	File  = "HeciInitDxe.inf"
+	Package  = "DenvertonPkg"	
+	ModuleTypes  = "DXE_DRIVER"
+End
+

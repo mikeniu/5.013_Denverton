@@ -1,0 +1,8 @@
+<component>
+	name = "Tools"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Tools\"
+	RefName = "HarrisonvillePkg.Tools"
+[parts]
+"HarrisonvillePkg.Tools.FTool"
+<endComponent>

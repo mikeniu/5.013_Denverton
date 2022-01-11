@@ -1,0 +1,23 @@
+<component>
+	name = "AmiCRBPkg"
+	category = eBoard
+	Rank = 55
+	LocalRoot = "AmiCRBPkg\"
+	RefName = "AmiCRBPkg"
+[files]
+"AmiCRBPkg.sdl"	
+"AmiCRBPkg.dec"	
+"E5804X4.EFI"
+"uefi_2400_396.efi"
+"ASTVBIOS_396.bin"
+"15ce03.LOM"
+
+[INF]
+"CRB\Chipset\SB\SbPciHotPlugLib\SbPciHotPlugLib.inf"
+
+[parts]
+"CRBLibrary"
+"MdeModulePkg.Metronome"
+"MdeModulePkg.WatchdogTimer"
+"IntelFrameworkModulePkg.CpuIoDxe"
+<endComponent>

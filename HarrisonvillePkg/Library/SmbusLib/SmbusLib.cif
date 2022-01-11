@@ -1,0 +1,11 @@
+<component>
+	name = "SmbusLib"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Library\SmbusLib\"
+	RefName = "HarrisonvillePkg.SmbusLib"
+[INF]
+"SmbusLib.inf"
+[files]
+"CommonHeader.h"	
+"SmbusLib.sdl"	
+<endComponent>

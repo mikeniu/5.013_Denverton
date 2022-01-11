@@ -1,0 +1,7 @@
+TOKEN
+	Name  = "ME_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling ME support in the project"
+	TokenType = Boolean
+	Master = Yes
+End

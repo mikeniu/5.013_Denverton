@@ -1,0 +1,15 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Cpu\Include\Library\"
+	RefName = "DenvertonPkg.Cpu.Include.Library"
+[files]
+"AslUpdateLib.h"	
+"CpuIA32.h"	
+"CpuPlatformLib.h"
+"DTSHookLib.h"	
+"KscLib.h"	
+"PeiCpuPolicyLibrary.h"	
+"SmmIoLib.h"	
+"StallSmmLib.h"	
+<endComponent>

@@ -1,0 +1,138 @@
+#
+# This file contains 'Framework Code' and is licensed as such
+# under the terms of your license agreement with Intel or your
+# vendor.  This file may not be modified, except as allowed by
+# additional terms of your license agreement.
+#
+## @file  CpuPkg.dec
+#
+#Copyright (c) 2011 - 2013, Intel Corporation. All rights reserved.
+#This software and associated documentation (if any) is furnished
+#under a license and may only be used or copied in accordance
+#with the terms of the license. Except as permitted by such
+#license, no part of this software or documentation may be
+#reproduced, stored in a retrieval system, or transmitted in any
+#form or by any means without the express written consent of
+#Intel Corporation.
+#
+##
+
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = CpuPkg
+  PACKAGE_GUID                   = 5141013F-96FE-439C-BD03-8B9EB0627D9F
+  PACKAGE_VERSION                = 0.91
+
+[Includes]
+  Include
+#  SampleCode/Include
+
+[LibraryClasses]
+  CpuPlatformLib|Include/Library/CpuPlatformLib.h
+  OverclockingLib|Include/Library/OverclockingLib.h
+  ThunkLib|Include/Library/ThunkLib.h
+
+[Guids]
+  #
+  # CpuGuidLib:START
+  #
+
+
+  ## Include/Guid/SmramCpuDataVariable.h
+  gSmramCpuDataVariableGuid = { 0x429501d9, 0xe447, 0x40f4, { 0x86, 0x7b, 0x75, 0xc9, 0x3a, 0x1d, 0xb5, 0x4e } }
+
+  ## Include/Guid/SmramCpuDataHeader.h
+  gSmramCpuDataHeaderGuid = { 0x5848fd2d, 0xd6af, 0x474b, { 0x82, 0x75, 0x95, 0xdd, 0xe7, 0x0a, 0xe8, 0x23 } }
+
+  ## Include/Guid/CpuAcpiTableStorage.h
+  gCpuAcpiTableStorageGuid = { 0xc38fb0e2, 0xc43, 0x49c9, { 0xb5, 0x44, 0x9b, 0x17, 0xaa, 0x4d, 0xcb, 0xa3 } }
+
+  ## Include/Guid/TxtInfoHob.h
+  gTxtInfoHobGuid = { 0x2986883F, 0x88E0, 0x48d0, { 0x4B, 0x82, 0x20, 0xC2, 0x69, 0x48, 0xDD, 0xAC } }
+
+  ## Include/Guid/TxtOneTouch.h
+  gTxtOneTouchGuid = { 0x3D989471, 0xCFAC, 0x46B7, { 0x9B, 0x1C, 0x8, 0x43, 0x1, 0x9, 0x40, 0x2D } }
+
+  ## Include/Guid/HtBistHob.h
+  gHtBistHobGuid = { 0xBE644001, 0xE7D4, 0x48B1, { 0xB0, 0x96, 0x8B, 0xA0, 0x47, 0xBC, 0x7A, 0xE7 }}
+
+  #
+  # CpuGuidLib:END
+  #
+
+  ## Include/Guid/ProcessorProducer.h
+  gProcessorProducerGuid = { 0x1bf06aea, 0x5bec, 0x4a8d, { 0x95, 0x76, 0x74, 0x9b, 0x09, 0x56, 0x2d, 0x30 } }
+
+[Protocols]
+  #
+  # CpuProtocolLib:START
+  #
+  
+  ## Include/Protocol/CpuCache.h
+  gDxeCpuCacheProtocolGuid = { 0x5c6fa2c9, 0x9768, 0x45f6, { 0x8e, 0x64, 0x5a, 0xec, 0xca, 0xda, 0xb4, 0x81 } }
+
+  ## Include/Protocol/CpuInfo.h
+  gDxeCpuInfoProtocolGuid = { 0xe223cf65, 0xf6ce, 0x4122, { 0xb3, 0xaf, 0x4b, 0xd1, 0x8a, 0xff, 0x40, 0xa1 } }
+
+  ## Include/Protocol/CpuPlatformPolicy.h
+  gDxeCpuPlatformPolicyProtocolGuid = { 0x1279e288, 0x24cd, 0x47e9, { 0x96, 0xba, 0xd7, 0xa3, 0x8c, 0x17, 0xbd, 0x64 } }
+
+  ## Include/Protocol/Pfat.h
+  gSmmPfatProtocolGuid = { 0xc3e156e4, 0x27b3, 0x4dff, { 0xb8, 0x96, 0xfb, 0x11, 0x3b, 0x2e, 0x68, 0xb5 } }
+
+  ## Include/Protocol/PowerMgmtInitDone.h
+  gPowerMgmtInitDoneProtocolGuid = { 0xd71db106, 0xe32d, 0x4225, { 0xbf, 0xf4, 0xde, 0x6d, 0x77, 0x87, 0x17, 0x61 } }
+
+  # Include/Protocol/CpuGlobalNvsArea.h
+  gCpuGlobalNvsAreaProtocolGuid = { 0xab5a4df4, 0xf0d7, 0x49a8, { 0xbf, 0x5c, 0xf2, 0x5d, 0xa0, 0x4c, 0x25, 0x33 } }
+
+  # Include/Protocol/SmmThunk.h
+  gSmmThunkProtocolGuid = { 0x2a82fce6, 0x8bb6, 0x413e, { 0xb9, 0xeb, 0x45, 0xdf, 0xc0, 0x52, 0x2d, 0xf3 } }
+
+  # Include/Protocol/GlobalNvsArea.h
+  gEfiGlobalNvsAreaProtocolGuid = {0x74e1e48, 0x8132, 0x47a1, { 0x8c, 0x2c, 0x3f, 0x14, 0xad, 0x9a, 0x66, 0xdc } }
+  #
+  # CpuProtocolLib:END
+  #
+
+  #
+  # CpuSampleProtocolLib: START
+  #
+  
+  ## SampleCode/Include/Protocol/TxtOneTouchOp.h
+  gTxtOneTouchOpProtocolGuid = { 0xFA2338AD, 0x80DF, 0x49D0, { 0x93, 0x96, 0xCF, 0x71, 0x45, 0xD0, 0x3A, 0x76 } }
+  
+  #
+  # CpuSampleProtocolLib: END
+  #
+  
+[Ppis]
+  #
+  # CpuPpiLib:START
+  #
+
+  ## Include/Ppi/CpuPlatformPolicy.h
+  gPeiCpuPlatformPolicyPpiGuid = { 0xf8d5438e, 0x26e1, 0x481d, { 0xb6, 0x3c, 0x30, 0xd6, 0xef, 0xf4, 0xa4, 0x20 } }
+
+  ## Include/Ppi/Cache.h
+  gPeiCachePpiGuid = { 0x9be4bc2, 0x790e, 0x4dea, { 0x8b, 0xdc, 0x38, 0x5, 0x16, 0x98, 0x39, 0x44 } }
+
+
+  ## Include/Ppi/TpmInitialized.h
+  gPeiTpmInitializedPpiGuid = { 0xe9db0d58, 0xd48d, 0x47f6, { 0x9c, 0x6e, 0x6f, 0x40, 0xe8, 0x6c, 0x7b, 0x41 } }
+
+  ## Include/Ppi/TxtMemoryUnlocked.h
+  gPeiTxtMemoryUnlockedPpiGuid = { 0x38cdd10b, 0x767d, 0x4f6e, { 0xa7, 0x44, 0x67, 0xee, 0x1d, 0xfe, 0x2f, 0xa5 } }
+
+  #
+  # CpuPpiLib:END
+  #
+
+  gPeiMasterBootModePpiGuid = { 0x7408d748, 0xfc8c, 0x4ee6, { 0x92, 0x88, 0xc4, 0xbe, 0xc0, 0x92, 0xa4, 0x10}}
+  gPeiMemoryDiscoveredPpiGuid = { 0xf894643d, 0xc449, 0x42d1, { 0x8e, 0xa8, 0x85, 0xbd, 0xd8, 0xc6, 0x5b, 0xde}} 
+
+[PcdsFixedAtBuild]
+
+[PcdsFixedAtBuild, PcdsPatchableInModule, PcdsDynamic, PcdsDynamicEx]
+

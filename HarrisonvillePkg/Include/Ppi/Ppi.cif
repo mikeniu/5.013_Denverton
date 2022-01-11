@@ -1,0 +1,12 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Include\Ppi\"
+	RefName = "HarrisonvillePkg.Include.Ppi"
+[files]
+"AtaPolicy.h"	
+"BaseMemoryTest.h"	
+"FlashMap.h"	
+"PlatformMemoryRange.h"	
+"PlatformMemorySize.h"	
+<endComponent>

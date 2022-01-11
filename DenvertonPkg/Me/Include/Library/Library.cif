@@ -1,0 +1,20 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Me\Include\Library\"
+	RefName = "DenvertonPkg.Me.Include.Library"
+[files]
+"CoreBiosMsg.h"	
+"HeciCoreLib.h"	
+"HeciMsgLib.h"	
+"HeciMsgLibPei.h"	
+"MeChipsetLib.h"	
+"MeLib.h"	
+"MeLibPei.h"
+"MeShowBufferLib.h"
+"MeTypeLib.h"	
+"MeTypeSetLib.h"
+"MeUmaEinjLib.h"
+"MeFiaMuxLib.h"	
+"MeTypeDefs.h"
+<endComponent>

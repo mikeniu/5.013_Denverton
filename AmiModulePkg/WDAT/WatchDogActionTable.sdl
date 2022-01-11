@@ -1,0 +1,20 @@
+TOKEN
+	Name  = "WDAT_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable WatchDog Action Table support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "WDAT_DIR"
+End
+
+INFComponent
+	Name  = "WdatDxe"
+	File  = "WdatDxe.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes = "DXE_DRIVER"
+End

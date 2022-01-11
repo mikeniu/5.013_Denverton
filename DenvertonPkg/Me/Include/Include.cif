@@ -1,0 +1,26 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Me\Include\"
+	RefName = "DenvertonPkg.Me.Include"
+[files]
+"BupMsgs.h"	
+"FwStsSmbiosTable.h"
+"HeciRegs.h"	
+"IshMsgs.h"
+"MeAccess.h"	
+"MeChipset.h"
+"MeFwHob.h"	
+"MeState.h"
+"MeHeci3.h"
+"MeiBusMsg.h"	
+"MkhiMsgs.h"
+"MeSetup.h"	
+"Sps.h"	
+"SpsMisc.h"	
+[parts]
+"DenvertonPkg.Me.Include.Guid"
+"DenvertonPkg.Me.Include.Library"
+"DenvertonPkg.Me.Include.Ppi"
+"DenvertonPkg.Me.Include.Protocol"
+<endComponent>

@@ -1,0 +1,9 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Me\Include\Guid\"
+	RefName = "DenvertonPkg.Me.Include.Guid"
+[files]
+"SpsAcpiTableLocatorGuid.h"	
+"SpsInfoHobGuid.h"	
+<endComponent>

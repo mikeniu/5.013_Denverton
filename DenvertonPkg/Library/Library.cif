@@ -1,0 +1,16 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\Library\"
+	RefName = "DenvertonPkg.Library"
+[INF]
+"PeiSiPolicyLib\PeiSiPolicyLib.inf"
+"BaseConfigBlockLib\BaseConfigBlockLib.inf"
+"DxeAslUpdateLib\DxeAslUpdateLib.inf"
+"PeiDxeSmmMmPciLib\PeiDxeSmmMmPciLib.inf"
+"BaseResetSystemLib\BaseResetSystemLib.inf"
+[files]
+"Library.sdl"	
+[parts]
+"DenvertonPkg.AvotonSmmLib"
+<endComponent>

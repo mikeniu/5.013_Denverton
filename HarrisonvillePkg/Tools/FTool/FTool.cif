@@ -1,0 +1,20 @@
+<component>
+	name = "FTool"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Tools\FTool\"
+	RefName = "HarrisonvillePkg.Tools.FTool"
+[files]
+"Config\DNVHV_SiEn.xml"	
+"Config\DNVCL_SiEn.xml"	
+"Config\DNVAC_SiEn.xml"	
+"Tokens\orange_global_token.bin"	
+"SPS_dictionary.xml"	
+"spsOperational.bin"	
+"spsRecovery.bin"	
+"DNV_LAN0_KR_Inphi_noMNG_1.16_0.05_8000084F.bin"	
+"DNV_LAN1_KR_Inphi_noMNG_1.16_0.05_8000086B.bin"
+"DNV_LAN0_KR_Inphi_NCSI_1.16_0.05_8000084E.bin"
+"DNV_LAN1_KR_Inphi_NCSI_1.16_0.05_8000086A.bin"	
+[parts]
+"HarrisonvillePkg.Tools.FTool.FlashImageTool"
+<endComponent>

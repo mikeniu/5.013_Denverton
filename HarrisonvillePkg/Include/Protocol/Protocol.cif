@@ -1,0 +1,16 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Include\Protocol\"
+	RefName = "HarrisonvillePkg.Include.Protocol"
+[files]
+"BiosGuardFlashProtocol.h"	
+"EfiLegacyBootMarker.h"	
+"FlashDeviceInfo.h"	
+"PlatformCpu.h"	
+"PlatformPolicy.h"	
+"PlatformType.h"	
+"PlatformUncorePolicy.h"	
+"Spi.h"	
+"Sntp4.h"	
+<endComponent>

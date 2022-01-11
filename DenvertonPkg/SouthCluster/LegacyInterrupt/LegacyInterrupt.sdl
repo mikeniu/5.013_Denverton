@@ -1,0 +1,16 @@
+TOKEN
+	Name  = "LegacyInterrupt_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling LegacyInterrupt support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "LegacyInterrupt"
+	File  = "Dxe\LegacyInterrupt.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "LegacyInterrupt_SUPPORT" "=" "1"
+End
+

@@ -1,0 +1,9 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SystemAgent\Include\Guid\"
+	RefName = "DenvertonPkg.SystemAgent.Include.Guid"
+[files]
+"MemoryConfigData.h"	
+"SaAcpiTableStorage.h"	
+<endComponent>

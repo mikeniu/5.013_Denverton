@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "PtuLoader_SUPPORT"
+	Value  = "0"
+	Help  = "Switch for Enabling PtuLoader support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PtuLoader"
+	File  = "PtuLoader.inf"
+	ModuleTypes  = "DXE_DRIVER"
+	Package  = "DenvertonPkg"
+End
+

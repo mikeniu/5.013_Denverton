@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "PowerManagementAcpiTables2_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PowerManagementAcpiTables2 support in Project"
+	TokenType = Boolean
+	Master = Yes	
+End
+
+INFComponent
+	Name  = "PowerManagementAcpiTables2"
+	File  = "PowerManagementAcpiTables.inf"
+	Package  = "DenvertonPkg"
+	ModuleTypes  = "USER_DEFINED"
+End
+

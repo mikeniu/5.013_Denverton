@@ -1,0 +1,76 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+#
+# @file DxeIpmiTransportInitialize.inf
+#
+# INF description file for DxeIpmiTransportInitialize driver
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DxeIpmiTransportInitialize
+  FILE_GUID                      = AFD21350-4B27-4CC7-B3FE-089130E1E1FF
+  MODULE_TYPE                    = DXE_RUNTIME_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = InitializeIpmiIePhysicalLayer
+
+[Sources]
+  DxeIpmiTransportInitialize.c
+  DxeSmmIpmiTransport.c
+  ../IpmiIeCommonAccess/DxeSmmIpmiTransport.h
+  ../IpmiIeCommonAccess/IpmiIeCommunicate.h
+  ../IpmiIeCommonAccess/IpmiIeCommunicate.c
+  ../IpmiIeCommonAccess/IeDcmi.c
+  ../IpmiIeCommonAccess/IeDcmi.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiIePkg/AmiIePkg.dec
+  DenvertonPkg/Ie/IePkg.dec
+
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  MemoryAllocationLib
+  UefiLib
+  DebugLib
+  ReportStatusCodeLib
+  AmiDxeLib
+
+[Protocols]
+  gEfiDxeIpmiIeTransportProtocolGuid  #PRODUCES
+  gEfiSmmIpmiIeTransportProtocolGuid  #CONSUMES
+  gEfiSmmCommunicationProtocolGuid  #CONSUMES
+  gDxeIeHeciProtocolGuid            #CONSUMES
+
+[Depex]
+  TRUE
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

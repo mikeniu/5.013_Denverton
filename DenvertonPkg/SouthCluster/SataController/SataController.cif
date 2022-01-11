@@ -1,0 +1,10 @@
+<component>
+	name = "SataController"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\SataController\"
+	RefName = "DenvertonPkg.SouthCluster.SataController"
+[INF]
+"Dxe\SataController.inf"
+[files]
+"SataController.sdl"	
+<endComponent>

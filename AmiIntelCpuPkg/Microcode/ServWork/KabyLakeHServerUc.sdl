@@ -1,0 +1,22 @@
+TOKEN
+    Name  = "SERVWORK_906EX"
+    Value = "0"
+    Help  = "Intel(R) KabyLake"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "SERVWORK_M2A906E9"
+    Value  = "1"
+    Help  = "Intel(R) KabyLake Processor B-0 Stepping"
+    TokenType = Boolean
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M2A906E9_0000007C.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) KabyLake Processor B-0 Stepping"
+    Token = "SERVWORK_M2A906E9" "=" "1"
+    InvokeOrder = AfterParent
+End

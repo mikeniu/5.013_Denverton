@@ -1,0 +1,24 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Include\Library\"
+	RefName = "HarrisonvillePkg.Include.Library"
+[files]
+"BiosIdLib.h"	
+"CmosAccessLib.h"
+"DebugPropertyLib.h"	
+"FlashDeviceLib.h"	
+"MultiPlatSupportLib.h"	
+"PeiFiaMuxPolicyUpdateLib.h"
+"PeiIqatIpPolicyUpdateLib.h"
+"PeiPchPolicyDebugLib.h"
+"PeiPchPolicyUpdateLib.h"	
+"PeiPcieIpPolicyUpdateLib.h"
+"PeiPlatformHookLib.h"	
+"PeiPlatformLib.h"	
+"PeiPolicyInitLib.h"
+"PeiRasPolicyUpdateLib.h"	
+"PlatformCmosLib.h"	
+"PlatformTimerLib.h"	
+"PostCodeLib.h"	
+<endComponent>

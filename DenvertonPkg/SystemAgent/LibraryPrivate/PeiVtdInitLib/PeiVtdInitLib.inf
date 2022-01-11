@@ -1,0 +1,54 @@
+## @file
+# Library description file for PEI Phase SA VT-d Init
+#
+#@copyright
+# Copyright (c) 2014 Intel Corporation. All rights reserved
+# This software and associated documentation (if any) is furnished
+# under a license and may only be used or copied in accordance
+# with the terms of the license. Except as permitted by the
+# license, no part of this software or documentation may be
+# reproduced, stored in a retrieval system, or transmitted in any
+# form or by any means without the express written consent of
+# Intel Corporation.
+# This file contains an 'Intel Peripheral Driver' and is uniquely
+# identified as "Intel Reference Module" and is licensed for Intel
+# CPUs and chipsets under the terms of your license agreement with
+# Intel or your vendor. This file may be modified by the user, subject
+# to additional terms of the license agreement.
+#
+#@par Specification
+##
+
+
+[Defines]
+INF_VERSION = 0x00010005
+BASE_NAME = PeiVtdInitLib
+FILE_GUID = 9DF9BBE4-32DA-4D1A-91C1-EDEF70BFB76F
+VERSION_STRING = 1.0
+MODULE_TYPE = PEIM
+LIBRARY_CLASS = VtdInitLib
+
+
+[LibraryClasses]
+BaseLib
+DebugLib
+BaseMemoryLib
+PeiServicesLib
+PeiServicesTablePointerLib
+HobLib
+IoLib
+MmPciLib
+TimerLib
+PchRcLib
+
+[Guids]
+gSaDataHobGuid
+
+[Packages]
+MdePkg/MdePkg.dec
+DenvertonPkg/SiPkg.dec
+DenvertonPkg/DnvSiPrivate.dec
+
+[Sources]
+PeiVtdInitLib.c
+

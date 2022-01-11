@@ -1,0 +1,8 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SystemAgent\Include\Library\"
+	RefName = "DenvertonPkg.SystemAgent.Include.Library"
+[files]
+"PeiSaPolicyLibrary.h"	
+<endComponent>

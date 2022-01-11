@@ -1,0 +1,2103 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may
+// be modified by the user, subject to additional terms of the
+// license agreement
+//
+// *++
+//
+// Copyright (c) 1999 - 2017 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+//
+//
+// Module Name:
+//
+//   NorthBridgeConfig.hfr
+//
+// Abstract:
+//
+//   NorthBridge Configuration form
+//
+// Revision History:
+//
+// --*/
+
+#define DFX_PPR_TITLE_VARIABLE(x)     DFX_PPR_TITLE_VARIABLE_H(x)
+#define DFX_PPR_TITLE_VARIABLE_H(v)   STR_PPR_OPTION##v##_TITLE
+
+#define DFX_PPR_FORM_ID_VARIABLE(x)   DFX_PPR_FORM_ID_VARIABLE_H(x)
+#define DFX_PPR_FORM_ID_VARIABLE_H(v) NB_PPR##v##_FORM_ID
+
+  form formid = VFR_FORMID_CHIPSET_NB,
+
+  title       = STRING_TOKEN(STR_NB_FORM);
+  subtitle text = STRING_TOKEN(STR_NB_FORM);
+  subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+
+  subtitle text = STRING_TOKEN(STR_NULL_STRING);
+  subtitle text = STRING_TOKEN(STR_MEMORY);
+
+    text
+      help   = STRING_TOKEN(STR_MRC_VERSION_HELP),
+      text   = STRING_TOKEN(STR_MRC_VERSION_NAME),
+      text   = STRING_TOKEN(STR_MRC_VERSION_VALUE),
+      flags  = 0,
+      key    = 0;
+
+    text
+      help   = STRING_TOKEN(STR_MEMORY_SIZE_HELP),
+      text   = STRING_TOKEN(STR_MEMORY_SIZE_NAME),
+      text   = STRING_TOKEN(STR_MEMORY_SIZE_VALUE),
+      flags  = 0,
+      key    = 0;
+
+    text
+      help   = STRING_TOKEN(STR_MEMORY_FRQ_HELP),
+      text   = STRING_TOKEN(STR_MEMORY_FRQ_PROMPT),
+      text   = STRING_TOKEN(STR_MEMORY_FRQ_VALUE),
+      flags  = 0,
+      key    = 0;
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    goto PASS_GATE_FORM_ID,
+      prompt  = STRING_TOKEN(STR_PASS_GATE_PROMPT),
+      help    = STRING_TOKEN(STR_PASS_GATE_HELP);
+
+    goto LEAKY_BUCKET_FORM_ID,
+      prompt  = STRING_TOKEN(STR_LEAKY_BUCKET_PROMPT),
+      help    = STRING_TOKEN(STR_LEAKY_BUCKET_HELP);
+
+    goto NONVOL_MEM_FORM_ID,
+      prompt  = STRING_TOKEN(STR_NV_MEM_PROMPT),
+      help    = STRING_TOKEN(STR_NV_MEM_HELP);
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+    oneof varid = SYSTEM_CONFIGURATION.FastBoot,
+        prompt  = STRING_TOKEN(STR_MRC_FAST_BOOT),
+        help    = STRING_TOKEN(STR_MRC_FAST_BOOT_HELP),
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.CommandMode,
+        prompt  = STRING_TOKEN(STR_CMD_RATE_PROMPT),
+        help    = STRING_TOKEN(STR_CMD_RATE_HELP),
+        option text = STRING_TOKEN(STR_DEFAULT),         value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_VALUE_1N_STRING), value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_VALUE_2N_STRING), value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+    // Denverton AptioV override Start - EIP262802
+    // SmmSize is insufficient after core upgrade
+    oneof varid = SYSTEM_CONFIGURATION.SmmSize,
+      prompt      = STRING_TOKEN(STR_SMM_SIZE),
+      help        = STRING_TOKEN(STR_SMM_SIZE_HELP),
+      option text = STRING_TOKEN(STR_VALUE_2_STRING),  value = 2,  flags = RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_VALUE_4_STRING),  value = 4,  flags = DEFAULT|RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_VALUE_8_STRING),  value = 8,  flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_VALUE_16_STRING), value = 16, flags = RESET_REQUIRED;
+    endoneof;
+    // Denverton AptioV override End - EIP262802
+
+
+    ///
+    /// DDR4 Command Address Parity menu
+    ///
+    grayoutif ideqval SYSTEM_CONFIGURATION.EnableDdr4Options == 0;
+      oneof varid = SYSTEM_CONFIGURATION.CommandAddressParity,
+        prompt        = STRING_TOKEN(STR_MEMORY_ADD_PARITY_PROMPT),
+        help          = STRING_TOKEN(STR_MEMORY_ADD_PARITY_HELP),
+        option text   = STRING_TOKEN(STR_MEMORY_ADD_PARITY_DISABLE), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+        option text   = STRING_TOKEN(STR_MEMORY_ADD_PARITY_ENABLE), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    
+    ///
+    /// DDR speed BIOS menu
+    ///
+    oneof varid = SYSTEM_CONFIGURATION.DdrFreq,
+      prompt      = STRING_TOKEN(STR_MEMORY_FRQ_PROMPT),
+      help        = STRING_TOKEN(STR_MEMORY_FRQ_HELP),
+#ifndef   CAR_LAKE_SUPPORT    
+      option text = STRING_TOKEN(STR_MEMORY_FRQ_DDR_1600), value = 3, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MEMORY_FRQ_DDR_1866), value = 4, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MEMORY_FRQ_DDR_2133), value = 5, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MEMORY_FRQ_DDR_2400), value = 6, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+#else
+      option text = STRING_TOKEN(STR_AUTO_STRING), value = 15, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MEMORY_FRQ_DDR_1600), value = 3, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MEMORY_FRQ_DDR_1866), value = 4, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MEMORY_FRQ_DDR_2133), value = 5, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+      option text = STRING_TOKEN(STR_MEMORY_FRQ_DDR_2400), value = 6, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MEMORY_FRQ_DDR_2666), value = 7, flags = RESET_REQUIRED;
+#endif
+    endoneof;
+    ///
+    /// 32 bit bus enabled
+    ///
+    oneof varid = SYSTEM_CONFIGURATION.HalfWidthEnable,
+      prompt      = STRING_TOKEN(STR_32BITMODE_PROMPT),
+      help        = STRING_TOKEN(STR_32BITMODE_TRAINING_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING),  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+    ///
+    /// Modify Tcl timing for performance improvement
+    ///
+    oneof varid = SYSTEM_CONFIGURATION.TclIdle,
+      prompt      = STRING_TOKEN(STR_TCL_PERF_PROMPT),
+      help        = STRING_TOKEN(STR_TCL_PERF_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING),  value = 1, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+    endoneof;
+    
+    ///
+    /// Parallel Training
+    ///
+    oneof varid = SYSTEM_CONFIGURATION.EnableParallelTraining,
+      prompt      = STRING_TOKEN(STR_PARALLEL_TRAINING_PROMPT),
+      help        = STRING_TOKEN(STR_PARALLEL_TRAINING_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING),  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.SuppressChannelOption == 1;
+      oneof varid = SYSTEM_CONFIGURATION.DdrChannels,
+        prompt      = STRING_TOKEN(STR_MEMORY_CHANNELS_PROMPT),
+        help        = STRING_TOKEN(STR_MEMORY_CHANNELS_HELP),
+        option text = STRING_TOKEN(STR_MEMORY_CHANNELS_DUAL), value = 2, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+        option text = STRING_TOKEN(STR_MEMORY_CHANNELS_SINGLE), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    oneof varid = SYSTEM_CONFIGURATION.MrcDebugMsg,
+      prompt      = STRING_TOKEN(STR_MRC_TRAINING_MSG_SUPPORT),
+      help        = STRING_TOKEN(STR_MRC_TRAINING_MSG_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_MRC_DBG_MSG_MIN), value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MRC_DBG_MSG_MED), value = 2, flags = DEFAULT|RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MRC_DBG_MSG_MAX), value = 3, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MRC_DBG_MSG_AUTO), value = 4, flags = RESET_REQUIRED;	//"Auto"
+    endoneof;
+
+    // Denverton Aptiov override Start - EIP#373905
+    oneof varid = SYSTEM_CONFIGURATION.MemoryPreservation,
+      prompt      = STRING_TOKEN(STR_MEMORY_PRESERVATION_SUPPORT),
+      help        = STRING_TOKEN(STR_MEMORY_PRESERVATION_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING),  value = 1, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+    endoneof;
+    // Denverton Aptiov override End - EIP#373905
+
+    numeric varid = SYSTEM_CONFIGURATION.InputFineDdrVoltage,
+      prompt    = STRING_TOKEN(STR_FINE_DDR_VOLTAGE_SUPPORT),
+      help      = STRING_TOKEN(STR_FINE_DDR_VOLTAGE_SUPPORT_HELP),
+      flags     = RESET_REQUIRED,
+      minimum   = 0,
+      maximum   = 200,
+      step      = 5,
+      default   = 100,
+      option text = STRING_TOKEN(STR_TEST_DEFAULT), value = 100, flags = MANUFACTURING;
+    endnumeric;
+
+    oneof varid = SYSTEM_CONFIGURATION.ReadPerBitEnable,
+      prompt      = STRING_TOKEN(STR_READ_PER_BIT_SUPPORT),
+      help        = STRING_TOKEN(STR_READ_PER_BIT_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.WritePerBitEnable,
+      prompt      = STRING_TOKEN(STR_WRITE_PER_BIT_SUPPORT),
+      help        = STRING_TOKEN(STR_WRITE_PER_BIT_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.ECCSupport,
+      prompt      = STRING_TOKEN(STR_ECC_SUPPORT),
+      help        = STRING_TOKEN(STR_ECC_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.FaultyPartEnable,
+      prompt      = STRING_TOKEN(STR_FAULTY_PART_SUPPORT),
+      help        = STRING_TOKEN(STR_FAULTY_PART_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.FaultyPartEnable == 0;
+      oneof varid = SYSTEM_CONFIGURATION.FaultyPartOnCorrectable,
+        prompt      = STRING_TOKEN(STR_FAULTY_PART_ONCORRECTABLE),
+        help        = STRING_TOKEN(STR_FAULTY_PART_ONCORRECTABLE_HELP),
+        option text = STRING_TOKEN(STR_HALT_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+        option text = STRING_TOKEN(STR_CONTINUE_STRING ), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+
+    oneof varid = SYSTEM_CONFIGURATION.PatrolSupport,
+      prompt      = STRING_TOKEN(STR_PATROL_SUPPORT),
+      help        = STRING_TOKEN(STR_PATROL_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.PatrolPeriod,
+      prompt      = STRING_TOKEN(STR_PATROL_PERIOD),
+      help        = STRING_TOKEN(STR_PATROL_PERIOD_HELP),
+      option text = STRING_TOKEN(STR_PATROL_PERIOD_24), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_PATROL_PERIOD_10), value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PATROL_PERIOD_4),  value = 2, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PATROL_PERIOD_1),  value = 3, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.DemandScrub,
+      prompt      = STRING_TOKEN(STR_SCRUB_SUPPORT),
+      help        = STRING_TOKEN(STR_SCRUB_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING ), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING),   value = 1, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.AbSegToDram,
+      prompt      = STRING_TOKEN(STR_AB_SEG_TO_DRAM_SUPPORT),
+      help        = STRING_TOKEN(STR_AB_SEG_TO_DRAM_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.ESegToDram,
+      prompt      = STRING_TOKEN(STR_E_SEG_TO_DRAM_SUPPORT),
+      help        = STRING_TOKEN(STR_E_SEG_TO_DRAM_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.FSegToDram,
+      prompt      = STRING_TOKEN(STR_F_SEG_TO_DRAM_SUPPORT),
+      help        = STRING_TOKEN(STR_F_SEG_TO_DRAM_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.ZqcEnable,
+      prompt      = STRING_TOKEN(STR_ZQC_ENABLE_SUPPORT),
+      help        = STRING_TOKEN(STR_ZQC_ENABLE_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MrcRmtSupport,
+      prompt      = STRING_TOKEN(STR_RMT_SUPPORT),
+      help        = STRING_TOKEN(STR_RMT_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING ), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MrcRmtCpgcExpLoopCntValue,
+      prompt      = STRING_TOKEN(STR_RMT_CPGC_LOOP_COUNT),
+      help        = STRING_TOKEN(STR_RMT_CPGC_LOOP_COUNT_HELP),
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_1),  value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_2),  value = 2, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_3),  value = 3, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_4),  value = 4, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_5),  value = 5, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_6),  value = 6, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_7),  value = 7, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_8),  value = 8, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_9),  value = 9, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_10),  value = 10, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_11),  value = 11, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_12),  value = 12, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_13),  value = 13, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_14),  value = 14, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_15),  value = 15, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MrcRmtCpgcNumBursts,
+      prompt      = STRING_TOKEN(STR_RMT_CPGC_NUM_BURSTS),
+      help        = STRING_TOKEN(STR_RMT_CPGC_NUM_BURSTS_HELP),
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_1),  value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_2),  value = 2, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_3),  value = 3, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_4),  value = 4, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_5),  value = 5, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_6),  value = 6, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_7),  value = 7, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_8),  value = 8, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_9),  value = 9, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_10),  value = 10, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_11),  value = 11, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_12),  value = 12, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_13),  value = 13, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_14),  value = 14, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_15),  value = 15, flags = RESET_REQUIRED;
+    endoneof;
+
+
+    oneof varid = SYSTEM_CONFIGURATION.EnableOutOfOrderProcessing,
+      prompt      = STRING_TOKEN(STR_OOO_MEMORY_PROCESSING_PROMPT),
+      help        = STRING_TOKEN(STR_OOO_MEMORY_PROCESSING_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.TwoClkRdPreamble,
+      prompt      = STRING_TOKEN(STR_TWO_CLOCK_RD_PREAMBLE_PROMPT),
+      help        = STRING_TOKEN(STR_TWO_CLOCK_RD_PREAMBLE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.TwoClkWrPreamble,
+      prompt      = STRING_TOKEN(STR_TWO_CLOCK_WR_PREAMBLE_PROMPT),
+      help        = STRING_TOKEN(STR_TWO_CLOCK_WR_PREAMBLE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.WriteDataEarlyEnable,
+      prompt      = STRING_TOKEN(STR_WR_DATA_ENABLE_PROMPT),
+      help        = STRING_TOKEN(STR_WR_DATA_ENABLE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.OutOfOrderAgingThreshold,
+      prompt    = STRING_TOKEN(STR_OOO_AGING_THRESHOLD_PROMPT),
+      help      = STRING_TOKEN(STR_OOO_AGING_THRESHOLD_HELP),
+      minimum   = 0x0,
+      maximum   = 0x1f,
+      step      = 1,
+      default   = 0x8,
+    endnumeric;
+
+    oneof varid = SYSTEM_CONFIGURATION.EnableNewRequestBypass,
+      prompt      = STRING_TOKEN(STR_NEW_REQUEST_BYPASS_PROMPT),
+      help        = STRING_TOKEN(STR_NEW_REQUEST_BYPASS_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.SelectRefreshRate,
+      prompt      = STRING_TOKEN(STR_REFRESH_RATE_PROMPT),
+      help        = STRING_TOKEN(STR_REFRESH_RATE_HELP),
+      option text = STRING_TOKEN(STR_REFRESH_RATE_1X_2X),  value = 2, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+      option text = STRING_TOKEN(STR_REFRESH_RATE_1X_2X_4X),  value = 4, flags = RESET_REQUIRED;
+    endoneof;
+
+
+    oneof varid = SYSTEM_CONFIGURATION.CkePowerDownDisable,
+      prompt      = STRING_TOKEN(STR_CKE_POWER_DOWN_PROMPT),
+      help        = STRING_TOKEN(STR_CKE_POWER_DOWN_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+      option text = STRING_TOKEN(STR_ACTIVEPWRDWN_STRING), value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PRECHARGE_STRING), value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.DramRaplTimeWindow,
+      prompt    = STRING_TOKEN(STR_DRAM_RAPL_TIME_WINDOW_SUPPORT),
+      help      = STRING_TOKEN(STR_DRAM_RAPL_TIME_WINDOW_HELP),
+      flags     = RESET_REQUIRED,
+      minimum   = 0,
+      maximum   = 0x1C0000000,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    oneof varid = SYSTEM_CONFIGURATION.DramRaplPowerLimitEnable,
+      prompt      = STRING_TOKEN(STR_DRAM_RAPL_POWER_LIMIT_EN_SUPPORT),
+      help        = STRING_TOKEN(STR_DRAM_RAPL_POWER_LIMIT_EN_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.DramRaplPowerLimit,
+      prompt    = STRING_TOKEN(STR_DRAM_RAPL_POWER_LIMIT_SUPPORT),
+      help      = STRING_TOKEN(STR_DRAM_RAPL_POWER_LIMIT_HELP),
+      flags     = RESET_REQUIRED,
+      minimum   = 0,
+      maximum   = 4095875,
+      step      = 1,
+      default   = 2047875,
+    endnumeric;
+
+    oneof varid     = SYSTEM_CONFIGURATION.DramRaplLimitLock,
+        prompt      = STRING_TOKEN(STR_DRAM_RAPL_LIMIT_LOCK),
+        help        = STRING_TOKEN(STR_DRAM_RAPL_LIMIT_LOCK_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE), value = 1,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.PmopPc0,
+      prompt    = STRING_TOKEN(STR_PMOP_PC0_PROMPT),
+      help      = STRING_TOKEN(STR_PMOP_PC0_HELP),
+      flags     = RESET_REQUIRED,
+      minimum   = 0x1,
+      maximum   = 0x9,
+      step      = 1,
+      default   = 0x4,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.PmopPcx,
+      prompt    = STRING_TOKEN(STR_PMOP_PCX_PROMPT),
+      help      = STRING_TOKEN(STR_PMOP_PCX_HELP),
+      flags     = RESET_REQUIRED,
+      minimum   = 0x1,
+      maximum   = 0x9,
+      step      = 1,
+      default   = 0x7,
+    endnumeric;
+
+    oneof varid = SYSTEM_CONFIGURATION.OpenPolicyTimer,
+      prompt      = STRING_TOKEN(STR_OPEN_PAGE_POLICY_PROMPT),
+      help        = STRING_TOKEN(STR_OPEN_PAGE_POLICY_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT| RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_INMEDIATE_STRING), value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_OPEN_PAGE_POLICY_30TO60NS), value = 2, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_OPEN_PAGE_POLICY_60TO120NS), value = 3, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_OPEN_PAGE_POLICY_120TO240NS), value = 4, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_OPEN_PAGE_POLICY_240TO480NS), value = 5, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_OPEN_PAGE_POLICY_480TO960NS), value = 6, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_OPEN_PAGE_POLICY_1TO2MS), value = 7, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MemoryThermalEnable,
+      prompt      = STRING_TOKEN(STR_MEMORY_THERMAL_PROMPT),
+      help        = STRING_TOKEN(STR_MEMORY_THERMAL_PROMPT_HELP),
+      option text = STRING_TOKEN(STR_AUTO_STRING), value = 2, flags = DEFAULT | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DISABLED_STRING ), value = 0, flags = RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.MemoryThermalEnable == 0;
+      oneof varid = SYSTEM_CONFIGURATION.ThermalThrottlingType,
+      prompt      = STRING_TOKEN(STR_THERMAL_THROTTLING_TYPE_PROMPT),
+      help        = STRING_TOKEN(STR_THERMAL_THROTTLING_TYPE_PROMPT_HELP),
+      option text = STRING_TOKEN(STR_CLTT_STRING ), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_OLTT_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.ThermalThrottlingType == 1;
+        oneof varid = SYSTEM_CONFIGURATION.ClttMode,
+        prompt      = STRING_TOKEN(STR_CLTT_MODE_PROMPT),
+        help        = STRING_TOKEN(STR_CLTT_MODE_PROMPT_HELP),
+        option text = STRING_TOKEN(STR_CLTT_NORMAL_STRING ), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+        option text = STRING_TOKEN(STR_CLTT_PASSTHRU_STRING), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+
+        numeric varid = SYSTEM_CONFIGURATION.TempHi,  // Default 105C -- Program so TEMP_HI > TEMP_MID
+        prompt    = STRING_TOKEN(STR_TEMP_HI_PROMPT),
+        help      = STRING_TOKEN(STR_TEMP_HI_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 105,
+        maximum   = 255,
+        step      = 1,
+        default   = 105,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.TempMid, // Default 85C -- Program so TEMP_MID < TEMP_HI
+        prompt    = STRING_TOKEN(STR_TEMP_MID_PROMPT),
+        help      = STRING_TOKEN(STR_TEMP_MID_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 85,
+        maximum   = 104,
+        step      = 1,
+        default   = 85,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.TempLo, // Default -- 82C TEMP_LO < TEMP_MID
+        prompt    = STRING_TOKEN(STR_TEMP_LO_PROMPT),
+        help      = STRING_TOKEN(STR_TEMP_LO_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 84,
+        step      = 1,
+        default   = 82,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.BwLevelOnThrtCrit,   // Default -- BW Level 3% (Meaning 97% throttled)
+        prompt    = STRING_TOKEN(STR_THRT_CRIT_PROMPT),
+        help      = STRING_TOKEN(STR_THRT_CRIT_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 9,
+        step      = 1,
+        default   = 3,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.BwLevelOnThrtHi,   // Default -- BW Level 10% (Meaning 90% throttled)
+        prompt    = STRING_TOKEN(STR_THRT_HI_PROMPT),
+        help      = STRING_TOKEN(STR_THRT_HI_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 10,
+        maximum   = 50,
+        step      = 1,
+        default   = 10,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.BwLevelOnThrtMid,   // Default -- BW Level 100% (Meaning 0% throttled)
+        prompt    = STRING_TOKEN(STR_THRT_MID_PROMPT),
+        help      = STRING_TOKEN(STR_THRT_MID_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 51,
+        maximum   = 100,
+        step      = 1,
+        default   = 100,
+        endnumeric;
+      endif;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.ThermalThrottlingType == 0;
+        numeric varid = SYSTEM_CONFIGURATION.OlttThrtBw,   // Default -- Throttle Bandwidth 90%
+        prompt    = STRING_TOKEN(STR_OLTT_THRT_BW_PROMPT),
+        help      = STRING_TOKEN(STR_OLTT_THRT_BW_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 100,
+        step      = 1,
+        default   = 90,
+        endnumeric;
+      endif;
+    endif;
+
+    oneof varid     = SYSTEM_CONFIGURATION.MemHotThrotLvl,
+      prompt      = STRING_TOKEN(STR_MEMHOT_PROMPT),
+      help        = STRING_TOKEN(STR_MEMHOT_PROMPT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING),          value = 0,  flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MEMHOT_THRT_MID_STRING),   value = 1,  flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MEMHOT_THRT_HI_STRING),    value = 2,  flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MEMHOT_THRT_CRIT_STRING),  value = 3,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.MemoryThermalEnable == 0;
+      suppressif ideqval SYSTEM_CONFIGURATION.ThermalThrottlingType == 1;
+        oneof varid     = SYSTEM_CONFIGURATION.EnMemTrip,
+          prompt      = STRING_TOKEN(STR_EN_MEMTRIP_PROMPT),
+          help        = STRING_TOKEN(STR_EN_MEMTRIP_HELP),
+          option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_ENABLED_STRING),  value = 1,  flags = RESET_REQUIRED;
+        endoneof;
+
+        suppressif ideqval SYSTEM_CONFIGURATION.EnMemTrip == 0;
+          numeric varid = SYSTEM_CONFIGURATION.TempMemTrip,
+          prompt    = STRING_TOKEN(STR_TEMP_MEMTRIP_PROMPT),
+          help      = STRING_TOKEN(STR_TEMP_MEMTRIP_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = 255,
+          step      = 1,
+          default   = 105,
+          endnumeric;
+        endif;
+      endif;
+    endif;
+
+    oneof varid = SYSTEM_CONFIGURATION.RxSkewCtl,
+      prompt      = STRING_TOKEN(STR_RX_SKEW_CONTROL_PROMPT),
+      help        = STRING_TOKEN(STR_RX_SKEW_CONTROL_HELP),
+      option text = STRING_TOKEN(STR_NO_SKEW_STRING ), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_PLUS_TWO_STRING), value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MINUS_TWO_STRING), value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.TxSkewCtl,
+      prompt      = STRING_TOKEN(STR_TX_SKEW_CONTROL_PROMPT),
+      help        = STRING_TOKEN(STR_TX_SKEW_CONTROL_HELP),
+      option text = STRING_TOKEN(STR_NO_SKEW_STRING ), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_PLUS_TWO_STRING), value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MINUS_TWO_STRING), value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.PerformanceProfile,
+      prompt      = STRING_TOKEN(STR_PERFORMANCE_PROFILE_PROMPT),
+      help        = STRING_TOKEN(STR_PERFORMANCE_PROFILE_HELP),
+      option text = STRING_TOKEN(STR_PROFILE_ONE_STRING ), value = 1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_PROFILE_TWO_STRING), value = 2, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PROFILE_THREE_STRING), value = 3, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.OverrideCheckpoints,
+      prompt      = STRING_TOKEN(STR_OVERRIDE_CHECKPOINT_PROMPT),
+      help        = STRING_TOKEN(STR_OVERRIDE_CHECKPOINT_HELP),
+      option text = STRING_TOKEN(STR_AUTO_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+
+    oneof varid = SYSTEM_CONFIGURATION.EnableScrambler,
+      prompt      = STRING_TOKEN(STR_SCRAMBLER_PROMPT),
+      help        = STRING_TOKEN(STR_SCRAMBLER_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING ), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.EnableSlowPowerDownExit,
+      prompt      = STRING_TOKEN(STR_SLOW_POWER_DOWN_EXIT_PROMPT),
+      help        = STRING_TOKEN(STR_SLOW_POWER_DOWN_EXIT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    goto TIMING_MRC_FORM_ID,
+      prompt  = STRING_TOKEN(STR_TIMING_MRC_PROMPT),
+      help    = STRING_TOKEN(STR_TIMING_MRC_HELP);
+
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    goto SSA_CONFIG_FORM_ID,
+      prompt  = STRING_TOKEN(STR_SSA_CONFIG_PROMPT),
+      help    = STRING_TOKEN(STR_NULL_STRING);
+
+    goto VFR_FORMID_DFX_MEMORY,
+      prompt  = STRING_TOKEN(STR_DFX_MEMORY_CONFIG_PROMPT),
+      help    = STRING_TOKEN(STR_NULL_STRING);
+
+    endform;
+	
+    form formid = VFR_FORMID_DFX_MEMORY,
+
+    title         = STRING_TOKEN(STR_DFX_MEMORY_CONFIG_PROMPT);
+    subtitle text = STRING_TOKEN(STR_DFX_PROCESSOR_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+	
+    text
+      help   = STRING_TOKEN(STR_TCL_TIMING_HELP_CH0),
+      text   = STRING_TOKEN(STR_TCL_TIMING_PROMPT_CH0),
+      text   = STRING_TOKEN(STR_TCL_TIMING_VALUE_CH0),
+      flags  = 0,
+      key    = 0;
+
+    text
+      help   = STRING_TOKEN(STR_TRCD_TIMING_HELP_CH0),
+      text   = STRING_TOKEN(STR_TRCD_TIMING_PROMPT_CH0),
+      text   = STRING_TOKEN(STR_TRCD_TIMING_VALUE_CH0),
+      flags  = 0,
+      key    = 0;
+
+    text
+      help   = STRING_TOKEN(STR_TRP_TIMING_HELP_CH0),
+      text   = STRING_TOKEN(STR_TRP_TIMING_PROMPT_CH0),
+      text   = STRING_TOKEN(STR_TRP_TIMING_VALUE_CH0),
+      flags  = 0,
+      key    = 0;
+
+    text
+      help   = STRING_TOKEN(STR_TRAS_TIMING_HELP_CH0),
+      text   = STRING_TOKEN(STR_TRAS_TIMING_PROMPT_CH0),
+      text   = STRING_TOKEN(STR_TRAS_TIMING_VALUE_CH0),
+      flags  = 0,
+      key    = 0;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideChannel1 == 1;
+
+      subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+      text
+        help   = STRING_TOKEN(STR_TCL_TIMING_HELP_CH1),
+        text   = STRING_TOKEN(STR_TCL_TIMING_PROMPT_CH1),
+        text   = STRING_TOKEN(STR_TCL_TIMING_VALUE_CH1),
+        flags  = 0,
+        key    = 0;
+
+      text
+        help   = STRING_TOKEN(STR_TRCD_TIMING_HELP_CH1),
+        text   = STRING_TOKEN(STR_TRCD_TIMING_PROMPT_CH1),
+        text   = STRING_TOKEN(STR_TRCD_TIMING_VALUE_CH1),
+        flags  = 0,
+        key    = 0;
+
+      text
+        help   = STRING_TOKEN(STR_TRP_TIMING_HELP_CH1),
+        text   = STRING_TOKEN(STR_TRP_TIMING_PROMPT_CH1),
+        text   = STRING_TOKEN(STR_TRP_TIMING_VALUE_CH1),
+        flags  = 0,
+        key    = 0;
+
+      text
+        help   = STRING_TOKEN(STR_TRAS_TIMING_HELP_CH1),
+        text   = STRING_TOKEN(STR_TRAS_TIMING_PROMPT_CH1),
+        text   = STRING_TOKEN(STR_TRAS_TIMING_VALUE_CH1),
+        flags  = 0,
+        key    = 0;
+    endif;
+	
+    goto NB_PPR0_FORM_ID,
+      prompt  = STRING_TOKEN(STR_PPR_OPTION0_TITLE),
+      help    = STRING_TOKEN(STR_PPR_OPTION_HELP);
+
+    goto NB_PPR1_FORM_ID,
+      prompt  = STRING_TOKEN(STR_PPR_OPTION1_TITLE),
+      help    = STRING_TOKEN(STR_PPR_OPTION_HELP);
+
+     goto NB_PPR2_FORM_ID,
+      prompt  = STRING_TOKEN(STR_PPR_OPTION2_TITLE),
+      help    = STRING_TOKEN(STR_PPR_OPTION_HELP);
+
+    goto NB_PPR3_FORM_ID,
+      prompt  = STRING_TOKEN(STR_PPR_OPTION3_TITLE),
+      help    = STRING_TOKEN(STR_PPR_OPTION_HELP);
+
+    goto NB_PPR4_FORM_ID,
+      prompt  = STRING_TOKEN(STR_PPR_OPTION4_TITLE),
+      help    = STRING_TOKEN(STR_PPR_OPTION_HELP);
+
+    goto NB_PPR5_FORM_ID,
+      prompt  = STRING_TOKEN(STR_PPR_OPTION5_TITLE),
+      help    = STRING_TOKEN(STR_PPR_OPTION_HELP);
+
+    goto NB_PPR6_FORM_ID,
+      prompt  = STRING_TOKEN(STR_PPR_OPTION6_TITLE),
+      help    = STRING_TOKEN(STR_PPR_OPTION_HELP);
+
+    goto NB_PPR7_FORM_ID,
+      prompt  = STRING_TOKEN(STR_PPR_OPTION7_TITLE),
+      help    = STRING_TOKEN(STR_PPR_OPTION_HELP);
+
+
+    ///
+    /// Memory Bank XOR Mapping
+    ///
+    oneof varid = SYSTEM_CONFIGURATION.BankXorMapEnable,
+      prompt      = STRING_TOKEN(STR_MEM_BANK_XOR_PROMPT),
+      help        = STRING_TOKEN(STR_MEM_BANK_XOR_HELP),
+      option text = STRING_TOKEN(SRT_MEM_BANK_XOR_DISABLED), value = 0, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+      option text = STRING_TOKEN(STR_MEM_BANK_XOR_ENABLED),  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.CorrectErrThreshold,
+      prompt    = STRING_TOKEN(STR_ERR_THRESHOLD_SUPPORT),
+      help      = STRING_TOKEN(STR_ERR_THRESHOLD_HELP),
+      flags     = RESET_REQUIRED,
+      minimum   = 1,
+      maximum   = 32768,
+      step      = 1,
+      default   = 16384,
+    endnumeric;
+    
+    oneof varid = SYSTEM_CONFIGURATION.Rk2RkEn,
+      prompt      = STRING_TOKEN(STR_RK2RK_MSG_SUPPORT),
+      help        = STRING_TOKEN(STR_RK2RK_MSG_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = DEFAULT| RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MrcMemoryTestLoop,
+      prompt      = STRING_TOKEN(STR_MEMTEST_LOOP_SUPPORT),
+      help        = STRING_TOKEN(STR_MEMTEST_LOOP_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.LoopCount,
+      prompt    = STRING_TOKEN(STR_LOOPCOUNT_CPGC_PROMPT),
+      help      = STRING_TOKEN(STR_LOOPCOUNT_CPGC_HELP),
+      minimum   = 0x1,
+      maximum   = 0xffff,
+      step      = 1,
+      default   = 0x1,
+    endnumeric;
+
+    suppressif TRUE;
+    oneof varid = SYSTEM_CONFIGURATION.InputEnableBunitPerformance,
+      prompt      = STRING_TOKEN(STR_BUNIT_PERFORMANCE_PROMPT),
+      help        = STRING_TOKEN(STR_BUNIT_PERFORMANCE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+    endoneof;
+    endif;
+
+    oneof varid = SYSTEM_CONFIGURATION.InterleaveMode,
+      prompt      = STRING_TOKEN(STR_INTERLEAVE_MODE_PROMPT),
+      help        = STRING_TOKEN(STR_INTERLEAVE_MODE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MODE0_STRING), value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MODE1_STRING), value = 2, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MODE2_STRING), value = 3, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+      option text = STRING_TOKEN(STR_HVM_STRING), value = 4, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MrcHaltSystemOnMemTestError,
+      prompt      = STRING_TOKEN(STR_HALT_SYSTEM_ON_MEMTEST_ERROR_SUPPORT),
+      help        = STRING_TOKEN(STR_HALT_SYSTEM_ON_MEMTEST_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MrcResetLoop,
+      prompt      = STRING_TOKEN(STR_RESET_LOOP_SUPPORT),
+      help        = STRING_TOKEN(STR_RESET_LOOP_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.MrcResetLoop == 0;
+      numeric varid = SYSTEM_CONFIGURATION.MrcResetLoopCycles,
+        prompt    = STRING_TOKEN(STR_MRC_RESET_LOOP_CYCLES_PROMPT),
+        help      = STRING_TOKEN(STR_MRC_RESET_LOOP_CYCLES_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0x0,
+        maximum   = 0xFF,
+        step      = 1,
+        default   = 0x1,
+      endnumeric;
+    endif;
+
+    numeric varid = SYSTEM_CONFIGURATION.MaxScrubDebitCount,
+      prompt    = STRING_TOKEN(STR_MAX_SCRUB_DEBIT_COUNT_PROMPT),
+      help      = STRING_TOKEN(STR_MAX_SCRUB_DEBIT_COUNT_HELP),
+      minimum   = 0x0,
+      maximum   = 0xffff,
+      step      = 1,
+      default   = 0x0,
+    endnumeric;
+    oneof varid = SYSTEM_CONFIGURATION.BramParityEnable,
+      prompt      = STRING_TOKEN(STR_BRAM_PARITY_ENABLE_SUPPORT),
+      help        = STRING_TOKEN(STR_BRAM_PARITY_ENABLE_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;      
+      option text = STRING_TOKEN(STR_AUTO ),           value = 2, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MrcTrainingCpgcExpLoopCntValue,
+      prompt      = STRING_TOKEN(STR_CPGC_LOOP_COUNT),
+      help        = STRING_TOKEN(STR_CPGC_LOOP_COUNT_HELP),
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_1),  value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_2),  value = 2, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_3),  value = 3, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_4),  value = 4, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_5),  value = 5, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_6),  value = 6, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_7),  value = 7, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_8),  value = 8, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_9),  value = 9, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_10),  value = 10, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_11),  value = 11, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_12),  value = 12, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_13),  value = 13, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_14),  value = 14, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_15),  value = 15, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MrcTrainingCpgcNumBursts,
+      prompt      = STRING_TOKEN(STR_CPGC_NUM_BURSTS),
+      help        = STRING_TOKEN(STR_CPGC_NUM_BURSTS_HELP),
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_1),  value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_2),  value = 2, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_3),  value = 3, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_4),  value = 4, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_5),  value = 5, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_6),  value = 6, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_7),  value = 7, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_8),  value = 8, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_9),  value = 9, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_10),  value = 10, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_11),  value = 11, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_12),  value = 12, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_13),  value = 13, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_14),  value = 14, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CPGC_LOOP_COUNT_15),  value = 15, flags = RESET_REQUIRED;
+    endoneof;
+
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+    oneof varid = SYSTEM_CONFIGURATION.VrefOverrideEnable,
+      prompt      = STRING_TOKEN(STR_VREF_OVRD_ENABLE_PROMPT),
+      help        = STRING_TOKEN(STR_VREF_OVRD_ENABLE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.VrefOverrideEnable == 0;
+    numeric varid = SYSTEM_CONFIGURATION.VrefOverrideValue,
+      prompt    = STRING_TOKEN(STR_VREF_OVRD_PROMPT),
+      help      = STRING_TOKEN(STR_VREF_OVRD_HELP),
+      flags     = RESET_REQUIRED,
+      minimum   = 0,
+      maximum   = 126,
+      step      = 3,
+      default   = 65,
+    endnumeric;
+    endif;
+
+
+#if ME_SUPPORT_FLAG
+    oneof varid = SYSTEM_CONFIGURATION.MeSeg,
+      prompt      = STRING_TOKEN(STR_MESEG_ENABLE),
+      help        = STRING_TOKEN(STR_MESEG_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+#endif
+    oneof varid = SYSTEM_CONFIGURATION.MmioSize,
+      prompt      = STRING_TOKEN(STR_MMIO_SIZE),
+      help        = STRING_TOKEN(STR_MMIO_SIZE_HELP),
+      option text = STRING_TOKEN(STR_AUTO), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_MEMORY_1024M), value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_MEMORY_3072M), value = 2, flags = RESET_REQUIRED;
+    endoneof;
+	
+    oneof varid = SYSTEM_CONFIGURATION.BDebugSelfRefresh,
+      prompt      = STRING_TOKEN(STR_BDEBUG_SELF_REFRESH_PROMPT),
+      help        = STRING_TOKEN(STR_BDEBUG_SELF_REFRESH_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    endform;
+
+#define PPR_INDEX 0
+  #include "PprOption/PprOption.hfr"
+#undef PPR_INDEX
+#define PPR_INDEX 1
+  #include "PprOption/PprOption.hfr"
+#undef PPR_INDEX
+#define PPR_INDEX 2
+  #include "PprOption/PprOption.hfr"
+#undef PPR_INDEX
+#define PPR_INDEX 3
+  #include "PprOption/PprOption.hfr"
+#undef PPR_INDEX
+#define PPR_INDEX 4
+  #include "PprOption/PprOption.hfr"
+#undef PPR_INDEX
+#define PPR_INDEX 5
+  #include "PprOption/PprOption.hfr"
+#undef PPR_INDEX
+#define PPR_INDEX 6
+  #include "PprOption/PprOption.hfr"
+#undef PPR_INDEX
+#define PPR_INDEX 7
+  #include "PprOption/PprOption.hfr"
+#undef PPR_INDEX
+
+  form formid = TIMING_MRC_FORM_ID,
+
+    title       = STRING_TOKEN(STR_TIMING_MRC_PROMPT);
+    subtitle text = STRING_TOKEN(STR_TIMING_MRC_PROMPT);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+        oneof varid = SYSTEM_CONFIGURATION.TCLTiming,
+           prompt      = STRING_TOKEN(STR_TCL_TIMING_PROMPT),
+           help        = STRING_TOKEN(STR_TCL_TIMING_HELP),
+           option text = STRING_TOKEN(STR_AUTO_STRING),     value = 0,  flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+           option text = STRING_TOKEN(STR_VALUE_7_STRING),  value = 7,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_8_STRING),  value = 8,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_9_STRING),  value = 9,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_10_STRING), value = 10, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_11_STRING), value = 11, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_12_STRING), value = 12, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_13_STRING), value = 13, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_14_STRING), value = 14, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_15_STRING), value = 15, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_16_STRING), value = 16, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_17_STRING), value = 17, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_18_STRING), value = 18, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_19_STRING), value = 19, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_20_STRING), value = 20, flags = RESET_REQUIRED;
+        endoneof;
+
+        oneof varid = SYSTEM_CONFIGURATION.TRCDTiming,
+           prompt      = STRING_TOKEN(STR_TRCD_TIMING_PROMPT),
+           help        = STRING_TOKEN(STR_TRCD_TIMING_HELP),
+           option text = STRING_TOKEN(STR_AUTO_STRING),     value = 0,  flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+           option text = STRING_TOKEN(STR_VALUE_7_STRING),  value = 7,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_8_STRING),  value = 8,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_9_STRING),  value = 9,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_10_STRING), value = 10, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_11_STRING), value = 11, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_12_STRING), value = 12, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_13_STRING), value = 13, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_14_STRING), value = 14, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_15_STRING), value = 15, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_16_STRING), value = 16, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_17_STRING), value = 17, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_18_STRING), value = 18, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_20_STRING), value = 20, flags = RESET_REQUIRED;
+        endoneof;
+
+        oneof varid = SYSTEM_CONFIGURATION.TRPTiming,
+           prompt      = STRING_TOKEN(STR_TRP_TIMING_PROMPT),
+           help        = STRING_TOKEN(STR_TRP_TIMING_HELP),
+           option text = STRING_TOKEN(STR_AUTO_STRING),     value = 0,  flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+           option text = STRING_TOKEN(STR_VALUE_7_STRING),  value = 7,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_8_STRING),  value = 8,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_9_STRING),  value = 9,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_10_STRING), value = 10, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_11_STRING), value = 11, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_12_STRING), value = 12, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_13_STRING), value = 13, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_14_STRING), value = 14, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_15_STRING), value = 15, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_16_STRING), value = 16, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_17_STRING), value = 17, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_18_STRING), value = 18, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_20_STRING), value = 20, flags = RESET_REQUIRED;
+        endoneof;
+
+        oneof varid = SYSTEM_CONFIGURATION.TRASTiming,
+           prompt      = STRING_TOKEN(STR_TRAS_TIMING_PROMPT),
+           help        = STRING_TOKEN(STR_TRAS_TIMING_HELP),
+           option text = STRING_TOKEN(STR_AUTO_STRING),     value = 0,  flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+           option text = STRING_TOKEN(STR_VALUE_24_STRING), value = 24, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_25_STRING), value = 25, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_26_STRING), value = 26, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_27_STRING), value = 27, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_28_STRING), value = 28, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_29_STRING), value = 29, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_30_STRING), value = 30, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_31_STRING), value = 31, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_32_STRING), value = 32, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_33_STRING), value = 33, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_34_STRING), value = 34, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_35_STRING), value = 35, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_36_STRING), value = 36, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_37_STRING), value = 37, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_38_STRING), value = 38, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_39_STRING), value = 39, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_40_STRING), value = 40, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_41_STRING), value = 41, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_42_STRING), value = 42, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_43_STRING), value = 43, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_44_STRING), value = 44, flags = RESET_REQUIRED;
+        endoneof;
+
+        oneof varid = SYSTEM_CONFIGURATION.TRTPTiming,
+           prompt      = STRING_TOKEN(STR_TRTP_TIMING_PROMPT),
+           help        = STRING_TOKEN(STR_TRTP_TIMING_HELP),
+           option text = STRING_TOKEN(STR_AUTO_STRING),     value = 0,  flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+           option text = STRING_TOKEN(STR_VALUE_6_STRING),  value = 6,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_7_STRING),  value = 7,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_8_STRING),  value = 8,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_9_STRING),  value = 9,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_10_STRING), value = 10, flags = RESET_REQUIRED;
+        endoneof;
+
+        oneof varid = SYSTEM_CONFIGURATION.TRRDTiming,
+           prompt      = STRING_TOKEN(STR_TRRD_TIMING_PROMPT),
+           help        = STRING_TOKEN(STR_TRRD_TIMING_HELP),
+           option text = STRING_TOKEN(STR_AUTO_STRING),     value = 0,  flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+           option text = STRING_TOKEN(STR_VALUE_4_STRING),  value = 4,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_5_STRING),  value = 5,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_6_STRING),  value = 6,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_7_STRING),  value = 7,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_8_STRING),  value = 8,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_9_STRING),  value = 9,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_10_STRING), value = 10, flags = RESET_REQUIRED;
+        endoneof;
+
+        oneof varid = SYSTEM_CONFIGURATION.TFAWTiming,
+           prompt      = STRING_TOKEN(STR_TFAW_TIMING_PROMPT),
+           help        = STRING_TOKEN(STR_TFAW_TIMING_HELP),
+           option text = STRING_TOKEN(STR_AUTO_STRING),     value = 0,  flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+           option text = STRING_TOKEN(STR_VALUE_16_STRING), value = 16, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_20_STRING), value = 20, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_22_STRING), value = 22, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_23_STRING), value = 23, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_24_STRING), value = 24, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_26_STRING), value = 26, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_27_STRING), value = 27, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_30_STRING), value = 30, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_32_STRING), value = 32, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_33_STRING), value = 33, flags = RESET_REQUIRED;
+        endoneof;
+
+        oneof varid = SYSTEM_CONFIGURATION.TCCDTiming,
+           prompt      = STRING_TOKEN(STR_TCCD_TIMING_PROMPT),
+           help        = STRING_TOKEN(STR_TCCD_TIMING_HELP),
+           option text = STRING_TOKEN(STR_AUTO_STRING),     value = 0,  flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+           option text = STRING_TOKEN(STR_VALUE_4_STRING),  value = 4,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_5_STRING),  value = 5,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_6_STRING),  value = 6,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_7_STRING),  value = 7,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_8_STRING),  value = 8,  flags = RESET_REQUIRED;
+        endoneof;
+
+        oneof varid = SYSTEM_CONFIGURATION.TWTPTiming,
+           prompt      = STRING_TOKEN(STR_TWTP_TIMING_PROMPT),
+           help        = STRING_TOKEN(STR_TWTP_TIMING_HELP),
+           option text = STRING_TOKEN(STR_AUTO_STRING), value = 0, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+           option text = STRING_TOKEN(STR_VALUE_15_STRING), value = 1, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_16_STRING), value = 2, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_17_STRING), value = 3, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_18_STRING), value = 4, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_19_STRING), value = 5, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_20_STRING), value = 6, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_21_STRING), value = 7, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_22_STRING), value = 8, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_23_STRING), value = 9, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_24_STRING), value = 10, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_25_STRING), value = 11, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_26_STRING), value = 12, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_27_STRING), value = 13, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_28_STRING), value = 14, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_29_STRING), value = 15, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_30_STRING), value = 16, flags = RESET_REQUIRED;
+        endoneof;
+
+        oneof varid = SYSTEM_CONFIGURATION.TWCLTiming,
+           prompt      = STRING_TOKEN(STR_TWCL_TIMING_PROMPT),
+           help        = STRING_TOKEN(STR_TWCL_TIMING_HELP),
+           option text = STRING_TOKEN(STR_AUTO_STRING),     value = 0,  flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+           option text = STRING_TOKEN(STR_VALUE_7_STRING),  value = 7,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_8_STRING),  value = 8,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_9_STRING),  value = 9,  flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_10_STRING), value = 10, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_11_STRING), value = 11, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_12_STRING), value = 12, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_14_STRING), value = 14, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_16_STRING), value = 16, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_VALUE_18_STRING), value = 18, flags = RESET_REQUIRED;
+        endoneof;
+  endform;
+// CBDMA Form ID
+
+form formid = LEAKY_BUCKET_FORM_ID,
+    title           = STRING_TOKEN(STR_LEAKY_BUCKET_PROMPT);
+    subtitle text   = STRING_TOKEN(STR_LEAKY_BUCKET_PROMPT);
+    subtitle text   = STRING_TOKEN(STR_HORIZONTAL_LINE);
+
+    subtitle text   = STRING_TOKEN(STR_NULL_STRING);
+    subtitle text   = STRING_TOKEN(STR_CHANNEL_0);
+
+    oneof varid = SYSTEM_CONFIGURATION.LeakyBucketUnits,
+      prompt      = STRING_TOKEN(STR_LEAKY_BUCKET_RATE_UNITS_PROMPT),
+      help        = STRING_TOKEN(STR_LEAKY_BUCKET_RATE_UNITS_HELP),
+      option text = STRING_TOKEN(STR_USEC_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DAYS_STRING ), value = 1, flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+    endoneof;
+
+    subtitle text   = STRING_TOKEN(STR_NULL_STRING);
+    subtitle text   = STRING_TOKEN(STR_LEAK_RATE_CONFIG);
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[0] == 1;
+      numeric varid = SYSTEM_CONFIGURATION.LeakyBucketRateCh0[0],
+        prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_0_EN_SUPPORT),
+        help      = STRING_TOKEN(STR_PASS_GATE_RANK_0_EN_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 0xFFFFFFFF,
+        step      = 1,
+        default   = 0,
+      endnumeric;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[1] == 1;
+      numeric varid = SYSTEM_CONFIGURATION.LeakyBucketRateCh0[1],
+        prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_1_EN_SUPPORT),
+        help      = STRING_TOKEN(STR_PASS_GATE_RANK_1_EN_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 0xFFFFFFFF,
+        step      = 1,
+        default   = 0,
+      endnumeric;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[2] == 1;
+      numeric varid = SYSTEM_CONFIGURATION.LeakyBucketRateCh0[2],
+        prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_2_EN_SUPPORT),
+        help      = STRING_TOKEN(STR_PASS_GATE_RANK_2_EN_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 0xFFFFFFFF,
+        step      = 1,
+        default   = 0,
+      endnumeric;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[3] == 1;
+      numeric varid = SYSTEM_CONFIGURATION.LeakyBucketRateCh0[3],
+        prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_3_EN_SUPPORT),
+        help      = STRING_TOKEN(STR_PASS_GATE_RANK_3_EN_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 0xFFFFFFFF,
+        step      = 1,
+        default   = 0,
+      endnumeric;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideChannel1 == 1;
+      subtitle text = STRING_TOKEN(STR_NULL_STRING);
+      subtitle text   = STRING_TOKEN(STR_CHANNEL_1);
+
+      suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[0] == 1;
+        numeric varid = SYSTEM_CONFIGURATION.LeakyBucketRateCh1[0],
+          prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_0_EN_SUPPORT),
+          help      = STRING_TOKEN(STR_PASS_GATE_RANK_0_EN_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = 0xFFFFFFFF,
+          step      = 1,
+          default   = 0,
+        endnumeric;
+      endif;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[1] == 1;
+        numeric varid = SYSTEM_CONFIGURATION.LeakyBucketRateCh1[1],
+          prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_1_EN_SUPPORT),
+          help      = STRING_TOKEN(STR_PASS_GATE_RANK_1_EN_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = 0xFFFFFFFF,
+          step      = 1,
+          default   = 0,
+        endnumeric;
+      endif;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[2] == 1;
+        numeric varid = SYSTEM_CONFIGURATION.LeakyBucketRateCh1[2],
+          prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_2_EN_SUPPORT),
+          help      = STRING_TOKEN(STR_PASS_GATE_RANK_2_EN_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = 0xFFFFFFFF,
+          step      = 1,
+          default   = 0,
+        endnumeric;
+      endif;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[3] == 1;
+        numeric varid = SYSTEM_CONFIGURATION.LeakyBucketRateCh1[3],
+          prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_3_EN_SUPPORT),
+          help      = STRING_TOKEN(STR_PASS_GATE_RANK_3_EN_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = 0xFFFFFFFF,
+          step      = 1,
+          default   = 0,
+        endnumeric;
+      endif;
+    endif;
+
+    subtitle text   = STRING_TOKEN(STR_NULL_STRING);
+    subtitle text   = STRING_TOKEN(STR_CORR_ERR_THR_CONFIG);
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[0] == 1;
+      numeric varid = SYSTEM_CONFIGURATION.CorrectableErrorThresholdCh0[0],
+        prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_0_EN_SUPPORT),
+        help      = STRING_TOKEN(STR_PASS_GATE_RANK_0_EN_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 0xFFFF,
+        step      = 1,
+        default   = 0,
+      endnumeric;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[1] == 1;
+      numeric varid = SYSTEM_CONFIGURATION.CorrectableErrorThresholdCh0[1],
+        prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_1_EN_SUPPORT),
+        help      = STRING_TOKEN(STR_PASS_GATE_RANK_1_EN_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 0xFFFF,
+        step      = 1,
+        default   = 0,
+      endnumeric;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[2] == 1;
+      numeric varid = SYSTEM_CONFIGURATION.CorrectableErrorThresholdCh0[2],
+        prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_2_EN_SUPPORT),
+        help      = STRING_TOKEN(STR_PASS_GATE_RANK_2_EN_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 0xFFFF,
+        step      = 1,
+        default   = 0,
+      endnumeric;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[3] == 1;
+      numeric varid = SYSTEM_CONFIGURATION.CorrectableErrorThresholdCh0[3],
+        prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_3_EN_SUPPORT),
+        help      = STRING_TOKEN(STR_PASS_GATE_RANK_3_EN_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 0xFFFF,
+        step      = 1,
+        default   = 0,
+      endnumeric;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideChannel1 == 1;
+      subtitle text = STRING_TOKEN(STR_NULL_STRING);
+      subtitle text   = STRING_TOKEN(STR_CHANNEL_1);
+
+      suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[0] == 1;
+        numeric varid = SYSTEM_CONFIGURATION.CorrectableErrorThresholdCh1[0],
+          prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_0_EN_SUPPORT),
+          help      = STRING_TOKEN(STR_PASS_GATE_RANK_0_EN_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = 0xFFFF,
+          step      = 1,
+          default   = 0,
+        endnumeric;
+      endif;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[1] == 1;
+        numeric varid = SYSTEM_CONFIGURATION.CorrectableErrorThresholdCh1[1],
+          prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_1_EN_SUPPORT),
+          help      = STRING_TOKEN(STR_PASS_GATE_RANK_1_EN_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = 0xFFFF,
+          step      = 1,
+          default   = 0,
+        endnumeric;
+      endif;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[2] == 1;
+        numeric varid = SYSTEM_CONFIGURATION.CorrectableErrorThresholdCh1[2],
+          prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_2_EN_SUPPORT),
+          help      = STRING_TOKEN(STR_PASS_GATE_RANK_2_EN_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = 0xFFFF,
+          step      = 1,
+          default   = 0,
+        endnumeric;
+      endif;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[3] == 1;
+        numeric varid = SYSTEM_CONFIGURATION.CorrectableErrorThresholdCh1[3],
+          prompt    = STRING_TOKEN(STR_PASS_GATE_RANK_3_EN_SUPPORT),
+          help      = STRING_TOKEN(STR_PASS_GATE_RANK_3_EN_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = 0xFFFF,
+          step      = 1,
+          default   = 0,
+        endnumeric;
+      endif;
+
+    endif;
+endform;
+
+form formid = PASS_GATE_FORM_ID,
+
+    title           = STRING_TOKEN(STR_PASS_GATE_PROMPT);
+    subtitle text   = STRING_TOKEN(STR_PASS_GATE_PROMPT);
+    subtitle text   = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    subtitle text   = STRING_TOKEN(STR_NULL_STRING);
+
+    subtitle text   = STRING_TOKEN(STR_MITIGATION_CONFIG);
+    grayoutif ideqval SYSTEM_CONFIGURATION.EnableDdr4Options == 1;
+      oneof varid = SYSTEM_CONFIGURATION.MitigationProbability,
+        prompt        = STRING_TOKEN(STR_MITIGATION_EN_PROMPT),
+        help          = STRING_TOKEN(STR_MITIGATION_EN_HELP),
+        option text   = STRING_TOKEN(STR_DISABLED_STRING   ), value = 0,     flags = DEFAULT|RESET_REQUIRED| MANUFACTURING;
+        option text   = STRING_TOKEN(STR_VALUE_2048_STRING ), value = 2048,  flags = RESET_REQUIRED;
+        option text   = STRING_TOKEN(STR_VALUE_4096_STRING ), value = 4096,  flags = RESET_REQUIRED;
+        option text   = STRING_TOKEN(STR_VALUE_8192_STRING ), value = 8192,  flags = RESET_REQUIRED;
+        option text   = STRING_TOKEN(STR_VALUE_16384_STRING), value = 16384, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    subtitle text   = STRING_TOKEN(STR_NULL_STRING);
+    subtitle text   = STRING_TOKEN(STR_PASS_GATE_TEST);
+
+    oneof varid = SYSTEM_CONFIGURATION.InputPassGateEnabled,
+      prompt      = STRING_TOKEN(STR_PASS_GATE_TEST_SUPPORT),
+      help        = STRING_TOKEN(STR_PASS_GATE_TEST_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.InputPassGateDirection,
+      prompt      = STRING_TOKEN(STR_PASS_GATE_DIRECTION_SUPPORT),
+      help        = STRING_TOKEN(STR_PASS_GATE_DIRECTION_HELP),
+      option text = STRING_TOKEN(STR_LOW_HIGH_STRING), value =  0, flags = DEFAULT | RESET_REQUIRED | MANUFACTURING;
+      option text = STRING_TOKEN(STR_HIGH_LOW_STRING), value =  1, flags = RESET_REQUIRED;
+    endoneof;
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.InputPassGateMonteCarloEnable == 1;
+        numeric varid = SYSTEM_CONFIGURATION.InputPassGateRepetitionCountRange,
+          prompt    = STRING_TOKEN(STR_PASS_GATE_REPETITION_SUPPORT),
+          help      = STRING_TOKEN(STR_PASS_GATE_REPETITION_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 100,
+          maximum   = 2000,
+          step      = 50,
+          default   = 900,
+        endnumeric;
+    endif;
+
+    numeric varid = SYSTEM_CONFIGURATION.InputPassGateIterationOnRow,
+      prompt    = STRING_TOKEN(STR_PASS_GATE_ITERATION_SUPPORT),
+      help      = STRING_TOKEN(STR_PASS_GATE_ITERATION_HELP),
+      flags     = RESET_REQUIRED,
+      minimum   = 1,
+      maximum   = 300,
+      step      = 1,
+      default   = 1,
+    endnumeric;
+
+    oneof varid = SYSTEM_CONFIGURATION.InputPassGateSwizzle,
+      prompt      = STRING_TOKEN(STR_PASS_GATE_SWIZZLE_SUPPORT),
+      help        = STRING_TOKEN(STR_PASS_GATE_SWIZZLE_HELP),
+      option text = STRING_TOKEN(STR_AUTO_STRING),    value =  0, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value =  1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.InputPassGatePattern,
+      prompt      = STRING_TOKEN(STR_PASS_GATE_PATTERN_SUPPORT),
+      help        = STRING_TOKEN(STR_PASS_GATE_PATTERN_HELP),
+      option text = STRING_TOKEN(STR_0_PASS_GATE_STRING), value =  0, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+      option text = STRING_TOKEN(STR_1_PASS_GATE_STRING), value =  1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.InputPassGateTargetPattern,
+      prompt      = STRING_TOKEN(STR_PASS_GATE_TARGET_SUPPORT),
+      help        = STRING_TOKEN(STR_PASS_GATE_TARGET_HELP),
+      option text = STRING_TOKEN(STR_0_PASS_GATE_STRING), value =  0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_1_PASS_GATE_STRING), value =  1, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.InputSpeedSelected,
+      prompt      = STRING_TOKEN(STR_PASS_GATE_SPEED_SUPPORT),
+      help        = STRING_TOKEN(STR_PASS_GATE_SPEED_HELP),
+      option text = STRING_TOKEN(STR_1X_ONLY),     value =  1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_2X_ONLY),     value =  2, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_4X_ONLY),     value =  4, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_8X_ONLY),     value =  8, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+    endoneof;
+
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    oneof varid = SYSTEM_CONFIGURATION.InputPassGatePartial,
+      prompt      = STRING_TOKEN(STR_PASS_GATE_PARTIAL_SUPPORT),
+      help        = STRING_TOKEN(STR_PASS_GATE_PARTIAL_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = RESET_REQUIRED;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.InputPassGateRowBankMin,
+      prompt    = STRING_TOKEN(STR_PASS_GATE_ROW_BANK_MIN_SUPPORT),
+      help      = STRING_TOKEN(STR_PASS_GATE_ROW_BANK_MIN_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | RESET_REQUIRED,
+      minimum   = 0,
+      maximum   = 0x3FFFF,
+      step      = 8,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.InputPassGateRowBankMax,
+      prompt    = STRING_TOKEN(STR_PASS_GATE_ROW_BANK_MAX_SUPPORT),
+      help      = STRING_TOKEN(STR_PASS_GATE_ROW_BANK_MAX_HELP),
+      flags     = DISPLAY_UINT_HEX | INTERACTIVE | RESET_REQUIRED,
+      minimum   = 8,
+      maximum   = 0x3FFFF,
+      step      = 8,
+      default   = 8,
+    endnumeric;
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+    subtitle text   = STRING_TOKEN(STR_CHANNEL_0);
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[0] == 1;
+      oneof varid = SYSTEM_CONFIGURATION.InputPassGateRankEnableCh0[0],
+        prompt      = STRING_TOKEN(STR_PASS_GATE_RANK_0_EN_SUPPORT),
+        help        = STRING_TOKEN(STR_PASS_GATE_RANK_0_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+      endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[1] == 1;
+      oneof varid = SYSTEM_CONFIGURATION.InputPassGateRankEnableCh0[1],
+        prompt      = STRING_TOKEN(STR_PASS_GATE_RANK_1_EN_SUPPORT),
+        help        = STRING_TOKEN(STR_PASS_GATE_RANK_1_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+      endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[2] == 1;
+      oneof varid = SYSTEM_CONFIGURATION.InputPassGateRankEnableCh0[2],
+        prompt      = STRING_TOKEN(STR_PASS_GATE_RANK_2_EN_SUPPORT),
+        help        = STRING_TOKEN(STR_PASS_GATE_RANK_2_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+      endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh0[3] == 1;
+      oneof varid = SYSTEM_CONFIGURATION.InputPassGateRankEnableCh0[3],
+        prompt      = STRING_TOKEN(STR_PASS_GATE_RANK_3_EN_SUPPORT),
+        help        = STRING_TOKEN(STR_PASS_GATE_RANK_3_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+      endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.HideChannel1 == 1;
+      subtitle text = STRING_TOKEN(STR_NULL_STRING);
+      subtitle text   = STRING_TOKEN(STR_CHANNEL_1);
+
+      suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh1[0] == 1;
+        oneof varid = SYSTEM_CONFIGURATION.InputPassGateRankEnableCh1[0],
+          prompt      = STRING_TOKEN(STR_PASS_GATE_RANK_0_EN_SUPPORT),
+          help        = STRING_TOKEN(STR_PASS_GATE_RANK_0_EN_HELP),
+          option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+        endoneof;
+      endif;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh1[1] == 1;
+        oneof varid = SYSTEM_CONFIGURATION.InputPassGateRankEnableCh1[1],
+          prompt      = STRING_TOKEN(STR_PASS_GATE_RANK_1_EN_SUPPORT),
+          help        = STRING_TOKEN(STR_PASS_GATE_RANK_1_EN_HELP),
+          option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+        endoneof;
+      endif;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh1[2] == 1;
+        oneof varid = SYSTEM_CONFIGURATION.InputPassGateRankEnableCh1[2],
+          prompt      = STRING_TOKEN(STR_PASS_GATE_RANK_2_EN_SUPPORT),
+          help        = STRING_TOKEN(STR_PASS_GATE_RANK_2_EN_HELP),
+          option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+        endoneof;
+      endif;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.HideRankCh1[3] == 1;
+        oneof varid = SYSTEM_CONFIGURATION.InputPassGateRankEnableCh1[3],
+          prompt      = STRING_TOKEN(STR_PASS_GATE_RANK_3_EN_SUPPORT),
+          help        = STRING_TOKEN(STR_PASS_GATE_RANK_3_EN_HELP),
+          option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+        endoneof;
+      endif;
+    endif;
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    oneof varid = SYSTEM_CONFIGURATION.InputPassGateMonteCarloEnable,
+      prompt      = STRING_TOKEN(STR_PASS_GATE_MONTECARLO_SUPPORT),
+      help        = STRING_TOKEN(STR_PASS_GATE_MONTECARLO_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = DEFAULT|RESET_REQUIRED|MANUFACTURING;
+      option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = RESET_REQUIRED;
+    endoneof;
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.InputPassGateMonteCarloEnable == 0;
+        numeric varid = SYSTEM_CONFIGURATION.InputMontecarloMaxFailures,
+          prompt    = STRING_TOKEN(STR_PASS_GATE_MAX_FAILURES_SUPPORT),
+          help      = STRING_TOKEN(STR_PASS_GATE_MAX_FAILURES_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 1,
+          maximum   = 50,
+          step      = 1,
+          default   = 50,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.InputMontecarloStartRepetition,
+          prompt    = STRING_TOKEN(STR_PASS_GATE_MAX_REPETITION_SUPPORT),
+          help      = STRING_TOKEN(STR_PASS_GATE_MAX_REPETITION_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 300,
+          maximum   = 2000,
+          step      = 50,
+          default   = 900,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.InputMontecarloDecrement,
+          prompt    = STRING_TOKEN(STR_PASS_GATE_MIN_REPETITION_SUPPORT),
+          help      = STRING_TOKEN(STR_PASS_GATE_MIN_REPETITION_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 1,
+          maximum   = 100,
+          step      = 1,
+          default   = 10,
+        endnumeric;
+    endif;
+
+endform;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Menu: Persistent Memory Setup
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  form formid = NONVOL_MEM_FORM_ID,
+
+    title           = STRING_TOKEN(STR_NV_MEM_PROMPT);
+    subtitle text   = STRING_TOKEN(STR_NULL_STRING);
+
+    oneof varid = SYSTEM_CONFIGURATION.NonVolMemMode,
+      prompt      = STRING_TOKEN(STR_NV_MEM_METHOD_PROMPT),
+      help        = STRING_TOKEN(STR_NV_MEM_METHOD_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = DEFAULT|MANUFACTURING|RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_NV_MEM_ADR),      value =  1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_NV_MEM_C2F),      value =  2, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_NV_MEM_SMI_C2F),  value =  3, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_NV_MEM_NVDIMM),   value =  4, flags = RESET_REQUIRED;
+    endoneof;
+
+    subtitle text   = STRING_TOKEN(STR_NULL_STRING);
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.NonVolMemMode == 0;
+        checkbox varid = SYSTEM_CONFIGURATION.PmcInternAdrSources[0],
+		  prompt = STRING_TOKEN(STR_IADR_ENABLE_PROMPT),
+		  help   = STRING_TOKEN(STR_IADR_ENABLE_HELP),
+		  flags  = RESET_REQUIRED,
+		  key    = 0,
+		endcheckbox;
+
+	      oneof varid = SYSTEM_CONFIGURATION.NonVolMemCacheFlushing,
+	        prompt      = STRING_TOKEN(STR_NV_MEM_FLUSHING_PROMPT),
+	        help        = STRING_TOKEN(STR_NV_MEM_FLUSHING_HELP),
+	        option text = STRING_TOKEN(STR_NV_MEM_FLUSHING_L1_STRING),  value =  0, flags = DEFAULT|RESET_REQUIRED;
+	        option text = STRING_TOKEN(STR_NV_MEM_FLUSHING_L2_STRING),  value =  1, flags = RESET_REQUIRED;
+	      endoneof;
+
+	      oneof varid = SYSTEM_CONFIGURATION.NonVolMemAdrStatusSrc,
+	        prompt      = STRING_TOKEN(STR_NV_MEM_EVENT_SRC_PROMPT),
+	        help        = STRING_TOKEN(STR_NV_MEM_EVENT_SRC_HELP),
+	        option text = STRING_TOKEN(STR_NV_MEM_EVENT_EXTERNAL_STRING),  value =  0, flags = DEFAULT|RESET_REQUIRED;
+	        option text = STRING_TOKEN(STR_NV_MEM_EVENT_INTERNAL_STRING),  value =  1, flags = RESET_REQUIRED;
+	      endoneof;
+
+		  goto NONVOL_MEM_INTER_ADR_ID,
+		    prompt  = STRING_TOKEN(STR_NV_MEM_IADR_PROMPT),
+		    help    = STRING_TOKEN(STR_NV_MEM_IADR_HELP);
+
+	    subtitle text   = STRING_TOKEN(STR_NULL_STRING);
+
+      suppressif ideqval SYSTEM_CONFIGURATION.NonVolMemMode > 0 AND ideqval SYSTEM_CONFIGURATION.NonVolMemMode < 4;
+        //
+        //NVDIMM only options
+        //
+        oneof varid = SYSTEM_CONFIGURATION.NonVolMemInterleaving,
+          prompt      = STRING_TOKEN(STR_NV_MEM_INTERLEAVE_PROMPT),
+          help        = STRING_TOKEN(STR_NV_MEM_INTERLEAVE_HELP),
+          option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = DEFAULT|MANUFACTURING|RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = RESET_REQUIRED;
+        endoneof;
+
+        oneof varid = SYSTEM_CONFIGURATION.restoreNVDIMMS,
+          prompt      = STRING_TOKEN(STR_NV_MEM_RESTORE_PROMPT),
+          help        = STRING_TOKEN(STR_NV_MEM_RESTORE_HELP),
+          option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = DEFAULT|MANUFACTURING|RESET_REQUIRED;
+        endoneof;
+
+        oneof varid = SYSTEM_CONFIGURATION.eraseArmNVDIMMS,
+          prompt      = STRING_TOKEN(STR_NV_MEM_ERASE_ARM_PROMPT),
+          help        = STRING_TOKEN(STR_NV_MEM_ERASE_ARM_HELP),
+          option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLED_STRING),  value =  1, flags = DEFAULT|MANUFACTURING|RESET_REQUIRED;
+        endoneof;
+
+        text
+          help   = STRING_TOKEN(STR_NV_MEM_NV_BATT_HELP),
+          text   = STRING_TOKEN(STR_NV_MEM_NV_BATT_TITLE),
+          text   = STRING_TOKEN(STR_NV_MEM_NV_BATT_VALUE),
+          flags  = 0,
+          key    = 0;
+
+      endif;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.NonVolMemMode == 4;
+      	  //
+      	  // C2F - location in the flash storage
+      	  //
+          grayoutif ideqval SYSTEM_CONFIGURATION.NonVolMemMode < 2 OR ideqval SYSTEM_CONFIGURATION.NonVolMemMode > 3;
+			  oneof varid = SYSTEM_CONFIGURATION.NonVolMemC2fLbaLocMethod,
+			    prompt      = STRING_TOKEN(STR_NV_LBA_LOCATION_METHOD),
+			    help        = STRING_TOKEN(STR_NV_LBA_LOC_METHOD_HELP),
+			    option text = STRING_TOKEN(STR_NV_LBA_LOC_FIXED), value =  0, flags = MANUFACTURING|RESET_REQUIRED;
+			    //option text = STRING_TOKEN(STR_NV_LBA_LOC_PART), value =  1, flags =  DEFAULT|RESET_REQUIRED;
+			  endoneof;
+
+          	grayoutif ideqval SYSTEM_CONFIGURATION.NonVolMemC2fLbaLocMethod == 1;
+	          numeric varid = SYSTEM_CONFIGURATION.NonVolMemC2fLba,
+	            prompt    = STRING_TOKEN (STR_NV_LBA_PROMPT),
+	            help      = STRING_TOKEN (STR_NV_LBA_HELP),
+	            flags     = RESET_REQUIRED,
+		        minimum   = 0,
+		        maximum   = 0xFFFFFFFF,
+		        step      = 1,
+		        default   = 0,
+	          endnumeric;
+	      	endif;
+	      endif;
+
+          //
+          // ADR/C2F only option
+          //
+          numeric varid = SYSTEM_CONFIGURATION.NonVolMemSize,
+            prompt    = STRING_TOKEN (STR_NV_MEM_SIZE_PROMPT),
+            help      = STRING_TOKEN (STR_NV_MEM_SIZE_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 512,
+            maximum   = 8128,
+            step      = 64,
+            default   = 1024,
+          endnumeric;
+      endif;
+
+	  oneof varid = SYSTEM_CONFIGURATION.NonVolMemTestMode,
+	    prompt      = STRING_TOKEN(STR_NV_MEM_TEST_PROMPT),
+	    help        = STRING_TOKEN(STR_NV_MEM_TEST_HELP),
+	    option text = STRING_TOKEN(STR_DISABLED_STRING), value =  0, flags = DEFAULT|MANUFACTURING|RESET_REQUIRED;
+	    option text = STRING_TOKEN(STR_NV_MEM_ADR_RECOVERY_STRING), value =  1, flags = RESET_REQUIRED;
+	    option text = STRING_TOKEN(STR_NV_MEM_C2F_SAVE_STRING),     value =  2, flags = RESET_REQUIRED;
+	    option text = STRING_TOKEN(STR_NV_MEM_C2F_RESTORE_STRING),  value =  3, flags = RESET_REQUIRED;
+	  endoneof;
+    endif;
+endform;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Menu: Internal ADR source Setup
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+form formid = NONVOL_MEM_INTER_ADR_ID,
+    title           = STRING_TOKEN(STR_NV_MEM_IADR_PROMPT);
+    subtitle text   = STRING_TOKEN(STR_NULL_STRING);
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.PmcInternAdrSources[0] == 0 OR ideqval SYSTEM_CONFIGURATION.PmcInternAdrSources[0] == 1;
+		//
+		// Show always grayed out for reference only - the SoC's ADR enable is set in the menu above
+		//
+		checkbox varid = SYSTEM_CONFIGURATION.PmcInternAdrSources[0],
+		  prompt = STRING_TOKEN(STR_IADR_ENABLE_PROMPT),
+		  help   = STRING_TOKEN(STR_IADR_ENABLE_HELP),
+		  flags  = RESET_REQUIRED,
+		  key    = 0,
+		endcheckbox;
+    endif;
+
+    checkbox varid = SYSTEM_CONFIGURATION.PmcInternAdrSources[2],
+      prompt = STRING_TOKEN(STR_IADR_PMC_PROMPT),
+      help   = STRING_TOKEN(STR_IADR_PMC_HELP),
+      flags  = RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.PmcInternAdrSources[5],
+      prompt = STRING_TOKEN(STR_IADR_PBO_PROMPT),
+      help   = STRING_TOKEN(STR_IADR_PBO_HELP),
+      flags  = RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.PmcInternAdrSources[6],
+      prompt = STRING_TOKEN(STR_IADR_MPBO_PROMPT),
+      help   = STRING_TOKEN(STR_IADR_MPBO_HELP),
+      flags  = RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.PmcInternAdrSources[7],
+      prompt = STRING_TOKEN(STR_IADR_MWDT_PROMPT),
+      help   = STRING_TOKEN(STR_IADR_MWDT_HELP),
+      flags  = RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.PmcInternAdrSources[8],
+      prompt = STRING_TOKEN(STR_IADR_MRST_PROMPT),
+      help   = STRING_TOKEN(STR_IADR_MRST_HELP),
+      flags  = RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.PmcInternAdrSources[10],
+      prompt = STRING_TOKEN(STR_IADR_PWDT_PROMPT),
+      help   = STRING_TOKEN(STR_IADR_PWDT_HELP),
+      flags  = RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.PmcInternAdrSources[11],
+      prompt = STRING_TOKEN(STR_IADR_MUE_PROMPT),
+      help   = STRING_TOKEN(STR_IADR_MUE_HELP),
+      flags  = RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.PmcInternAdrSources[12],
+      prompt = STRING_TOKEN(STR_IADR_POK_PROMPT),
+      help   = STRING_TOKEN(STR_IADR_POK_HELP),
+      flags  = RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.PmcInternAdrSources[14],
+      prompt = STRING_TOKEN(STR_IADR_PPERR_PROMPT),
+      help   = STRING_TOKEN(STR_IADR_PPERR_HELP),
+      flags  = RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.PmcInternAdrSources[29],
+      prompt = STRING_TOKEN(STR_IADR_RESET_PROMPT),
+      help   = STRING_TOKEN(STR_IADR_RESET_HELP),
+      flags  = RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+endform;
+
+  form formid = SSA_CONFIG_FORM_ID,
+
+    title       = STRING_TOKEN(STR_SSA_CONFIG_PROMPT);
+    subtitle text = STRING_TOKEN(STR_SSA_CONFIG_PROMPT);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    oneof varid = SYSTEM_CONFIGURATION.VtdEnable,
+      prompt      = STRING_TOKEN(STR_SA_VTD_PROMPT),
+      help        = STRING_TOKEN(STR_SA_VTD_HELP),
+      option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.InterruptRemappingSupport,
+      prompt      = STRING_TOKEN(STR_SA_VTD_IR_PROMPT),
+      help        = STRING_TOKEN(STR_SA_VTD_IR_HELP),
+      option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+	
+    goto DFX_SSA_CONFIG_FORM_ID,
+      prompt  = STRING_TOKEN(STR_DFX_SSA_CONFIG_PROMPT),
+      help    = STRING_TOKEN(STR_NULL_STRING);
+
+
+  endform; // SSA_CONFIG_FORM_ID
+
+ form formid = DFX_SSA_CONFIG_FORM_ID,
+
+    title       = STRING_TOKEN(STR_DFX_SSA_CONFIG_PROMPT);
+    subtitle text = STRING_TOKEN(STR_DFX_SSA_CONFIG_PROMPT);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+	
+    oneof varid = SYSTEM_CONFIGURATION.EnableSsaClockGating,
+      prompt      = STRING_TOKEN(STR_SSA_CLOCK_GATING),
+      help        = STRING_TOKEN(STR_SSA_CLOCK_GATING_HELP),
+      option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT|MANUFACTURING|RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.InOrderAPIC,
+      prompt      = STRING_TOKEN(STR_IN_ORDER_APIC),
+      help        = STRING_TOKEN(STR_IN_ORDER_APIC_HELP),
+      option text = STRING_TOKEN(STR_DISABLED),  value = 0, flags = DEFAULT|MANUFACTURING|RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED),   value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.SchedulerLat,
+      prompt      = STRING_TOKEN(STR_SCHEDULER_LATENCY),
+      help        = STRING_TOKEN(STR_SCHEDULER_LATENCY_HELP),
+      minimum   = 0,
+      maximum   = 15,
+      step      = 1,
+      default   = 0x8,
+    endnumeric;
+  //
+  // MSI redirection algorithm options
+  //
+  oneof varid     = SYSTEM_CONFIGURATION.MsiRedirAlgorithm,
+    prompt      = STRING_TOKEN(STR_MSI_MSG_ALGORITHM),
+    help        = STRING_TOKEN(STR_MSI_MSG_HELP),
+    option text = STRING_TOKEN(STR_MSI_FIXED_PRIORITY),  value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    option text = STRING_TOKEN(STR_MSI_ROUND_ROBIN),   value = 1, flags = RESET_REQUIRED;
+  endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[0],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT0),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[1],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT1),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[2],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT2),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[3],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT3),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[4],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT4),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[5],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT5),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[6],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT6),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[7],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT7),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[8],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT8),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[9],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT9),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[10],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT10),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[11],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT11),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[12],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT12),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[13],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT13),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[14],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT14),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.CosCatAgent[15],
+      prompt      = STRING_TOKEN(STR_COS_CAT_AGENT15),
+      help        = STRING_TOKEN(STR_COS_CAT_AGENT_HELP),
+      minimum   = 0,
+      maximum   = 3,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.BestEffortMaxLat,
+      prompt      = STRING_TOKEN(STR_BEST_EFFORT_MAX_LATENCY),
+      help        = STRING_TOKEN(STR_BEST_EFFORT_MAX_LATENCY_HELP),
+      minimum   = 0,
+      maximum   = 255,
+      step      = 0,
+      default   = 0x3f,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.PageHitDelay,
+      prompt      = STRING_TOKEN(STR_PAGE_HIT_DELAY),
+      help        = STRING_TOKEN(STR_PAGE_HIT_DELAY_HELP),
+      minimum   = 0,
+      maximum   = 7,
+      step      = 1,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.IsocBankPrefetch,
+      prompt      = STRING_TOKEN(STR_ISOC_BANK_PREFETCH),
+      help        = STRING_TOKEN(STR_ISOC_BANK_PREFETCH_HELP),
+      minimum   = 0,
+      maximum   = 127,
+      step      = 0,
+      default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.BestEffortBankPref,
+      prompt      = STRING_TOKEN(STR_BEST_EFFORT_BANK_PREFETCH),
+      help        = STRING_TOKEN(STR_BEST_EFFORT_BANK_PREFETCH_HELP),
+      minimum   = 0,
+      maximum   = 127,
+      step      = 0,
+      default   = 0x20,
+    endnumeric;
+endform;

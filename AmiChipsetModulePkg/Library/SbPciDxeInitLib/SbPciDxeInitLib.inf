@@ -1,0 +1,30 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SbPciDxeInitLib
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SbPciDxeInitLib|DXE_DRIVER
+
+[Sources]
+  SbPciDxeInitLib.c
+
+[LibraryClasses]
+  AmiDxeLib
+  AmiSdlLib
+  AmiPciBusLib
+
+[Protocols]
+  gEfiDevicePathProtocolGuid
+  gAmiBoardPciInitProtocolGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  DenvertonPkg/SiPkg.dec # Denverton AptioV override - EIP#235471
+  HarrisonvillePkg/PlatformPkg.dec   # Denverton Aptiov override - EIP#379099

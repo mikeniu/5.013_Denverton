@@ -1,0 +1,10 @@
+<component>
+	name = "SaInit"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SystemAgent\SaInit\"
+	RefName = "DenvertonPkg.SystemAgent.SaInit"
+[INF]
+"Dxe\SaInit.inf"	
+[files]
+"Dxe\SaInit.sdl"
+<endComponent>

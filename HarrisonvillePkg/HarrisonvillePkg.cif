@@ -1,0 +1,22 @@
+<component>
+	name = "HarrisonvillePkg"
+	category = eChipset
+	LocalRoot = "HarrisonvillePkg\"
+	RefName = "HarrisonvillePkg"
+[files]
+"PlatformPkg.dec"	
+"HarrisonvillePkg.sdl"	
+"BuildImage.bat"	
+[parts]
+"HarrisonvillePkg.Acpi"
+"HarrisonvillePkg.Cpu"
+"HarrisonvillePkg.Include"
+"HarrisonvillePkg.Library"
+"HarrisonvillePkg.Override"
+"HarrisonvillePkg.Platform"
+"HarrisonvillePkg.IePolicy"
+"HarrisonvillePkg.MePlatform"
+"HarrisonvillePkg.Ras"
+"HarrisonvillePkg.Tools"
+"HarrisonvillePkg.IntelLtsxFit"
+<endComponent>

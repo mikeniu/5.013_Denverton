@@ -1,0 +1,20 @@
+<component>
+	name = "Platform"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Platform\"
+	RefName = "HarrisonvillePkg.Platform"
+[INF]
+"PlatformTypeDxe\PlatformTypeDxe.inf"
+"SaveMemoryConfigDxe\SaveMemoryConfigDxe.inf"
+"PlatformInfo\Pei\PlatformInfoPei.inf"
+"PowerButtonSmm\PowerButtonSmm.inf"
+"IPMIPlatformID\IPMIPlatformID.inf"
+[files]
+"Platform.sdl"	
+[parts]
+"HarrisonvillePkg.SetupDxe"
+"HarrisonvillePkg.MemorySubClassDxe"
+"HarrisonvillePkg.Platform.NonVolatileMem"
+"HarrisonvillePkg.Platform.PlatformStage1Pei"
+"HarrisonvillePkg.Platform.PlatformStage2Pei"
+<endComponent>

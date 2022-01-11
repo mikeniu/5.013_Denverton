@@ -1,0 +1,24 @@
+TOKEN
+    Name  = "PeiIpmiTransportInitialize_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling PeiIpmiTransportInitialize support in the project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+End
+
+INFComponent
+    Name  = "PeiIpmiTransportInitialize"
+    File  = "PeiIpmiTransportInitialize.inf"
+    Package  = "AmiIePkg"
+    ModuleTypes  = "PEIM"
+End
+
+FFS_FILE
+    Name  = "PeiIpmiTransportInitialize"
+    FD_AREA  = "FV_BB"
+    INFComponent  = "AmiIePkg.PeiIpmiTransportInitialize"
+    Apriori_Index  = "3"
+End
+

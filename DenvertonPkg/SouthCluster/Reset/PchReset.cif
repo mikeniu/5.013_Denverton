@@ -1,0 +1,10 @@
+<component>
+	name = "PchReset"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SouthCluster\Reset\"
+	RefName = "DenvertonPkg.SouthCluster.PchReset"
+[INF]
+"RuntimeDxe\PchResetRuntime.inf"
+[files]
+"PchReset.sdl"
+<endComponent>

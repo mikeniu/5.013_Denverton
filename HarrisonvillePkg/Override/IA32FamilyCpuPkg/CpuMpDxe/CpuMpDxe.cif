@@ -1,0 +1,12 @@
+<component>
+	name = "CpuMpDxe"
+	category = ModulePart
+	LocalRoot = "HarrisonvillePkg\Override\IA32FamilyCpuPkg\CpuMpDxe\"
+	RefName = "HarrisonvillePkg.CpuMpDxe"
+[INF]
+"CpuMpDxe.inf"
+[files]
+"CpuMpDxe.sdl"	
+"IA32\Exception.c"	
+"X64\Exception.c"	
+<endComponent>

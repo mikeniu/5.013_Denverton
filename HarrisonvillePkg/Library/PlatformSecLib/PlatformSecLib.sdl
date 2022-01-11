@@ -1,0 +1,57 @@
+TOKEN
+	Name  = "PlatformSecLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PlatformSecLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PlatformSecLib"
+	File  = "PlatformSecLib.inf"
+	Package  = "HarrisonvillePkg"
+	Arch  = "IA32"
+	ModuleTypes  = "SEC"
+End
+
+LibraryMapping
+	Class  = "PlatformSecLib"
+	Instance  = "HarrisonvillePkg.PlatformSecLib"
+	Arch  = "IA32"
+End
+
+TOKEN
+	Name  = "CAR_BASE_ADDRESS"
+	Value  = "(0xffffffff - $(FLASH_SIZE) + 1 - 0x100000) & 0xfff00000"
+	Help  = "DO NOT CHANGE THIS VALUE.\Cache-as-RAM physical base location"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CAR_TOTAL_SIZE"
+	Value  = "0x20000"
+	Help  = "Total Cache-as-RAM size available (in bytes)"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CODE_CACHE_BASE_ADDRESS"
+	Value  = "$(FV_BB_BASE)"
+	Help  = "Code Cache Base Address."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CODE_CACHE_SIZE"
+	Value  = "20000h"
+	Help  = "Code Cache Size.\Max 40000h. Size must match alignment of base."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End

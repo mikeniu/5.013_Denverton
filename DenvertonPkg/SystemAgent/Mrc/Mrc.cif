@@ -1,0 +1,9 @@
+<component>
+	name = "Mrc"
+	category = ModulePart
+	LocalRoot = "DenvertonPkg\SystemAgent\Mrc\"
+	RefName = "DenvertonPkg.SystemAgent.Mrc"
+[parts]
+"DenvertonPkg.SystemAgent.MrcInclude"
+"DenvertonPkg.SystemAgent.Mrc.MemoryInit"
+<endComponent>

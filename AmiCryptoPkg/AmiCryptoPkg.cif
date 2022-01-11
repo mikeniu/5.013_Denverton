@@ -1,0 +1,14 @@
+<component>
+	name = "AmiCryptoPkg"
+	category = eModule
+	LocalRoot = "AmiCryptoPkg\"
+	RefName = "AmiCryptoPkg"
+[files]
+"AmiCryptoPkg.sdl"	
+"AmiCryptoPkg.dec"	
+"AmiCryptoPkg.chm"
+[parts]
+"AmiCryptoProtocols"
+"AmiCryptoLib"
+"AmiCryptoUtils"
+<endComponent>
